@@ -5,6 +5,8 @@ namespace Scripts.StateMachine.Base
 {
     public abstract class StateMachineBase : MonoBehaviour
     {
+        [SerializeField] private bool _debug = false;
+
         private State _currentState;
         private Stack<State> _previousStates = new Stack<State>(4);
 
@@ -46,9 +48,11 @@ namespace Scripts.StateMachine.Base
         private void Transition(State newState)
         {
             InTransition = true;
+            if (_debug) Debug.Log("Exiting... " + CurrentState?.GetType().Name);
             CurrentState?.Exit();
             AddPreviousState();
             _currentState = newState;
+            if (_debug) Debug.Log("Entering... " + CurrentState?.GetType().Name);
             CurrentState?.Enter();
             InTransition = false;
         }

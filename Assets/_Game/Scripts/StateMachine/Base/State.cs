@@ -7,8 +7,6 @@ namespace Scripts.StateMachine.Base
         public abstract void Enter();
         public abstract void Tick();
 
-        public virtual void Exit()
-        {
-        }
+        public abstract void Exit();
     }
 }

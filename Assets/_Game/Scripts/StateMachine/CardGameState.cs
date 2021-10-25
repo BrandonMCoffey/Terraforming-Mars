@@ -22,5 +22,9 @@ namespace Scripts.StateMachine
         public override void Tick()
         {
         }
+
+        public override void Exit()
+        {
+        }
     }
 }

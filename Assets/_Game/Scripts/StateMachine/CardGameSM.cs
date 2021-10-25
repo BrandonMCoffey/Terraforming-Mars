@@ -1,3 +1,4 @@
+using Scripts.CardGame;
 using Scripts.StateMachine.Base;
 
 namespace Scripts.StateMachine
@@ -6,6 +7,7 @@ namespace Scripts.StateMachine
     {
         private void Start()
         {
+            ChangeState<SetupCardGameState>();
         }
     }
 }
