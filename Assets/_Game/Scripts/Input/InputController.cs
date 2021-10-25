@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Scripts
+namespace Scripts.Input
 {
     public class InputController : MonoBehaviour
     {
