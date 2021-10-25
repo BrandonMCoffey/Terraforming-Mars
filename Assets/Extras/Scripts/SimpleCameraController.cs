@@ -1,10 +1,10 @@
-﻿#if ENABLE_INPUT_SYSTEM 
+﻿#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
 
 using UnityEngine;
 
-namespace UnityTemplateProjects
+namespace Extras.Scripts
 {
     public class SimpleCameraController : MonoBehaviour
     {
@@ -41,7 +41,7 @@ namespace UnityTemplateProjects
                 yaw = Mathf.Lerp(yaw, target.yaw, rotationLerpPct);
                 pitch = Mathf.Lerp(pitch, target.pitch, rotationLerpPct);
                 roll = Mathf.Lerp(roll, target.roll, rotationLerpPct);
-                
+
                 x = Mathf.Lerp(x, target.x, positionLerpPct);
                 y = Mathf.Lerp(y, target.y, positionLerpPct);
                 z = Mathf.Lerp(z, target.z, positionLerpPct);
@@ -53,7 +53,7 @@ namespace UnityTemplateProjects
                 t.position = new Vector3(x, y, z);
             }
         }
-        
+
         CameraState m_TargetCameraState = new CameraState();
         CameraState m_InterpolatingCameraState = new CameraState();
 
@@ -131,81 +131,70 @@ namespace UnityTemplateProjects
             direction.z = moveDelta.y;
             direction.y = verticalMovementAction.ReadValue<Vector2>().y;
 #else
-            if (Input.GetKey(KeyCode.W))
-            {
+            if (Input.GetKey(KeyCode.W)) {
                 direction += Vector3.forward;
             }
-            if (Input.GetKey(KeyCode.S))
-            {
+            if (Input.GetKey(KeyCode.S)) {
                 direction += Vector3.back;
             }
-            if (Input.GetKey(KeyCode.A))
-            {
+            if (Input.GetKey(KeyCode.A)) {
                 direction += Vector3.left;
             }
-            if (Input.GetKey(KeyCode.D))
-            {
+            if (Input.GetKey(KeyCode.D)) {
                 direction += Vector3.right;
             }
-            if (Input.GetKey(KeyCode.Q))
-            {
+            if (Input.GetKey(KeyCode.Q)) {
                 direction += Vector3.down;
             }
-            if (Input.GetKey(KeyCode.E))
-            {
+            if (Input.GetKey(KeyCode.E)) {
                 direction += Vector3.up;
             }
 #endif
             return direction;
         }
-        
+
         void Update()
         {
             // Exit Sample  
 
-            if (IsEscapePressed())
-            {
+            if (IsEscapePressed()) {
                 Application.Quit();
-				#if UNITY_EDITOR
-				UnityEditor.EditorApplication.isPlaying = false; 
-				#endif
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#endif
             }
 
             // Hide and lock cursor when right mouse button pressed
-            if (IsRightMouseButtonDown())
-            {
+            if (IsRightMouseButtonDown()) {
                 Cursor.lockState = CursorLockMode.Locked;
             }
 
             // Unlock and show cursor when right mouse button released
-            if (IsRightMouseButtonUp())
-            {
+            if (IsRightMouseButtonUp()) {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
             }
 
             // Rotation
-            if (IsCameraRotationAllowed())
-            {
+            if (IsCameraRotationAllowed()) {
                 var mouseMovement = GetInputLookRotation() * Time.deltaTime * 5;
                 if (invertY)
                     mouseMovement.y = -mouseMovement.y;
-                
+
                 var mouseSensitivityFactor = mouseSensitivityCurve.Evaluate(mouseMovement.magnitude);
 
                 m_TargetCameraState.yaw += mouseMovement.x * mouseSensitivityFactor;
                 m_TargetCameraState.pitch += mouseMovement.y * mouseSensitivityFactor;
             }
-            
+
             // Translation
             var translation = GetInputTranslationDirection() * Time.deltaTime;
 
             // Speed up movement when shift key held
-            if (IsBoostPressed())
-            {
+            if (IsBoostPressed()) {
                 translation *= 10.0f;
             }
-            
+
             // Modify movement by a boost factor (defined in Inspector and modified in play mode through the mouse scroll wheel)
             boost += GetBoostFactor();
             translation *= Mathf.Pow(2.0f, boost);
@@ -248,13 +237,12 @@ namespace UnityTemplateProjects
 #else
             return Input.GetKey(KeyCode.LeftShift);
 #endif
-
         }
 
         bool IsEscapePressed()
         {
 #if ENABLE_INPUT_SYSTEM
-            return Keyboard.current != null ? Keyboard.current.escapeKey.isPressed : false; 
+            return Keyboard.current != null ? Keyboard.current.escapeKey.isPressed : false;
 #else
             return Input.GetKey(KeyCode.Escape);
 #endif
@@ -288,7 +276,5 @@ namespace UnityTemplateProjects
             return Input.GetMouseButtonUp(1);
 #endif
         }
-
     }
-
 }

@@ -1,10 +1,9 @@
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
-namespace Scripts.StateMachine
+namespace Scripts.StateMachine.Base
 {
-    public abstract class StateMachine : MonoBehaviour
+    public abstract class StateMachineBase : MonoBehaviour
     {
         private State _currentState;
         private Stack<State> _previousStates = new Stack<State>(4);
@@ -57,6 +56,9 @@ namespace Scripts.StateMachine
         private void AddPreviousState()
         {
             if (CurrentState == null) return;
+            if (_previousStates.Count >= _previousStateMax) {
+                // TODO: Remove last state
+            }
             _previousStates.Push(CurrentState);
         }
     }
