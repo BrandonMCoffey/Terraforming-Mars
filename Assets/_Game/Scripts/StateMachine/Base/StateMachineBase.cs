@@ -48,11 +48,11 @@ namespace Scripts.StateMachine.Base
         private void Transition(State newState)
         {
             InTransition = true;
-            if (_debug) Debug.Log("Exiting... " + CurrentState?.GetType().Name);
+            if (_debug) Debug.Log("<color=yellow>Exit State: </color>" + CurrentState?.GetType().Name);
             CurrentState?.Exit();
             AddPreviousState();
             _currentState = newState;
-            if (_debug) Debug.Log("Entering... " + CurrentState?.GetType().Name);
+            if (_debug) Debug.Log("<color=yellow>Enter State: </color>" + CurrentState?.GetType().Name);
             CurrentState?.Enter();
             InTransition = false;
         }

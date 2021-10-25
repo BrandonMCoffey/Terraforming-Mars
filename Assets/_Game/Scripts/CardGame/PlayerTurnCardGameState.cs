@@ -16,11 +16,20 @@ namespace Scripts.CardGame
 
             _playerTurnCount++;
             UpdateUI();
+
+            StateMachine.Input.Confirm += OnConfirm;
         }
 
         public override void Exit()
         {
             EnableUI(false);
+
+            StateMachine.Input.Confirm -= OnConfirm;
+        }
+
+        private void OnConfirm()
+        {
+            StateMachine.ChangeState<EnemyTurnCardGameState>();
         }
 
         private void EnableUI(bool enable)

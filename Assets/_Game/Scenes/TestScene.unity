@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0bd58505cc2c4f4d8b1a94c304b3eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
+  _debug: 1
 --- !u!114 &404352609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,6 +325,7 @@ GameObject:
   - component: {fileID: 577941185}
   - component: {fileID: 577941186}
   - component: {fileID: 577941187}
+  - component: {fileID: 577941188}
   m_Layer: 0
   m_Name: StateController
   m_TagString: Untagged
@@ -359,6 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debug: 1
+  _input: {fileID: 404352608}
 --- !u!114 &577941186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,6 +390,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 577941185}
   _playerTurnTextUI: {fileID: 2088606443}
+--- !u!114 &577941188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577941183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc7c294cb17c5ed40ae5dec8d4f9159b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateMachine: {fileID: 577941185}
 --- !u!1 &1002612237
 GameObject:
   m_ObjectHideFlags: 0

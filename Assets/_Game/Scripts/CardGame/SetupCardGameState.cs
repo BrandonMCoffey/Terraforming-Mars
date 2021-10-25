@@ -5,8 +5,7 @@ namespace Scripts.CardGame
 {
     public class SetupCardGameState : CardGameState
     {
-        [SerializeField] private int _startingCardNumber = 10;
-        [SerializeField] private int _numberOfPlayers = 2;
+        [SerializeField] private int _startingCardNumber = 5;
 
         private bool _activated;
 

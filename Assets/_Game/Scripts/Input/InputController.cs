@@ -19,26 +19,33 @@ namespace Scripts
 
         public void OnConfirm(InputValue value)
         {
-            if (_debug) Debug.Log("User Input: Confirm");
+            DebugInput("Confirm");
             Confirm?.Invoke();
         }
 
         public void OnCancel(InputValue value)
         {
-            if (_debug) Debug.Log("User Input: Cancel");
+            DebugInput("Cancel");
             Cancel?.Invoke();
         }
 
         public void OnSelectLeft(InputValue value)
         {
-            if (_debug) Debug.Log("User Input: Select Left");
+            DebugInput("Select Left");
             SelectLeft?.Invoke();
         }
 
         public void OnSelectRight(InputValue value)
         {
-            if (_debug) Debug.Log("User Input: Select Right");
+            DebugInput("Select Right");
             SelectRight?.Invoke();
+        }
+
+        private void DebugInput(string inputAction)
+        {
+            if (_debug) {
+                Debug.Log("<color=aqua>User Input: </color>" + inputAction);
+            }
         }
     }
 }
