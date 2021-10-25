@@ -1,7 +1,7 @@
 using System;
-using Scripts.StateMachine;
+using Scripts.CardGame.StateMachine;
 
-namespace Scripts.CardGame
+namespace Scripts.CardGame.States
 {
     public class PlayerTurnCardGameState : CardGameState
     {

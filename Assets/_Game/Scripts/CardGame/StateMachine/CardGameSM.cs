@@ -1,9 +1,9 @@
-using Scripts.CardGame;
+using Scripts.CardGame.States;
 using Scripts.Input;
-using Scripts.StateMachine.Base;
+using Scripts.Utility.StateMachine;
 using UnityEngine;
 
-namespace Scripts.StateMachine
+namespace Scripts.CardGame.StateMachine
 {
     public class CardGameSM : StateMachineBase
     {

@@ -1,7 +1,7 @@
-using Scripts.StateMachine;
+using Scripts.CardGame.StateMachine;
 using UnityEngine;
 
-namespace Scripts.CardGame
+namespace Scripts.CardGame.States
 {
     public class SetupCardGameState : CardGameState
     {

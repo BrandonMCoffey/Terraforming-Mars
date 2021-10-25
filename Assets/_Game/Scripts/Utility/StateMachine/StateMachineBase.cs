@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts.StateMachine.Base
+namespace Scripts.Utility.StateMachine
 {
     public abstract class StateMachineBase : MonoBehaviour
     {

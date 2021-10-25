@@ -1,7 +1,8 @@
+using Scripts.CardGame.States;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Scripts.CardGame
+namespace Scripts.UI
 {
     public class CardGameUIController : MonoBehaviour
     {

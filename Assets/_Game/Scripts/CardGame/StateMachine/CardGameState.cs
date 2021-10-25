@@ -1,7 +1,7 @@
-using Scripts.StateMachine.Base;
+using Scripts.Utility.StateMachine;
 using UnityEngine;
 
-namespace Scripts.StateMachine
+namespace Scripts.CardGame.StateMachine
 {
     public class CardGameState : State
     {
