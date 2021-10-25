@@ -15,6 +15,15 @@ namespace Scripts.CardGame.States
             TurnBegin?.Invoke(++_playerTurnCount);
 
             StateMachine.Input.Confirm += OnConfirm;
+            StateMachine.Input.Cancel += OnCancel;
+        }
+
+        public override void Tick()
+        {
+            if (_playerTurnCount >= 5) {
+                _playerTurnCount = 0;
+                StateMachine.ChangeState<WinCardGameState>();
+            }
         }
 
         public override void Exit()
@@ -22,6 +31,12 @@ namespace Scripts.CardGame.States
             TurnEnd?.Invoke();
 
             StateMachine.Input.Confirm -= OnConfirm;
+            StateMachine.Input.Cancel -= OnCancel;
+        }
+
+        private void OnCancel()
+        {
+            StateMachine.ChangeState<LoseCardGameState>();
         }
 
         private void OnConfirm()
