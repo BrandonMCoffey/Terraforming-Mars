@@ -9,12 +9,12 @@ namespace Scripts.CardGame
     {
         [SerializeField] private float _pauseDuration = 1.5f;
 
-        public static event Action EnemyTurnBegin;
-        public static event Action EnemyTurnEnd;
+        public static event Action TurnBegin;
+        public static event Action TurnEnd;
 
         public override void Enter()
         {
-            EnemyTurnBegin?.Invoke();
+            TurnBegin?.Invoke();
 
             StartCoroutine(EnemyThinkRoutine(_pauseDuration));
         }
@@ -23,7 +23,7 @@ namespace Scripts.CardGame
         {
             yield return new WaitForSecondsRealtime(thinkTime);
 
-            EnemyTurnEnd?.Invoke();
+            TurnEnd?.Invoke();
             StateMachine.ChangeState<PlayerTurnCardGameState>();
         }
     }
