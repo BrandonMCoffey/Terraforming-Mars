@@ -1,13 +1,13 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
 using UnityEngine;
 
-namespace Scripts.Utility.CustomFloats.Editor
+namespace Scripts.Utility.Audio.Systems.Editor
 {
-#if UNITY_EDITOR
-    [CustomPropertyDrawer(typeof(FloatReference), true)]
-    public class FloatReferenceDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(SfxReference))]
+    public class SfxReferenceDrawer : PropertyDrawer
     {
-        private readonly string[] _popupOptions = { "Use Constant", "Use Variable" };
+        private readonly string[] _popupOptions = { "Use Audio Clip", "Use Sfx Base" };
 
         private GUIStyle _popupStyle;
 
@@ -22,8 +22,8 @@ namespace Scripts.Utility.CustomFloats.Editor
 
             // Get properties
             SerializedProperty useConstant = property.FindPropertyRelative("UseConstant");
-            SerializedProperty constantValue = property.FindPropertyRelative("ConstantValue");
-            SerializedProperty variable = property.FindPropertyRelative("Variable");
+            SerializedProperty clip = property.FindPropertyRelative("Clip");
+            SerializedProperty data = property.FindPropertyRelative("Base");
 
             // Calculate rect for configuration button
             Rect buttonRect = new Rect(position);
@@ -40,7 +40,7 @@ namespace Scripts.Utility.CustomFloats.Editor
             useConstant.boolValue = result == 0;
 
             EditorGUI.PropertyField(position,
-                useConstant.boolValue ? constantValue : variable,
+                useConstant.boolValue ? clip : data,
                 GUIContent.none);
 
             if (EditorGUI.EndChangeCheck())
@@ -50,5 +50,5 @@ namespace Scripts.Utility.CustomFloats.Editor
             EditorGUI.EndProperty();
         }
     }
-#endif
 }
+#endif

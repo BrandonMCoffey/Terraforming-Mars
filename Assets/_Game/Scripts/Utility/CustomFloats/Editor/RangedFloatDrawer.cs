@@ -1,8 +1,7 @@
-using Scripts.Utility.CustomFloats;
 using UnityEditor;
 using UnityEngine;
 
-namespace CustomFloats.Editor
+namespace Scripts.Utility.CustomFloats.Editor
 {
 #if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(RangedFloat), true)]
