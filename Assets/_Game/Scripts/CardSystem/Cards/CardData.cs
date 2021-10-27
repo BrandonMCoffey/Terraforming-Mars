@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Scripts.CardSystem
+namespace Scripts.CardSystem.Cards
 {
     public abstract class CardData : ScriptableObject
     {

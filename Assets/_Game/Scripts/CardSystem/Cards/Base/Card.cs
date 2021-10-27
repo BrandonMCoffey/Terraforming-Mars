@@ -1,8 +1,7 @@
-using System;
 using Scripts.Utility.Buttons;
 using UnityEngine;
 
-namespace Scripts.CardSystem
+namespace Scripts.CardSystem.Cards.Base
 {
     public class Card : MonoBehaviour
     {

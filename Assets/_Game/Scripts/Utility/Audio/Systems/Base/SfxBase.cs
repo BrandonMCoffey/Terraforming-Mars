@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Scripts.Utility.Audio.Systems
+namespace Scripts.Utility.Audio.Systems.Base
 {
     public abstract class SfxBase : ScriptableObject
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Scripts.Utility.Audio.Systems
+namespace Scripts.Utility.Audio.Systems.Base
 {
     public struct SfxProperties
     {

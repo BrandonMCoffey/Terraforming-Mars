@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using Scripts.Utility.Audio.Systems.Base;
+using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Scripts.Utility.Audio.Systems
+namespace Scripts.Utility.Audio.Systems.Events
 {
     [CreateAssetMenu(menuName = "Utility/Sound System/Sfx Variant")]
     public class SfxVariant : SfxBase

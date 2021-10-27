@@ -1,7 +1,6 @@
-using Scripts.Utility.Audio.Systems;
 using UnityEngine;
 
-namespace Scripts.Utility.Audio
+namespace Scripts.Utility.Audio.Systems.Events
 {
     [CreateAssetMenu(menuName = "Utility/Sound System/Music Event")]
     public class MusicEvent : ScriptableObject

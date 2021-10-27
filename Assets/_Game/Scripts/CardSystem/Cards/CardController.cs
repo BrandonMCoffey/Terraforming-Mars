@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Scripts.CardSystem
+namespace Scripts.CardSystem.Cards
 {
     public class CardController : MonoBehaviour
     {

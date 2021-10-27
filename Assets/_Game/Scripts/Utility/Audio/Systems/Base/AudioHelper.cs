@@ -1,4 +1,4 @@
-namespace Scripts.Utility.Audio.Systems
+namespace Scripts.Utility.Audio.Systems.Base
 {
     public static class AudioHelper
     {

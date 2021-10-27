@@ -493,9 +493,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c26ffa021202849999537dc270a8e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _theme: {fileID: 0}
-  _card: {fileID: 0}
-  _cardUI: {fileID: 0}
+  _theme: {fileID: 11400000, guid: 333765884f56e7b4d8e7ca6c57b120cd, type: 2}
+  _card: {fileID: 11400000, guid: 939919c0376bb6440bb4d4799ae07ff3, type: 2}
+  _cardUI: {fileID: 495695139}
 --- !u!222 &495695138
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -695,7 +695,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Type
+  m_text: Action
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a506fd1e130d1f489383135c9dd6b53, type: 2}
   m_sharedMaterial: {fileID: -6456295069115946204, guid: 9a506fd1e130d1f489383135c9dd6b53, type: 2}
@@ -1231,7 +1231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1608333514
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1271,7 +1271,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Title
+  m_text: Minion
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a506fd1e130d1f489383135c9dd6b53, type: 2}
   m_sharedMaterial: {fileID: -6456295069115946204, guid: 9a506fd1e130d1f489383135c9dd6b53, type: 2}
@@ -1365,7 +1365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1644326297
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1405,7 +1405,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 4
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a506fd1e130d1f489383135c9dd6b53, type: 2}
   m_sharedMaterial: {fileID: -6456295069115946204, guid: 9a506fd1e130d1f489383135c9dd6b53, type: 2}
@@ -1711,7 +1711,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is what this card does.
+  m_text: Description
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a506fd1e130d1f489383135c9dd6b53, type: 2}
   m_sharedMaterial: {fileID: -6456295069115946204, guid: 9a506fd1e130d1f489383135c9dd6b53, type: 2}
@@ -1805,7 +1805,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1966128329
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1845,7 +1845,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Action Title
+  m_text: Action
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a506fd1e130d1f489383135c9dd6b53, type: 2}
   m_sharedMaterial: {fileID: -6456295069115946204, guid: 9a506fd1e130d1f489383135c9dd6b53, type: 2}

@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using Scripts.Utility.Audio.Systems;
+using Scripts.Utility.Audio.Systems.Base;
 using Scripts.Utility.CustomFloats;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Scripts.Utility.Audio
+namespace Scripts.Utility.Audio.Systems.Events
 {
     [CreateAssetMenu(menuName = "Utility/Sound System/Sfx Event")]
     public class SfxEvent : SfxBase
