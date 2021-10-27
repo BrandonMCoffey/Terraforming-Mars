@@ -1,12 +1,12 @@
-﻿namespace EasyButtons
-{
-    using System;
+﻿using System;
 
+namespace Scripts.Utility.Buttons
+{
     public enum ButtonMode
     {
-        AlwaysEnabled,
-        EnabledInPlayMode,
-        DisabledInPlayMode
+        Always,
+        NotPlaying,
+        PlayOnly
     }
 
     [AttributeUsage(AttributeTargets.Method)]
@@ -20,6 +20,6 @@
 
         public ButtonAttribute(string name) => this.name = name;
 
-        public ButtonMode Mode { get; set; } = ButtonMode.AlwaysEnabled;
+        public ButtonMode Mode { get; set; } = ButtonMode.Always;
     }
 }

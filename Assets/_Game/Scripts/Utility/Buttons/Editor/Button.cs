@@ -1,7 +1,6 @@
 ﻿#if UNITY_EDITOR
 using System.Collections.Generic;
 using System.Reflection;
-using EasyButtons;
 using UnityEditor;
 
 namespace Scripts.Utility.Buttons.Editor
@@ -31,10 +30,10 @@ namespace Scripts.Utility.Buttons.Editor
 
             _disabled = buttonAttribute.Mode switch
             {
-                ButtonMode.AlwaysEnabled      => false,
-                ButtonMode.EnabledInPlayMode  => !EditorApplication.isPlaying,
-                ButtonMode.DisabledInPlayMode => EditorApplication.isPlaying,
-                _                             => true
+                ButtonMode.Always     => false,
+                ButtonMode.NotPlaying => !EditorApplication.isPlaying,
+                ButtonMode.PlayOnly   => EditorApplication.isPlaying,
+                _                     => true
             };
         }
 

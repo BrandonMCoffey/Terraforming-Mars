@@ -1,7 +1,6 @@
 ﻿#if UNITY_EDITOR
 using System.Collections.Generic;
 using System.Reflection;
-using EasyButtons;
 
 namespace Scripts.Utility.Buttons.Editor
 {

@@ -1,4 +1,4 @@
-using EasyButtons;
+using Scripts.Utility.Buttons;
 using UnityEngine;
 
 namespace Scripts.CardSystem
@@ -9,10 +9,9 @@ namespace Scripts.CardSystem
         [SerializeField] private CardData _card;
         [SerializeField] private CardController _cardUI;
 
-        [Button("Render")]
-        public void RenderCard(string text, int num, Transform trans)
+        [Button]
+        public void RenderCard()
         {
-            Debug.Log("Hello " + text);
         }
     }
 }
