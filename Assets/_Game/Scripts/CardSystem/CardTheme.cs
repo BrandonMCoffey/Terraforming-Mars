@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Scripts.CardSystem
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Card Game/Card Theme")]
     public class CardTheme : ScriptableObject
     {
         [SerializeField] private TMP_FontAsset _font;

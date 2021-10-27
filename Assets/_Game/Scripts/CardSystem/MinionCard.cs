@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Scripts.CardSystem
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Card Game/Minion Card")]
     public class MinionCard : CardData
     {
         [Header("Card")]

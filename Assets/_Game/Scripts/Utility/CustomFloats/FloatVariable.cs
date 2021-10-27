@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Scripts.Utility.CustomFloats
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Utility/Float Variable")]
     public class FloatVariable : ScriptableObject
     {
         [SerializeField] private float _value;
