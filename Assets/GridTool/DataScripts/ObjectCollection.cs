@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GridTool.DataScripts
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Level Designer/Object Collection")]
     public class ObjectCollection : ScriptableObject
     {
         public List<ObjectData> Objects = new List<ObjectData>();

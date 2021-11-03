@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GridTool.DataScripts
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Level Designer/Level Data")]
     public class LevelData : ScriptableObject
     {
         [Header("Level Properties")]

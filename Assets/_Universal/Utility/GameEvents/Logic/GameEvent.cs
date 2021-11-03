@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Utility.GameEvents.Logic
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Utility/Game Event")]
     public class GameEvent : ScriptableObject
     {
         private List<GameEventListener> _eventListeners = new List<GameEventListener>();

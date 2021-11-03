@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace GridTool.DataScripts
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Level Designer/Object Data")]
     public class ObjectData : ScriptableObject
     {
         [Header("art Properties")]

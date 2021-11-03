@@ -27,7 +27,7 @@ namespace GridTool.DataScripts.GUI
 
         #region Initialization
 
-        [MenuItem("Window/art Designer")]
+        [MenuItem("Window/Object Designer")]
         private static void OpenWindow()
         {
             ObjectDesignerWindow window = (ObjectDesignerWindow)GetWindow(typeof(ObjectDesignerWindow), false, "art Designer");
