@@ -13,10 +13,22 @@ namespace Input
         public event Action Cancel = delegate { };
         public event Action SelectLeft = delegate { };
         public event Action SelectRight = delegate { };
+        public event Action<Vector2> MouseMoved = delegate { };
         public event Action<Vector2> LeftClick = delegate { };
         public event Action<Vector2> RightClick = delegate { };
         public event Action UILeftClick = delegate { };
         public event Action UIRightClick = delegate { };
+
+        private Vector2 _mousePosition;
+
+        private void Update()
+        {
+            Vector2 newMousePosition = Mouse.current.position.ReadValue();
+            if (_mousePosition != newMousePosition) {
+                _mousePosition = newMousePosition;
+                MouseMoved.Invoke(_mousePosition);
+            }
+        }
 
         public void OnConfirm(InputValue value)
         {
@@ -48,7 +60,7 @@ namespace Input
             if (IsMouseOverUI()) {
                 UILeftClick?.Invoke();
             } else {
-                LeftClick?.Invoke(Mouse.current.position.ReadValue());
+                LeftClick?.Invoke(_mousePosition);
             }
         }
 
@@ -58,7 +70,7 @@ namespace Input
             if (IsMouseOverUI()) {
                 UIRightClick?.Invoke();
             } else {
-                RightClick?.Invoke(Mouse.current.position.ReadValue());
+                RightClick?.Invoke(_mousePosition);
             }
         }
 

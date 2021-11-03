@@ -18,9 +18,14 @@ namespace Scripts
             }
         }
 
+        public void OnHover()
+        {
+            HoverSelectedController.instance.SetHoverParent(transform);
+        }
+
         public void OnSelect()
         {
-            Debug.Log(gameObject);
+            HoverSelectedController.instance.SetSelectedParent(transform);
         }
     }
 }
