@@ -13,7 +13,7 @@ namespace GridTool.DataScripts.Editor
             DrawDefaultInspector();
 
             EditorGUILayout.Separator();
-            if (GUILayout.Button("Edit Object", GUILayout.Height(40))) {
+            if (GUILayout.Button("Edit art", GUILayout.Height(40))) {
                 ObjectDesignerWindow.OpenWindow((ObjectData)target);
             }
         }

@@ -26,6 +26,8 @@ namespace Utility.Buttons.Editor
             _expanded = true;
         }
 
+        // TODO: Draw default values for parameters
+
         protected override void DrawInternal(IEnumerable<object> targets)
         {
             Rect full = GUILayoutUtility.GetRect(GUIContent.none, EditorStyles.foldoutHeader);

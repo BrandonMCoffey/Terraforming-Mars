@@ -27,17 +27,17 @@ namespace GridTool.DataScripts.GUI
 
         #region Initialization
 
-        [MenuItem("Window/Object Designer")]
+        [MenuItem("Window/art Designer")]
         private static void OpenWindow()
         {
-            ObjectDesignerWindow window = (ObjectDesignerWindow)GetWindow(typeof(ObjectDesignerWindow), false, "Object Designer");
+            ObjectDesignerWindow window = (ObjectDesignerWindow)GetWindow(typeof(ObjectDesignerWindow), false, "art Designer");
             window.minSize = new Vector2(500, 500);
             window.Show();
         }
 
         public static void OpenWindow(ObjectData data)
         {
-            ObjectDesignerWindow window = (ObjectDesignerWindow)GetWindow(typeof(ObjectDesignerWindow), false, "Object Designer");
+            ObjectDesignerWindow window = (ObjectDesignerWindow)GetWindow(typeof(ObjectDesignerWindow), false, "art Designer");
             window.minSize = new Vector2(500, 500);
             _overrideData = data;
             window.Show();
@@ -125,7 +125,7 @@ namespace GridTool.DataScripts.GUI
         {
             GUILayout.BeginArea(_headerSection);
             GUIStyle titleStyle = new GUIStyle { fontSize = 25, stretchHeight = true, alignment = TextAnchor.MiddleLeft };
-            GUILayout.Label(" Object Designer", titleStyle);
+            GUILayout.Label(" art Designer", titleStyle);
             GUILayout.EndArea();
         }
 
@@ -148,7 +148,7 @@ namespace GridTool.DataScripts.GUI
                 _overrideData = _loadObjectData;
                 _loadObjectData = null;
             } else {
-                //EditorUtility.OpenFilePanel("Select Existing Object", "", "asset");
+                //EditorUtility.OpenFilePanel("Select Existing art", "", "asset");
             }
         }
 
@@ -160,7 +160,7 @@ namespace GridTool.DataScripts.GUI
         {
             GUILayout.BeginArea(_mainSection);
 
-            GUILayout.Label("Object Settings");
+            GUILayout.Label("art Settings");
             EditorGUILayout.Separator();
 
             EditorGUILayout.BeginHorizontal();

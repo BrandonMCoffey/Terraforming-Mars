@@ -5,7 +5,7 @@ namespace GridTool.DataScripts
     [CreateAssetMenu]
     public class ObjectData : ScriptableObject
     {
-        [Header("Object Properties")]
+        [Header("art Properties")]
         public string Name = "";
         public int SortingPriority = 1;
         public Color MixColor = Color.white;

@@ -153,7 +153,7 @@ namespace GridTool.DataScripts.GUI
                 _overrideData = _loadLevelData;
                 _loadLevelData = null;
             } else {
-                //EditorUtility.OpenFilePanel("Select Existing Object", "", "asset");
+                //EditorUtility.OpenFilePanel("Select Existing art", "", "asset");
             }
         }
 
@@ -250,7 +250,7 @@ namespace GridTool.DataScripts.GUI
                 GUILayout.EndHorizontal();
                 GUILayout.EndVertical();
             } else {
-                EditorGUILayout.HelpBox("Please specify an [Object Collection] for this level.", MessageType.Error);
+                EditorGUILayout.HelpBox("Please specify an [art Collection] for this level.", MessageType.Error);
             }
 
             EditorGUILayout.Separator();
