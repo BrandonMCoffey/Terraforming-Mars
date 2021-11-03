@@ -30,10 +30,10 @@ namespace Scripts.Utility.Buttons.Editor
 
             _disabled = buttonAttribute.Mode switch
             {
-                ButtonMode.Always     => false,
-                ButtonMode.NotPlaying => !EditorApplication.isPlaying,
-                ButtonMode.PlayOnly   => EditorApplication.isPlaying,
-                _                     => true
+                ButtonMode.Always       => false,
+                ButtonMode.NotPlaying   => !EditorApplication.isPlaying,
+                ButtonMode.WhilePlaying => EditorApplication.isPlaying,
+                _                       => true
             };
         }
 

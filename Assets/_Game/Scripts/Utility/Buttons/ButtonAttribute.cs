@@ -6,7 +6,7 @@ namespace Scripts.Utility.Buttons
     {
         Always,
         NotPlaying,
-        PlayOnly
+        WhilePlaying
     }
 
     [AttributeUsage(AttributeTargets.Method)]
