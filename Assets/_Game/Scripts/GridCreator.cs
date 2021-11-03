@@ -19,13 +19,13 @@ namespace Scripts
         {
             if (_gridController == null || _baseGridSlot == null) return;
             _landTiles.Verify();
-            var grid = new List<GridSlot>(_width * _height);
+            var grid = new GridSlot[_width, _height];
             for (int x = 0; x < _width; x++) {
                 for (int y = 0; y < _height; y++) {
                     var gridObj = Instantiate(_baseGridSlot, _gridController.transform);
                     gridObj.Setup(x, y, _landTiles.GetArt());
-                    grid.Add(gridObj);
                     gridObj.gameObject.name = _baseGridSlot.name + " (" + (x + 1) + "," + (y + 1) + ")";
+                    grid[x, y] = gridObj;
                 }
             }
             _gridController.SetGrid(grid);

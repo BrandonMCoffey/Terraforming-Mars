@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utility.Other;
 
 namespace Scripts
 {
@@ -6,14 +7,12 @@ namespace Scripts
     {
         [SerializeField] private GameObject _gridObject = null;
 
-        private static int[] _rotations = { 0, 90, 180, 270 };
-
         public void Setup(int x, int y, GameObject tileArt)
         {
             transform.localPosition = new Vector3(x, 0, y);
             if (tileArt != null) {
-                var art = Instantiate(tileArt, transform).transform;
-                art.localRotation = Quaternion.Euler(0, _rotations[Random.Range(0, _rotations.Length)], 0);
+                var art = Instantiate(tileArt, transform);
+                RandomizeArt.RotateRandomClamped(art.transform);
             } else {
                 Debug.LogWarning("No tile art");
             }
@@ -29,6 +28,7 @@ namespace Scripts
             HoverSelectedController.instance.SetSelectedParent(transform);
             if (_gridObject == null) {
                 _gridObject = Instantiate(objToPlace, transform);
+                RandomizeArt.RotateRandomClamped(_gridObject.transform);
             }
         }
     }
