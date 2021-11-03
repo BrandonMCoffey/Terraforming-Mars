@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace Input
@@ -12,10 +13,10 @@ namespace Input
         public event Action Cancel = delegate { };
         public event Action SelectLeft = delegate { };
         public event Action SelectRight = delegate { };
-
-        private void Update()
-        {
-        }
+        public event Action<Vector2> LeftClick = delegate { };
+        public event Action<Vector2> RightClick = delegate { };
+        public event Action UILeftClick = delegate { };
+        public event Action UIRightClick = delegate { };
 
         public void OnConfirm(InputValue value)
         {
@@ -41,11 +42,36 @@ namespace Input
             SelectRight?.Invoke();
         }
 
+        public void OnLeftClick(InputValue value)
+        {
+            DebugInput("Left Click");
+            if (IsMouseOverUI()) {
+                UILeftClick?.Invoke();
+            } else {
+                LeftClick?.Invoke(Mouse.current.position.ReadValue());
+            }
+        }
+
+        public void OnRightClick(InputValue value)
+        {
+            DebugInput("Right Click");
+            if (IsMouseOverUI()) {
+                UIRightClick?.Invoke();
+            } else {
+                RightClick?.Invoke(Mouse.current.position.ReadValue());
+            }
+        }
+
         private void DebugInput(string inputAction)
         {
             if (_debug) {
                 Debug.Log("<color=aqua>User Input: </color>" + inputAction);
             }
+        }
+
+        public static bool IsMouseOverUI()
+        {
+            return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
         }
     }
 }

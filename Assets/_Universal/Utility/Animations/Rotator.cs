@@ -7,6 +7,7 @@ namespace Utility.Animations
         [Header("Degrees to rotate per second")]
         [SerializeField] private float _rotateSpeed = 360;
         [SerializeField] private Vector3 _rotateDirection = new Vector3(0, 1, 0);
+        [SerializeField] private Vector3 _rotateOffset = Vector3.zero;
 
         private Rigidbody _rb;
         private bool _useRb;
@@ -24,7 +25,7 @@ namespace Utility.Animations
         private void Update()
         {
             if (_useRb) return;
-            transform.Rotate(_rotateDirection * _rotateSpeed * Time.deltaTime);
+            transform.RotateAround(_rotateOffset, _rotateDirection, _rotateSpeed * Time.deltaTime);
         }
 
         private void FixedUpdate()

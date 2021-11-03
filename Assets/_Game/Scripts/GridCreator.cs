@@ -30,6 +30,7 @@ namespace Scripts
                     var gridObj = Instantiate(_baseGridSlot, transform);
                     gridObj.Setup(x, y, _potentialTiles[Random.Range(0, _potentialTiles.Count)].GetTile());
                     _grid.Add(gridObj);
+                    gridObj.gameObject.name = _baseGridSlot.name + " (" + (x + 1) + "," + (y + 1) + ")";
                 }
             }
         }
