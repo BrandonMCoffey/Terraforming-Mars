@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _CardGame.Scripts.CardSystem
+namespace Scripts.CardSystem
 {
     [Serializable]
     public class Deck<T>

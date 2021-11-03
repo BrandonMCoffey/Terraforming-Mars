@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
-using _CardGame.Scripts.CardGame.StateMachine;
+using Scripts.CardGame.StateMachine;
 using UnityEngine;
 
-namespace _CardGame.Scripts.CardGame.States
+namespace Scripts.CardGame.States
 {
     public class EnemyTurnCardGameState : CardGameState
     {
