@@ -1,6 +1,6 @@
 //Maya ASCII 2020 scene
 //Name: Cube.ma
-//Last modified: Wed, Nov 03, 2021 05:14:53 PM
+//Last modified: Wed, Nov 03, 2021 05:41:08 PM
 //Codeset: 1252
 requires maya "2020";
 currentUnit -l centimeter -a degree -t film;
@@ -9,21 +9,22 @@ fileInfo "product" "Maya 2020";
 fileInfo "version" "2020";
 fileInfo "cutIdentifier" "202011110415-b1e20b88e2";
 fileInfo "osv" "Microsoft Windows 10 Technical Preview  (Build 19042)\n";
-fileInfo "UUID" "82E5FBB8-46A7-4A3C-D388-10AC201B9769";
+fileInfo "UUID" "CE38343D-4D3F-E058-9832-708B28592084";
 fileInfo "license" "student";
 createNode transform -s -n "persp";
 	rename -uid "63E54C04-43BC-C87D-3013-1999EC6894F8";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" -37.973324635218496 150.37229585184608 -37.461655448648145 ;
-	setAttr ".r" -type "double3" -79.538352740217391 589.00000000013335 0 ;
+	setAttr ".t" -type "double3" -79.966150814733027 145.21813943788911 -192.10633880195542 ;
+	setAttr ".r" -type "double3" -34.538352740209817 562.60000000012838 0 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "3F7ED7E8-4FB1-867B-96EB-679F07F681BD";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999993;
-	setAttr ".coi" 157.53903757286429;
+	setAttr ".coi" 252.60812763660084;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
+	setAttr ".tp" -type "double3" 0 2 0 ;
 	setAttr ".hc" -type "string" "viewSet -p %camera";
 createNode transform -s -n "top";
 	rename -uid "8EBF5B11-47D2-DABB-71FE-EA8804B9E477";
@@ -44925,19 +44926,8 @@ createNode mesh -n "SelectedShape" -p "Selected";
 	setAttr ".dcc" -type "string" "Ambient+Diffuse";
 	setAttr ".covm[0]"  0 1 1;
 	setAttr ".cdvm[0]"  0 1 1;
-	setAttr -s 12 ".pt";
-	setAttr ".pt[1]" -type "float3" 2 0 0 ;
-	setAttr ".pt[2]" -type "float3" -2 0 0 ;
-	setAttr ".pt[4]" -type "float3" 0 0 -2 ;
-	setAttr ".pt[5]" -type "float3" 2 0 -2 ;
-	setAttr ".pt[6]" -type "float3" -2 0 -2 ;
-	setAttr ".pt[7]" -type "float3" 0 0 -2 ;
-	setAttr ".pt[8]" -type "float3" 0 0 2 ;
-	setAttr ".pt[9]" -type "float3" 2 0 2 ;
-	setAttr ".pt[10]" -type "float3" -2 0 2 ;
-	setAttr ".pt[11]" -type "float3" 0 0 2 ;
-	setAttr ".pt[13]" -type "float3" 2 0 0 ;
-	setAttr ".pt[14]" -type "float3" -2 0 0 ;
+	setAttr -s 16 ".pt[1:15]" -type "float3"  2 0 0 -2 0 0 0 0 0 0 0 -2 
+		2 0 -2 -2 0 -2 0 0 -2 0 0 2 2 0 2 -2 0 2 0 0 2 0 0 0 2 0 0 -2 0 0 0 0 0;
 	setAttr -s 16 ".vt[0:15]"  -50 2 50 -45 2 50 45 2 50 50 2 50 -50 2 45
 		 -45 2 45 45 2 45 50 2 45 -50 2 -45 -45 2 -45 45 2 -45 50 2 -45 -50 2 -50 -45 2 -50
 		 45 2 -50 50 2 -50;

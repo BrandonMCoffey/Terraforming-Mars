@@ -4,7 +4,7 @@ namespace Utility.Animations
 {
     public class Rotator : MonoBehaviour
     {
-        [Header("Degrees to rotate per second")]
+        [Tooltip("Degrees to rotate per second")]
         [SerializeField] private float _rotateSpeed = 360;
         [SerializeField] private Vector3 _rotateDirection = new Vector3(0, 1, 0);
         [SerializeField] private Vector3 _rotateOffset = Vector3.zero;

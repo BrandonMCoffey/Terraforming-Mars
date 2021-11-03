@@ -7,32 +7,28 @@ namespace Scripts
 {
     public class GridCreator : MonoBehaviour
     {
-        [Header("Existing Grid")]
-        [SerializeField] private List<GridSlot> _grid;
-        [Header("Generate Grid")]
+        [SerializeField] private GridController _gridController = null;
         [SerializeField] private GridSlot _baseGridSlot = null;
-        [SerializeField] private List<ArtCollection> _potentialTiles;
+        [SerializeField] private ArtCollection _landTiles = null;
 
+        [SerializeField] private int _width = 8;
+        [SerializeField] private int _height = 8;
 
         [Button]
-        private void GenerateGridSlots(int width, int height)
+        private void GenerateGridSlots()
         {
-            if (_baseGridSlot == null) return;
-            if (_grid != null) {
-                foreach (var gridObj in _grid.Where(gridObj => gridObj != null)) {
-                    DestroyImmediate(gridObj.gameObject);
-                }
-            }
-            _potentialTiles = _potentialTiles.Where(obj => obj != null).ToList();
-            _grid = new List<GridSlot>(width * height);
-            for (int x = 0; x < width; x++) {
-                for (int y = 0; y < height; y++) {
-                    var gridObj = Instantiate(_baseGridSlot, transform);
-                    gridObj.Setup(x, y, _potentialTiles[Random.Range(0, _potentialTiles.Count)].GetTile());
-                    _grid.Add(gridObj);
+            if (_gridController == null || _baseGridSlot == null) return;
+            _landTiles.Verify();
+            var grid = new List<GridSlot>(_width * _height);
+            for (int x = 0; x < _width; x++) {
+                for (int y = 0; y < _height; y++) {
+                    var gridObj = Instantiate(_baseGridSlot, _gridController.transform);
+                    gridObj.Setup(x, y, _landTiles.GetArt());
+                    grid.Add(gridObj);
                     gridObj.gameObject.name = _baseGridSlot.name + " (" + (x + 1) + "," + (y + 1) + ")";
                 }
             }
+            _gridController.SetGrid(grid);
         }
     }
 }

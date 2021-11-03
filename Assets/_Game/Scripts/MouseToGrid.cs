@@ -6,6 +6,7 @@ namespace Scripts
     public class MouseToGrid : MonoBehaviour
     {
         [SerializeField] private InputController _inputController;
+        [SerializeField] private ArtCollection _artToPlace = null;
 
         private Camera _mainCamera;
         private Ray _mouseRay;
@@ -16,6 +17,7 @@ namespace Scripts
                 _inputController = FindObjectOfType<InputController>();
             }
             _mainCamera = Camera.main;
+            _artToPlace.Verify();
         }
 
         private void OnEnable()
@@ -49,7 +51,7 @@ namespace Scripts
             _mouseRay = _mainCamera.ScreenPointToRay(mousePos);
         }
 
-        private static void OnLeftClick(Vector2 mousePos)
+        private void OnLeftClick(Vector2 mousePos)
         {
             Ray ray = Camera.main.ScreenPointToRay(mousePos);
             Physics.Raycast(ray, out var hit, 100f);
@@ -60,7 +62,8 @@ namespace Scripts
 
             GridSlot slot = hit.collider.GetComponent<GridSlot>();
             if (slot != null) {
-                slot.OnSelect();
+                GameObject objToPlace = _artToPlace.GetArt();
+                slot.OnSelect(objToPlace);
             }
         }
     }

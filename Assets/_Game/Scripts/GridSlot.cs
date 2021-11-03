@@ -1,10 +1,11 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scripts
 {
     public class GridSlot : MonoBehaviour
     {
+        [SerializeField] private GameObject _gridObject = null;
+
         private static int[] _rotations = { 0, 90, 180, 270 };
 
         public void Setup(int x, int y, GameObject tileArt)
@@ -23,9 +24,12 @@ namespace Scripts
             HoverSelectedController.instance.SetHoverParent(transform);
         }
 
-        public void OnSelect()
+        public void OnSelect(GameObject objToPlace)
         {
             HoverSelectedController.instance.SetSelectedParent(transform);
+            if (_gridObject == null) {
+                _gridObject = Instantiate(objToPlace, transform);
+            }
         }
     }
 }

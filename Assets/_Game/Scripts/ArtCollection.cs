@@ -13,9 +13,15 @@ namespace Scripts
 
         public ArtType Type => _type;
 
-        public GameObject GetTile()
+        public void Verify()
         {
+#if UNITY_EDITOR
             _art = _art.Where(obj => obj.art != null).ToList();
+#endif
+        }
+
+        public GameObject GetArt()
+        {
             return _weighted ? GetRandomWeighted() : GetRandomRaw();
         }
 
