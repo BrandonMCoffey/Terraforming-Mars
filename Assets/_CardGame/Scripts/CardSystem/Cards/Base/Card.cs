@@ -1,7 +1,7 @@
-using Scripts.Utility.Buttons;
 using UnityEngine;
+using Utility.Buttons;
 
-namespace Scripts.CardSystem.Cards.Base
+namespace _CardGame.Scripts.CardSystem.Cards.Base
 {
     public class Card : MonoBehaviour
     {

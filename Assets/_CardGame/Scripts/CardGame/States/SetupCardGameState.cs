@@ -1,8 +1,8 @@
 using System;
-using Scripts.CardGame.StateMachine;
+using _CardGame.Scripts.CardGame.StateMachine;
 using UnityEngine;
 
-namespace Scripts.CardGame.States
+namespace _CardGame.Scripts.CardGame.States
 {
     public class SetupCardGameState : CardGameState
     {

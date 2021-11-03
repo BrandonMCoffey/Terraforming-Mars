@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Scripts.CardSystem
+namespace _CardGame.Scripts.CardSystem
 {
     [Serializable]
     public class DeckSystem<T>

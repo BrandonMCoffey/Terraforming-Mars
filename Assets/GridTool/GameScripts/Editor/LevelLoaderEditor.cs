@@ -1,9 +1,8 @@
 #if UNITY_EDITOR
-using GridTool.GameScripts;
 using UnityEditor;
 using UnityEngine;
 
-namespace Assets.GridTool.GameScripts.Editor
+namespace GridTool.GameScripts.Editor
 {
     [CustomEditor(typeof(LevelLoader), true)]
     public class LevelLoaderEditor : UnityEditor.Editor

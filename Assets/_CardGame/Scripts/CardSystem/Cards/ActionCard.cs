@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Scripts.CardSystem.Cards
+namespace _CardGame.Scripts.CardSystem.Cards
 {
     [CreateAssetMenu(menuName = "Card Game/Action Card")]
     public class ActionCard : CardData

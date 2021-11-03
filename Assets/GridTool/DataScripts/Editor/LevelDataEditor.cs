@@ -1,11 +1,10 @@
 #if UNITY_EDITOR
 using System.IO;
-using GridTool.DataScripts;
 using GridTool.DataScripts.GUI;
 using UnityEditor;
 using UnityEngine;
 
-namespace Assets.GridTool.DataScripts.Editor
+namespace GridTool.DataScripts.Editor
 {
     [CustomEditor(typeof(LevelData), true)]
     public class LevelDataEditor : UnityEditor.Editor
@@ -39,7 +38,7 @@ namespace Assets.GridTool.DataScripts.Editor
             EditorGUILayout.Separator();
             GUILayout.BeginHorizontal();
             data.CheckValid();
-            var centeredStyle = GUI.skin.GetStyle("Label");
+            var centeredStyle = UnityEngine.GUI.skin.GetStyle("Label");
             centeredStyle.alignment = TextAnchor.MiddleCenter;
             float width = (Screen.width - 20 - data.Width * 4f) / data.Width;
             for (int w = 0; w < data.Width; w++) {

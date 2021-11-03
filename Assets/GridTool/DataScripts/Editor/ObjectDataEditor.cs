@@ -1,10 +1,9 @@
 #if UNITY_EDITOR
-using GridTool.DataScripts;
 using GridTool.DataScripts.GUI;
 using UnityEditor;
 using UnityEngine;
 
-namespace Assets.GridTool.DataScripts.Editor
+namespace GridTool.DataScripts.Editor
 {
     [CustomEditor(typeof(ObjectData), true)]
     public class ObjectDataEditor : UnityEditor.Editor
