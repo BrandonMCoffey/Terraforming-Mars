@@ -12,24 +12,16 @@ namespace Scripts.States
         public static event Action<int> TurnBegin;
         public static event Action TurnEnd;
 
-        private int _playerTurnCount;
+        private int _turnCount;
 
         public override void Enter()
         {
-            TurnBegin?.Invoke(++_playerTurnCount);
+            TurnBegin?.Invoke(++_turnCount);
 
             StateMachine.Input.Confirm += OnConfirm;
             StateMachine.Input.Cancel += OnCancel;
 
             _mouseToGrid.LockActions(false);
-        }
-
-        public override void Tick()
-        {
-            if (_playerTurnCount >= 5) {
-                _playerTurnCount = 0;
-                StateMachine.ChangeState<WinTbState>();
-            }
         }
 
         public override void Exit()

@@ -72,6 +72,7 @@ namespace Scripts.Grid
 
         public void SetSelectedParent(Transform parent)
         {
+            ClearUnitOptions();
             if (!_selectedActive) {
                 _selectedArt.SetActive(true);
                 _selectedActive = true;

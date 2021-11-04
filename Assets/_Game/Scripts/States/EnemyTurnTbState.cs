@@ -12,14 +12,30 @@ namespace Scripts.States
         [SerializeField] private float _thinkTime = 3f;
         [SerializeField] private float _continuePause = 1f;
 
-        public static event Action TurnBegin;
+        public static event Action<int> TurnBegin;
         public static event Action TurnEnd;
+
+        private int _turnCount;
+        private bool _lostGame;
 
         public override void Enter()
         {
-            TurnBegin?.Invoke();
+            if (_enemyToGrid.CheckGameOver) {
+                _lostGame = true;
+                return;
+            }
+
+            TurnBegin?.Invoke(++_turnCount);
 
             StartCoroutine(EnemyThinkRoutine());
+        }
+
+        public override void Tick()
+        {
+            if (_lostGame) {
+                _lostGame = false;
+                StateMachine.ChangeState<WinTbState>();
+            }
         }
 
         private IEnumerator EnemyThinkRoutine()

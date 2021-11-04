@@ -17,9 +17,24 @@ namespace Scripts.Units
 
         public void PlaceStartingUnits()
         {
-            var playerSlot = _gridController.GetSlot(1, 1);
+            PlacePlayerUnit(1, 6);
+            PlacePlayerUnit(2, 6);
+            PlacePlayerUnit(1, 5);
+
+            PlaceEnemyUnit(1, 6);
+            PlaceEnemyUnit(2, 6);
+            PlaceEnemyUnit(1, 5);
+        }
+
+        private void PlacePlayerUnit(int x, int y)
+        {
+            var playerSlot = _gridController.GetSlot(x, y);
             playerSlot.PlaceObject(_playerUnit, true);
-            var enemySlot = _gridController.GetOppositeSlot(1, 1);
+        }
+
+        private void PlaceEnemyUnit(int x, int y)
+        {
+            var enemySlot = _gridController.GetOppositeSlot(x, y);
             enemySlot.PlaceObject(_enemyUnit, false);
         }
 

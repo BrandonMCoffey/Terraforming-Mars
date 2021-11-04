@@ -43,11 +43,9 @@ namespace Scripts.Grid
         {
             if (_actionReady) {
                 if (_gridUnit == null) {
-                    Debug.Log("Move " + _actingSlot.name + " to " + name, gameObject);
                     _gridUnit = _actingSlot.ClearGridUnit();
                     _gridUnit.transform.SetParent(transform, false);
                 } else {
-                    Debug.Log("Kill " + name, gameObject);
                     Destroy(_gridUnit.gameObject);
                 }
                 HoverSelectedController.instance.ClearUnitOptions();
@@ -74,6 +72,9 @@ namespace Scripts.Grid
 
             _gridUnit = Instantiate(unitToPlace, transform);
             _gridUnit.PlayerOwned = playerOwned;
+            if (!playerOwned) {
+                EnemyToGrid.AddNewEnemy?.Invoke(_gridUnit);
+            }
             RandomizeArt.RotateRandomClamped(unitToPlace.transform);
             return true;
         }
