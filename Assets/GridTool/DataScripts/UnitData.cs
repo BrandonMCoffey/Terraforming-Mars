@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace GridTool.DataScripts
@@ -13,6 +14,20 @@ namespace GridTool.DataScripts
         public UnitLevelData[,] UnitOptions;
 
         public int UnitOptionLength => MaxMoveDistance * 2 + 1;
+
+        public List<UnitLevelData> GetReadableData()
+        {
+            CheckValid();
+            var usableData = new List<UnitLevelData>();
+            for (int x = 0; x < UnitOptionLength; x++) {
+                for (int y = 0; y < UnitOptionLength; y++) {
+                    if (UnitOptions[x, y].IsUseful) {
+                        usableData.Add(UnitOptions[x, y]);
+                    }
+                }
+            }
+            return usableData;
+        }
 
         public void CheckValid(int maxDistance)
         {
@@ -32,7 +47,7 @@ namespace GridTool.DataScripts
                 UnitOptions = new UnitLevelData[UnitOptionLength, UnitOptionLength];
                 for (int x = 0; x < UnitOptionLength; x++) {
                     for (int y = 0; y < UnitOptionLength; y++) {
-                        UnitOptions[x, y] = new UnitLevelData(x, y);
+                        UnitOptions[x, y] = new UnitLevelData(x - MaxMoveDistance, y - MaxMoveDistance);
                     }
                 }
             }
@@ -68,9 +83,9 @@ namespace GridTool.DataScripts
                     rowArr = arr[y].Split(',');
                     for (int x = 0; x < width; x++) {
                         if (x >= rowArr.Length || y > arr.Length) {
-                            newOptions[x, y] = new UnitLevelData(x, y);
+                            newOptions[x, y] = new UnitLevelData(x - MaxMoveDistance, y - MaxMoveDistance);
                         } else {
-                            newOptions[x, y] = new UnitLevelData(x, y, rowArr[x]);
+                            newOptions[x, y] = new UnitLevelData(x - MaxMoveDistance, y - MaxMoveDistance, rowArr[x]);
                         }
                     }
                 }

@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using Utility.Animations;
 
 namespace Scripts
 {
@@ -6,6 +8,11 @@ namespace Scripts
     {
         [SerializeField] private GameObject _hoverArt = null;
         [SerializeField] private GameObject _selectedArt = null;
+        [SerializeField] private ObjectPoolFollowTransform _moveToArtPool = null;
+        [SerializeField] private ObjectPoolFollowTransform _attackArtPool = null;
+
+        private List<GameObject> _activeMoveToArt = new List<GameObject>();
+        private List<GameObject> _activeAttackArt = new List<GameObject>();
 
         public static HoverSelectedController instance;
 
@@ -80,7 +87,36 @@ namespace Scripts
                 _selectedParent = null;
                 _selectedArt.SetActive(false);
                 _selectedActive = false;
+                ClearUnitOptions();
             }
+        }
+
+        public void SetMoveOption(Transform other)
+        {
+            var moveObj = _moveToArtPool.GetObject();
+            _activeMoveToArt.Add(moveObj);
+            var objAnimator = moveObj.GetComponent<MatchTransform>();
+            objAnimator.SetTransformToMatch(other);
+        }
+
+        public void SetAttackOption(Transform other)
+        {
+            var attackObj = _attackArtPool.GetObject();
+            _activeAttackArt.Add(attackObj);
+            var objAnimator = attackObj.GetComponent<MatchTransform>();
+            objAnimator.SetTransformToMatch(other);
+        }
+
+        public void ClearUnitOptions()
+        {
+            foreach (var art in _activeMoveToArt) {
+                _moveToArtPool.ReturnObject(art);
+            }
+            _activeMoveToArt = new List<GameObject>();
+            foreach (var art in _activeAttackArt) {
+                _attackArtPool.ReturnObject(art);
+            }
+            _activeMoveToArt = new List<GameObject>();
         }
     }
 }

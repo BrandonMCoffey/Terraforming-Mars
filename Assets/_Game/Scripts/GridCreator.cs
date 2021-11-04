@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using Utility.Buttons;
 
 namespace Scripts
 {
@@ -14,18 +12,22 @@ namespace Scripts
         [SerializeField] private int _width = 8;
         [SerializeField] private int _height = 8;
 
-        [Button]
+        private void Awake()
+        {
+            GenerateGridSlots();
+        }
+
         private void GenerateGridSlots()
         {
             if (_gridController == null || _baseGridSlot == null) return;
             _landTiles.Verify();
-            var grid = new GridSlot[_width, _height];
+            var grid = new List<List<GridSlot>>(_width);
             for (int x = 0; x < _width; x++) {
+                grid.Add(new List<GridSlot>(_height));
                 for (int y = 0; y < _height; y++) {
                     var gridObj = Instantiate(_baseGridSlot, _gridController.transform);
-                    gridObj.Setup(x, y, _landTiles.GetArt());
-                    gridObj.gameObject.name = _baseGridSlot.name + " (" + (x + 1) + "," + (y + 1) + ")";
-                    grid[x, y] = gridObj;
+                    gridObj.Setup(_gridController, x, y, _landTiles.GetArt());
+                    grid[x].Add(gridObj);
                 }
             }
             _gridController.SetGrid(grid);

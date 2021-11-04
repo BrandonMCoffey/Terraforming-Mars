@@ -9,6 +9,8 @@ namespace GridTool.DataScripts
         public bool CanMove;
         public bool CanAttack;
 
+        public bool IsUseful => CanMove || CanAttack;
+
         public UnitLevelData(int horzOffset, int vertOffset)
         {
             HorzOffset = horzOffset;
