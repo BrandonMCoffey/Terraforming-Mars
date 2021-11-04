@@ -1,6 +1,7 @@
 using System;
 using Scripts.StateMachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Scripts.States
 {
@@ -21,7 +22,8 @@ namespace Scripts.States
 
         private void OnConfirm()
         {
-            StateMachine.ChangeState<SetupTbState>();
+            // TODO: Restart game without reloading the scene
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

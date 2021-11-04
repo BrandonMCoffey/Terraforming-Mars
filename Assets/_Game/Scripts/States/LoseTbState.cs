@@ -20,7 +20,8 @@ namespace Scripts.States
 
         private void OnConfirm()
         {
-            StateMachine.ChangeState<SetupTbState>();
+            // TODO: Restart game without reloading the scene
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }
