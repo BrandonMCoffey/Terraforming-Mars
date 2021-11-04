@@ -5,7 +5,7 @@ namespace Scripts
 {
     public class GridSlot : MonoBehaviour
     {
-        [SerializeField] private GameObject _gridObject = null;
+        [SerializeField] private Unit _gridUnit;
 
         public void Setup(int x, int y, GameObject tileArt)
         {
@@ -23,13 +23,19 @@ namespace Scripts
             HoverSelectedController.instance.SetHoverParent(transform);
         }
 
-        public void OnSelect(GameObject objToPlace)
+        public void OnSelect()
         {
             HoverSelectedController.instance.SetSelectedParent(transform);
-            if (_gridObject == null) {
-                _gridObject = Instantiate(objToPlace, transform);
-                RandomizeArt.RotateRandomClamped(_gridObject.transform);
-            }
+            Debug.Log(_gridUnit);
+        }
+
+        public bool PlaceObject(Unit unitToPlace)
+        {
+            if (_gridUnit != null) return false;
+
+            _gridUnit = Instantiate(unitToPlace, transform);
+            RandomizeArt.RotateRandomClamped(unitToPlace.transform);
+            return true;
         }
     }
 }

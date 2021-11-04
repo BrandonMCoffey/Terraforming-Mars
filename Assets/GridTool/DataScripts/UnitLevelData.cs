@@ -17,25 +17,26 @@ namespace GridTool.DataScripts
             CanAttack = false;
         }
 
-        public UnitLevelData(int horzOffset, int vertOffset, bool canMove, bool canAttack)
+        public UnitLevelData(int horzOffset, int vertOffset, string moveAndAttack)
         {
             HorzOffset = horzOffset;
             VertOffset = vertOffset;
-            CanMove = canMove;
-            CanAttack = canAttack;
+            CanMove = moveAndAttack.Contains("m") || moveAndAttack.Contains("M");
+            CanAttack = moveAndAttack.Contains("a") || moveAndAttack.Contains("A");
         }
 
-        public UnitLevelData(int horzOffset, int vertOffset, int moveAndAttack)
+        public string GetReadableString()
         {
-            HorzOffset = horzOffset;
-            VertOffset = vertOffset;
-            CanMove = moveAndAttack == 1 || moveAndAttack == 3;
-            CanAttack = moveAndAttack == 2 || moveAndAttack == 3;
+            return CanMove switch
+            {
+                true when CanAttack => "M + A",
+                true                => "Move",
+                _                   => CanAttack ? "Attack" : "-"
+            };
         }
 
         public int GetValue()
         {
-            Debug.Log(HorzOffset + "," + VertOffset + "  " + CanMove + " " + CanAttack);
             int value = CanMove ? 1 : 0;
             value += CanAttack ? 2 : 0;
             return value;

@@ -28,8 +28,11 @@ namespace GridTool.DataScripts.GUI
 
         private static string _lastPath = "";
 
-        private static int _minPixels = 32;
-        private static int _maxPixels = 128;
+        private const int MinPixels = 32;
+        private const int MaxPixels = 128;
+
+        private const int MinMoveDistance = 1;
+        private const int MaxMoveDistance = 8;
 
         #region Initialization
 
@@ -37,14 +40,14 @@ namespace GridTool.DataScripts.GUI
         private static void OpenWindow()
         {
             UnitDesignerWindow window = (UnitDesignerWindow)GetWindow(typeof(UnitDesignerWindow), false, "Unit Designer");
-            window.minSize = new Vector2(800, 600);
+            window.minSize = new Vector2(800, 700);
             window.Show();
         }
 
         public static void OpenWindow(UnitData data)
         {
             UnitDesignerWindow window = (UnitDesignerWindow)GetWindow(typeof(UnitDesignerWindow), false, "Unit Designer");
-            window.minSize = new Vector2(800, 500);
+            window.minSize = new Vector2(800, 700);
             _overrideData = data;
             window.Show();
             _unitData = ScriptableObject.Instantiate(data);
@@ -175,9 +178,9 @@ namespace GridTool.DataScripts.GUI
         {
             GUILayout.BeginArea(_mainSection);
 
-            int size = Mathf.RoundToInt(Mathf.Clamp((_mainSection.width - 4 * _unitData.UnitOptionLength) / _unitData.UnitOptionLength, _minPixels, _maxPixels));
+            int size = Mathf.RoundToInt(Mathf.Clamp((_mainSection.width - 4 * _unitData.UnitOptionLength) / _unitData.UnitOptionLength, MinPixels, MaxPixels));
 
-            _unitData.Verify();
+            _unitData.CheckValid();
 
             GUILayout.BeginHorizontal();
             for (int x = 0; x < _unitData.UnitOptionLength; x++) {
@@ -219,6 +222,12 @@ namespace GridTool.DataScripts.GUI
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Name:");
             _unitData.Name = EditorGUILayout.TextField(_unitData.Name);
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label("Move Distance:");
+            _unitData.MaxMoveDistance = Mathf.Clamp(EditorGUILayout.DelayedIntField(_unitData.MaxMoveDistance), MinMoveDistance, MaxMoveDistance);
+            _unitData.CheckValid();
             EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.Separator();
@@ -277,6 +286,7 @@ namespace GridTool.DataScripts.GUI
                     // TODO: Better way to copy information
                     _overrideData.Name = _unitData.Name;
                     _overrideData.UnitOptions = _unitData.UnitOptions;
+                    _overrideData.SaveUnitOptions();
                 }
                 EditorGUILayout.ObjectField(_overrideData, typeof(ObjectData), false);
             } else {
@@ -288,13 +298,14 @@ namespace GridTool.DataScripts.GUI
                     }
                     _lastPath = fullPath;
                     string path = "Assets" + fullPath.Remove(0, projectPath.Length);
+                    _unitData.SaveUnitOptions();
                     AssetDatabase.CreateAsset(_unitData, path + "/" + _unitData.Name + ".asset");
                     ClearDesigner();
                 }
             }
         }
 
-        private void ClearDesigner()
+        private static void ClearDesigner()
         {
             _unitData = null;
             InitData();
