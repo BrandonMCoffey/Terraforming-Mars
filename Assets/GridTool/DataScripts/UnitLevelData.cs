@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace GridTool.DataScripts
 {
     public struct UnitLevelData
