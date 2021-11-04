@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6e075ff2f67aa4eba9e3f0fe4b2424, type: 3}
   m_Name: Test Unit
   m_EditorClassIdentifier: 
-  Name: 
-  MaxMoveDistance: 2
+  Name: Test Unit
+  MaxMoveDistance: 4
