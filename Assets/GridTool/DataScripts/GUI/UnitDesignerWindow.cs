@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GridTool.DataScripts.GUI
 {
-    public class LevelDesignerWindow : EditorWindow
+    public class UnitDesignerWindow : EditorWindow
     {
         private Rect _headerSection;
         private Rect _loadSection;
@@ -16,37 +16,38 @@ namespace GridTool.DataScripts.GUI
         private Color _headerSectionColor = new Color(0.5f, 0.5f, 0.5f);
         private Color _mainSectionColor = new Color(0.2f, 0.2f, 0.2f);
 
-        private static LevelData _levelData;
-        private static LevelData _loadLevelData;
-        private static LevelData _overrideData;
+        private Texture2D _moveTexture;
+        private Texture2D _attackTexture;
+        private Texture2D _moveAndAttackTexture;
 
-        private static ObjectData _selectedObject;
+        private static int _moveOrAttack;
+
+        private static UnitData _unitData;
+        private static UnitData _loadUnitData;
+        private static UnitData _overrideData;
 
         private static string _lastPath = "";
 
         private static int _minPixels = 32;
         private static int _maxPixels = 128;
 
-        private static int _maxWidth = 32;
-        private static int _maxHeight = 24;
-
         #region Initialization
 
-        [MenuItem("Window/Level Designer")]
+        [MenuItem("Window/Unit Designer")]
         private static void OpenWindow()
         {
-            LevelDesignerWindow window = (LevelDesignerWindow)GetWindow(typeof(LevelDesignerWindow), false, "Level Designer");
-            window.minSize = new Vector2(800, 500);
+            UnitDesignerWindow window = (UnitDesignerWindow)GetWindow(typeof(UnitDesignerWindow), false, "Unit Designer");
+            window.minSize = new Vector2(800, 600);
             window.Show();
         }
 
-        public static void OpenWindow(LevelData data)
+        public static void OpenWindow(UnitData data)
         {
-            LevelDesignerWindow window = (LevelDesignerWindow)GetWindow(typeof(LevelDesignerWindow), false, "Level Designer");
+            UnitDesignerWindow window = (UnitDesignerWindow)GetWindow(typeof(UnitDesignerWindow), false, "Unit Designer");
             window.minSize = new Vector2(800, 500);
             _overrideData = data;
             window.Show();
-            _levelData = ScriptableObject.Instantiate(data);
+            _unitData = ScriptableObject.Instantiate(data);
         }
 
         private void OnEnable()
@@ -65,11 +66,20 @@ namespace GridTool.DataScripts.GUI
             _mainSectionTexture = new Texture2D(1, 1);
             _mainSectionTexture.SetPixel(0, 0, _mainSectionColor);
             _mainSectionTexture.Apply();
+
+            _moveTexture = (Texture2D)AssetDatabase.LoadAssetAtPath("Assets/GridTool/Sprites/MoveIcon.png", typeof(Texture2D));
+            _moveTexture.Apply();
+
+            _attackTexture = (Texture2D)AssetDatabase.LoadAssetAtPath("Assets/GridTool/Sprites/AttackIcon.png", typeof(Texture2D));
+            _attackTexture.Apply();
+
+            _moveAndAttackTexture = (Texture2D)AssetDatabase.LoadAssetAtPath("Assets/GridTool/Sprites/MoveAndAttackIcon.png", typeof(Texture2D));
+            _moveAndAttackTexture.Apply();
         }
 
-        private void InitData()
+        private static void InitData()
         {
-            _levelData = (LevelData)ScriptableObject.CreateInstance(typeof(LevelData));
+            _unitData = (UnitData)ScriptableObject.CreateInstance(typeof(UnitData));
             _overrideData = null;
         }
 
@@ -130,7 +140,7 @@ namespace GridTool.DataScripts.GUI
         {
             GUILayout.BeginArea(_headerSection);
             GUIStyle titleStyle = new GUIStyle { fontSize = 25, stretchHeight = true, alignment = TextAnchor.MiddleLeft };
-            GUILayout.Label(" Level Designer" + (string.IsNullOrEmpty(_levelData.Name) ? " " : " (" + _levelData.Name + ")"), titleStyle);
+            GUILayout.Label(" Unit Designer" + (string.IsNullOrEmpty(_unitData.Name) ? " " : " (" + _unitData.Name + ")"), titleStyle);
             GUILayout.EndArea();
         }
 
@@ -138,7 +148,7 @@ namespace GridTool.DataScripts.GUI
         {
             GUILayout.BeginArea(_loadSection);
             EditorGUILayout.BeginVertical();
-            _loadLevelData = (LevelData)EditorGUILayout.ObjectField(_loadLevelData, typeof(LevelData), false);
+            _loadUnitData = (UnitData)EditorGUILayout.ObjectField(_loadUnitData, typeof(UnitData), false);
             if (GUILayout.Button("Load Existing")) {
                 LoadExistingAsset();
             }
@@ -148,10 +158,10 @@ namespace GridTool.DataScripts.GUI
 
         private static void LoadExistingAsset()
         {
-            if (_loadLevelData != null) {
-                _levelData = ScriptableObject.Instantiate(_loadLevelData);
-                _overrideData = _loadLevelData;
-                _loadLevelData = null;
+            if (_loadUnitData != null) {
+                _unitData = ScriptableObject.Instantiate(_loadUnitData);
+                _overrideData = _loadUnitData;
+                _loadUnitData = null;
             } else {
                 //EditorUtility.OpenFilePanel("Select Existing art", "", "asset");
             }
@@ -159,35 +169,41 @@ namespace GridTool.DataScripts.GUI
 
         #endregion
 
-        #region Level Map
+        #region Unit Map
 
         private void DrawMain()
         {
             GUILayout.BeginArea(_mainSection);
 
-            if (_levelData.Collection != null) {
-                _levelData.CheckValid();
-                int width = _levelData.Width;
-                int size = Mathf.RoundToInt(Mathf.Clamp((_mainSection.width - 4 * width) / width, _minPixels, _maxPixels));
+            int size = Mathf.RoundToInt(Mathf.Clamp((_mainSection.width - 4 * _unitData.UnitOptionLength) / _unitData.UnitOptionLength, _minPixels, _maxPixels));
 
-                GUILayout.BeginHorizontal();
-                for (int x = 0; x < width; x++) {
-                    GUILayout.BeginVertical();
-                    for (int y = 0; y < _levelData.Height; y++) {
-                        string objName = _levelData.Level[x, y].Name;
-                        if (GUILayout.RepeatButton(_levelData.Collection.GetTexture(objName), GUILayout.Width(size), GUILayout.Height(size))) {
-                            if (_selectedObject != null) {
-                                _levelData.Level[x, y].Name = _selectedObject.Name;
-                            } else {
-                                _levelData.Level[x, y].Name = "";
-                            }
-                        }
-                        //_levelData.Level[x, y].Name = GUILayout.TextField(_levelData.Get(x, y).Name, GUILayout.MinWidth(0));
+            _unitData.Verify();
+
+            GUILayout.BeginHorizontal();
+            for (int x = 0; x < _unitData.UnitOptionLength; x++) {
+                GUILayout.BeginVertical();
+                for (int y = 0; y < _unitData.UnitOptionLength; y++) {
+                    if (x == _unitData.MaxMoveDistance && y == _unitData.MaxMoveDistance) {
+                        GUILayout.Box(GUIContent.none, GUILayout.Width(size), GUILayout.Height(size - 4));
+                        continue;
                     }
-                    GUILayout.EndVertical();
+
+                    int unitValue = _unitData.UnitOptions[x, y].GetValue();
+                    var tex = unitValue switch
+                    {
+                        1 => _moveTexture,
+                        2 => _attackTexture,
+                        3 => _moveAndAttackTexture,
+                        _ => Texture2D.blackTexture
+                    };
+
+                    if (GUILayout.RepeatButton(tex, GUILayout.Width(size), GUILayout.Height(size))) {
+                        _unitData.UnitOptions[x, y].SetNewData(_moveOrAttack);
+                    }
                 }
-                GUILayout.EndHorizontal();
+                GUILayout.EndVertical();
             }
+            GUILayout.EndHorizontal();
 
             GUILayout.EndArea();
         }
@@ -202,61 +218,50 @@ namespace GridTool.DataScripts.GUI
 
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Name:");
-            _levelData.Name = EditorGUILayout.TextField(_levelData.Name);
+            _unitData.Name = EditorGUILayout.TextField(_unitData.Name);
             EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.Separator();
-
-            EditorGUILayout.BeginHorizontal();
-            GUILayout.Label("Width:");
-            int w = EditorGUILayout.DelayedIntField(_levelData.Width, GUILayout.MinWidth(0));
-            GUILayout.Label("Height:");
-            int h = EditorGUILayout.DelayedIntField(_levelData.Height, GUILayout.MinWidth(0));
-            EditorGUILayout.EndHorizontal();
-
-            w = Mathf.Clamp(w, 1, _maxWidth);
-            h = Mathf.Clamp(h, 1, _maxHeight);
-            _levelData.CheckValid(w, h);
-
-            EditorGUILayout.Separator();
             EditorGUILayout.Separator();
 
-            GUILayout.Label("Objects");
-            _levelData.Collection = (ObjectCollection)EditorGUILayout.ObjectField(_levelData.Collection, typeof(ObjectCollection), false);
 
-            if (_levelData.Collection != null) {
-                EditorGUILayout.Separator();
+            GUILayout.Label("Set Move and Attack Data");
+            int size = Mathf.RoundToInt(_objectSection.width / 4 - 4);
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button(Texture2D.blackTexture, GUILayout.Width(size), GUILayout.Height(size))) {
+                _moveOrAttack = 0;
+            }
+            if (GUILayout.Button(_moveTexture, GUILayout.Width(size), GUILayout.Height(size))) {
+                _moveOrAttack = 1;
+            }
+            if (GUILayout.Button(_attackTexture, GUILayout.Width(size), GUILayout.Height(size))) {
+                _moveOrAttack = 2;
+            }
+            if (GUILayout.Button(_moveAndAttackTexture, GUILayout.Width(size), GUILayout.Height(size))) {
+                _moveOrAttack = 3;
+            }
+            GUILayout.EndHorizontal();
 
-                _levelData.Collection.CheckValid();
-                int size = Mathf.RoundToInt(Mathf.Clamp((_objectSection.width - 16) / 4, _minPixels, _maxPixels));
-
-                GUILayout.BeginVertical();
-                GUILayout.BeginHorizontal();
-                if (GUILayout.Button(Texture2D.blackTexture, GUILayout.Width(size), GUILayout.Height(size))) {
-                    _selectedObject = null;
-                }
-                int horz = 1;
-                foreach (var obj in _levelData.Collection.Objects) {
-                    if (GUILayout.Button(obj.Texture, GUILayout.Width(size), GUILayout.Height(size))) {
-                        _selectedObject = obj;
-                    }
-                    horz++;
-                    if (horz >= 4) {
-                        horz = 0;
-                        GUILayout.EndHorizontal();
-                        GUILayout.BeginHorizontal();
-                    }
-                }
-                GUILayout.EndHorizontal();
-                GUILayout.EndVertical();
-            } else {
-                EditorGUILayout.HelpBox("Please specify an [art Collection] for this level.", MessageType.Error);
+            switch (_moveOrAttack) {
+                case 1:
+                    GUILayout.Label("Set Move");
+                    break;
+                case 2:
+                    GUILayout.Label("Set Attack");
+                    break;
+                case 3:
+                    GUILayout.Label("Set Move and Attack");
+                    break;
+                default:
+                    GUILayout.Label("Set Nothing");
+                    break;
             }
 
+
             EditorGUILayout.Separator();
             EditorGUILayout.Separator();
 
-            if (string.IsNullOrEmpty(_levelData.Name)) {
+            if (string.IsNullOrEmpty(_unitData.Name)) {
                 EditorGUILayout.HelpBox("Please specify a [Name] for this object.", MessageType.Warning);
             } else {
                 DrawCreateButton();
@@ -270,24 +275,20 @@ namespace GridTool.DataScripts.GUI
             if (_overrideData != null) {
                 if (GUILayout.Button("Save Asset", GUILayout.Height(40))) {
                     // TODO: Better way to copy information
-                    _overrideData.Name = _levelData.Name;
-                    _overrideData.Width = _levelData.Width;
-                    _overrideData.Height = _levelData.Height;
-                    _overrideData.Level = _levelData.Level;
-                    _overrideData.SaveLevel();
+                    _overrideData.Name = _unitData.Name;
+                    _overrideData.UnitOptions = _unitData.UnitOptions;
                 }
                 EditorGUILayout.ObjectField(_overrideData, typeof(ObjectData), false);
             } else {
                 if (GUILayout.Button("Create", GUILayout.Height(40))) {
                     string projectPath = string.IsNullOrEmpty(_lastPath) ? Application.dataPath : _lastPath;
-                    string fullPath = EditorUtility.OpenFolderPanel("Select folder to save " + _levelData.Name + " to", projectPath, "");
+                    string fullPath = EditorUtility.OpenFolderPanel("Select folder to save " + _unitData.Name + " to", projectPath, "");
                     if (fullPath.Length < projectPath.Length) {
                         return;
                     }
                     _lastPath = fullPath;
                     string path = "Assets" + fullPath.Remove(0, projectPath.Length);
-                    _levelData.SaveLevel();
-                    AssetDatabase.CreateAsset(_levelData, path + "/" + _levelData.Name + ".asset");
+                    AssetDatabase.CreateAsset(_unitData, path + "/" + _unitData.Name + ".asset");
                     ClearDesigner();
                 }
             }
@@ -295,7 +296,7 @@ namespace GridTool.DataScripts.GUI
 
         private void ClearDesigner()
         {
-            _levelData = null;
+            _unitData = null;
             InitData();
         }
 

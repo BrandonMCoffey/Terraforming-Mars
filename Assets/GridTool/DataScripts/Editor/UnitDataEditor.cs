@@ -5,16 +5,16 @@ using UnityEngine;
 
 namespace GridTool.DataScripts.Editor
 {
-    [CustomEditor(typeof(ObjectData), true)]
-    public class ObjectDataEditor : UnityEditor.Editor
+    [CustomEditor(typeof(UnitData), true)]
+    public class UnitDataEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
 
             EditorGUILayout.Separator();
-            if (GUILayout.Button("Edit Object", GUILayout.Height(40))) {
-                ObjectDesignerWindow.OpenWindow((ObjectData)target);
+            if (GUILayout.Button("Edit Unit", GUILayout.Height(40))) {
+                UnitDesignerWindow.OpenWindow((UnitData)target);
             }
         }
     }

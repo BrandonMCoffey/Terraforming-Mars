@@ -53,7 +53,7 @@ namespace GridTool.DataScripts.Editor
 
             // Edit Button
             EditorGUILayout.Separator();
-            if (GUILayout.Button("Edit art", GUILayout.Height(40))) {
+            if (GUILayout.Button("Edit Level", GUILayout.Height(40))) {
                 LevelDesignerWindow.OpenWindow(data);
             }
         }
