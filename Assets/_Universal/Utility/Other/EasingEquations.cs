@@ -53,9 +53,85 @@ using UnityEngine;
 
 namespace Utility.Other
 {
+    public enum EasingOption
+    {
+        Linear,
+        Spring,
+        EaseInQuad,
+        EaseOutQuad,
+        EaseInOutQuad,
+        EaseInCubic,
+        EaseOutCubic,
+        EaseInOutCubic,
+        EaseInQuart,
+        EaseOutQuart,
+        EaseInOutQuart,
+        EaseInQuint,
+        EaseOutQuint,
+        EaseInOutQuint,
+        EaseInSine,
+        EaseOutSine,
+        EaseInOutSine,
+        EaseInExpo,
+        EaseOutExpo,
+        EaseInOutExpo,
+        EaseInCirc,
+        EaseOutCirc,
+        EaseInOutCirc,
+        EaseInBounce,
+        EaseOutBounce,
+        EaseInOutBounce,
+        EaseInBack,
+        EaseOutBack,
+        EaseInOutBack,
+        EaseInElastic,
+        EaseOutElastic,
+        EaseInOutElastic
+    }
+
     public static class EasingEquations
     {
         private const float ErrorPrecision = 0.001f;
+
+        public static float Ease(EasingOption option, float start, float end, float value)
+        {
+            return option switch
+            {
+                EasingOption.Linear           => Linear(start, end, value),
+                EasingOption.Spring           => Spring(start, end, value),
+                EasingOption.EaseInQuad       => EaseInQuad(start, end, value),
+                EasingOption.EaseOutQuad      => EaseOutQuad(start, end, value),
+                EasingOption.EaseInOutQuad    => EaseInOutQuad(start, end, value),
+                EasingOption.EaseInCubic      => EaseInCubic(start, end, value),
+                EasingOption.EaseOutCubic     => EaseOutCubic(start, end, value),
+                EasingOption.EaseInOutCubic   => EaseInOutCubic(start, end, value),
+                EasingOption.EaseInQuart      => EaseInQuart(start, end, value),
+                EasingOption.EaseOutQuart     => EaseOutQuart(start, end, value),
+                EasingOption.EaseInOutQuart   => EaseInOutQuart(start, end, value),
+                EasingOption.EaseInQuint      => EaseInQuint(start, end, value),
+                EasingOption.EaseOutQuint     => EaseOutQuint(start, end, value),
+                EasingOption.EaseInOutQuint   => EaseInOutQuint(start, end, value),
+                EasingOption.EaseInSine       => EaseInSine(start, end, value),
+                EasingOption.EaseOutSine      => EaseOutSine(start, end, value),
+                EasingOption.EaseInOutSine    => EaseInOutSine(start, end, value),
+                EasingOption.EaseInExpo       => EaseInExpo(start, end, value),
+                EasingOption.EaseOutExpo      => EaseOutExpo(start, end, value),
+                EasingOption.EaseInOutExpo    => EaseInOutExpo(start, end, value),
+                EasingOption.EaseInCirc       => EaseInCirc(start, end, value),
+                EasingOption.EaseOutCirc      => EaseOutCirc(start, end, value),
+                EasingOption.EaseInOutCirc    => EaseInOutCirc(start, end, value),
+                EasingOption.EaseInBounce     => EaseInBounce(start, end, value),
+                EasingOption.EaseOutBounce    => EaseOutBounce(start, end, value),
+                EasingOption.EaseInOutBounce  => EaseInOutBounce(start, end, value),
+                EasingOption.EaseInBack       => EaseInBack(start, end, value),
+                EasingOption.EaseOutBack      => EaseOutBack(start, end, value),
+                EasingOption.EaseInOutBack    => EaseInOutBack(start, end, value),
+                EasingOption.EaseInElastic    => EaseInElastic(start, end, value),
+                EasingOption.EaseOutElastic   => EaseOutElastic(start, end, value),
+                EasingOption.EaseInOutElastic => EaseInOutElastic(start, end, value),
+                _                             => 0
+            };
+        }
 
         public static float Linear(float start, float end, float value)
         {
