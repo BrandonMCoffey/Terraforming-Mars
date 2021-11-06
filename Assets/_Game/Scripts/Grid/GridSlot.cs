@@ -39,14 +39,16 @@ namespace Scripts.Grid
             HoverSelectedController.instance.SetHoverParent(transform);
         }
 
-        public void OnSelect()
+        public void OnSelect(bool isPlayer)
         {
             if (_actionReady) {
                 if (_gridUnit == null) {
                     _gridUnit = _actingSlot.ClearGridUnit();
                     _gridUnit.transform.SetParent(transform, false);
+                    _gridUnit.AddUnitMoved();
                 } else {
                     Destroy(_gridUnit.gameObject);
+                    _gridUnit.AddUnitAttacked();
                 }
                 HoverSelectedController.instance.ClearUnitOptions();
                 _controller.ClearSelection();
@@ -54,8 +56,8 @@ namespace Scripts.Grid
             }
             _controller.ClearSelection();
             HoverSelectedController.instance.SetSelectedParent(transform);
-            if (_gridUnit != null) {
-                DisplayUnitOptions(_gridUnit.Data);
+            if (_gridUnit != null && (isPlayer == _gridUnit.PlayerOwned)) {
+                DisplayUnitOptions(_gridUnit.Data, _gridUnit.CanMove, _gridUnit.CanAttack);
             }
         }
 
@@ -85,7 +87,7 @@ namespace Scripts.Grid
             _actionReady = ready;
         }
 
-        private void DisplayUnitOptions(UnitData data)
+        private void DisplayUnitOptions(UnitData data, bool move, bool attack)
         {
             HoverSelectedController.instance.ClearUnitOptions();
             var options = data.GetReadableData();
@@ -94,11 +96,11 @@ namespace Scripts.Grid
                 int y = _yPosition + option.VertOffset;
                 var slot = _controller.GetSlot(x, y);
                 if (slot == null) continue;
-                if (slot.CanMove && option.CanMove) {
+                if (move && slot.CanMove && option.CanMove) {
                     HoverSelectedController.instance.SetMoveOption(slot.transform);
                     slot.ReadyAction(this);
                 }
-                if (slot.CanAttack && option.CanAttack) {
+                if (attack && slot.CanAttack && option.CanAttack) {
                     HoverSelectedController.instance.SetAttackOption(slot.transform);
                     slot.ReadyAction(this);
                 }

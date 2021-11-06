@@ -71,7 +71,7 @@ namespace Scripts.Grid
 
             GridSlot slot = hit.collider.GetComponent<GridSlot>();
             if (slot != null) {
-                slot.OnSelect();
+                slot.OnSelect(true);
             }
         }
     }
