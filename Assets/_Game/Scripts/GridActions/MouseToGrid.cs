@@ -1,7 +1,8 @@
 using Input;
+using Scripts.Grid;
 using UnityEngine;
 
-namespace Scripts.Grid
+namespace Scripts.GridActions
 {
     public class MouseToGrid : MonoBehaviour
     {

@@ -1,4 +1,5 @@
 using GridTool.DataScripts;
+using Scripts.GridActions;
 using Scripts.Units;
 using UnityEngine;
 using Utility.Other;
@@ -50,6 +51,7 @@ namespace Scripts.Grid
                     Destroy(_gridUnit.gameObject);
                     _gridUnit.AddUnitAttacked();
                 }
+                HoverSelectedController.instance.DisableSelected();
                 HoverSelectedController.instance.ClearUnitOptions();
                 _controller.ClearSelection();
                 return;

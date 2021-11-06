@@ -1,6 +1,5 @@
 using System;
 using Scripts.StateMachine;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Scripts.States

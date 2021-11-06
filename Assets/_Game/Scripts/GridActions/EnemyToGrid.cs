@@ -5,7 +5,7 @@ using Scripts.Units;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Scripts.Grid
+namespace Scripts.GridActions
 {
     public class EnemyToGrid : MonoBehaviour
     {

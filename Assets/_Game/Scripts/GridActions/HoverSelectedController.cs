@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using Scripts.Grid;
 using UnityEngine;
 using Utility.Animations;
 
-namespace Scripts.Grid
+namespace Scripts.GridActions
 {
     public class HoverSelectedController : MonoBehaviour
     {
