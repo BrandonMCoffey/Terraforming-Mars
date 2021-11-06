@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: M_Hover
     second: {fileID: 2100000, guid: a43c3e9eefb33854282f8a2673d01918, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Select
+    second: {fileID: 2100000, guid: a43c3e9eefb33854282f8a2673d01918, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
