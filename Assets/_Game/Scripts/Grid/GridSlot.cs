@@ -20,13 +20,13 @@ namespace Scripts.Grid
         private GridSlot _actingSlot;
         private bool _actionReady;
 
-        public void Setup(GridController controller, int x, int y, GameObject tileArt)
+        public void Setup(GridController controller, int x, int y, Vector3 offset, GameObject tileArt)
         {
             _controller = controller;
             _xPosition = x;
             _yPosition = y;
             gameObject.name = "Grid Slot (" + (x + 1) + "," + (y + 1) + ")";
-            transform.localPosition = new Vector3(x, 0, y);
+            transform.localPosition = offset + new Vector3(x, 0, y);
             if (tileArt != null) {
                 var art = Instantiate(tileArt, transform);
                 RandomizeArt.RotateRandomClamped(art.transform);

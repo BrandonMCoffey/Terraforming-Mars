@@ -25,7 +25,11 @@ namespace Utility.Animations
         private void Update()
         {
             if (_useRb) return;
-            transform.RotateAround(_rotateOffset, _rotateDirection, _rotateSpeed * Time.deltaTime);
+            if (_rotateOffset == Vector3.zero) {
+                transform.Rotate(_rotateDirection, _rotateSpeed * Time.deltaTime);
+            } else {
+                transform.RotateAround(transform.position + _rotateOffset, _rotateDirection, _rotateSpeed * Time.deltaTime);
+            }
         }
 
         private void FixedUpdate()
