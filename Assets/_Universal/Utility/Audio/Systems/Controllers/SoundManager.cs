@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
-using Utility.Audio.Systems.Events;
+using Utility.Audio.Systems.Base;
 using Utility.Pooling;
 
-namespace Utility.Audio.Systems
+namespace Utility.Audio.Systems.Controllers
 {
     public class SoundManager : MonoBehaviour
     {

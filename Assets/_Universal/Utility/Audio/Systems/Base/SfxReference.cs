@@ -1,8 +1,8 @@
 ﻿using System;
 using UnityEngine;
-using Utility.Audio.Systems.Base;
+using Utility.Audio.Systems.Controllers;
 
-namespace Utility.Audio.Systems.Events
+namespace Utility.Audio.Systems.Base
 {
     [Serializable]
     public class SfxReference

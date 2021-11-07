@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace Utility.CustomFloats
 {
@@ -17,6 +18,11 @@ namespace Utility.CustomFloats
         public float GetRandom()
         {
             return UnityEngine.Random.Range(MinValue, MaxValue);
+        }
+
+        public float Clamp(float value)
+        {
+            return Mathf.Clamp(value, MinValue, MaxValue);
         }
     }
 }

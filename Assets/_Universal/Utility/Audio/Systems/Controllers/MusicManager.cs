@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
-using Utility.Audio.Systems.Events;
+using Utility.Audio.Systems.Base;
 
-namespace Utility.Audio.Systems
+namespace Utility.Audio.Systems.Controllers
 {
     public class MusicManager : MonoBehaviour
     {

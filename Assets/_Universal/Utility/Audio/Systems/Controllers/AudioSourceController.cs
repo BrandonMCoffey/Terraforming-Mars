@@ -2,7 +2,7 @@
 using UnityEngine.Audio;
 using Utility.Audio.Systems.Base;
 
-namespace Utility.Audio.Systems
+namespace Utility.Audio.Systems.Controllers
 {
     [RequireComponent(typeof(AudioSource))]
     public class AudioSourceController : MonoBehaviour
