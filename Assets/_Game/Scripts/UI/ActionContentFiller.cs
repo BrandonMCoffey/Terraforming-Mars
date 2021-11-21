@@ -43,6 +43,11 @@ namespace Scripts.UI
             }
             switch (category) {
                 case ActionCategory.StandardProject:
+                    for (int i = 0; i < StandardProjects.NumOfProjects; i++) {
+                        var newContent = Instantiate(_projectBasePrefab, _parent);
+                        newContent.Fill(i);
+                        _activeContent.Add(newContent.gameObject);
+                    }
                     break;
                 case ActionCategory.OwnedPatents:
                     foreach (var patent in _playerData.ActivePatents) {
@@ -52,14 +57,14 @@ namespace Scripts.UI
                     }
                     break;
                 case ActionCategory.ActivePatents:
-                    foreach (var patent in _playerData.ActivePatents) {
+                    foreach (var patent in _playerData.OwnedPatents) {
                         var newContent = Instantiate(_patentBasePrefab, _parent);
                         newContent.Fill(patent);
                         _activeContent.Add(newContent.gameObject);
                     }
                     break;
                 case ActionCategory.CompletedPatents:
-                    foreach (var patent in _playerData.ActivePatents) {
+                    foreach (var patent in _playerData.CompletedPatents) {
                         var newContent = Instantiate(_patentBasePrefab, _parent);
                         newContent.Fill(patent);
                         _activeContent.Add(newContent.gameObject);

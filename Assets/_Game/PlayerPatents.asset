@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 094e42b474753884b95a78b633035419, type: 3}
   m_Name: PlayerPatents
   m_EditorClassIdentifier: 
-  OwnedPatents: []
-  ActivePatents: []
-  CompletedPatents: []
+  OwnedPatents:
+  - {fileID: 11400000, guid: 3343dff002ec15d49b75429d2f788fad, type: 2}
+  ActivePatents:
+  - {fileID: 11400000, guid: 08a264e96fac65143ae609af94189c1b, type: 2}
+  CompletedPatents:
+  - {fileID: 11400000, guid: 7ef6c529a3829554cb40f4e1dbcbff57, type: 2}
