@@ -15,11 +15,14 @@ namespace Scripts.UI
             _button.onClick.RemoveAllListeners();
         }
 
-        public void Fill(int index)
+        public void Fill(int index, bool active)
         {
             _titleText.text = StandardProjects.GetName(index);
             _costText.text = StandardProjects.GetCostReadable(index);
-            _button.onClick.AddListener(delegate { StandardProjects.InvokeProject(index); });
+            _button.interactable = active;
+            if (active) {
+                _button.onClick.AddListener(delegate { StandardProjects.InvokeProject(index); });
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Scripts.Data;
+using Scripts.States;
 using UnityEngine;
 
 namespace Scripts.UI
@@ -13,6 +14,17 @@ namespace Scripts.UI
 
         private List<GameObject> _activeContent = new List<GameObject>();
         private ActionCategory? _activeCategory;
+
+        private bool _canInteract;
+
+        private void Start()
+        {
+            PlayerTurnState.PlayerCanAct += canAct =>
+            {
+                _canInteract = canAct;
+                UpdateActions();
+            };
+        }
 
         public void Fill(int index)
         {
@@ -44,7 +56,7 @@ namespace Scripts.UI
                 case ActionCategory.StandardProject:
                     for (int i = 0; i < StandardProjects.NumOfProjects; i++) {
                         var newContent = Instantiate(_projectBasePrefab, _parent);
-                        newContent.Fill(i);
+                        newContent.Fill(i, _canInteract);
                         _activeContent.Add(newContent.gameObject);
                     }
                     break;
@@ -70,6 +82,14 @@ namespace Scripts.UI
                     }
                     break;
             }
+        }
+
+        private void UpdateActions()
+        {
+            var category = _activeCategory;
+            if (category == null) return;
+            _activeCategory = null;
+            Fill(category.Value);
         }
     }
 }
