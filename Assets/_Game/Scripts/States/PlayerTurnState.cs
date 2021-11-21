@@ -1,4 +1,4 @@
-using Utility.StateMachine;
+using UnityEngine;
 
 namespace Scripts.States
 {
@@ -6,6 +6,7 @@ namespace Scripts.States
     {
         public override void Enter()
         {
+            StandardProjects.OnUseProject += OnStandardProject;
         }
 
         public override void Tick()
@@ -13,6 +14,16 @@ namespace Scripts.States
         }
 
         public override void Exit()
+        {
+            StandardProjects.OnUseProject -= OnStandardProject;
+        }
+
+        private void OnStandardProject(StandardProjectType type)
+        {
+            Debug.Log("Activate Project: " + type);
+        }
+
+        private void OnActivatePatent()
         {
         }
     }

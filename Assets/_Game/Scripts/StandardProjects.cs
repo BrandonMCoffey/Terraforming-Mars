@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Scripts
@@ -12,20 +13,15 @@ namespace Scripts
      */
     public static class StandardProjects
     {
+        public static event Action<StandardProjectType> OnUseProject = delegate { };
+
         public static int NumOfProjects = 6;
 
-        public static StandardProjectType GetProject(int index)
+        public static void InvokeProject(int index) => InvokeProject(GetProject(index));
+
+        public static void InvokeProject(StandardProjectType type)
         {
-            return index switch
-            {
-                0 => StandardProjectType.SellPatents,
-                1 => StandardProjectType.PowerPlant,
-                2 => StandardProjectType.Asteroid,
-                3 => StandardProjectType.Aquifer,
-                4 => StandardProjectType.Greenery,
-                5 => StandardProjectType.City,
-                _ => throw new System.ComponentModel.InvalidEnumArgumentException()
-            };
+            OnUseProject?.Invoke(type);
         }
 
         public static string GetName(int index) => GetName(GetProject(index));
@@ -67,6 +63,20 @@ namespace Scripts
                 return "+" + Mathf.Abs(cost);
             }
             return cost.ToString();
+        }
+
+        public static StandardProjectType GetProject(int index)
+        {
+            return index switch
+            {
+                0 => StandardProjectType.SellPatents,
+                1 => StandardProjectType.PowerPlant,
+                2 => StandardProjectType.Asteroid,
+                3 => StandardProjectType.Aquifer,
+                4 => StandardProjectType.Greenery,
+                5 => StandardProjectType.City,
+                _ => throw new System.ComponentModel.InvalidEnumArgumentException()
+            };
         }
     }
 }

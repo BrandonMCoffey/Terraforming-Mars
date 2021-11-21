@@ -1,14 +1,14 @@
 using Utility.StateMachine;
 
-namespace Scripts.StateMachine
+namespace Scripts.States
 {
-    public class TbState : StateBase
+    public class State : StateBase
     {
-        protected TurnBasedStateMachine StateMachine { get; private set; }
+        protected MasterStateMachine StateMachine { get; private set; }
 
         private void Awake()
         {
-            StateMachine = GetComponent<TurnBasedStateMachine>();
+            StateMachine = GetComponent<MasterStateMachine>();
         }
 
         public override void Enter()
