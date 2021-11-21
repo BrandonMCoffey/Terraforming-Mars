@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scripts.Data
@@ -7,13 +6,21 @@ namespace Scripts.Data
     [CreateAssetMenu]
     public class PatentData : ScriptableObject
     {
+        [Header("Patent Info")]
         public string Name;
         public int Cost;
-        public List<ResourceType> Criteria;
-        public List<ResourceType> Resources;
-        public List<PatentEffect> Effects;
-        public List<TileType> TilesToPlace;
         public int Points;
+        [Header("Patent Criteria")]
+        public ResourceType Criteria1;
+        public ResourceType Criteria2;
+        public ResourceType Criteria3;
+        [Header("Patent Resources")]
+        public ResourceType Resource1;
+        public ResourceType Resource2;
+        [Header("Patent Effects")]
+        public PatentEffect Effect1;
+        public PatentEffect Effect2;
+        public TileType TileToPlace;
     }
 
     [Serializable]

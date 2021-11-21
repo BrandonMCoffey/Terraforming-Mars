@@ -10,12 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 330b16b2844aeee4eb600b7e320dbf32, type: 3}
-  m_Name: Patent_IronReserve
+  m_Name: PowerInfrastructure
   m_EditorClassIdentifier: 
-  Name: Iron Reservve
-  Cost: 5
-  Criteria: 
-  Resources: 
-  Effects: []
-  TilesToPlace: 
+  Name: Power Infrastructure
+  Cost: 4
   Points: 0
+  Criteria1: 0
+  Criteria2: 0
+  Criteria3: 0
+  Resource1: 0
+  Resource2: 0
+  Effect1:
+    Resource: 0
+    Amount: 0
+    Level: 0
+    EffectEnemy: 0
+  Effect2:
+    Resource: 0
+    Amount: 0
+    Level: 0
+    EffectEnemy: 0
+  TileToPlace: 0

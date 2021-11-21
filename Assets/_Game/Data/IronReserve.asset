@@ -10,12 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 330b16b2844aeee4eb600b7e320dbf32, type: 3}
-  m_Name: Patent_Nuke
+  m_Name: IronReserve
   m_EditorClassIdentifier: 
-  Name: Nuke
-  Cost: 50
-  Criteria: 
-  Resources: 
-  Effects: []
-  TilesToPlace: 
+  Name: Iron Reserve
+  Cost: 5
   Points: 0
+  Criteria1: 0
+  Criteria2: 0
+  Criteria3: 0
+  Resource1: 0
+  Resource2: 0
+  Effect1:
+    Resource: 0
+    Amount: 0
+    Level: 0
+    EffectEnemy: 0
+  Effect2:
+    Resource: 0
+    Amount: 0
+    Level: 0
+    EffectEnemy: 0
+  TileToPlace: 0
