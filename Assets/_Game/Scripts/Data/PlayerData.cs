@@ -10,12 +10,14 @@ namespace Scripts.Data
     [CreateAssetMenu(menuName = "TM/Player Data")]
     public class PlayerData : ScriptableObject
     {
-        [SerializeField] [Range(0, 100)] private int _startingCredits = 20;
         [SerializeField] [ReadOnly] private int _credits = 20;
 
         [SerializeField] [ReadOnly] private List<PatentData> _ownedPatents = new List<PatentData>();
         [SerializeField] [ReadOnly] private List<PatentData> _activePatents = new List<PatentData>();
         [SerializeField] [ReadOnly] private List<PatentData> _completedPatents = new List<PatentData>();
+
+        [Header("Debug Menu")]
+        [SerializeField] private bool _debug;
 
         public List<PatentData> OwnedPatents => _ownedPatents;
         public List<PatentData> ActivePatents => _activePatents;
@@ -27,7 +29,6 @@ namespace Scripts.Data
 
         private void OnValidate()
         {
-            SetCredits(_startingCredits);
             VerifyPatents();
         }
 

@@ -4,16 +4,19 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 3548722968036862803
-    second: TerraformingMarsIconsUI_6
+    second: TM07_TitaniumCircle
   - first:
       213: 6839500061399920004
-    second: TerraformingMarsIconsUI_7
+    second: TM06_IronCircle
   - first:
       213: -6948016702602016690
-    second: TerraformingMarsIconsUI_8
+    second: TM08_PlantsCircle
   - first:
       213: -8073147845346604733
-    second: TerraformingMarsIconsUI_9
+    second: TM09_EnergyCircle
+  - first:
+      213: -5408962584624073521
+    second: TM_Icons_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -151,7 +154,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_0
+      name: TM00_Credits
       rect:
         serializedVersion: 2
         x: 0
@@ -159,7 +162,7 @@ TextureImporter:
         width: 153
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -172,7 +175,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_1
+      name: TM02_Titanium
       rect:
         serializedVersion: 2
         x: 162
@@ -180,7 +183,7 @@ TextureImporter:
         width: 153
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -193,7 +196,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_2
+      name: TM01_Iron
       rect:
         serializedVersion: 2
         x: 323
@@ -201,7 +204,7 @@ TextureImporter:
         width: 153
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -214,7 +217,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_3
+      name: TM03_Plants
       rect:
         serializedVersion: 2
         x: 484
@@ -222,7 +225,7 @@ TextureImporter:
         width: 153
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -235,7 +238,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_4
+      name: TM04_Energy
       rect:
         serializedVersion: 2
         x: 646
@@ -243,7 +246,7 @@ TextureImporter:
         width: 153
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -256,7 +259,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_10
+      name: TM10_Bacteria
       rect:
         serializedVersion: 2
         x: 0
@@ -264,7 +267,7 @@ TextureImporter:
         width: 153
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -277,15 +280,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_11
+      name: TM11_Animal
       rect:
         serializedVersion: 2
-        x: 162
-        y: 509
+        x: 160
+        y: 510
         width: 153
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -298,7 +301,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_14
+      name: TM12_BacteriaCircle
       rect:
         serializedVersion: 2
         x: 0
@@ -306,7 +309,7 @@ TextureImporter:
         width: 153
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -319,7 +322,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_15
+      name: TM13_AnimalCircle
       rect:
         serializedVersion: 2
         x: 162
@@ -327,7 +330,7 @@ TextureImporter:
         width: 153
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -340,7 +343,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_16
+      name: TM15_DecreaseLevel
       rect:
         serializedVersion: 2
         x: 317
@@ -348,7 +351,7 @@ TextureImporter:
         width: 153
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -361,15 +364,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_18
+      name: TM14_IncreaseLevel
       rect:
         serializedVersion: 2
-        x: 553
+        x: 552
         y: 427
         width: 230
         height: 224
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 38, y: 35, z: 38, w: 35}
       outline: []
       physicsShape: []
@@ -382,7 +385,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_19
+      name: TM16_CityHexagon
       rect:
         serializedVersion: 2
         x: 0
@@ -390,7 +393,7 @@ TextureImporter:
         width: 153
         height: 176
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -403,7 +406,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_20
+      name: TM17_OceanHexagon
       rect:
         serializedVersion: 2
         x: 159
@@ -411,7 +414,7 @@ TextureImporter:
         width: 153
         height: 176
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -424,7 +427,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_21
+      name: TM17_ForestHexagon
       rect:
         serializedVersion: 2
         x: 318
@@ -432,7 +435,7 @@ TextureImporter:
         width: 153
         height: 176
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -445,7 +448,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_22
+      name: TM18_NukeHexagon
       rect:
         serializedVersion: 2
         x: 476
@@ -453,7 +456,7 @@ TextureImporter:
         width: 153
         height: 176
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -466,7 +469,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_23
+      name: TM19_AtomicScience
       rect:
         serializedVersion: 2
         x: 0
@@ -474,7 +477,7 @@ TextureImporter:
         width: 153
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -487,7 +490,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_24
+      name: TM20_EarthScience
       rect:
         serializedVersion: 2
         x: 159
@@ -495,7 +498,7 @@ TextureImporter:
         width: 153
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -508,7 +511,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_25
+      name: TM21_MarsScience
       rect:
         serializedVersion: 2
         x: 318
@@ -516,7 +519,7 @@ TextureImporter:
         width: 153
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -529,7 +532,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_26
+      name: TM22_CityScience
       rect:
         serializedVersion: 2
         x: 476
@@ -537,7 +540,7 @@ TextureImporter:
         width: 153
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -550,7 +553,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_5
+      name: TM05_Heat
       rect:
         serializedVersion: 2
         x: 0
@@ -558,7 +561,7 @@ TextureImporter:
         width: 153
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -571,7 +574,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_6
+      name: TM07_TitaniumCircle
       rect:
         serializedVersion: 2
         x: 162
@@ -579,7 +582,7 @@ TextureImporter:
         width: 153
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -592,7 +595,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_7
+      name: TM06_IronCircle
       rect:
         serializedVersion: 2
         x: 323
@@ -600,7 +603,7 @@ TextureImporter:
         width: 153
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -613,7 +616,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_8
+      name: TM08_PlantsCircle
       rect:
         serializedVersion: 2
         x: 485
@@ -621,7 +624,7 @@ TextureImporter:
         width: 153
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -634,7 +637,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TerraformingMarsIconsUI_9
+      name: TM09_EnergyCircle
       rect:
         serializedVersion: 2
         x: 646
@@ -642,7 +645,7 @@ TextureImporter:
         width: 153
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

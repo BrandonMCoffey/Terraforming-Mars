@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d041ecbd2e89644a9fc219ba438070, type: 3}
+  m_Name: _Icons
+  m_EditorClassIdentifier: 
+  _credits: {fileID: 1364770746398346864, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _iron: {fileID: -1704744998552034085, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _titanium: {fileID: -646908973532902868, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _plants: {fileID: -7359228273928952349, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _energy: {fileID: -3309771982644491770, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _heat: {fileID: -941621868483879086, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _creditsClean: {fileID: 21300000, guid: 47446ec9f56da2142bac41eb08a59f91, type: 3}
+  _ironCircle: {fileID: 6839500061399920004, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _titaniumCircle: {fileID: 3548722968036862803, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _plantsCircle: {fileID: -6948016702602016690, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _energyCircle: {fileID: -8073147845346604733, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _bacteria: {fileID: -3979809440132771705, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _animal: {fileID: 8608433852809525068, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _bacteriaCircle: {fileID: 1376202003755801037, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _animalCircle: {fileID: 5205714748558221139, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _resourceLevelUp: {fileID: -5124542306328803544, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _resourceLevelDown: {fileID: -1985758250335292755, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _ocean: {fileID: -4897373708055109513, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _forest: {fileID: -1718036112843725518, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _city: {fileID: -462574813355369587, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _nuke: {fileID: 6976310501973280873, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _atomicScience: {fileID: -6227287708982940434, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _earth: {fileID: -3772170185648381776, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _mars: {fileID: -3146565715227026498, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _cityCircle: {fileID: -3001657998649607869, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}

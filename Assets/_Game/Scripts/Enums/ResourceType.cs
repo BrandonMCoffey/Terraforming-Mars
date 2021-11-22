@@ -1,9 +1,12 @@
 public enum ResourceType
 {
     Null,
+    Credits,
     Iron,
     Titanium,
     Plant,
     Energy,
-    Heat
+    Heat,
+    Bacteria,
+    Animal
 }

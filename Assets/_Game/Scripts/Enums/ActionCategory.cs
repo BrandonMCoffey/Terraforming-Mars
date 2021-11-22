@@ -4,5 +4,4 @@ public enum ActionCategory
     OwnedPatents,
     ActivePatents,
     CompletedPatents
-    //SellPatents
 }
