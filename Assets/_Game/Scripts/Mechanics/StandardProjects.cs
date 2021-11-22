@@ -56,9 +56,11 @@ namespace Scripts
             };
         }
 
-        public static string GetCostReadable(int index)
+        public static string GetCostReadable(int index) => GetCostReadable(GetProject(index));
+
+        public static string GetCostReadable(StandardProjectType type)
         {
-            int cost = GetCost(index);
+            int cost = GetCost(type);
             if (cost < 1) {
                 return "+" + Mathf.Abs(cost);
             }

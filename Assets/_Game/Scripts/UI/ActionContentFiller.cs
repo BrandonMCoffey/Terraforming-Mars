@@ -7,9 +7,9 @@ namespace Scripts.UI
 {
     public class ActionContentFiller : MonoBehaviour
     {
-        [SerializeField] private PlayerPatentData _playerData = null;
+        [SerializeField] private PlayerData _playerData = null;
         [SerializeField] private RectTransform _parent = null;
-        [SerializeField] private ProjectContent _projectBasePrefab = null;
+        [SerializeField] private List<ProjectContent> _standardProjects = new List<ProjectContent>();
         [SerializeField] private PatentContent _patentBasePrefab = null;
 
         private List<GameObject> _activeContent = new List<GameObject>();
@@ -24,6 +24,7 @@ namespace Scripts.UI
                 _canInteract = canAct;
                 UpdateActions();
             };
+            _playerData.OnPatentsChanged += UpdateActions;
         }
 
         public void Fill(int index)
@@ -52,23 +53,24 @@ namespace Scripts.UI
             foreach (var content in _activeContent) {
                 Destroy(content);
             }
+            foreach (var project in _standardProjects) {
+                project.gameObject.SetActive(category == ActionCategory.StandardProject);
+            }
             switch (category) {
                 case ActionCategory.StandardProject:
-                    for (int i = 0; i < StandardProjects.NumOfProjects; i++) {
-                        var newContent = Instantiate(_projectBasePrefab, _parent);
-                        newContent.Fill(i, _canInteract);
-                        _activeContent.Add(newContent.gameObject);
+                    foreach (var project in _standardProjects) {
+                        project.SetInteractable(_canInteract);
                     }
                     break;
                 case ActionCategory.OwnedPatents:
-                    foreach (var patent in _playerData.ActivePatents) {
+                    foreach (var patent in _playerData.OwnedPatents) {
                         var newContent = Instantiate(_patentBasePrefab, _parent);
                         newContent.Fill(patent);
                         _activeContent.Add(newContent.gameObject);
                     }
                     break;
                 case ActionCategory.ActivePatents:
-                    foreach (var patent in _playerData.OwnedPatents) {
+                    foreach (var patent in _playerData.ActivePatents) {
                         var newContent = Instantiate(_patentBasePrefab, _parent);
                         newContent.Fill(patent);
                         _activeContent.Add(newContent.gameObject);
