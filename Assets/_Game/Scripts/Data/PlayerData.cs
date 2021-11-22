@@ -1,17 +1,12 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scripts.Data
 {
-    [CreateAssetMenu(menuName = "TM/Player Patent Data")]
-    public class PlayerPatentData : ScriptableObject
+    [CreateAssetMenu(menuName = "TM/Player Data")]
+    public class PlayerData : ScriptableObject
     {
         [SerializeField] [Range(0, 100)] private int _credits;
-
-        public List<PatentData> OwnedPatents;
-        public List<PatentData> ActivePatents;
-        public List<PatentData> CompletedPatents;
 
         public event Action<int> OnCreditsChanged;
 

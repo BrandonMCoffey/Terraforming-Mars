@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Scripts.Data
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "TM/Patent Data")]
     public class PatentData : ScriptableObject
     {
         [Header("Patent Info")]
