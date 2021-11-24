@@ -343,7 +343,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TM15_DecreaseLevel
+      name: TM15_Event
       rect:
         serializedVersion: 2
         x: 317

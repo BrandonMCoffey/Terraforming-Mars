@@ -26,7 +26,6 @@ namespace Scripts.Data
         [SerializeField] private Sprite _animalCircle = null;
         [Header("Resource Level")]
         [SerializeField] private Sprite _resourceLevelUp = null;
-        [SerializeField] private Sprite _resourceLevelDown = null;
         [Header("Map Hexagons")]
         [SerializeField] private Sprite _ocean = null;
         [SerializeField] private Sprite _forest = null;
@@ -38,7 +37,7 @@ namespace Scripts.Data
         [SerializeField] private Sprite _mars = null;
         [SerializeField] private Sprite _cityCircle = null;
 
-        public Sprite GetLevel(bool up = true) => up ? _resourceLevelUp : _resourceLevelDown;
+        public Sprite ResourceLevelUp => _resourceLevelUp;
 
         public Sprite GetResource(ResourceType type, bool isCircular = false)
         {
