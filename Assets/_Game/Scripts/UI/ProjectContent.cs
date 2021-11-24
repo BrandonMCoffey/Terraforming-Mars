@@ -1,5 +1,6 @@
 using System;
 using Scripts.Data;
+using Scripts.Mechanics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,7 +26,11 @@ namespace Scripts.UI
         private void Start()
         {
             if (_playerData != null) {
-                _playerData.OnAnythingChanged += UpdateButton;
+                if (_project == StandardProjectType.SellPatents) {
+                    _playerData.OnPatentsChanged += UpdateButton;
+                } else {
+                    _playerData.OnCreditsChanged += (value) => UpdateButton();
+                }
             }
             _button.onClick.AddListener(delegate { StandardProjects.InvokeProject(_project); });
             UpdateVisuals();
@@ -60,7 +65,7 @@ namespace Scripts.UI
                 _button.interactable = _active && _playerData.HasAvailablePatents();
             } else {
                 int cost = StandardProjects.GetCost(_project);
-                _button.interactable = _active && _playerData.HasCredits(cost);
+                _button.interactable = _active && _playerData.HasResource(ResourceType.Credits, cost);
             }
         }
 

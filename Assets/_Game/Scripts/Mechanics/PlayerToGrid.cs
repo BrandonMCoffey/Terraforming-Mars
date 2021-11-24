@@ -11,15 +11,15 @@ namespace Scripts.Mechanics
         public bool OnStandardProject(StandardProjectType type)
         {
             if (type == StandardProjectType.SellPatents) {
-                if (_playerData.RemoveFirstPatent() != null) {
-                    _playerData.AddCredits(1);
-                    return true;
-                }
-                return false;
+                var soldPatent = _playerData.RemoveFirstPatent();
+                if (soldPatent == null) return false;
+
+                _playerData.AddResource(ResourceType.Credits, 1);
+                return true;
             }
 
             int cost = StandardProjects.GetCost(type);
-            bool successfullyPaidFor = _playerData.RemoveCredits(cost);
+            bool successfullyPaidFor = _playerData.RemoveResource(ResourceType.Credits, cost);
 
             if (!successfullyPaidFor) return false;
 

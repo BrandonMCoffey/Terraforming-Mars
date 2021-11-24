@@ -56,7 +56,16 @@ namespace Scripts.States
 
         private void OnStandardProject(StandardProjectType type)
         {
-            if (_actionsThisTurn >= 2) return;
+            if (_actionsThisTurn >= StateMachine.PlayerData.ActionsPerTurn) return;
+            if (type == StandardProjectType.SellPatents) {
+                var soldPatent = StateMachine.PlayerData.RemoveFirstPatent();
+                if (soldPatent == null) return;
+
+                StateMachine.PlayerData.AddResource(ResourceType.Credits, 1);
+                StateMachine.PatentCollection.AddToDiscarded(soldPatent);
+                UpdateActionPerformed();
+                return;
+            }
             if (_playerToGrid.OnStandardProject(type)) {
                 UpdateActionPerformed();
                 Debug.Log("Activate Project: " + type);

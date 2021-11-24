@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Scripts
+namespace Scripts.Mechanics
 {
     /* Available Standard Projects
      * 1) Sell patents: You may discard a number of cards from hand to gain the same number of credits.
