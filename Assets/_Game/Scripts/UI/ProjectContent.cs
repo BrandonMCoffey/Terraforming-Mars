@@ -1,4 +1,3 @@
-using System;
 using Scripts.Data;
 using Scripts.Mechanics;
 using TMPro;
@@ -73,7 +72,7 @@ namespace Scripts.UI
         {
             switch (_project) {
                 case StandardProjectType.SellPatents:
-                    _costImage.sprite = _iconData.GetResource(ResourceType.Null);
+                    _costImage.sprite = _iconData.GetResource(ResourceType.None);
                     _effectImage.sprite = _iconData.GetResource(ResourceType.Credits, true);
                     break;
                 case StandardProjectType.PowerPlant:

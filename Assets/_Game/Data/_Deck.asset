@@ -1,5 +1,57 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-751816673415662835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330b16b2844aeee4eb600b7e320dbf32, type: 3}
+  m_Name: AI Central
+  m_EditorClassIdentifier: 
+  Name: AI Central
+  Cost: 0
+  Points: 0
+  Constraint1:
+    Active: 0
+    Type: 2
+    Comparison: 0
+    Amount: 0
+  Constraint2:
+    Active: 0
+    Type: 0
+    Comparison: 0
+    Amount: 0
+  Alt1: 0
+  Alt2: 0
+  Alt3: 0
+  Effect1:
+    Active: 0
+    Type: 0
+    Amount: 0
+    Resource: 0
+    Tile: 0
+  Effect2:
+    Active: 0
+    Type: 0
+    Amount: 0
+    Resource: 0
+    Tile: 0
+  Effect3:
+    Active: 0
+    Type: 0
+    Amount: 0
+    Resource: 0
+    Tile: 0
+  Effect4:
+    Active: 0
+    Type: 0
+    Amount: 0
+    Resource: 0
+    Tile: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,23 +65,7 @@ MonoBehaviour:
   m_Name: _Deck
   m_EditorClassIdentifier: 
   _patents:
-  - {fileID: 11400000, guid: e5840110b31ec654286068fc18df26c2, type: 2}
-  - {fileID: 11400000, guid: 3343dff002ec15d49b75429d2f788fad, type: 2}
-  - {fileID: 11400000, guid: 5ceb36f27e4892c4d8aa09f5c18e38c7, type: 2}
-  - {fileID: 11400000, guid: 08a264e96fac65143ae609af94189c1b, type: 2}
-  - {fileID: 11400000, guid: 7b44425d275b66545910be196cf8ab28, type: 2}
-  - {fileID: 11400000, guid: 7ef6c529a3829554cb40f4e1dbcbff57, type: 2}
-  - {fileID: 11400000, guid: b1381cb233a86df4d977cddb2532c78d, type: 2}
-  - {fileID: 11400000, guid: 771a6480fbaf7f9418a89aac11d94e11, type: 2}
-  - {fileID: 11400000, guid: 0ae9e951d35a3bb4090acad74d55d388, type: 2}
-  - {fileID: 11400000, guid: e5840110b31ec654286068fc18df26c2, type: 2}
-  - {fileID: 11400000, guid: 3343dff002ec15d49b75429d2f788fad, type: 2}
-  - {fileID: 11400000, guid: 5ceb36f27e4892c4d8aa09f5c18e38c7, type: 2}
-  - {fileID: 11400000, guid: 08a264e96fac65143ae609af94189c1b, type: 2}
-  - {fileID: 11400000, guid: 7b44425d275b66545910be196cf8ab28, type: 2}
-  - {fileID: 11400000, guid: 7ef6c529a3829554cb40f4e1dbcbff57, type: 2}
-  - {fileID: 11400000, guid: b1381cb233a86df4d977cddb2532c78d, type: 2}
-  - {fileID: 11400000, guid: 771a6480fbaf7f9418a89aac11d94e11, type: 2}
-  - {fileID: 11400000, guid: 0ae9e951d35a3bb4090acad74d55d388, type: 2}
+  - {fileID: -751816673415662835}
+  _allowDuplicates: 1
   _availablePatents: []
   _discardedPatents: []

@@ -28,13 +28,12 @@ namespace Utility.Buttons.Editor
 
         // TODO: Draw default values for parameters
 
-        protected override void DrawInternal(IEnumerable<object> targets)
+        protected override void DrawInternal(IEnumerable<object> targets, int spacing)
         {
-            Rect full = GUILayoutUtility.GetRect(GUIContent.none, EditorStyles.foldoutHeader);
-            var foldoutRect = new Rect(full.x, full.y, full.width - ButtonWidth, full.height);
-            var buttonRect = new Rect(full.xMax - ButtonWidth, full.y, ButtonWidth, full.height);
-
-
+            if (spacing > 0) {
+                GUILayout.Space(spacing);
+            }
+            Rect foldoutRect = GUILayoutUtility.GetRect(GUIContent.none, EditorStyles.foldoutHeader);
             _expanded = EditorGUI.BeginFoldoutHeaderGroup(foldoutRect, _expanded, displayName);
             if (_expanded) {
                 EditorGUI.indentLevel++;
@@ -45,9 +44,11 @@ namespace Utility.Buttons.Editor
             }
             EditorGUILayout.EndFoldoutHeaderGroup();
 
-            if (GUI.Button(buttonRect, ButtonTitle)) {
-                foreach (object obj in targets) {
-                    method.Invoke(obj, _parameters.Select(param => param.Value).ToArray());
+            if (_expanded) {
+                if (GUILayout.Button(displayName)) {
+                    foreach (object obj in targets) {
+                        method.Invoke(obj, _parameters.Select(param => param.Value).ToArray());
+                    }
                 }
             }
         }

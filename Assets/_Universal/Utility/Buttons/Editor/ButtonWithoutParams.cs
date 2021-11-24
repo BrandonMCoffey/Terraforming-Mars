@@ -12,8 +12,11 @@ namespace Utility.Buttons.Editor
         {
         }
 
-        protected override void DrawInternal(IEnumerable<object> targets)
+        protected override void DrawInternal(IEnumerable<object> targets, int spacing)
         {
+            if (spacing > 0) {
+                GUILayout.Space(spacing);
+            }
             if (GUILayout.Button(displayName)) {
                 foreach (object obj in targets) {
                     method.Invoke(obj, null);

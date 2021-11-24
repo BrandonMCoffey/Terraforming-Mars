@@ -1,6 +1,6 @@
 public enum ResourceType
 {
-    Null,
+    None,
     Credits,
     Iron,
     Titanium,

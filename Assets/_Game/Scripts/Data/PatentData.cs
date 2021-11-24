@@ -1,5 +1,9 @@
-using System;
+using Scripts.Data.Structs;
 using UnityEngine;
+using Utility.Buttons;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Scripts.Data
 {
@@ -10,25 +14,41 @@ namespace Scripts.Data
         public string Name;
         public int Cost;
         public int Points;
-        [Header("Patent Criteria")]
-        public ResourceType Criteria1;
-        public ResourceType Criteria2;
-        public ResourceType Criteria3;
-        [Header("Patent Resources")]
-        public ResourceType Resource1;
-        public ResourceType Resource2;
-        [Header("Patent Effects")]
+        [Header("Requirements")]
+        public PatentConstraint Constraint1;
+        public PatentConstraint Constraint2;
+        [Header("Alt Resources")]
+        public ResourceType Alt1;
+        public ResourceType Alt2;
+        public ResourceType Alt3;
+        [Header("Effects")]
         public PatentEffect Effect1;
         public PatentEffect Effect2;
-        public TileType TileToPlace;
-    }
+        public PatentEffect Effect3;
+        public PatentEffect Effect4;
 
-    [Serializable]
-    public struct PatentEffect
-    {
-        public ResourceType Resource;
-        public int Amount;
-        public bool Level;
-        public bool EffectEnemy;
+        private PatentCollection _collection;
+
+#if UNITY_EDITOR
+        public void Init(PatentCollection collection)
+        {
+            _collection = collection;
+        }
+
+        [ContextMenu("Delete this")]
+        [Button("Delete This", Spacing = 25)]
+        private void EditorDeleteThis()
+        {
+            _collection.EditorDeletePatent(this);
+        }
+
+        [Button("Update Patent Name")]
+        private void EditorRename()
+        {
+            name = Name;
+            AssetDatabase.SaveAssets();
+            EditorUtility.SetDirty(this);
+        }
+#endif
     }
 }

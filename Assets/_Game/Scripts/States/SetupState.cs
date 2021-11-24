@@ -1,6 +1,3 @@
-using Scripts.Data;
-using UnityEngine;
-
 namespace Scripts.States
 {
     public class SetupState : State

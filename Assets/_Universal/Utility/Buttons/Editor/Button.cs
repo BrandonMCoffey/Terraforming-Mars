@@ -10,6 +10,7 @@ namespace Utility.Buttons.Editor
         public readonly MethodInfo method;
         public readonly string displayName;
         private readonly bool _disabled;
+        private readonly int _spacing;
 
         // Create a new button
         internal static Button Create(MethodInfo method, ButtonAttribute buttonAttribute)
@@ -28,6 +29,7 @@ namespace Utility.Buttons.Editor
             this.method = method;
             displayName = string.IsNullOrEmpty(buttonAttribute.name) ? ObjectNames.NicifyVariableName(method.Name) : buttonAttribute.name;
 
+            _spacing = buttonAttribute.Spacing;
             _disabled = buttonAttribute.Mode switch
             {
                 ButtonMode.Always       => false,
@@ -41,11 +43,11 @@ namespace Utility.Buttons.Editor
         public void Draw(IEnumerable<object> targets)
         {
             EditorGUI.BeginDisabledGroup(_disabled);
-            DrawInternal(targets);
+            DrawInternal(targets, _spacing);
             EditorGUI.EndDisabledGroup();
         }
 
-        protected abstract void DrawInternal(IEnumerable<object> targets);
+        protected abstract void DrawInternal(IEnumerable<object> targets, int spacing);
     }
 }
 #endif

@@ -36,7 +36,7 @@ namespace Scripts.Mechanics
                 StandardProjectType.Aquifer     => "Aquifer",
                 StandardProjectType.Greenery    => "Greenery",
                 StandardProjectType.City        => "City",
-                _                               => "Null"
+                _                               => "None"
             };
         }
 

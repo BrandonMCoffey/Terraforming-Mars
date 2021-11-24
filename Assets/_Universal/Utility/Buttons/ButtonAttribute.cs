@@ -21,5 +21,7 @@ namespace Utility.Buttons
         public ButtonAttribute(string name) => this.name = name;
 
         public ButtonMode Mode { get; set; } = ButtonMode.Always;
+
+        public int Spacing { get; set; } = 0;
     }
 }

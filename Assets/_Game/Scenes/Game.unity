@@ -1185,6 +1185,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 135722458}
+  - component: {fileID: 135722460}
   - component: {fileID: 135722459}
   m_Layer: 5
   m_Name: Slider
@@ -1265,6 +1266,21 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &135722460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135722457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fbce9435c2406d4aac69d6581f38178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _planetData: {fileID: 11400000, guid: 0251b9c07db3c524185126a32f0c22af, type: 2}
+  _statusType: 2
+  _slider: {fileID: 135722459}
 --- !u!1 &144344522
 GameObject:
   m_ObjectHideFlags: 0
@@ -3157,6 +3173,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 523645457}
+  - component: {fileID: 523645459}
   - component: {fileID: 523645458}
   m_Layer: 5
   m_Name: Slider
@@ -3237,6 +3254,21 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &523645459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523645456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fbce9435c2406d4aac69d6581f38178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _planetData: {fileID: 11400000, guid: 0251b9c07db3c524185126a32f0c22af, type: 2}
+  _statusType: 0
+  _slider: {fileID: 523645458}
 --- !u!1 &542365444
 GameObject:
   m_ObjectHideFlags: 0
@@ -5702,7 +5734,6 @@ GameObject:
   m_Component:
   - component: {fileID: 856575484}
   - component: {fileID: 856575485}
-  - component: {fileID: 856575486}
   m_Layer: 5
   m_Name: Layout
   m_TagString: Untagged
@@ -5758,22 +5789,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &856575486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 856575483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db039f611b15a0b4cab910a449210ce4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _planetData: {fileID: 11400000, guid: 0251b9c07db3c524185126a32f0c22af, type: 2}
-  _oxygenSlider: {fileID: 523645458}
-  _heatSlider: {fileID: 0}
-  _waterSlider: {fileID: 135722459}
 --- !u!1 &858636676
 GameObject:
   m_ObjectHideFlags: 0
