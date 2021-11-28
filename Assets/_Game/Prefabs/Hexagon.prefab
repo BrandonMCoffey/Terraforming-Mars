@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2069280357915918195}
   - component: {fileID: 2104446305005157191}
+  - component: {fileID: 3220847248338079939}
   - component: {fileID: 899876465820840950}
   m_Layer: 5
   m_Name: Image
@@ -45,6 +46,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3614519325223670301}
   m_CullTransparentMesh: 1
+--- !u!114 &3220847248338079939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3614519325223670301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc93a013915abe1469be96a5d96aabb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _alphaThreshold: 0.1
 --- !u!114 &899876465820840950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,6 +99,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4043080198150920922}
   - component: {fileID: 4043080198150920921}
+  - component: {fileID: 294779603263385919}
   m_Layer: 5
   m_Name: Hexagon
   m_TagString: Untagged
@@ -120,3 +135,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4043080198150920869}
   m_CullTransparentMesh: 1
+--- !u!114 &294779603263385919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4043080198150920869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1941c06f4492a384e9191d05e2f8fb40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tileClickable: {fileID: 3220847248338079939}
+  _neighbors: []

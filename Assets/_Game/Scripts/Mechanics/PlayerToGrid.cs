@@ -5,7 +5,7 @@ namespace Scripts.Mechanics
 {
     public class PlayerToGrid : MonoBehaviour
     {
-        [SerializeField] private PlayerData _playerData = null;
+        [SerializeField] private PlayerData _playerData;
 
         public bool OnStandardProject(StandardProjectType type)
         {
@@ -17,8 +17,8 @@ namespace Scripts.Mechanics
                 return true;
             }
 
-            int cost = StandardProjects.GetCost(type);
-            bool successfullyPaidFor = _playerData.RemoveResource(ResourceType.Credits, cost);
+            var cost = StandardProjects.GetCost(type);
+            var successfullyPaidFor = _playerData.RemoveResource(ResourceType.Credits, cost);
 
             if (!successfullyPaidFor) return false;
 

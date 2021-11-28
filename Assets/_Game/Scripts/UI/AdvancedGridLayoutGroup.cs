@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Scripts.UI {
-    public class AdvancedGridLayoutGroup : GridLayoutGroup {
+namespace Scripts.UI
+{
+    public class AdvancedGridLayoutGroup : GridLayoutGroup
+    {
         [SerializeField] private int _cellsPerLine = 4;
         [SerializeField] private float _aspectRatio = 1;
 

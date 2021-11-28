@@ -1,9 +1,11 @@
 #if UNITY_EDITOR
 using UnityEditor;
 
-namespace Scripts.UI.Editor {
+namespace Scripts.UI.Editor
+{
     [CustomEditor(typeof(AdvancedGridLayoutGroup))]
-    public class AdvancedGridLayoutGroupEditor : UnityEditor.Editor {
+    public class AdvancedGridLayoutGroupEditor : UnityEditor.Editor
+    {
         private bool _foldoutOpen;
 
         public override void OnInspectorGUI()

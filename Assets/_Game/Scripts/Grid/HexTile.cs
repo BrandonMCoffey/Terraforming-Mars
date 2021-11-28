@@ -1,20 +1,42 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace Scripts.Grid
 {
-    public class HexTile : MonoBehaviour, IPointerDownHandler
+    public class HexTile : MonoBehaviour
     {
-        [SerializeField] private float _alphaThreshold = 0.1f;
+        [SerializeField] private HexTileClickable _tileClickable;
+        [SerializeField] private List<HexTile> _neighbors = new List<HexTile>();
 
-        private void Start()
+        private void OnEnable()
         {
-            GetComponent<Image>().alphaHitTestMinimumThreshold = _alphaThreshold;
+            if (_tileClickable != null) _tileClickable.OnClicked += OnClick;
         }
 
-        public void OnPointerDown(PointerEventData eventData)
+        private void OnDisable()
         {
+            if (_tileClickable != null) _tileClickable.OnClicked -= OnClick;
+        }
+
+        public void UpdateNeighbors(List<HexTile> grid, float maxDist)
+        {
+            _neighbors = new List<HexTile>();
+            foreach (var tile in grid.Where(tile =>
+                tile != this && Vector3.Distance(tile.transform.position, transform.position) < maxDist))
+                _neighbors.Add(tile);
+        }
+
+        public void OnClick()
+        {
+            SetColor(Color.red);
+            foreach (var tile in _neighbors)
+                tile.SetColor(Color.yellow);
+        }
+
+        public void SetColor(Color color)
+        {
+            _tileClickable.SetColor(color);
         }
     }
 }
