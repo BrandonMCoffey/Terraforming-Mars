@@ -7,6 +7,14 @@ namespace Scripts.Data
     [CreateAssetMenu(menuName = "TM/Planet Data")]
     public class PlanetData : ScriptableObject
     {
+        [SerializeField] private string _planetName = "Earth";
+        [SerializeField] private string _planetSwitchDescription = "(Description)";
+        [SerializeField] private Sprite _planetSprite = null;
+
+        public string PlanetName => _planetName;
+        public string PlanetSwitchDescription => _planetSwitchDescription;
+        public Sprite PlanetSprite => _planetSprite;
+
         public const int MaxOxygen = 14;
         public const int MinHeat = -30;
         public const int MaxHeat = 8;

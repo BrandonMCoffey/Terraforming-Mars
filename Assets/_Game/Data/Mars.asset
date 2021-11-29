@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d0ab2ec7d83f3049ba53a6c49d22419, type: 3}
-  m_Name: _Mars
+  m_Name: Mars
   m_EditorClassIdentifier: 
+  _planetName: Mars
+  _planetSwitchDescription: (Longer & Complex)
+  _planetSprite: {fileID: 21300000, guid: a070036d77c8cb14ab1049b4c0504449, type: 3}
   _oxygenLevel: 0
   _heatLevel: -30
   _waterLevel: 0
