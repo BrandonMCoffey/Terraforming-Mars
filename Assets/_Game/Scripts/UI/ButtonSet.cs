@@ -8,6 +8,7 @@ namespace Scripts.UI
     public class ButtonSet : MonoBehaviour
     {
         [SerializeField] private List<Button> _buttons = new List<Button>();
+        [SerializeField] private int _onSelectIntOffset = 0;
 
         public UnityEvent<int> OnSelect = new UnityEvent<int>();
 
@@ -37,7 +38,7 @@ namespace Scripts.UI
             for (var i = 0; i < _buttons.Count; i++) {
                 _buttons[i].interactable = i != index;
             }
-            OnSelect?.Invoke(index);
+            OnSelect?.Invoke(index + _onSelectIntOffset);
         }
     }
 }

@@ -4,6 +4,7 @@ namespace Scripts.Enums
     {
         Oxygen,
         Heat,
-        Water
+        Water,
+        MagneticField
     }
 }

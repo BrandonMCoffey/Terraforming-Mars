@@ -23,11 +23,6 @@ namespace Scripts.Grid
             OnClicked?.Invoke();
         }
 
-        public void SetColor(Color color)
-        {
-            _image.color = color;
-        }
-
         public event Action OnClicked;
     }
 }

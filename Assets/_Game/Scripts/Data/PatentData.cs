@@ -14,7 +14,7 @@ namespace Scripts.Data
         [Header("Patent Info")]
         public string Name;
         public int Cost;
-        public int Points;
+        public int Honor;
         [Header("Requirements")]
         public PatentConstraint Constraint1;
         public PatentConstraint Constraint2;

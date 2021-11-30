@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
+using GridTool.DataScripts;
 using Scripts.Enums;
 using UnityEngine;
+using Utility.CustomFloats;
 using Utility.Other;
 
 namespace Scripts.Data
@@ -8,7 +11,10 @@ namespace Scripts.Data
     [CreateAssetMenu(menuName = "TM/Planet Data")]
     public class PlanetData : ScriptableObject
     {
-        [SerializeField] private string _planetName = "Earth";
+        #region Planet Info
+
+        [Header("Planet Info")]
+        [SerializeField] private string _planetName = "Planet";
         [SerializeField] private string _planetSwitchDescription = "(Description)";
         [SerializeField] private Sprite _planetSprite = null;
 
@@ -16,37 +22,61 @@ namespace Scripts.Data
         public string PlanetSwitchDescription => _planetSwitchDescription;
         public Sprite PlanetSprite => _planetSprite;
 
-        public const int MaxOxygen = 14;
-        public const int MinHeat = -30;
-        public const int MaxHeat = 8;
-        public const int MaxOcean = 12;
+        #endregion
 
-        [SerializeField] [Range(0, MaxOxygen)] private int _oxygenLevel = 0;
-        [SerializeField] [Range(MinHeat, MaxHeat)]
-        private int _heatLevel = -30;
-        [SerializeField] [Range(0, MaxOcean)] private int _waterLevel = 0;
+        #region Planet Resources
 
-        public event Action OnValuesChanges;
+        [Header("Planet Resources")]
+        [SerializeField] private List<ResourceType> _availableResources = new List<ResourceType>();
 
-        private int _oxygen;
-        private int _heat = -30;
-        private int _water;
+        public List<ResourceType> AvailableResources => _availableResources;
 
-#if UNITY_EDITOR
-        private void OnValidate()
-        {
-            CheckForUpdates();
-        }
-#endif
+        #endregion
 
-        public int GetLevel(PlanetStatusType type, bool normalize = false)
+        #region Planet Goals
+
+        [Header("Oxygen")]
+        [SerializeField] private bool _requireOxygen = true;
+        [SerializeField] private MinMaxInt _oxygenLevel = new MinMaxInt(0, 14);
+        [SerializeField] private int _oxygenStep = 1;
+        [SerializeField] [ReadOnly] private int _oxygenStatus = 0;
+
+        [Header("Water")]
+        [SerializeField] private bool _requireWater = true;
+        [SerializeField] private MinMaxInt _waterLevel = new MinMaxInt(0, 12);
+        [SerializeField] private int _waterStep = 1;
+        [SerializeField] [ReadOnly] private int _waterStatus = 0;
+
+        [Header("Heat")]
+        [SerializeField] private bool _requireHeat = true;
+        [SerializeField] private MinMaxInt _minMaxHeat = new MinMaxInt(-30, 8);
+        [SerializeField] private int _heatStep = 2;
+        [SerializeField] [ReadOnly] private int _heatStatus = -30;
+
+        [Header("Magnetic Field")]
+        [SerializeField] private bool _requireMagneticField = true;
+        [SerializeField] [ReadOnly] private bool _magneticFieldStatus = false;
+
+        public bool RequireOxygen => _requireOxygen;
+        public bool RequireWater => _requireWater;
+        public bool RequireHeat => _requireHeat;
+        public bool RequireMagneticField => _requireMagneticField;
+
+        #endregion
+
+        // ------------------------------------------
+
+        #region Planet Goals
+
+        public int GetLevel(PlanetStatusType type)
         {
             return type switch
             {
-                PlanetStatusType.Oxygen => _oxygen,
-                PlanetStatusType.Heat   => _heat,
-                PlanetStatusType.Water  => _water,
-                _                       => 0
+                PlanetStatusType.Oxygen        => _oxygenStatus,
+                PlanetStatusType.Heat          => _heatStatus,
+                PlanetStatusType.Water         => _waterStatus,
+                PlanetStatusType.MagneticField => _magneticFieldStatus ? 1 : 0,
+                _                              => 0
             };
         }
 
@@ -54,32 +84,14 @@ namespace Scripts.Data
         {
             return type switch
             {
-                PlanetStatusType.Oxygen => CustomMath.Map(_oxygen, 0, MaxOxygen, 0, 1),
-                PlanetStatusType.Heat   => CustomMath.Map(_heat, MinHeat, MaxHeat, 0, 1),
-                PlanetStatusType.Water  => CustomMath.Map(_water, 0, MaxOcean, 0, 1),
-                _                       => 0
+                PlanetStatusType.Oxygen        => CustomMath.Map(_oxygenStatus, _oxygenLevel.MinValue, _oxygenLevel.MaxValue, 0, 1),
+                PlanetStatusType.Heat          => CustomMath.Map(_heatStatus, _minMaxHeat.MinValue, _minMaxHeat.MaxValue, 0, 1),
+                PlanetStatusType.Water         => CustomMath.Map(_waterStatus, _waterLevel.MinValue, _waterLevel.MaxValue, 0, 1),
+                PlanetStatusType.MagneticField => _magneticFieldStatus ? 1 : 0,
+                _                              => 0
             };
         }
 
-        public bool CheckForUpdates(bool force = false)
-        {
-            bool changed = false;
-            if (Math.Abs(_oxygen - _oxygenLevel) > 0.001f) {
-                changed = true;
-                _oxygen = _oxygenLevel;
-            }
-            if (Math.Abs(_heat - _heatLevel) > 0.001f) {
-                changed = true;
-                _heat = _heatLevel;
-            }
-            if (Math.Abs(_water - _waterLevel) > 0.001f) {
-                changed = true;
-                _water = _waterLevel;
-            }
-            if (changed || force) {
-                OnValuesChanges?.Invoke();
-            }
-            return changed;
-        }
+        #endregion
     }
 }

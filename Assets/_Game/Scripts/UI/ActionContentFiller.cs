@@ -12,20 +12,23 @@ namespace Scripts.UI
         [SerializeField] private RectTransform _parent = null;
         [SerializeField] private List<ProjectContent> _standardProjects = new List<ProjectContent>();
         [SerializeField] private PatentContent _patentBasePrefab = null;
+        [SerializeField] private bool _debug = false;
 
         private List<GameObject> _activeContent = new List<GameObject>();
         private ActionCategory? _activeCategory;
 
         private bool _canInteract;
 
-        private void Start()
+        private void OnEnable()
         {
-            PlayerTurnState.PlayerCanAct += canAct =>
-            {
-                _canInteract = canAct;
-                UpdateActions();
-            };
+            PlayerTurnState.PlayerCanAct += UpdatePlayer;
             _playerData.OnPatentsChanged += UpdateActions;
+        }
+
+        private void OnDisable()
+        {
+            PlayerTurnState.PlayerCanAct -= UpdatePlayer;
+            _playerData.OnPatentsChanged -= UpdateActions;
         }
 
         public void Fill(int index)
@@ -49,7 +52,7 @@ namespace Scripts.UI
         public void Fill(ActionCategory category)
         {
             if (_activeCategory == category) return;
-            Debug.Log("Currently Selected: " + category);
+            if (_debug) Debug.Log("Currently Selected: " + category, gameObject);
             _activeCategory = category;
             foreach (var content in _activeContent) {
                 Destroy(content);
@@ -85,6 +88,12 @@ namespace Scripts.UI
                     }
                     break;
             }
+        }
+
+        private void UpdatePlayer(bool canAct)
+        {
+            _canInteract = canAct;
+            UpdateActions();
         }
 
         private void UpdateActions()

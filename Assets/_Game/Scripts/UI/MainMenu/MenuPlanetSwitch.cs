@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Scripts.UI.MainMenu
 {
-    public class MainMenuSwitch : MonoBehaviour
+    public class MenuPlanetSwitch : MonoBehaviour
     {
         [SerializeField] private PlanetData _currentPlanet;
         [Header("Main Planet")]

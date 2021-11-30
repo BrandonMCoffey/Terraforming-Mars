@@ -7,25 +7,28 @@ namespace Scripts.States
 {
     public class PlayerTurnState : State
     {
-        [SerializeField] private PlayerToGrid _playerToGrid;
-
         public static event Action StartTurn;
         public static event Action EndTurn;
 
         public static event Action<bool> PlayerCanAct;
+
+        private PlayerStandardProjects _standardProjects;
+        private int _actionsThisTurn;
         private bool _playerCanAct;
 
-        private int _actionsThisTurn;
+        private void Start()
+        {
+            _standardProjects = new PlayerStandardProjects(StateMachine.PlayerData);
+        }
 
         public override void Enter()
         {
             _actionsThisTurn = 0;
-            StartTurn?.Invoke();
             SetPlayerCanAct(true);
-
-            StandardProjects.OnUseProject += OnStandardProject;
-
+            _standardProjects.StartPlayerTurn();
+            _standardProjects.OnPerformAction += UpdateActionsPerformed;
             StateMachine.Input.Confirm += OnEndTurn;
+            StartTurn?.Invoke();
         }
 
         public override void Tick()
@@ -35,16 +38,15 @@ namespace Scripts.States
         public override void Exit()
         {
             SetPlayerCanAct(false);
+            _standardProjects.EndPlayerTurn();
             EndTurn?.Invoke();
-
-            StandardProjects.OnUseProject -= OnStandardProject;
         }
 
-        private void UpdateActionPerformed()
+        private void UpdateActionsPerformed()
         {
             _actionsThisTurn++;
-            if (_actionsThisTurn >= 2) {
-                SetPlayerCanAct(false);
+            if (_actionsThisTurn > StateMachine.PlayerData.ActionsPerTurn) {
+                PlayerCanAct?.Invoke(false);
             }
         }
 
@@ -53,28 +55,6 @@ namespace Scripts.States
             if (_playerCanAct == canAct) return;
             _playerCanAct = canAct;
             PlayerCanAct?.Invoke(canAct);
-        }
-
-        private void OnStandardProject(StandardProjectType type)
-        {
-            if (_actionsThisTurn >= StateMachine.PlayerData.ActionsPerTurn) return;
-            if (type == StandardProjectType.SellPatents) {
-                var soldPatent = StateMachine.PlayerData.RemoveFirstPatent();
-                if (soldPatent == null) return;
-
-                StateMachine.PlayerData.AddResource(ResourceType.Credits, 1);
-                StateMachine.PatentCollection.AddToDiscarded(soldPatent);
-                UpdateActionPerformed();
-                return;
-            }
-            if (_playerToGrid.OnStandardProject(type)) {
-                UpdateActionPerformed();
-                Debug.Log("Activate Project: " + type);
-            }
-        }
-
-        private void OnActivatePatent()
-        {
         }
 
         private void OnEndTurn()

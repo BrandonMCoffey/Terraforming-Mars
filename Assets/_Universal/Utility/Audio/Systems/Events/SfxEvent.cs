@@ -14,16 +14,12 @@ namespace Utility.Audio.Systems.Events
         [SerializeField] private List<SfxReference> _clips = new List<SfxReference>();
 
         [Header("Volume Settings")]
-        [SerializeField] [MinMaxRange(0f, 1f)]
-        private RangedFloat _volume = new RangedFloat(0.4f, 0.8f);
-        [SerializeField] [MinMaxRange(0.25f, 3f)]
-        private RangedFloat _pitch = new RangedFloat(0.8f, 1.2f);
+        [SerializeField] [MinMaxRange(0f, 1f)] private RangedFloat _volume = new RangedFloat(0.4f, 0.8f);
+        [SerializeField] [MinMaxRange(0.25f, 3f)] private RangedFloat _pitch = new RangedFloat(0.8f, 1.2f);
 
         [Header("Spatial Settings")]
-        [SerializeField] [MinMaxRange(-1f, 1f)]
-        private RangedFloat _stereoPan = new RangedFloat(0f, 0f);
-        [SerializeField] [MinMaxRange(0f, 1.1f)]
-        private RangedFloat _reverbZoneMix = new RangedFloat(1f, 1f);
+        [SerializeField] [MinMaxRange(-1f, 1f)] private RangedFloat _stereoPan = new RangedFloat(0f, 0f);
+        [SerializeField] [MinMaxRange(0f, 1.1f)] private RangedFloat _reverbZoneMix = new RangedFloat(1f, 1f);
 
         [Header("Override Mixer")]
         [SerializeField] private AudioMixerGroup _mixerGroup = null;

@@ -1,13 +1,24 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Scripts.Data;
+using Scripts.Enums;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Scripts.Grid
 {
     public class HexTile : MonoBehaviour
     {
+        [SerializeField] private IconData _icons = null;
         [SerializeField] private HexTileClickable _tileClickable = null;
+        [SerializeField] private Image _tileImage = null;
+        [SerializeField] private Image _ownerImage = null;
         [SerializeField] private List<HexTile> _neighbors = new List<HexTile>();
+
+        public bool Claimed { get; private set; }
+
+        public static event Action<HexTile> OnTileClicked;
 
         private void OnEnable()
         {
@@ -27,16 +38,17 @@ namespace Scripts.Grid
                 _neighbors.Add(tile);
         }
 
-        public void OnClick()
+        private void OnClick()
         {
-            SetColor(Color.red);
-            foreach (var tile in _neighbors)
-                tile.SetColor(Color.yellow);
+            OnTileClicked?.Invoke(this);
         }
 
-        public void SetColor(Color color)
+        public void SetTile(TileType tile, Color owner)
         {
-            _tileClickable.SetColor(color);
+            _tileImage.sprite = _icons.GetTile(tile);
+            _tileImage.color = Color.white;
+            _ownerImage.color = owner;
+            Claimed = true;
         }
     }
 }

@@ -11,10 +11,22 @@ namespace Scripts.UI
         [SerializeField] private PlayerData _playerData = null;
         [SerializeField] private TextMeshProUGUI _text = null;
 
-        private void Start()
+        private void OnEnable()
         {
             if (_playerData == null || _text == null) return;
-            _playerData.OnResourcesChanged += () => _text.text = _playerData.GetResource(_type).ToString();
+            _playerData.OnResourcesChanged += UpdateDisplay;
+            UpdateDisplay();
+        }
+
+        private void OnDisable()
+        {
+            if (_playerData == null || _text == null) return;
+            _playerData.OnResourcesChanged -= UpdateDisplay;
+        }
+
+        private void UpdateDisplay()
+        {
+            _text.text = _playerData.GetResource(_type).ToString();
         }
     }
 }

@@ -6,9 +6,9 @@ using Utility.Buttons;
 
 namespace Scripts.UI.MainMenu
 {
-    public class MainMenuOtherPlanetSwitch : MonoBehaviour
+    public class MenuPlanetSwitcher : MonoBehaviour
     {
-        [SerializeField] private MainMenuSwitch _mainMenuSwitch = null;
+        [SerializeField] private MenuPlanetSwitch _menuPlanetSwitch = null;
         [SerializeField] private PlanetData _currentPlanet;
         [Header("Other Planet")]
         [SerializeField] private TextMeshProUGUI _switchPlanetTxt = null;
@@ -23,7 +23,7 @@ namespace Scripts.UI.MainMenu
         [Button]
         public void Swap()
         {
-            _currentPlanet = _mainMenuSwitch.Swap(_currentPlanet);
+            _currentPlanet = _menuPlanetSwitch.Swap(_currentPlanet);
             Setup();
         }
 

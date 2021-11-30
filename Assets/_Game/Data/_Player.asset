@@ -13,24 +13,20 @@ MonoBehaviour:
   m_Name: _Player
   m_EditorClassIdentifier: 
   _corporation: {fileID: 11400000, guid: a297451beb2feb7479411c120b962769, type: 2}
+  _color: {r: 1, g: 0.86274517, b: 0, a: 1}
   _honor: 0
-  _credits: 20
+  _credits: 34
   _iron: 5
   _titanium: 0
   _plants: 10
   _energy: 5
   _heat: 0
   _ownedPatents:
-  - {fileID: 11400000, guid: 7ef6c529a3829554cb40f4e1dbcbff57, type: 2}
-  - {fileID: 11400000, guid: e5840110b31ec654286068fc18df26c2, type: 2}
-  - {fileID: 11400000, guid: 0ae9e951d35a3bb4090acad74d55d388, type: 2}
-  - {fileID: 11400000, guid: 08a264e96fac65143ae609af94189c1b, type: 2}
-  - {fileID: 11400000, guid: 0ae9e951d35a3bb4090acad74d55d388, type: 2}
-  - {fileID: 11400000, guid: 08a264e96fac65143ae609af94189c1b, type: 2}
-  - {fileID: 11400000, guid: 5ceb36f27e4892c4d8aa09f5c18e38c7, type: 2}
-  - {fileID: 11400000, guid: 3343dff002ec15d49b75429d2f788fad, type: 2}
-  - {fileID: 11400000, guid: 3343dff002ec15d49b75429d2f788fad, type: 2}
-  - {fileID: 11400000, guid: 5ceb36f27e4892c4d8aa09f5c18e38c7, type: 2}
+  - {fileID: -751816673415662835, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   _activePatents: []
   _completedPatents: []
   _debug: 0

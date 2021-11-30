@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Scripts.UI.MainMenu
 {
-    public class MainMenuSideViewSwitcher : MonoBehaviour
+    public class SideViewSwitcher : MonoBehaviour
     {
         [Header("Buttons")]
         [SerializeField] private Image _optionsButton = null;

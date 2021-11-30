@@ -158,7 +158,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 871
+        y: 870
         width: 153
         height: 153
       alignment: 0
@@ -283,7 +283,7 @@ TextureImporter:
       name: TM11_Animal
       rect:
         serializedVersion: 2
-        x: 160
+        x: 161
         y: 510
         width: 153
         height: 153
@@ -409,7 +409,7 @@ TextureImporter:
       name: TM17_OceanHexagon
       rect:
         serializedVersion: 2
-        x: 159
+        x: 160
         y: 159
         width: 153
         height: 176
@@ -427,7 +427,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TM17_ForestHexagon
+      name: TM18_ForestHexagon
       rect:
         serializedVersion: 2
         x: 318
@@ -448,7 +448,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TM18_NukeHexagon
+      name: TM19_NukeHexagon
       rect:
         serializedVersion: 2
         x: 476
@@ -469,7 +469,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TM19_AtomicScience
+      name: TM20_AtomicScience
       rect:
         serializedVersion: 2
         x: 0
@@ -490,7 +490,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TM20_EarthScience
+      name: TM21_EarthScience
       rect:
         serializedVersion: 2
         x: 159
@@ -511,7 +511,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TM21_MarsScience
+      name: TM22_MarsScience
       rect:
         serializedVersion: 2
         x: 318
@@ -532,7 +532,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TM22_CityScience
+      name: TM23_CityScience
       rect:
         serializedVersion: 2
         x: 476

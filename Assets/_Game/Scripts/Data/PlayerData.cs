@@ -11,8 +11,8 @@ namespace Scripts.Data
     [CreateAssetMenu(menuName = "TM/Player Data")]
     public class PlayerData : ScriptableObject
     {
-        [SerializeField] private CorporationData _corporation;
-
+        [SerializeField] private CorporationData _corporation = null;
+        [SerializeField] private Color _color = Color.cyan;
         [SerializeField] [ReadOnly] private int _honor;
 
         [Header("Resources")]
@@ -33,6 +33,7 @@ namespace Scripts.Data
 
         public int ActionsPerTurn => _corporation.ActionsPerTurn;
 
+        public Color PlayerColor => _color;
         public List<PatentData> OwnedPatents => _ownedPatents;
         public List<PatentData> ActivePatents => _activePatents;
         public List<PatentData> CompletedPatents => _completedPatents;
@@ -130,6 +131,7 @@ namespace Scripts.Data
             OnResourcesChanged?.Invoke();
         }
 
+        [Button]
         public void AddResource(ResourceType type, int amount)
         {
             if (amount <= 0) return;
