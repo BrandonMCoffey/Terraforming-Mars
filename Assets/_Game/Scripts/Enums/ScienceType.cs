@@ -1,7 +1,10 @@
-public enum ScienceType
+namespace Scripts.Enums
 {
-    Atomic,
-    Earth,
-    Mars,
-    City
+    public enum ScienceType
+    {
+        Atomic,
+        Earth,
+        Mars,
+        City
+    }
 }

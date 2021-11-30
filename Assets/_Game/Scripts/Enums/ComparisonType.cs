@@ -1,8 +1,11 @@
-public enum ComparisonType
+namespace Scripts.Enums
 {
-    GreaterThan,
-    GreaterThanOrEqualTo,
-    LessThan,
-    LessThanOrEqualTo,
-    EqualTo
+    public enum ComparisonType
+    {
+        GreaterThan,
+        GreaterThanOrEqualTo,
+        LessThan,
+        LessThanOrEqualTo,
+        EqualTo
+    }
 }

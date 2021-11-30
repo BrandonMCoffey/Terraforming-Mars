@@ -1,6 +1,9 @@
-public enum PlanetStatusType
+namespace Scripts.Enums
 {
-    Oxygen,
-    Heat,
-    Water
+    public enum PlanetStatusType
+    {
+        Oxygen,
+        Heat,
+        Water
+    }
 }

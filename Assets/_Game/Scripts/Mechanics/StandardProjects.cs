@@ -1,4 +1,5 @@
 using System;
+using Scripts.Enums;
 using UnityEngine;
 
 namespace Scripts.Mechanics

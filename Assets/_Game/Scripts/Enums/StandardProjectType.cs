@@ -1,9 +1,12 @@
-public enum StandardProjectType
+namespace Scripts.Enums
 {
-    SellPatents,
-    PowerPlant,
-    Asteroid,
-    Aquifer,
-    Greenery,
-    City
+    public enum StandardProjectType
+    {
+        SellPatents,
+        PowerPlant,
+        Asteroid,
+        Aquifer,
+        Greenery,
+        City
+    }
 }

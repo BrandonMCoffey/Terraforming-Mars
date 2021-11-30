@@ -1,3 +1,4 @@
+using Scripts.Enums;
 using UnityEngine;
 
 namespace Scripts.Data

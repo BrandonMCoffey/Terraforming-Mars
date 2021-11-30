@@ -1,7 +1,10 @@
-public enum ActionCategory
+namespace Scripts.Enums
 {
-    StandardProject,
-    OwnedPatents,
-    ActivePatents,
-    CompletedPatents
+    public enum ActionCategory
+    {
+        StandardProject,
+        OwnedPatents,
+        ActivePatents,
+        CompletedPatents
+    }
 }

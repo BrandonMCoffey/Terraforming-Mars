@@ -1,11 +1,12 @@
 using Scripts.Data;
+using Scripts.Enums;
 using UnityEngine;
 
 namespace Scripts.Mechanics
 {
     public class PlayerToGrid : MonoBehaviour
     {
-        [SerializeField] private PlayerData _playerData;
+        [SerializeField] private PlayerData _playerData = null;
 
         public bool OnStandardProject(StandardProjectType type)
         {

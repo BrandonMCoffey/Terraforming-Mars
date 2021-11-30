@@ -1,7 +1,10 @@
-public enum TileType
+namespace Scripts.Enums
 {
-    Ocean,
-    Forest,
-    City,
-    Nuke
+    public enum TileType
+    {
+        Ocean,
+        Forest,
+        City,
+        Nuke
+    }
 }

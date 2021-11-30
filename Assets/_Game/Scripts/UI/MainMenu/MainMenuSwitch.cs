@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Scripts.UI
+namespace Scripts.UI.MainMenu
 {
     public class MainMenuSwitch : MonoBehaviour
     {

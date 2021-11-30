@@ -1,4 +1,5 @@
 using Scripts.Data.Structs;
+using Scripts.Enums;
 using UnityEngine;
 using Utility.Buttons;
 #if UNITY_EDITOR

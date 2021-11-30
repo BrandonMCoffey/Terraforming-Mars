@@ -1,7 +1,10 @@
-public enum MWOption
+namespace Scripts.Enums
 {
-    Null,
-    Resources,
-    PatentDetails,
-    Research
+    public enum MWOption
+    {
+        Null,
+        Resources,
+        PatentDetails,
+        Research
+    }
 }

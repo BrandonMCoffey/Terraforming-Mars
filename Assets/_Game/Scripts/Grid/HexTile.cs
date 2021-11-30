@@ -6,7 +6,7 @@ namespace Scripts.Grid
 {
     public class HexTile : MonoBehaviour
     {
-        [SerializeField] private HexTileClickable _tileClickable;
+        [SerializeField] private HexTileClickable _tileClickable = null;
         [SerializeField] private List<HexTile> _neighbors = new List<HexTile>();
 
         private void OnEnable()

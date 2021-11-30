@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utility.Buttons;
 
-namespace Scripts.UI
+namespace Scripts.UI.MainMenu
 {
     public class MainMenuOtherPlanetSwitch : MonoBehaviour
     {

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GridTool.DataScripts;
+using Scripts.Enums;
 using UnityEngine;
 using Utility.Buttons;
 
