@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Utility.Other
 {
     public static class CustomMath

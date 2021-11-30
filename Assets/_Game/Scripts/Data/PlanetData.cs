@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
-using GridTool.DataScripts;
 using Scripts.Enums;
 using UnityEngine;
-using Utility.CustomFloats;
+using Utility.Inspector;
 using Utility.Other;
 
 namespace Scripts.Data

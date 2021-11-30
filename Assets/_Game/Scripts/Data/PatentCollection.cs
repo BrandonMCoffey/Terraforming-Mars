@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using GridTool.DataScripts;
 using UnityEngine;
 using Utility.Buttons;
+using Utility.Inspector;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif

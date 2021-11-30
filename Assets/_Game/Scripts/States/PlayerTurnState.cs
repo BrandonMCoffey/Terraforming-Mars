@@ -1,7 +1,5 @@
 using System;
-using Scripts.Enums;
 using Scripts.Mechanics;
-using UnityEngine;
 
 namespace Scripts.States
 {

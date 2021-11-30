@@ -2,7 +2,6 @@ using System;
 using Scripts.Data;
 using Scripts.Enums;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Scripts.UI

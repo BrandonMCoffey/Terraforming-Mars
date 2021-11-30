@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GridTool.DataScripts
+namespace Utility.Inspector
 {
     public class ReadOnlyAttribute : PropertyAttribute
     {

@@ -1,7 +1,6 @@
 using System;
-using UnityEngine;
 
-namespace Utility.CustomFloats
+namespace Utility.Inspector
 {
     [Serializable]
     public struct MinMaxInt
