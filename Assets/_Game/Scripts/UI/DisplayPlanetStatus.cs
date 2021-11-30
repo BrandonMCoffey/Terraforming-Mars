@@ -11,9 +11,15 @@ namespace Scripts.UI
         [SerializeField] private PlanetStatusType _statusType = PlanetStatusType.Oxygen;
         [SerializeField] private Slider _slider = null;
 
-        private void Start()
+        private void OnEnable()
         {
+            _planetData.OnPlanetStatusChanged += UpdateValue;
             UpdateValue();
+        }
+
+        private void OnDisable()
+        {
+            _planetData.OnPlanetStatusChanged -= UpdateValue;
         }
 
         private void UpdateValue()

@@ -1,10 +1,8 @@
 #if UNITY_EDITOR
-using Scripts.Data.Structs;
 using UnityEditor;
 using UnityEngine;
-using Utility.Inspector;
 
-namespace Utility.CustomFloats.Editor
+namespace Scripts.Data.Structs.Editor
 {
     [CustomPropertyDrawer(typeof(PlanetStatusLevel))]
     public class MinMaxIntPropertyDrawer : PropertyDrawer
@@ -17,8 +15,8 @@ namespace Utility.CustomFloats.Editor
             pos.height -= BottomSpacing;
             label = EditorGUI.BeginProperty(pos, label, prop);
             var contentRect = EditorGUI.PrefixLabel(pos, GUIUtility.GetControlID(FocusType.Passive), label);
-            var labels = new[] { new GUIContent("Min"), new GUIContent("Max") };
-            var properties = new[] { prop.FindPropertyRelative("MinValue"), prop.FindPropertyRelative("MaxValue") };
+            var labels = new[] { new GUIContent("Min"), new GUIContent("Max"), new GUIContent("Step") };
+            var properties = new[] { prop.FindPropertyRelative("MinValue"), prop.FindPropertyRelative("MaxValue"), prop.FindPropertyRelative("StepValue") };
             DrawMultiplePropertyFields(contentRect, labels, properties);
 
             EditorGUI.EndProperty();

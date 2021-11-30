@@ -14,16 +14,11 @@ namespace Scripts.States
         private int _actionsThisTurn;
         private bool _playerCanAct;
 
-        private void Start()
-        {
-            _standardProjects = new PlayerStandardProjects(StateMachine.PlayerData);
-        }
-
         public override void Enter()
         {
+            _standardProjects ??= new PlayerStandardProjects(StateMachine.Player);
             _actionsThisTurn = 0;
             SetPlayerCanAct(true);
-            _standardProjects.StartPlayerTurn();
             _standardProjects.OnPerformAction += UpdateActionsPerformed;
             StateMachine.Input.Confirm += OnEndTurn;
             StartTurn?.Invoke();
@@ -36,21 +31,22 @@ namespace Scripts.States
         public override void Exit()
         {
             SetPlayerCanAct(false);
-            _standardProjects.EndPlayerTurn();
+            _standardProjects.OnPerformAction -= UpdateActionsPerformed;
             EndTurn?.Invoke();
         }
 
         private void UpdateActionsPerformed()
         {
             _actionsThisTurn++;
-            if (_actionsThisTurn > StateMachine.PlayerData.ActionsPerTurn) {
-                PlayerCanAct?.Invoke(false);
-            }
+            //if (_actionsThisTurn >= StateMachine.Player.ActionsPerTurn) {
+            //SetPlayerCanAct(false);
+            //}
         }
 
         private void SetPlayerCanAct(bool canAct)
         {
             if (_playerCanAct == canAct) return;
+            _standardProjects.PlayerCanAct(canAct);
             _playerCanAct = canAct;
             PlayerCanAct?.Invoke(canAct);
         }

@@ -10,15 +10,30 @@ namespace Scripts.Grid
 {
     public class HexTile : MonoBehaviour
     {
+        [SerializeField] private bool _waterTile = false;
+        [Header("References")]
         [SerializeField] private IconData _icons = null;
+        [Header("Internal References")]
         [SerializeField] private HexTileClickable _tileClickable = null;
         [SerializeField] private Image _tileImage = null;
         [SerializeField] private Image _ownerImage = null;
+        [SerializeField] private GameObject _waterTileImage = null;
         [SerializeField] private List<HexTile> _neighbors = new List<HexTile>();
 
         public bool Claimed { get; private set; }
+        public bool WaterTile { get; private set; }
 
         public static event Action<HexTile> OnTileClicked;
+
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            if (_waterTile != WaterTile) {
+                WaterTile = _waterTile;
+                _waterTileImage.gameObject.SetActive(_waterTile);
+            }
+        }
+#endif
 
         private void OnEnable()
         {

@@ -8,13 +8,15 @@ namespace Scripts.States
     public class MasterStateMachine : StateMachineBase
     {
         [SerializeField] private InputController _input;
-        [SerializeField] private PlayerData _playerData = null;
-        [SerializeField] private PlayerData _opponentData = null;
+        [SerializeField] private PlayerData _player = null;
+        [SerializeField] private PlayerData _opponent = null;
+        [SerializeField] private PlanetData _planet = null;
         [SerializeField] private PatentCollection _patentCollection = null;
 
         public InputController Input => _input;
-        public PlayerData PlayerData => _playerData;
-        public PlayerData OpponentData => _opponentData;
+        public PlayerData Player => _player;
+        public PlayerData Opponent => _opponent;
+        public PlanetData Planet => _planet;
         public PatentCollection PatentCollection => _patentCollection;
 
         private void Awake()

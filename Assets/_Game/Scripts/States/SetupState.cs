@@ -8,8 +8,9 @@ namespace Scripts.States
         {
             _activated = false;
             StateMachine.PatentCollection.RestoreList();
-            StateMachine.PlayerData.SetupPlayer(StateMachine.PatentCollection);
-            StateMachine.OpponentData.SetupPlayer(StateMachine.PatentCollection);
+            StateMachine.Player.SetupPlayer(StateMachine.PatentCollection);
+            StateMachine.Opponent.SetupPlayer(StateMachine.PatentCollection);
+            StateMachine.Planet.Setup();
         }
 
         public override void Tick()

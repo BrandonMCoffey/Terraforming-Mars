@@ -3,6 +3,7 @@ using Scripts.Data;
 using Scripts.Enums;
 using Scripts.Grid;
 using Scripts.UI;
+using UnityEngine;
 
 namespace Scripts.Mechanics
 {
@@ -21,31 +22,37 @@ namespace Scripts.Mechanics
             _playerData = playerData;
         }
 
-        public void StartPlayerTurn()
+        public void PlayerCanAct(bool canAct)
         {
-            StandardProjects.OnUseProject += OnStandardProject;
-        }
-
-        public void EndPlayerTurn()
-        {
-            StandardProjects.OnUseProject -= OnStandardProject;
+            if (canAct) {
+                StandardProjects.OnUseProject += OnStandardProject;
+            } else {
+                StandardProjects.OnUseProject -= OnStandardProject;
+            }
         }
 
         #endregion
 
         private void OnStandardProject(StandardProjectType type)
         {
-            _currentProject = type;
+            // Sell Patents
+            if (type == StandardProjectType.SellPatents) {
+                GameController.Instance.ShowSellPatents();
+                return;
+            }
+            // Check cost
+            int cost = StandardProjects.GetCost(type);
+            if (!_playerData.HasResource(ResourceType.Credits, cost)) return;
+            // Run standard project
             switch (type) {
-                case StandardProjectType.SellPatents:
-                    OnSellPatents();
-                    break;
                 case StandardProjectType.PowerPlant:
-                    OnPowerPlant();
-                    break;
+                    _playerData.AddResource(ResourceType.Energy, 1);
+                    _playerData.RemoveResource(ResourceType.Credits, cost);
+                    return;
                 case StandardProjectType.Asteroid:
-                    OnAsteroid();
-                    break;
+                    GameController.Instance.IncreasePlanetStatus(PlanetStatusType.Heat);
+                    _playerData.RemoveResource(ResourceType.Credits, cost);
+                    return;
                 case StandardProjectType.Aquifer:
                     OnPlaceTile(TileType.Ocean);
                     break;
@@ -56,28 +63,8 @@ namespace Scripts.Mechanics
                     OnPlaceTile(TileType.City);
                     break;
             }
+            _currentProject = type;
         }
-
-        #region Sell Patents
-
-        private static void OnSellPatents()
-        {
-            CanvasController.Instance.ShowSellPatents();
-        }
-
-        #endregion
-
-        #region Planet Effects
-
-        private void OnPowerPlant()
-        {
-        }
-
-        private void OnAsteroid()
-        {
-        }
-
-        #endregion
 
         #region Placing Tiles
 
@@ -85,31 +72,44 @@ namespace Scripts.Mechanics
         {
             _tileToPlace = type;
             HexTile.OnTileClicked += OnClickTile;
-            CanvasController.OnCancelPlacingTile += CancelPlacingTile;
-            CanvasController.Instance.ShowPlacingTile(type);
+            GameController.OnCancelPlacingTile += CancelPlacingTile;
+            GameController.Instance.ShowPlacingTile(type);
         }
 
         private void CancelPlacingTile()
         {
             _tileToPlace = TileType.None;
             HexTile.OnTileClicked -= OnClickTile;
-            CanvasController.OnCancelPlacingTile -= CancelPlacingTile;
-            CanvasController.Instance.ShowActions();
+            GameController.OnCancelPlacingTile -= CancelPlacingTile;
+            GameController.Instance.ShowActions();
         }
 
         private void OnClickTile(HexTile tile)
         {
             if (_tileToPlace == TileType.None) return;
             if (tile.Claimed) return;
+            if (tile.WaterTile != (_tileToPlace == TileType.Ocean)) return;
+            PurchaseTile(_tileToPlace);
             tile.SetTile(_tileToPlace, _playerData.PlayerColor);
-            PurchaseTile();
             CancelPlacingTile();
         }
 
-        private void PurchaseTile()
+        private void PurchaseTile(TileType tile)
         {
             int cost = StandardProjects.GetCost(_currentProject);
-            _playerData.RemoveResource(ResourceType.Credits, cost);
+            bool success = _playerData.RemoveResource(ResourceType.Credits, cost);
+            if (!success) {
+                Debug.Log("MAJOR ERROR: ATTEMPTING TO PLACE TILE AND DOES NOT HAVE ENOUGH MONEY!");
+                return;
+            }
+            switch (tile) {
+                case TileType.Ocean:
+                    GameController.Instance.IncreasePlanetStatus(PlanetStatusType.Water);
+                    break;
+                case TileType.Forest:
+                    GameController.Instance.IncreasePlanetStatus(PlanetStatusType.Oxygen);
+                    break;
+            }
             OnPerformAction?.Invoke();
         }
 

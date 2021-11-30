@@ -6,8 +6,11 @@ using UnityEngine.UI;
 
 namespace Scripts.UI
 {
-    public class CanvasController : MonoBehaviour
+    public class GameController : MonoBehaviour
     {
+        public static GameController Instance;
+
+        [SerializeField] private PlanetData _planet = null;
         [SerializeField] private IconData _icons = null;
 
         [Header("While Placing vs Main")]
@@ -15,13 +18,16 @@ namespace Scripts.UI
         [SerializeField] private GameObject _leftSidePlacing = null;
         [SerializeField] private Image _placingIcon = null;
 
-        public static CanvasController Instance;
-
         public static Action OnCancelPlacingTile;
 
         private void Awake()
         {
             Instance = this;
+        }
+
+        public void IncreasePlanetStatus(PlanetStatusType type)
+        {
+            _planet.IncreaseStatus(type);
         }
 
         public void ShowPlacingTile(TileType tile)

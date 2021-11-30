@@ -20,19 +20,22 @@ MonoBehaviour:
   _oxygenLevel:
     MinValue: 0
     MaxValue: 14
-  _oxygenStep: 1
+    StepValue: 1
   _oxygenStatus: 0
+  _oxygenComplete: 0
   _requireWater: 1
   _waterLevel:
     MinValue: 0
     MaxValue: 12
-  _waterStep: 1
+    StepValue: 1
   _waterStatus: 0
+  _waterComplete: 0
   _requireHeat: 1
-  _minMaxHeat:
+  _heatLevel:
     MinValue: -30
     MaxValue: 8
-  _heatStep: 2
+    StepValue: 2
   _heatStatus: -30
+  _heatComplete: 0
   _requireMagneticField: 1
-  _magneticFieldStatus: 0
+  _magneticFieldComplete: 0
