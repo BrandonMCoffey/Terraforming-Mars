@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95d041ecbd2e89644a9fc219ba438070, type: 3}
-  m_Name: _Icons
+  m_Name: Icons
   m_EditorClassIdentifier: 
   _credits: {fileID: 1364770746398346864, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
   _iron: {fileID: -1704744998552034085, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}

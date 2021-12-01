@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ade51c62e58a8de48b11819ef098cd22, type: 3}
-  m_Name: _Deck
+  m_Name: Patents
   m_EditorClassIdentifier: 
   _patents:
   - {fileID: -751816673415662835}

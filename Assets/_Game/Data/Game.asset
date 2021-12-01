@@ -9,15 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90fc0c6b8f4a66c4eb60d3a5313ae47e, type: 3}
-  m_Name: _BasicCorporation
+  m_Script: {fileID: 11500000, guid: 73c5ae204576ea042b8aa17bd8d47db7, type: 3}
+  m_Name: Game
   m_EditorClassIdentifier: 
-  _actionsPerTurn: 10
-  _startHonor: 0
-  _startPatents: 5
-  _startCredits: 100
-  _startIron: 5
-  _startTitanium: 0
-  _startPlants: 10
-  _startEnergy: 5
-  _startHeat: 0
+  _player: {fileID: 11400000, guid: ba737941427f86e45bed45e3c7a6ba4a, type: 2}
+  _opponent: {fileID: 11400000, guid: e92104065a7eecf46a0530b80f336de1, type: 2}
+  _planet: 0
