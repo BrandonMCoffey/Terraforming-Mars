@@ -2,7 +2,6 @@
 using Scripts.Data.Structs;
 using UnityEditor;
 using UnityEngine;
-using Utility.Inspector;
 
 namespace Utility.CustomFloats.Editor
 {

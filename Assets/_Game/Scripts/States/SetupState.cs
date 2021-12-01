@@ -1,5 +1,3 @@
-using Scripts.UI;
-
 namespace Scripts.States
 {
     public class SetupState : State
