@@ -11,18 +11,18 @@ namespace Scripts.UI.MainMenu
         private const int MarsPlanetSceneIndex = 1;
         private const int MoonPlanetSceneIndex = 2;
 
-        [SerializeField] private bool _debug = false;
-        [SerializeField] private GameData _gameData = null;
+        [SerializeField] private bool _debug;
+        [SerializeField] private GameData _gameData;
         [Header("Solo Player")]
-        [SerializeField] private PlayerData _mainPlayer = null;
+        [SerializeField] private PlayerData _mainPlayer;
         [Header("AI Players")]
-        [SerializeField] private PlayerData _aiEasyPlayer = null;
-        [SerializeField] private PlayerData _aiMediumPlayer = null;
-        [SerializeField] private PlayerData _aiHardPlayer = null;
-        [SerializeField] private Image _aiColor = null;
+        [SerializeField] private PlayerData _aiEasyPlayer;
+        [SerializeField] private PlayerData _aiMediumPlayer;
+        [SerializeField] private PlayerData _aiHardPlayer;
+        [SerializeField] private Image _aiColor;
         [Header("Hotseat Players")]
-        [SerializeField] private PlayerData _hotseatPlayer1 = null;
-        [SerializeField] private PlayerData _hotseatPlayer2 = null;
+        [SerializeField] private PlayerData _hotseatPlayer1;
+        [SerializeField] private PlayerData _hotseatPlayer2;
 
         private AiDifficultyLevels _aiDifficulty = AiDifficultyLevels.Easy;
 
@@ -33,8 +33,7 @@ namespace Scripts.UI.MainMenu
 
         private void StartGame()
         {
-            int gameScene = _gameData.Planet switch
-            {
+            int gameScene = _gameData.Planet switch {
                 PlanetType.Mars => MarsPlanetSceneIndex,
                 PlanetType.Moon => MoonPlanetSceneIndex,
                 _               => 0
@@ -53,8 +52,7 @@ namespace Scripts.UI.MainMenu
 
         public void SetAiDifficulty(int difficulty)
         {
-            _aiDifficulty = difficulty switch
-            {
+            _aiDifficulty = difficulty switch {
                 0 => AiDifficultyLevels.Easy,
                 1 => AiDifficultyLevels.Medium,
                 2 => AiDifficultyLevels.Hard,
@@ -68,8 +66,7 @@ namespace Scripts.UI.MainMenu
         {
             Log("AI Game Started");
             _gameData.Player = _mainPlayer;
-            _gameData.Opponent = _aiDifficulty switch
-            {
+            _gameData.Opponent = _aiDifficulty switch {
                 AiDifficultyLevels.Easy   => _aiEasyPlayer,
                 AiDifficultyLevels.Medium => _aiMediumPlayer,
                 AiDifficultyLevels.Hard   => _aiHardPlayer,
@@ -95,8 +92,7 @@ namespace Scripts.UI.MainMenu
 
         private void UpdateAiColor()
         {
-            _aiColor.color = _aiDifficulty switch
-            {
+            _aiColor.color = _aiDifficulty switch {
                 AiDifficultyLevels.Easy   => _aiEasyPlayer.DefaultColor,
                 AiDifficultyLevels.Medium => _aiMediumPlayer.DefaultColor,
                 AiDifficultyLevels.Hard   => _aiHardPlayer.DefaultColor,

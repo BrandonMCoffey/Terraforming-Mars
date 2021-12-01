@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Scripts.Helper
+namespace Scripts.UI.Helper
 {
     public class ShowOrHideOnAwake : MonoBehaviour
     {

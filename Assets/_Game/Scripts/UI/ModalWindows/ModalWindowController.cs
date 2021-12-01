@@ -1,13 +1,9 @@
 using System.Collections.Generic;
-using System.Linq;
 using Scripts.Enums;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using Utility.Buttons;
 
-namespace Scripts.UI
+namespace Scripts.UI.ModalWindows
 {
     public class ModalWindowController : MonoBehaviour
     {

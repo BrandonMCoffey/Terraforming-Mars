@@ -3,14 +3,14 @@ using Scripts.Enums;
 using TMPro;
 using UnityEngine;
 
-namespace Scripts.UI
+namespace Scripts.UI.Displays
 {
     public class DisplayResource : MonoBehaviour
     {
         [SerializeField] private ResourceType _type = ResourceType.Credits;
-        [SerializeField] private GameData _gameData = null;
+        [SerializeField] private GameData _gameData;
         [SerializeField] private bool _player1 = true;
-        [SerializeField] private TextMeshProUGUI _text = null;
+        [SerializeField] private TextMeshProUGUI _text;
 
         private void OnEnable()
         {

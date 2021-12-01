@@ -5,7 +5,7 @@ namespace GridTool.GameScripts
 {
     public class GridController : MonoBehaviour
     {
-        [SerializeField] private ObjectController _baseObjectController = null;
+        [SerializeField] private ObjectController _baseObjectController;
         [SerializeField] private float _gridSize = 1f;
         [SerializeField] private bool _centered = true;
         [SerializeField] private bool _drawGrid = true;

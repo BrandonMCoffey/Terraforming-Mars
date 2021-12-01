@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Scripts.UI
+namespace Scripts.UI.ModalWindows
 {
     public class DraggableUI : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler
     {

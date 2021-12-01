@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Scripts.Data;
 using TMPro;
@@ -11,17 +10,17 @@ namespace Scripts.UI
     public class AnnouncementController : MonoBehaviour
     {
         [Header("Settings")]
-        [SerializeField] private float _waitTime = 0.5f;
+        [SerializeField] private float _waitTime = 0.25f;
         [SerializeField] private AnimationCurve _popupTiming = AnimationCurve.Linear(0, 0, 1, 1);
-        [SerializeField] private float _holdTime = 1.5f;
+        [SerializeField] private float _holdTime = 2f;
         [SerializeField] private AnimationCurve _closeTiming = AnimationCurve.Linear(0, 1, 1, 0);
 
         [Header("References")]
-        [SerializeField] private GameData _gameData = null;
-        [SerializeField] private GameObject _container = null;
-        [SerializeField] private RectMask2D _bannerMask = null;
-        [SerializeField] private TextMeshProUGUI _bannerTitle = null;
-        [SerializeField] private TextMeshProUGUI _bannerSubtitle = null;
+        [SerializeField] private GameData _gameData;
+        [SerializeField] private GameObject _container;
+        [SerializeField] private RectMask2D _bannerMask;
+        [SerializeField] private TextMeshProUGUI _bannerTitle;
+        [SerializeField] private TextMeshProUGUI _bannerSubtitle;
 
         private void Start()
         {

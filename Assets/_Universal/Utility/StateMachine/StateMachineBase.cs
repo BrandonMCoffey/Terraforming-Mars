@@ -5,7 +5,7 @@ namespace Utility.StateMachine
 {
     public abstract class StateMachineBase : MonoBehaviour
     {
-        [SerializeField] private bool _debug = false;
+        [SerializeField] private bool _debug;
 
         private StateBase _currentStateBase;
         private Stack<StateBase> _previousStates = new Stack<StateBase>(4);

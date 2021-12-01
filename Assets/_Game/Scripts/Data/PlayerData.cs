@@ -21,7 +21,7 @@ namespace Scripts.Data
         [SerializeField] [ReadOnly] private Color _playerColor = Color.cyan;
 
         [Header("Important Player Info")]
-        [SerializeField] private CorporationData _corporation = null;
+        [SerializeField] private CorporationData _corporation;
         [SerializeField] [ReadOnly] private int _honor;
 
         [Header("Resources")]
@@ -46,16 +46,14 @@ namespace Scripts.Data
         public bool UserControlled => _playerControlled;
         public string DefaultName => _defaultPlayerName;
 
-        public string PlayerName
-        {
+        public string PlayerName {
             get => _playerName;
             set => _playerName = value;
         }
 
         public Color DefaultColor => _defaultPlayerColor;
 
-        public Color PlayerColor
-        {
+        public Color PlayerColor {
             get => _playerColor;
             set => _playerColor = value;
         }
@@ -132,8 +130,7 @@ namespace Scripts.Data
 
         public int GetResource(ResourceType type)
         {
-            return type switch
-            {
+            return type switch {
                 ResourceType.Credits  => _credits,
                 ResourceType.Iron     => _iron,
                 ResourceType.Titanium => _titanium,

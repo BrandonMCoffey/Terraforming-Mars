@@ -11,16 +11,16 @@ namespace Scripts.Grid
 {
     public class HexTile : MonoBehaviour
     {
-        [SerializeField] private bool _waterTile = false;
+        [SerializeField] private bool _waterTile;
         [Header("References")]
-        [SerializeField] private IconData _icons = null;
+        [SerializeField] private IconData _icons;
         [Header("Internal References")]
-        [SerializeField] private HexTileClickable _tileClickable = null;
-        [SerializeField] private Image _tileImage = null;
-        [SerializeField] private Image _ownerImage = null;
-        [SerializeField] private Image _hoverImage = null;
-        [SerializeField] private GameObject _waterTileImage = null;
-        [SerializeField] private GameObject _bonusHoverVisual = null;
+        [SerializeField] private HexTileClickable _tileClickable;
+        [SerializeField] private Image _tileImage;
+        [SerializeField] private Image _ownerImage;
+        [SerializeField] private Image _hoverImage;
+        [SerializeField] private GameObject _waterTileImage;
+        [SerializeField] private GameObject _bonusHoverVisual;
         [SerializeField] private List<HexTile> _neighbors = new List<HexTile>();
 
         public bool WaterTile { get; private set; }

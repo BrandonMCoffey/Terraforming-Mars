@@ -5,22 +5,22 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Scripts.UI
+namespace Scripts.UI.Displays
 {
     public class ProjectContent : MonoBehaviour
     {
         [SerializeField] private StandardProjectType _project = StandardProjectType.SellPatents;
         [Header("References")]
-        [SerializeField] private GameData _gameData = null;
+        [SerializeField] private GameData _gameData;
         [SerializeField] private PlayerTypes _whichPlayer = PlayerTypes.AnyUser;
-        [SerializeField] private IconData _iconData = null;
-        [SerializeField] private Button _button = null;
-        [SerializeField] private TextMeshProUGUI _titleText = null;
+        [SerializeField] private IconData _iconData;
+        [SerializeField] private Button _button;
+        [SerializeField] private TextMeshProUGUI _titleText;
         [Header("Cost and Effect")]
-        [SerializeField] private Image _costImage = null;
-        [SerializeField] private TextMeshProUGUI _costText = null;
-        [SerializeField] private Image _effectImage = null;
-        [SerializeField] private TextMeshProUGUI _effectText = null;
+        [SerializeField] private Image _costImage;
+        [SerializeField] private TextMeshProUGUI _costText;
+        [SerializeField] private Image _effectImage;
+        [SerializeField] private TextMeshProUGUI _effectText;
 
         private bool _active;
 

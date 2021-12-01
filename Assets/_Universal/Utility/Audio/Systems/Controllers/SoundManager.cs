@@ -7,12 +7,12 @@ namespace Utility.Audio.Systems.Controllers
 {
     public class SoundManager : MonoBehaviour
     {
-        [SerializeField] private bool _scenePersistent = false;
+        [SerializeField] private bool _scenePersistent;
         [Header("Music Controller")]
         //[SerializeField] private AudioMixerGroup _musicGroup = null;
         [SerializeField] private MusicManager _musicSourceController;
         [Header("Audio Pool")]
-        [SerializeField] private AudioMixerGroup _sfxGroup = null;
+        [SerializeField] private AudioMixerGroup _sfxGroup;
         [SerializeField] private Transform _poolParent;
         [SerializeField] private int _initialPoolSize = 5;
 
@@ -29,10 +29,8 @@ namespace Utility.Audio.Systems.Controllers
 
         private static SoundManager _instance;
 
-        public static SoundManager Instance
-        {
-            get
-            {
+        public static SoundManager Instance {
+            get {
                 if (_instance == null) {
                     _instance = FindObjectOfType<SoundManager>();
                     if (_instance == null) {

@@ -7,7 +7,7 @@ namespace Utility.CustomFloats
     {
         public bool UseConstant;
         public float ConstantValue;
-        public FloatVariable Variable = null;
+        public FloatVariable Variable;
 
         public FloatReference()
         {
@@ -21,11 +21,9 @@ namespace Utility.CustomFloats
             ConstantValue = value;
         }
 
-        public float Value
-        {
+        public float Value {
             get => UseConstant ? ConstantValue : Variable.Value;
-            set
-            {
+            set {
                 if (UseConstant) {
                     ConstantValue = value;
                 } else {

@@ -3,15 +3,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Scripts.UI
+namespace Scripts.UI.Displays
 {
     public class MatchPlayerInfo : MonoBehaviour
     {
-        [SerializeField] private GameData _gameData = null;
-        [SerializeField] private TextMeshProUGUI _player1Name = null;
-        [SerializeField] private Image _player1Color = null;
-        [SerializeField] private TextMeshProUGUI _player2Name = null;
-        [SerializeField] private Image _player2Color = null;
+        [SerializeField] private GameData _gameData;
+        [SerializeField] private TextMeshProUGUI _player1Name;
+        [SerializeField] private Image _player1Color;
+        [SerializeField] private TextMeshProUGUI _player2Name;
+        [SerializeField] private Image _player2Color;
 
         private void OnEnable()
         {

@@ -17,7 +17,7 @@ namespace Scripts.Data
         [SerializeField] private PlanetType _planetType = PlanetType.Mars;
         [SerializeField] private string _planetName = "Planet";
         [SerializeField] private string _planetSwitchDescription = "(Description)";
-        [SerializeField] private Sprite _planetSprite = null;
+        [SerializeField] private Sprite _planetSprite;
 
         public PlanetType PlanetType => _planetType;
         public string PlanetName => _planetName;
@@ -134,8 +134,7 @@ namespace Scripts.Data
 
         public int GetLevel(PlanetStatusType type)
         {
-            return type switch
-            {
+            return type switch {
                 PlanetStatusType.Oxygen        => _oxygenStatus,
                 PlanetStatusType.Heat          => _heatStatus,
                 PlanetStatusType.Water         => _waterStatus,
@@ -146,8 +145,7 @@ namespace Scripts.Data
 
         public float GetLevel0To1(PlanetStatusType type)
         {
-            return type switch
-            {
+            return type switch {
                 PlanetStatusType.Oxygen        => CustomMath.Map(_oxygenStatus, _oxygenLevel.MinValue, _oxygenLevel.MaxValue, 0, 1),
                 PlanetStatusType.Heat          => CustomMath.Map(_heatStatus, _heatLevel.MinValue, _heatLevel.MaxValue, 0, 1),
                 PlanetStatusType.Water         => CustomMath.Map(_waterStatus, _waterLevel.MinValue, _waterLevel.MaxValue, 0, 1),

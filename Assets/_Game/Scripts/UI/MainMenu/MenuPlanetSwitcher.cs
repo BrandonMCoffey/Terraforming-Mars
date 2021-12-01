@@ -8,12 +8,12 @@ namespace Scripts.UI.MainMenu
 {
     public class MenuPlanetSwitcher : MonoBehaviour
     {
-        [SerializeField] private MenuPlanetSwitch _menuPlanetSwitch = null;
+        [SerializeField] private MenuPlanetSwitch _menuPlanetSwitch;
         [SerializeField] private PlanetData _currentPlanet;
         [Header("Other Planet")]
-        [SerializeField] private TextMeshProUGUI _switchPlanetTxt = null;
-        [SerializeField] private TextMeshProUGUI _switchPlanetDesc = null;
-        [SerializeField] private Image _switchPlanetImage = null;
+        [SerializeField] private TextMeshProUGUI _switchPlanetTxt;
+        [SerializeField] private TextMeshProUGUI _switchPlanetDesc;
+        [SerializeField] private Image _switchPlanetImage;
 
         private void Start()
         {

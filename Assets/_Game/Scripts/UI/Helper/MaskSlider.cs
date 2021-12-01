@@ -1,15 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Scripts.UI
+namespace Scripts.UI.Helper
 {
     public class MaskSlider : MonoBehaviour
     {
         [Header("Slides from bottom to top")]
-        [SerializeField] private Image _image = null;
-        [SerializeField] private RectMask2D _mask = null;
-        [SerializeField] private Slider _slider = null;
-        [SerializeField] private float _offsetFromBottom = 0;
+        [SerializeField] private Image _image;
+        [SerializeField] private RectMask2D _mask;
+        [SerializeField] private Slider _slider;
+        [SerializeField] private float _offsetFromBottom;
 
         private float _height;
 

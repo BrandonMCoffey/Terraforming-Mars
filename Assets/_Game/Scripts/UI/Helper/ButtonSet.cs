@@ -3,12 +3,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace Scripts.UI
+namespace Scripts.UI.Helper
 {
     public class ButtonSet : MonoBehaviour
     {
         [SerializeField] private List<Button> _buttons = new List<Button>();
-        [SerializeField] private int _onSelectIntOffset = 0;
+        [SerializeField] private int _onSelectIntOffset;
 
         public UnityEvent<int> OnSelect = new UnityEvent<int>();
 

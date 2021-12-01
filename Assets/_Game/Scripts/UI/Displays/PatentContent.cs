@@ -2,12 +2,12 @@ using Scripts.Data;
 using TMPro;
 using UnityEngine;
 
-namespace Scripts.UI
+namespace Scripts.UI.Displays
 {
     public class PatentContent : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _titleText = null;
-        [SerializeField] private TextMeshProUGUI _costText = null;
+        [SerializeField] private TextMeshProUGUI _titleText;
+        [SerializeField] private TextMeshProUGUI _costText;
 
         public void Fill(PatentData patent)
         {

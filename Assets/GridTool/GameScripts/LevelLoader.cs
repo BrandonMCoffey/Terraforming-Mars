@@ -6,14 +6,12 @@ namespace GridTool.GameScripts
     [RequireComponent(typeof(GridController))]
     public class LevelLoader : MonoBehaviour
     {
-        [SerializeField] private LevelData _levelToLoad = null;
+        [SerializeField] private LevelData _levelToLoad;
 
         private GridController _grid;
 
-        private GridController Grid
-        {
-            get
-            {
+        private GridController Grid {
+            get {
                 if (_grid == null) {
                     _grid = GetComponent<GridController>();
                     if (_grid == null) {

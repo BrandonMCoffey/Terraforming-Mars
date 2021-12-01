@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Scripts.UI
+namespace Scripts.UI.ModalWindows
 {
     public class ModalWindow : MonoBehaviour
     {

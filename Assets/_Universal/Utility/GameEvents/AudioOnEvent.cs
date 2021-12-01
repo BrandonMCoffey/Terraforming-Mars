@@ -7,7 +7,7 @@ namespace Utility.GameEvents
     public class AudioOnEvent : GameEventListener
     {
         [Tooltip("Audio to play invoke when Event is raised.")]
-        [SerializeField] private AudioClip _audioClip = null;
+        [SerializeField] private AudioClip _audioClip;
         [SerializeField] private bool _oneShot = true;
 
         private AudioSource _audioSource;

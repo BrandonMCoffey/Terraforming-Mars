@@ -1,16 +1,15 @@
-using System;
 using Scripts.Data;
 using Scripts.Enums;
 using UnityEngine;
 
-namespace Scripts.Helper
+namespace Scripts.UI.Helper
 {
     public class ShowOnPlayerTurn : MonoBehaviour
     {
-        [SerializeField] private GameData _gameData = null;
+        [SerializeField] private GameData _gameData;
         [SerializeField] private PlayerTypes _whichPlayer = PlayerTypes.Player1;
         [SerializeField] private GameObject _obj;
-        [SerializeField] private bool _invert = false;
+        [SerializeField] private bool _invert;
 
         private void Start()
         {

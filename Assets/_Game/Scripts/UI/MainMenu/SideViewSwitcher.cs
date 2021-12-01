@@ -6,13 +6,13 @@ namespace Scripts.UI.MainMenu
     public class SideViewSwitcher : MonoBehaviour
     {
         [Header("Buttons")]
-        [SerializeField] private Image _optionsButton = null;
-        [SerializeField] private Image _creditsButton = null;
+        [SerializeField] private Image _optionsButton;
+        [SerializeField] private Image _creditsButton;
         [SerializeField] private Color _selectedColor = Color.yellow;
         [Header("Panels")]
-        [SerializeField] private GameObject _planetPanel = null;
-        [SerializeField] private GameObject _optionsPanel = null;
-        [SerializeField] private GameObject _creditsPanel = null;
+        [SerializeField] private GameObject _planetPanel;
+        [SerializeField] private GameObject _optionsPanel;
+        [SerializeField] private GameObject _creditsPanel;
 
         private bool _optionsActive;
         private bool _creditsActive;

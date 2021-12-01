@@ -8,9 +8,9 @@ namespace Utility.Audio.Systems.Events
     public class MusicEvent : ScriptableObject
     {
         [Header("Base Settings")]
-        [SerializeField] private SfxReference _musicClip = null;
-        [SerializeField] private bool _crossFade = false;
-        [SerializeField] private float _fadeTime = 0;
+        [SerializeField] private SfxReference _musicClip;
+        [SerializeField] private bool _crossFade;
+        [SerializeField] private float _fadeTime;
 
         public void Play()
         {

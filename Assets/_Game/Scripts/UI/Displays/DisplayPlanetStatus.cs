@@ -3,13 +3,13 @@ using Scripts.Enums;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Scripts.UI
+namespace Scripts.UI.Displays
 {
     public class DisplayPlanetStatus : MonoBehaviour
     {
-        [SerializeField] private PlanetData _planetData = null;
+        [SerializeField] private PlanetData _planetData;
         [SerializeField] private PlanetStatusType _statusType = PlanetStatusType.Oxygen;
-        [SerializeField] private Slider _slider = null;
+        [SerializeField] private Slider _slider;
 
         private void OnEnable()
         {

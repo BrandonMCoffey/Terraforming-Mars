@@ -5,8 +5,8 @@ namespace GridTool.GameScripts
 {
     public class ObjectController : MonoBehaviour
     {
-        [SerializeField] private SpriteRenderer _spriteRenderer = null;
-        [SerializeField] private ObjectData _object = null;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private ObjectData _object;
         [SerializeField] private float _framesPerSecond = 2f;
 
         private bool _animate;

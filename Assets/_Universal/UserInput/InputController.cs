@@ -7,7 +7,7 @@ namespace UserInput
 {
     public class InputController : MonoBehaviour
     {
-        [SerializeField] private bool _debug = false;
+        [SerializeField] private bool _debug;
 
         public event Action Confirm = delegate { };
         public event Action Cancel = delegate { };

@@ -8,20 +8,20 @@ namespace Utility.Audio.Systems.Events
     public class SfxVariant : SfxBase
     {
         [Header("Audio Clip Settings")]
-        [SerializeField] private SfxReference _clip = null;
-        [SerializeField] private bool _loop = false;
+        [SerializeField] private SfxReference _clip;
+        [SerializeField] private bool _loop;
 
         [Header("Volume Settings")]
         [SerializeField] [Range(0f, 1f)] private float _volume = 1f;
         [SerializeField] [Range(.25f, 3f)] private float _pitch = 1f;
 
         [Header("Spatial Settings")]
-        [SerializeField] [Range(-1f, 1f)] private float _stereoPan = 0f;
-        [SerializeField] [Range(0f, 1f)] private float _spatialBlend = 0f;
+        [SerializeField] [Range(-1f, 1f)] private float _stereoPan;
+        [SerializeField] [Range(0f, 1f)] private float _spatialBlend;
         [SerializeField] [Range(0f, 1.1f)] private float _reverbZoneMix = 1f;
 
         [Header("Mixer Settings")]
-        [SerializeField] private AudioMixerGroup _mixerGroup = null;
+        [SerializeField] private AudioMixerGroup _mixerGroup;
 
         public override SfxProperties GetSourceProperties()
         {

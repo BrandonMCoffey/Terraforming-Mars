@@ -11,20 +11,20 @@ namespace Scripts.UI
     {
         public static GameController Instance;
 
-        [SerializeField] private GameData _gameData = null;
-        [SerializeField] private PlanetData _planet = null;
-        [SerializeField] private IconData _icons = null;
+        [SerializeField] private GameData _gameData;
+        [SerializeField] private PlanetData _planet;
+        [SerializeField] private IconData _icons;
 
         [Header("While Placing vs Main")]
-        [SerializeField] private GameObject _leftSideMain = null;
-        [SerializeField] private GameObject _leftSidePlacing = null;
-        [SerializeField] private TextMeshProUGUI _actionTitle = null;
-        [SerializeField] private TextMeshProUGUI _actionDesc = null;
-        [SerializeField] private TextMeshProUGUI _actionCost = null;
-        [SerializeField] private GameObject _actionCostObject = null;
-        [SerializeField] private GameObject _confirmButton = null;
-        [SerializeField] private Image _tileIcon = null;
-        [SerializeField] private Image _resourceIcon = null;
+        [SerializeField] private GameObject _leftSideMain;
+        [SerializeField] private GameObject _leftSidePlacing;
+        [SerializeField] private TextMeshProUGUI _actionTitle;
+        [SerializeField] private TextMeshProUGUI _actionDesc;
+        [SerializeField] private TextMeshProUGUI _actionCost;
+        [SerializeField] private GameObject _actionCostObject;
+        [SerializeField] private GameObject _confirmButton;
+        [SerializeField] private Image _tileIcon;
+        [SerializeField] private Image _resourceIcon;
 
         public static Action OnConfirmAction;
         public static Action OnCancelAction;

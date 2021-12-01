@@ -5,7 +5,7 @@ namespace Utility.Audio.Systems.Controllers
 {
     public class AudioMixerController : MonoBehaviour
     {
-        [SerializeField] private AudioMixer _mixer = null;
+        [SerializeField] private AudioMixer _mixer;
 
         [Header("Master Slider")]
         [SerializeField] private string _masterVolume = "MasterVolume";

@@ -4,7 +4,7 @@ namespace Utility.Animations
 {
     public class FollowTransform : MonoBehaviour
     {
-        [SerializeField] private Transform _objectToFollow = null;
+        [SerializeField] private Transform _objectToFollow;
         [SerializeField] private float _smoothSpeed = 4;
 
         private bool _missingTransform;

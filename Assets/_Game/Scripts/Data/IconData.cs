@@ -7,43 +7,42 @@ namespace Scripts.Data
     public class IconData : ScriptableObject
     {
         [Header("Resources")]
-        [SerializeField] private Sprite _credits = null;
-        [SerializeField] private Sprite _iron = null;
-        [SerializeField] private Sprite _titanium = null;
-        [SerializeField] private Sprite _plants = null;
-        [SerializeField] private Sprite _energy = null;
-        [SerializeField] private Sprite _heat = null;
+        [SerializeField] private Sprite _credits;
+        [SerializeField] private Sprite _iron;
+        [SerializeField] private Sprite _titanium;
+        [SerializeField] private Sprite _plants;
+        [SerializeField] private Sprite _energy;
+        [SerializeField] private Sprite _heat;
         [Header("Resources (Circular)")]
-        [SerializeField] private Sprite _creditsClean = null;
-        [SerializeField] private Sprite _ironCircle = null;
-        [SerializeField] private Sprite _titaniumCircle = null;
-        [SerializeField] private Sprite _plantsCircle = null;
-        [SerializeField] private Sprite _energyCircle = null;
+        [SerializeField] private Sprite _creditsClean;
+        [SerializeField] private Sprite _ironCircle;
+        [SerializeField] private Sprite _titaniumCircle;
+        [SerializeField] private Sprite _plantsCircle;
+        [SerializeField] private Sprite _energyCircle;
         [Header("Special Resources")]
-        [SerializeField] private Sprite _bacteria = null;
-        [SerializeField] private Sprite _animal = null;
+        [SerializeField] private Sprite _bacteria;
+        [SerializeField] private Sprite _animal;
         [Header("Special Resources (Circular)")]
-        [SerializeField] private Sprite _bacteriaCircle = null;
-        [SerializeField] private Sprite _animalCircle = null;
+        [SerializeField] private Sprite _bacteriaCircle;
+        [SerializeField] private Sprite _animalCircle;
         [Header("Resource Level")]
-        [SerializeField] private Sprite _resourceLevelUp = null;
+        [SerializeField] private Sprite _resourceLevelUp;
         [Header("Map Hexagons")]
-        [SerializeField] private Sprite _ocean = null;
-        [SerializeField] private Sprite _forest = null;
-        [SerializeField] private Sprite _city = null;
-        [SerializeField] private Sprite _nuke = null;
+        [SerializeField] private Sprite _ocean;
+        [SerializeField] private Sprite _forest;
+        [SerializeField] private Sprite _city;
+        [SerializeField] private Sprite _nuke;
         [Header("Sciences")]
-        [SerializeField] private Sprite _atomicScience = null;
-        [SerializeField] private Sprite _earth = null;
-        [SerializeField] private Sprite _mars = null;
-        [SerializeField] private Sprite _cityCircle = null;
+        [SerializeField] private Sprite _atomicScience;
+        [SerializeField] private Sprite _earth;
+        [SerializeField] private Sprite _mars;
+        [SerializeField] private Sprite _cityCircle;
 
         public Sprite ResourceLevelUp => _resourceLevelUp;
 
         public Sprite GetResource(ResourceType type, bool isCircular = false)
         {
-            return type switch
-            {
+            return type switch {
                 ResourceType.Credits  => isCircular ? _creditsClean : _credits,
                 ResourceType.Iron     => isCircular ? _ironCircle : _iron,
                 ResourceType.Titanium => isCircular ? _titaniumCircle : _titanium,
@@ -58,8 +57,7 @@ namespace Scripts.Data
 
         public Sprite GetTile(TileType type)
         {
-            return type switch
-            {
+            return type switch {
                 TileType.Ocean  => _ocean,
                 TileType.Forest => _forest,
                 TileType.City   => _city,
@@ -70,8 +68,7 @@ namespace Scripts.Data
 
         public Sprite GetScience(ScienceType type)
         {
-            return type switch
-            {
+            return type switch {
                 ScienceType.Atomic => _atomicScience,
                 ScienceType.Earth  => _earth,
                 ScienceType.Mars   => _mars,

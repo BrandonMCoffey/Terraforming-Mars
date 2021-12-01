@@ -8,15 +8,14 @@ namespace Utility.Audio.Systems.Controllers
     public class MusicManager : MonoBehaviour
     {
         [SerializeField] [Range(0, 1)] private float _currentMusicVolume = 1;
-        [SerializeField] private AudioMixerGroup _musicGroup = null;
+        [SerializeField] private AudioMixerGroup _musicGroup;
         [SerializeField] private AudioSourceController _musicSource1;
         [SerializeField] private AudioSourceController _musicSource2;
 
         private bool _musicSource1Playing;
         private Coroutine _currentRoutine;
 
-        public float CurrentMusicVolume
-        {
+        public float CurrentMusicVolume {
             get => _currentMusicVolume;
             private set => Mathf.Clamp(value, 0, 1);
         }

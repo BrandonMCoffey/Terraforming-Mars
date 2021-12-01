@@ -1,4 +1,3 @@
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,7 +5,7 @@ namespace Scripts.UI
 {
     public class PauseMenuController : MonoBehaviour
     {
-        [SerializeField] private GameObject _pauseMenu = null;
+        [SerializeField] private GameObject _pauseMenu;
 
         public static PauseMenuController Instance;
 

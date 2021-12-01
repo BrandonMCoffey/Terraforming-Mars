@@ -5,16 +5,16 @@ using Scripts.States;
 using TMPro;
 using UnityEngine;
 
-namespace Scripts.UI
+namespace Scripts.UI.Displays
 {
     public class ActionContentFiller : MonoBehaviour
     {
-        [SerializeField] private GameData _gameData = null;
-        [SerializeField] private RectTransform _parent = null;
-        [SerializeField] private TextMeshProUGUI _headerText = null;
+        [SerializeField] private GameData _gameData;
+        [SerializeField] private RectTransform _parent;
+        [SerializeField] private TextMeshProUGUI _headerText;
         [SerializeField] private List<ProjectContent> _standardProjects = new List<ProjectContent>();
-        [SerializeField] private PatentContent _patentBasePrefab = null;
-        [SerializeField] private bool _debug = false;
+        [SerializeField] private PatentContent _patentBasePrefab;
+        [SerializeField] private bool _debug;
 
         private List<GameObject> _activeContent = new List<GameObject>();
         private ActionCategory? _activeCategory;

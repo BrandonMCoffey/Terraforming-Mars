@@ -7,12 +7,12 @@ namespace Scripts.UI.MainMenu
 {
     public class MenuPlanetSwitch : MonoBehaviour
     {
-        [SerializeField] private GameData _gameData = null;
+        [SerializeField] private GameData _gameData;
         [SerializeField] private PlanetData _currentPlanet;
         [Header("Main Planet")]
-        [SerializeField] private TextMeshProUGUI _terraformingPlanetTxt = null;
-        [SerializeField] private Image _mainPlanetImage1 = null;
-        [SerializeField] private Image _mainPlanetImage2 = null;
+        [SerializeField] private TextMeshProUGUI _terraformingPlanetTxt;
+        [SerializeField] private Image _mainPlanetImage1;
+        [SerializeField] private Image _mainPlanetImage2;
 
         private void Start()
         {

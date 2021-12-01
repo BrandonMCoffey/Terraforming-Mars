@@ -7,10 +7,10 @@ namespace Scripts.UI.MainMenu
 {
     public class SetPlayerInfo : MonoBehaviour
     {
-        [SerializeField] private PlayerData _player = null;
+        [SerializeField] private PlayerData _player;
 
-        [SerializeField] private Image _playerColor = null;
-        [SerializeField] private TMP_InputField _playerText = null;
+        [SerializeField] private Image _playerColor;
+        [SerializeField] private TMP_InputField _playerText;
 
         public string GetName => _player.PlayerName;
         public Color GetColor => _playerColor.color;

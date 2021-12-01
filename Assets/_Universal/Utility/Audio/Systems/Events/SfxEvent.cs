@@ -22,7 +22,7 @@ namespace Utility.Audio.Systems.Events
         [SerializeField] [MinMaxRange(0f, 1.1f)] private RangedFloat _reverbZoneMix = new RangedFloat(1f, 1f);
 
         [Header("Override Mixer")]
-        [SerializeField] private AudioMixerGroup _mixerGroup = null;
+        [SerializeField] private AudioMixerGroup _mixerGroup;
 
         public override SfxProperties GetSourceProperties()
         {

@@ -6,14 +6,14 @@ namespace Scripts.Data
     public class CorporationData : ScriptableObject
     {
         [SerializeField] [Range(0, 10)] private int _actionsPerTurn = 2;
-        [SerializeField] [Range(0, 100)] private int _startHonor = 0;
+        [SerializeField] [Range(0, 100)] private int _startHonor;
         [SerializeField] [Range(0, 20)] private int _startPatents = 10;
         [SerializeField] [Range(0, 100)] private int _startCredits = 20;
         [SerializeField] [Range(0, 100)] private int _startIron = 5;
-        [SerializeField] [Range(0, 100)] private int _startTitanium = 0;
+        [SerializeField] [Range(0, 100)] private int _startTitanium;
         [SerializeField] [Range(0, 100)] private int _startPlants = 10;
         [SerializeField] [Range(0, 100)] private int _startEnergy = 5;
-        [SerializeField] [Range(0, 100)] private int _startHeat = 0;
+        [SerializeField] [Range(0, 100)] private int _startHeat;
 
         public int ActionsPerTurn => _actionsPerTurn;
         public int StartHonor => _startHonor;

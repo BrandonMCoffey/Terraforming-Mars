@@ -1,7 +1,6 @@
 ﻿#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
-
 using UnityEngine;
 
 namespace Extras.Scripts
@@ -72,14 +71,14 @@ namespace Extras.Scripts
         public float rotationLerpTime = 0.01f;
 
         [Tooltip("Whether or not to invert our Y axis for mouse input to rotation.")]
-        public bool invertY = false;
+        public bool invertY;
 
 #if ENABLE_INPUT_SYSTEM
         InputAction movementAction;
         InputAction verticalMovementAction;
         InputAction lookAction;
         InputAction boostFactorAction;
-        bool        mouseRightButtonPressed;
+        bool mouseRightButtonPressed;
 
         void Start()
         {
@@ -231,7 +230,7 @@ namespace Extras.Scripts
         bool IsBoostPressed()
         {
 #if ENABLE_INPUT_SYSTEM
-            bool boost = Keyboard.current != null ? Keyboard.current.leftShiftKey.isPressed : false; 
+            bool boost = Keyboard.current != null ? Keyboard.current.leftShiftKey.isPressed : false;
             boost |= Gamepad.current != null ? Gamepad.current.xButton.isPressed : false;
             return boost;
 #else

@@ -9,10 +9,10 @@ namespace Utility.GameEvents
         [Tooltip("How many particles to emit when Event is raised.")]
         [SerializeField] private int _particlesToEmit = 10;
 
-        [SerializeField] private Transform _locationToEmit = null;
+        [SerializeField] private Transform _locationToEmit;
         [SerializeField] private Vector3 _transformAdjust = Vector3.zero;
 
-        [SerializeField] private bool _useDirection = false;
+        [SerializeField] private bool _useDirection;
         [SerializeField] private Vector3 _rotationAdjust = Vector3.zero;
 
         private ParticleSystem _system;

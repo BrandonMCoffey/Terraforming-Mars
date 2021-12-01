@@ -4,7 +4,7 @@ namespace Utility.Animations
 {
     public class MatchTransform : MonoBehaviour
     {
-        [SerializeField] private Transform _objectToMatch = null;
+        [SerializeField] private Transform _objectToMatch;
 
         private bool _missingTransform;
 

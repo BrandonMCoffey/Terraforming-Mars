@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c57eb47a5a31e74cba39a2c269c71d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waitTime: 0.4
+  _waitTime: 0.25
   _popupTiming:
     serializedVersion: 2
     m_Curve:

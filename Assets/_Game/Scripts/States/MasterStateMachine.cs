@@ -11,9 +11,9 @@ namespace Scripts.States
     public class MasterStateMachine : StateMachineBase
     {
         [SerializeField] private InputController _input;
-        [SerializeField] private GameData _gameData = null;
-        [SerializeField] private PlanetData _planet = null;
-        [SerializeField] private PatentCollection _patentCollection = null;
+        [SerializeField] private GameData _gameData;
+        [SerializeField] private PlanetData _planet;
+        [SerializeField] private PatentCollection _patentCollection;
         [SerializeField] [ReadOnly] private PlayerData _player;
         [SerializeField] [ReadOnly] private PlayerData _opponent;
 

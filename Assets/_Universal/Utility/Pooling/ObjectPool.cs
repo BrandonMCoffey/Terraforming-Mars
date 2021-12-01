@@ -5,7 +5,7 @@ namespace Utility.Pooling
 {
     public class ObjectPool : MonoBehaviour
     {
-        [SerializeField] private GameObject _objectToPool = null;
+        [SerializeField] private GameObject _objectToPool;
         [SerializeField] private int _initialPoolSize = 5;
 
         protected GameObject ObjectToPool => _objectToPool;

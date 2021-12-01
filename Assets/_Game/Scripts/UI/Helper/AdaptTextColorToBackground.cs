@@ -3,12 +3,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Scripts.UI
+namespace Scripts.UI.Helper
 {
     public class AdaptTextColorToBackground : MonoBehaviour
     {
         [SerializeField] private List<TextMeshProUGUI> _texts = new List<TextMeshProUGUI>();
-        [SerializeField] private Image _image = null;
+        [SerializeField] private Image _image;
 
         private void Start()
         {

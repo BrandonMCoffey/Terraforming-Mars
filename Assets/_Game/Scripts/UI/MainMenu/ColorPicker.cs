@@ -6,13 +6,13 @@ namespace Scripts.UI.MainMenu
 {
     public class ColorPicker : MonoBehaviour
     {
-        [SerializeField] private GameObject _container = null;
-        [SerializeField] private TextMeshProUGUI _titleText = null;
+        [SerializeField] private GameObject _container;
+        [SerializeField] private TextMeshProUGUI _titleText;
         [SerializeField] private string _titleTextEnd = "'s Color";
-        [SerializeField] private Image _colorDisplay = null;
-        [SerializeField] private Slider _sliderR = null;
-        [SerializeField] private Slider _sliderG = null;
-        [SerializeField] private Slider _sliderB = null;
+        [SerializeField] private Image _colorDisplay;
+        [SerializeField] private Slider _sliderR;
+        [SerializeField] private Slider _sliderG;
+        [SerializeField] private Slider _sliderB;
 
         private Color _color;
 
