@@ -6,9 +6,13 @@ using UnityEngine.UI;
 namespace Scripts.Grid
 {
     [RequireComponent(typeof(Image))]
-    public class HexTileClickable : MonoBehaviour, IPointerDownHandler
+    public class HexTileClickable : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private float _alphaThreshold = 0.1f;
+
+        public event Action OnClicked;
+        public event Action OnEnterHover;
+        public event Action OnExitHover;
 
         private Image _image;
 
@@ -23,6 +27,14 @@ namespace Scripts.Grid
             OnClicked?.Invoke();
         }
 
-        public event Action OnClicked;
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            OnEnterHover?.Invoke();
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            OnExitHover?.Invoke();
+        }
     }
 }

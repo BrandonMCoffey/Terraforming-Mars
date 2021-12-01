@@ -50,17 +50,17 @@ namespace Scripts.Mechanics
                     _playerData.RemoveResource(ResourceType.Credits, cost);
                     return;
                 case StandardProjectType.Asteroid:
-                    GameController.Instance.IncreasePlanetStatus(PlanetStatusType.Heat);
+                    IncreasePlanetStatus(PlanetStatusType.Heat);
                     _playerData.RemoveResource(ResourceType.Credits, cost);
                     return;
                 case StandardProjectType.Aquifer:
-                    OnPlaceTile(TileType.Ocean);
+                    OnStartPlacingTile(TileType.Ocean);
                     break;
                 case StandardProjectType.Greenery:
-                    OnPlaceTile(TileType.Forest);
+                    OnStartPlacingTile(TileType.Forest);
                     break;
                 case StandardProjectType.City:
-                    OnPlaceTile(TileType.City);
+                    OnStartPlacingTile(TileType.City);
                     break;
             }
             _currentProject = type;
@@ -68,7 +68,7 @@ namespace Scripts.Mechanics
 
         #region Placing Tiles
 
-        private void OnPlaceTile(TileType type)
+        private void OnStartPlacingTile(TileType type)
         {
             _tileToPlace = type;
             HexTile.OnTileClicked += OnClickTile;
@@ -89,12 +89,12 @@ namespace Scripts.Mechanics
             if (_tileToPlace == TileType.None) return;
             if (tile.Claimed) return;
             if (tile.WaterTile != (_tileToPlace == TileType.Ocean)) return;
-            PurchaseTile(_tileToPlace);
-            tile.SetTile(_tileToPlace, _playerData.PlayerColor);
+            if (_tileToPlace == TileType.City && tile.HasAdjacentCity) return;
+            PurchaseTile(tile, _tileToPlace);
             CancelPlacingTile();
         }
 
-        private void PurchaseTile(TileType tile)
+        private void PurchaseTile(HexTile tile, TileType tileType)
         {
             int cost = StandardProjects.GetCost(_currentProject);
             bool success = _playerData.RemoveResource(ResourceType.Credits, cost);
@@ -102,15 +102,23 @@ namespace Scripts.Mechanics
                 Debug.Log("MAJOR ERROR: ATTEMPTING TO PLACE TILE AND DOES NOT HAVE ENOUGH MONEY!");
                 return;
             }
-            switch (tile) {
+            int bonus = tile.SetTile(tileType, _playerData.PlayerColor);
+            _playerData.AddResource(ResourceType.Credits, bonus);
+            switch (tileType) {
                 case TileType.Ocean:
-                    GameController.Instance.IncreasePlanetStatus(PlanetStatusType.Water);
+                    IncreasePlanetStatus(PlanetStatusType.Water);
                     break;
                 case TileType.Forest:
-                    GameController.Instance.IncreasePlanetStatus(PlanetStatusType.Oxygen);
+                    IncreasePlanetStatus(PlanetStatusType.Oxygen);
                     break;
             }
             OnPerformAction?.Invoke();
+        }
+
+        private void IncreasePlanetStatus(PlanetStatusType type)
+        {
+            _playerData.AddHonor(1);
+            GameController.Instance.IncreasePlanetStatus(type);
         }
 
         #endregion

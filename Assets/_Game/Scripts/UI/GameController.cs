@@ -19,6 +19,9 @@ namespace Scripts.UI
         [SerializeField] private Image _placingIcon = null;
 
         public static Action OnCancelPlacingTile;
+        public static Action OnUpdateHover;
+
+        public TileType TileToPlace { get; private set; }
 
         private void Awake()
         {
@@ -34,7 +37,9 @@ namespace Scripts.UI
         {
             _leftSideMain.SetActive(false);
             _leftSidePlacing.SetActive(true);
+            TileToPlace = tile;
             _placingIcon.sprite = _icons.GetTile(tile);
+            OnUpdateHover?.Invoke();
         }
 
         public void ShowSellPatents()
@@ -45,6 +50,8 @@ namespace Scripts.UI
         {
             _leftSideMain.SetActive(true);
             _leftSidePlacing.SetActive(false);
+            TileToPlace = TileType.None;
+            OnUpdateHover?.Invoke();
         }
 
         public void CancelPlacingTile()
