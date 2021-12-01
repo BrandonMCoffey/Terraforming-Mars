@@ -18,7 +18,7 @@ namespace Scripts.States
 
         public override void Enter()
         {
-            _canEndTurnTime = Time.time + 0.5f;
+            _canEndTurnTime = Time.time + 3f;
             _standardProjects ??= new PlayerStandardProjects(_playerData);
             _actionsThisTurn = 0;
             SetPlayerCanAct(true);
@@ -33,6 +33,7 @@ namespace Scripts.States
 
         public override void Exit()
         {
+            _canEndTurnTime = Time.time + 1000f; // Weird fix
             SetPlayerCanAct(false);
             _standardProjects.OnPerformAction -= UpdateActionsPerformed;
             _playerData.EndTurn();

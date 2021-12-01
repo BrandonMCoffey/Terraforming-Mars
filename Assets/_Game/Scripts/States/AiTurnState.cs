@@ -12,7 +12,7 @@ namespace Scripts.States
 
         public override void Enter()
         {
-            _turnEndTime = Time.time + 2;
+            _turnEndTime = Time.time + 5f;
         }
 
         public override void Tick()
