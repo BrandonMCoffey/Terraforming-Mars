@@ -11,8 +11,15 @@ namespace Scripts.Data
     [CreateAssetMenu(menuName = "TM/Player Data")]
     public class PlayerData : ScriptableObject
     {
+        [Header("Basic Player Info")]
+        [SerializeField] private bool _playerControlled = true;
+        [SerializeField] private string _defaultPlayerName = "Player";
+        [SerializeField] private Color _defaultPlayerColor = Color.cyan;
+        [SerializeField] [ReadOnly] private string _playerName = "Player";
+        [SerializeField] [ReadOnly] private Color _playerColor = Color.cyan;
+
+        [Header("Important Player Info")]
         [SerializeField] private CorporationData _corporation = null;
-        [SerializeField] private Color _color = Color.cyan;
         [SerializeField] [ReadOnly] private int _honor;
 
         [Header("Resources")]
@@ -23,7 +30,7 @@ namespace Scripts.Data
         [SerializeField] [ReadOnly] private int _energy;
         [SerializeField] [ReadOnly] private int _heat;
 
-        [Header("Resources")]
+        [Header("Patents")]
         [SerializeField] [ReadOnly] private List<PatentData> _ownedPatents = new List<PatentData>();
         [SerializeField] [ReadOnly] private List<PatentData> _activePatents = new List<PatentData>();
         [SerializeField] [ReadOnly] private List<PatentData> _completedPatents = new List<PatentData>();
@@ -32,8 +39,24 @@ namespace Scripts.Data
         [SerializeField] private bool _debug;
 
         public int ActionsPerTurn => _corporation.ActionsPerTurn;
+        public bool UserControlled => _playerControlled;
+        public string DefaultName => _defaultPlayerName;
 
-        public Color PlayerColor => _color;
+        public string PlayerName
+        {
+            get => _playerName;
+            set => _playerName = value;
+        }
+
+        public Color DefaultColor => _defaultPlayerColor;
+
+        public Color PlayerColor
+        {
+            get => _playerColor;
+            set => _playerColor = value;
+        }
+
+
         public List<PatentData> OwnedPatents => _ownedPatents;
         public List<PatentData> ActivePatents => _activePatents;
         public List<PatentData> CompletedPatents => _completedPatents;

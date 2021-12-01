@@ -14,10 +14,12 @@ namespace Scripts.Data
         #region Planet Info
 
         [Header("Planet Info")]
+        [SerializeField] private PlanetType _planetType = PlanetType.Mars;
         [SerializeField] private string _planetName = "Planet";
         [SerializeField] private string _planetSwitchDescription = "(Description)";
         [SerializeField] private Sprite _planetSprite = null;
 
+        public PlanetType PlanetType => _planetType;
         public string PlanetName => _planetName;
         public string PlanetSwitchDescription => _planetSwitchDescription;
         public Sprite PlanetSprite => _planetSprite;

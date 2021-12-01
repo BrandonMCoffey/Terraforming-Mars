@@ -8,7 +8,6 @@ using UnityEditor;
 
 namespace Scripts.Data
 {
-    [CreateAssetMenu(menuName = "TM/Patent Data")]
     public class PatentData : ScriptableObject
     {
         [Header("Patent Info")]

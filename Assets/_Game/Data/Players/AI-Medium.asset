@@ -10,15 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 094e42b474753884b95a78b633035419, type: 3}
-  m_Name: _Opponent
+  m_Name: AI-Medium
   m_EditorClassIdentifier: 
+  _playerControlled: 0
   _corporation: {fileID: 11400000, guid: a297451beb2feb7479411c120b962769, type: 2}
+  _defaultPlayerName: Medium AI
+  _defaultPlayerColor: {r: 0, g: 1, b: 1, a: 1}
+  _playerName: Medium AI
+  _playerColor: {r: 0, g: 1, b: 1, a: 1}
   _honor: 0
-  _credits: 0
-  _iron: 0
+  _credits: 100
+  _iron: 5
   _titanium: 0
-  _plants: 0
-  _energy: 0
+  _plants: 10
+  _energy: 5
   _heat: 0
   _ownedPatents: []
   _activePatents: []

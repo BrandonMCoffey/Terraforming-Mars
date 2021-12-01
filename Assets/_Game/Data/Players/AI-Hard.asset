@@ -10,23 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 094e42b474753884b95a78b633035419, type: 3}
-  m_Name: _Player
+  m_Name: AI-Hard
   m_EditorClassIdentifier: 
+  _playerControlled: 0
   _corporation: {fileID: 11400000, guid: a297451beb2feb7479411c120b962769, type: 2}
-  _color: {r: 1, g: 0.86274517, b: 0, a: 1}
+  _defaultPlayerName: Hard AI
+  _defaultPlayerColor: {r: 0, g: 1, b: 1, a: 1}
+  _playerName: Hard AI
+  _playerColor: {r: 0, g: 1, b: 1, a: 1}
   _honor: 0
-  _credits: 34
+  _credits: 100
   _iron: 5
   _titanium: 0
   _plants: 10
   _energy: 5
   _heat: 0
-  _ownedPatents:
-  - {fileID: -751816673415662835, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _ownedPatents: []
   _activePatents: []
   _completedPatents: []
   _debug: 0

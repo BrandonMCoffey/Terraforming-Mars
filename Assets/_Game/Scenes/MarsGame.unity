@@ -7152,10 +7152,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _debug: 0
   _input: {fileID: 1970041024}
-  _player: {fileID: 11400000, guid: 08f1e041fd9e72e468ae4bb3f7a7a0eb, type: 2}
-  _opponent: {fileID: 11400000, guid: 10d818ef570b1f244a7475d412290f95, type: 2}
+  _gameData: {fileID: 11400000, guid: d12b2fa9cb6052247a1988dcac5bfe71, type: 2}
   _planet: {fileID: 11400000, guid: 0251b9c07db3c524185126a32f0c22af, type: 2}
   _patentCollection: {fileID: 11400000, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
+  _player: {fileID: 11400000, guid: 08f1e041fd9e72e468ae4bb3f7a7a0eb, type: 2}
+  _opponent: {fileID: 11400000, guid: 10d818ef570b1f244a7475d412290f95, type: 2}
 --- !u!4 &584428151
 Transform:
   m_ObjectHideFlags: 0
