@@ -2937,6 +2937,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 236393799}
+  - component: {fileID: 236393800}
   m_Layer: 5
   m_Name: Top
   m_TagString: Untagged
@@ -2964,6 +2965,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &236393800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236393798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8486c940293e5fd4792eea1ae2f74581, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameData: {fileID: 11400000, guid: d12b2fa9cb6052247a1988dcac5bfe71, type: 2}
+  _whichPlayer: 2
+  _obj: {fileID: 669008581}
+  _invert: 0
 --- !u!1 &241985598
 GameObject:
   m_ObjectHideFlags: 0
@@ -8948,7 +8965,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 669008584}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 584428150}
+        m_TargetAssemblyTypeName: Scripts.States.MasterStateMachine, Assembly-CSharp
+        m_MethodName: NextTurn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &669008584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18256,7 +18285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameData: {fileID: 11400000, guid: d12b2fa9cb6052247a1988dcac5bfe71, type: 2}
-  _player1: 0
+  _whichPlayer: 1
   _obj: {fileID: 712566698}
   _invert: 0
 --- !u!114 &1469375466
@@ -18272,7 +18301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameData: {fileID: 11400000, guid: d12b2fa9cb6052247a1988dcac5bfe71, type: 2}
-  _player1: 1
+  _whichPlayer: 0
   _obj: {fileID: 974708120}
   _invert: 0
 --- !u!1001 &1476654319

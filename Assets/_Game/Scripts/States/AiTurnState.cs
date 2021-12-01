@@ -13,6 +13,7 @@ namespace Scripts.States
         public override void Enter()
         {
             _turnEndTime = Time.time + 5f;
+            _playerData.StartTurn();
         }
 
         public override void Tick()
@@ -24,6 +25,7 @@ namespace Scripts.States
 
         public override void Exit()
         {
+            _playerData.EndTurn();
         }
 
         private void OnEndTurn()
