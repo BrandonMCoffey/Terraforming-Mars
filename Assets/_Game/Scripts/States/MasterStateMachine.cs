@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Input;
 using Scripts.Data;
 using UnityEngine;
@@ -21,6 +23,9 @@ namespace Scripts.States
         public PlanetData Planet => _planet;
         public PatentCollection PatentCollection => _patentCollection;
 
+        private List<State> _turnStates;
+        private int _currentTurn;
+
         private void Awake()
         {
             if (Input == null) {
@@ -33,6 +38,22 @@ namespace Scripts.States
         private void Start()
         {
             ChangeState<SetupState>();
+        }
+
+        public void SetupTurns(List<State> turns)
+        {
+            _currentTurn = -1;
+            _turnStates = turns.Where(turn => turn != null).ToList();
+        }
+
+        public void NextTurn()
+        {
+            _currentTurn++;
+            if (_currentTurn >= _turnStates.Count) {
+                _currentTurn = 0;
+            }
+            var turn = _turnStates[_currentTurn];
+            ChangeState(turn);
         }
     }
 }

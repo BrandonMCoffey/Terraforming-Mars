@@ -64,6 +64,8 @@ namespace Scripts.Data
         public List<PatentData> ActivePatents => _activePatents;
         public List<PatentData> CompletedPatents => _completedPatents;
 
+        public event Action OnTurnStart;
+        public event Action OnTurnEnd;
         public event Action OnHonorChanged;
         public event Action<int> OnCreditsChanged;
         public event Action OnResourcesChanged;
@@ -75,6 +77,8 @@ namespace Scripts.Data
             VerifyPatents();
         }
 #endif
+
+        #region Setup
 
         public void SetupPlayer(PatentCollection patents)
         {
@@ -90,6 +94,18 @@ namespace Scripts.Data
             ClearAllPatents();
             AddPatents(patents.GetRandom(_corporation.StartPatents));
         }
+
+        public void StartTurn()
+        {
+            OnTurnStart?.Invoke();
+        }
+
+        public void EndTurn()
+        {
+            OnTurnEnd?.Invoke();
+        }
+
+        #endregion
 
         #region Honor
 

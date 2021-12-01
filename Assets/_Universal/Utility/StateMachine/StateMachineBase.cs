@@ -21,6 +21,12 @@ namespace Utility.StateMachine
             CurrentStateBase.Tick();
         }
 
+        public void ChangeState(StateBase state)
+        {
+            if (!state.gameObject == gameObject) return;
+            InitiateStateChange(state);
+        }
+
         public void ChangeState<T>() where T : StateBase
         {
             T targetState = GetComponent<T>();

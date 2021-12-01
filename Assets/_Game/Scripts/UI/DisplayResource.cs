@@ -9,13 +9,13 @@ namespace Scripts.UI
     {
         [SerializeField] private ResourceType _type = ResourceType.Credits;
         [SerializeField] private GameData _gameData = null;
-        [SerializeField] private bool _player = true;
+        [SerializeField] private bool _player1 = true;
         [SerializeField] private TextMeshProUGUI _text = null;
 
         private void OnEnable()
         {
             if (_gameData == null || _text == null) return;
-            if (_player) {
+            if (_player1) {
                 _gameData.Player.OnResourcesChanged += UpdateDisplay;
             } else {
                 _gameData.Opponent.OnResourcesChanged += UpdateDisplay;
@@ -26,7 +26,7 @@ namespace Scripts.UI
         private void OnDisable()
         {
             if (_gameData == null || _text == null) return;
-            if (_player) {
+            if (_player1) {
                 _gameData.Player.OnResourcesChanged -= UpdateDisplay;
             } else {
                 _gameData.Opponent.OnResourcesChanged -= UpdateDisplay;
@@ -35,7 +35,7 @@ namespace Scripts.UI
 
         private void UpdateDisplay()
         {
-            if (_player) {
+            if (_player1) {
                 _text.text = _gameData.Player.GetResource(_type).ToString();
             } else {
                 _text.text = _gameData.Opponent.GetResource(_type).ToString();

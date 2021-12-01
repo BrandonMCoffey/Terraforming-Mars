@@ -1,27 +1,30 @@
 using System;
+using Scripts.Data;
 using Scripts.Mechanics;
+using UnityEngine;
 
 namespace Scripts.States
 {
     public class PlayerTurnState : State
     {
-        public static event Action StartTurn;
-        public static event Action EndTurn;
-
         public static event Action<bool> PlayerCanAct;
 
         private PlayerStandardProjects _standardProjects;
         private int _actionsThisTurn;
         private bool _playerCanAct;
+        private float _canEndTurnTime;
+
+        private PlayerData _playerData;
 
         public override void Enter()
         {
-            _standardProjects ??= new PlayerStandardProjects(StateMachine.Player);
+            _canEndTurnTime = Time.time + 0.5f;
+            _standardProjects ??= new PlayerStandardProjects(_playerData);
             _actionsThisTurn = 0;
             SetPlayerCanAct(true);
             _standardProjects.OnPerformAction += UpdateActionsPerformed;
             StateMachine.Input.Confirm += OnEndTurn;
-            StartTurn?.Invoke();
+            _playerData.StartTurn();
         }
 
         public override void Tick()
@@ -32,7 +35,12 @@ namespace Scripts.States
         {
             SetPlayerCanAct(false);
             _standardProjects.OnPerformAction -= UpdateActionsPerformed;
-            EndTurn?.Invoke();
+            _playerData.EndTurn();
+        }
+
+        public void Setup(PlayerData playerData)
+        {
+            _playerData = playerData;
         }
 
         private void UpdateActionsPerformed()
@@ -53,7 +61,8 @@ namespace Scripts.States
 
         private void OnEndTurn()
         {
-            StateMachine.ChangeState<EnemyTurnState>();
+            if (Time.time < _canEndTurnTime) return;
+            StateMachine.NextTurn();
         }
     }
 }

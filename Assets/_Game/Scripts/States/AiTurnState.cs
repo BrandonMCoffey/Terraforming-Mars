@@ -1,10 +1,14 @@
+using Scripts.Data;
 using UnityEngine;
 
 namespace Scripts.States
 {
-    public class EnemyTurnState : State
+    public class AiTurnState : State
     {
         private float _turnEndTime;
+
+        // Reference Difficulty here
+        private PlayerData _playerData;
 
         public override void Enter()
         {
@@ -24,7 +28,12 @@ namespace Scripts.States
 
         private void OnEndTurn()
         {
-            StateMachine.ChangeState<PlayerTurnState>();
+            StateMachine.NextTurn();
+        }
+
+        public void Setup(PlayerData playerData)
+        {
+            _playerData = playerData;
         }
     }
 }
