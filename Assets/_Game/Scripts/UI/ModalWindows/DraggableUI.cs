@@ -29,8 +29,10 @@ namespace Scripts.UI.ModalWindows
             Vector2 mousePos = eventData.position;
             Vector2 diff = mousePos - _prevMousePos;
 
-            Vector3 oldPos = _rect.position;
-            _rect.position += new Vector3(diff.x, diff.y, transform.position.z);
+            var newPos = _rect.position;
+            Vector3 oldPos = newPos;
+            newPos += new Vector3(diff.x, diff.y, transform.position.z);
+            _rect.position = newPos;
             if (IsRectInScreen(_rect)) {
                 _prevMousePos = mousePos;
             } else {

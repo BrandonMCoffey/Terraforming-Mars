@@ -33,34 +33,42 @@ namespace Scripts.UI.ModalWindows
             }
         }
 
-        public void OpenResourceWindow()
+        public void ToggleResourceWindow()
         {
-            OpenWindow(MWOption.Resources);
+            bool open = _openWindows.Contains(MWOption.Resources);
+            OpenWindow(MWOption.Resources, !open);
         }
 
-        public void OpenResearchWindow()
+        public void ToggleResearchWindow()
         {
-            OpenWindow(MWOption.Research);
+            bool open = _openWindows.Contains(MWOption.Research);
+            OpenWindow(MWOption.Research, !open);
         }
 
-        public void OpenAwardsWindow()
+        public void ToggleAwardsWindow()
         {
-            OpenWindow(MWOption.Awards);
+            bool open = _openWindows.Contains(MWOption.Awards);
+            OpenWindow(MWOption.Awards, !open);
         }
 
-        public void OpenMilestonesWindow()
+        public void ToggleMilestonesWindow()
         {
-            OpenWindow(MWOption.Milestones);
+            bool open = _openWindows.Contains(MWOption.Milestones);
+            OpenWindow(MWOption.Milestones, !open);
         }
 
         [Button]
-        public ModalWindow OpenWindow(MWOption option)
+        public ModalWindow OpenWindow(MWOption option, bool open = true)
         {
             if (!_windows.ContainsKey(option)) return null;
             var window = _windows[option];
-            window.gameObject.SetActive(true);
-            window.transform.SetAsLastSibling();
-            _openWindows.Add(option);
+            window.gameObject.SetActive(open);
+            if (open) {
+                window.transform.SetAsLastSibling();
+                _openWindows.Add(option);
+            } else if (_openWindows.Contains(option)) {
+                _openWindows.Remove(option);
+            }
             return window;
         }
 
