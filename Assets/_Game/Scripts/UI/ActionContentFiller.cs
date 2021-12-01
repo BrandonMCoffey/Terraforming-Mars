@@ -21,13 +21,13 @@ namespace Scripts.UI
 
         private bool _canInteract;
 
-        private void OnEnable()
+        private void Start()
         {
             PlayerTurnState.PlayerCanAct += UpdatePlayer;
             _playerData.OnPatentsChanged += UpdateActions;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             PlayerTurnState.PlayerCanAct -= UpdatePlayer;
             _playerData.OnPatentsChanged -= UpdateActions;
