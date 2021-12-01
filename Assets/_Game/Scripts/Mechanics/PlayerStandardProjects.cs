@@ -44,14 +44,13 @@ namespace Scripts.Mechanics
             int cost = StandardProjects.GetCost(type);
             if (!_playerData.HasResource(ResourceType.Credits, cost)) return;
             // Run standard project
+            _currentProject = type;
             switch (type) {
                 case StandardProjectType.PowerPlant:
-                    _playerData.AddResource(ResourceType.Energy, 1);
-                    _playerData.RemoveResource(ResourceType.Credits, cost);
+                    OnStartProject();
                     return;
                 case StandardProjectType.Asteroid:
-                    IncreasePlanetStatus(PlanetStatusType.Heat);
-                    _playerData.RemoveResource(ResourceType.Credits, cost);
+                    OnStartProject();
                     return;
                 case StandardProjectType.Aquifer:
                     OnStartPlacingTile(TileType.Ocean);
@@ -63,8 +62,44 @@ namespace Scripts.Mechanics
                     OnStartPlacingTile(TileType.City);
                     break;
             }
-            _currentProject = type;
         }
+
+        #region Power Plant and Asteroid
+
+        private void OnStartProject()
+        {
+            GameController.OnConfirmAction += OnConfirmProject;
+            GameController.OnCancelAction += OnCancelProject;
+            GameController.Instance.ShowStandardProject(_currentProject);
+        }
+
+        private void OnConfirmProject()
+        {
+            OnCancelProject();
+            int cost = StandardProjects.GetCost(_currentProject);
+            switch (_currentProject) {
+                case StandardProjectType.PowerPlant:
+                    _playerData.AddResource(ResourceType.Energy, 1);
+                    _playerData.RemoveResource(ResourceType.Credits, cost);
+                    return;
+                case StandardProjectType.Asteroid:
+                    IncreasePlanetStatus(PlanetStatusType.Heat);
+                    _playerData.RemoveResource(ResourceType.Credits, cost);
+                    return;
+                default:
+                    Debug.Log("MAJOR ERROR: CONFIRMING PROJECT WHEN CURRENT PROJECT IS INVALID!");
+                    return;
+            }
+        }
+
+        private void OnCancelProject()
+        {
+            GameController.OnConfirmAction -= OnConfirmProject;
+            GameController.OnCancelAction -= OnCancelProject;
+            GameController.Instance.ShowActions();
+        }
+
+        #endregion
 
         #region Placing Tiles
 
@@ -72,15 +107,15 @@ namespace Scripts.Mechanics
         {
             _tileToPlace = type;
             HexTile.OnTileClicked += OnClickTile;
-            GameController.OnCancelPlacingTile += CancelPlacingTile;
-            GameController.Instance.ShowPlacingTile(type);
+            GameController.OnCancelAction += CancelPlacingTile;
+            GameController.Instance.ShowPlacingTile(type, StandardProjects.GetCost(_currentProject));
         }
 
         private void CancelPlacingTile()
         {
             _tileToPlace = TileType.None;
             HexTile.OnTileClicked -= OnClickTile;
-            GameController.OnCancelPlacingTile -= CancelPlacingTile;
+            GameController.OnCancelAction -= CancelPlacingTile;
             GameController.Instance.ShowActions();
         }
 

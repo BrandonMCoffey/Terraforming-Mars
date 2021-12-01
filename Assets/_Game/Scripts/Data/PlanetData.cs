@@ -62,6 +62,7 @@ namespace Scripts.Data
         public bool RequireOxygen => _requireOxygen;
         public bool RequireWater => _requireWater;
         public bool RequireHeat => _requireHeat;
+        public PlanetStatusLevel HeatLevel => _heatLevel;
         public bool RequireMagneticField => _requireMagneticField;
 
         public event Action OnPlanetStatusChanged;

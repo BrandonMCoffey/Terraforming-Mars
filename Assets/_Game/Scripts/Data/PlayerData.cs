@@ -202,7 +202,7 @@ namespace Scripts.Data
 
         public void AddPatents(List<PatentData> patents)
         {
-            foreach (var patent in patents) {
+            foreach (var patent in patents.Where(patent => patent != null)) {
                 _ownedPatents.Add(patent);
             }
             OnPatentsChanged?.Invoke();

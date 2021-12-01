@@ -13,7 +13,7 @@ namespace Scripts.UI
         [SerializeField] private TextMeshProUGUI _player2Name = null;
         [SerializeField] private Image _player2Color = null;
 
-        private void Start()
+        private void OnEnable()
         {
             if (_gameData == null) return;
             if (_player1Name != null) _player1Name.text = _gameData.Player.PlayerName;

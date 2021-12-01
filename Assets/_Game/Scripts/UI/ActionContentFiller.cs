@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Scripts.Data;
 using Scripts.Enums;
 using Scripts.States;
+using TMPro;
 using UnityEngine;
 
 namespace Scripts.UI
@@ -10,6 +11,7 @@ namespace Scripts.UI
     {
         [SerializeField] private PlayerData _playerData = null;
         [SerializeField] private RectTransform _parent = null;
+        [SerializeField] private TextMeshProUGUI _headerText = null;
         [SerializeField] private List<ProjectContent> _standardProjects = new List<ProjectContent>();
         [SerializeField] private PatentContent _patentBasePrefab = null;
         [SerializeField] private bool _debug = false;
@@ -36,15 +38,19 @@ namespace Scripts.UI
             switch (index) {
                 case 0:
                     Fill(ActionCategory.StandardProject);
+                    _headerText.text = "Projects";
                     break;
                 case 1:
                     Fill(ActionCategory.OwnedPatents);
+                    _headerText.text = "Patents";
                     break;
                 case 2:
                     Fill(ActionCategory.ActivePatents);
+                    _headerText.text = "Active Effects";
                     break;
                 case 3:
                     Fill(ActionCategory.CompletedPatents);
+                    _headerText.text = "Completed";
                     break;
             }
         }
