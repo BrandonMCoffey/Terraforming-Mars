@@ -11,6 +11,7 @@ namespace Scripts.UI
     {
         public static GameController Instance;
 
+        [SerializeField] private GameData _gameData = null;
         [SerializeField] private PlanetData _planet = null;
         [SerializeField] private IconData _icons = null;
 
@@ -34,6 +35,18 @@ namespace Scripts.UI
         private void Awake()
         {
             Instance = this;
+        }
+
+        private void OnEnable()
+        {
+            _gameData.Player.OnTurnStart += ShowActions;
+            _gameData.Opponent.OnTurnStart += ShowActions;
+        }
+
+        private void OnDisable()
+        {
+            _gameData.Player.OnTurnStart -= ShowActions;
+            _gameData.Opponent.OnTurnStart -= ShowActions;
         }
 
         public void IncreasePlanetStatus(PlanetStatusType type)

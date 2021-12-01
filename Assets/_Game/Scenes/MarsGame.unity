@@ -7262,6 +7262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e520cafd089abd142abaab47d2ca9ead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameData: {fileID: 11400000, guid: d12b2fa9cb6052247a1988dcac5bfe71, type: 2}
   _planet: {fileID: 11400000, guid: 0251b9c07db3c524185126a32f0c22af, type: 2}
   _icons: {fileID: 11400000, guid: 16a858eecb4d2cf4fb3c8516d3e2f177, type: 2}
   _leftSideMain: {fileID: 1731841661}
@@ -16861,7 +16862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc3a4f78124c147489ec72ea2d3f15ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerData: {fileID: 11400000, guid: 08f1e041fd9e72e468ae4bb3f7a7a0eb, type: 2}
+  _gameData: {fileID: 11400000, guid: d12b2fa9cb6052247a1988dcac5bfe71, type: 2}
   _parent: {fileID: 479734452}
   _headerText: {fileID: 1859609111}
   _standardProjects:

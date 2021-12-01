@@ -21,29 +21,11 @@ namespace Scripts.Helper
         private void OnEnable()
         {
             if (_gameData == null) return;
-            bool player1 = false;
-            bool player2 = false;
-            switch (_whichPlayer) {
-                case PlayerTypes.Player1:
-                    player1 = true;
-                    break;
-                case PlayerTypes.Player2:
-                    player2 = true;
-                    break;
-                case PlayerTypes.AnyUser:
-                    if (_gameData.Player.UserControlled) player1 = true;
-                    if (_gameData.Opponent.UserControlled) player2 = true;
-                    break;
-                case PlayerTypes.AnyAi:
-                    if (!_gameData.Player.UserControlled) player1 = true;
-                    if (!_gameData.Opponent.UserControlled) player2 = true;
-                    break;
-            }
-            if (player1) {
+            if (_gameData.PlayerActive(_whichPlayer)) {
                 _gameData.Player.OnTurnStart += ShowObject;
                 _gameData.Player.OnTurnEnd += HideObject;
             }
-            if (player2) {
+            if (_gameData.OpponentActive(_whichPlayer)) {
                 _gameData.Opponent.OnTurnStart += ShowObject;
                 _gameData.Opponent.OnTurnEnd += HideObject;
             }

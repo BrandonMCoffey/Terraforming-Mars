@@ -40,6 +40,7 @@ namespace Scripts.Data
         [Header("Debug Menu")]
         [SerializeField] private bool _debug;
 
+        public bool CurrentTurn { get; private set; }
         public int ActionsPerTurn => _corporation.ActionsPerTurn;
         public AiDifficultyLevels AiLevel => _aiLevel;
         public bool UserControlled => _playerControlled;
@@ -67,7 +68,6 @@ namespace Scripts.Data
         public event Action OnTurnStart;
         public event Action OnTurnEnd;
         public event Action OnHonorChanged;
-        public event Action<int> OnCreditsChanged;
         public event Action OnResourcesChanged;
         public event Action OnPatentsChanged;
 
@@ -97,11 +97,13 @@ namespace Scripts.Data
 
         public void StartTurn()
         {
+            CurrentTurn = true;
             OnTurnStart?.Invoke();
         }
 
         public void EndTurn()
         {
+            CurrentTurn = false;
             OnTurnEnd?.Invoke();
         }
 
@@ -150,7 +152,6 @@ namespace Scripts.Data
             switch (type) {
                 case ResourceType.Credits:
                     _credits = amount;
-                    OnCreditsChanged?.Invoke(_credits);
                     break;
                 case ResourceType.Iron:
                     _iron = amount;

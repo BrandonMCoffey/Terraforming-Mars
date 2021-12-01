@@ -10,6 +10,8 @@ namespace Scripts.Data
         [SerializeField] private PlayerData _opponent;
         [SerializeField] private PlanetType _planet = PlanetType.Mars;
 
+        public PlayerData CurrentPlayer => Player.CurrentTurn ? Player : Opponent;
+
         public PlayerData Player
         {
             get => _player;
@@ -26,6 +28,30 @@ namespace Scripts.Data
         {
             get => _planet;
             set => _planet = value;
+        }
+
+        public bool PlayerActive(PlayerTypes type)
+        {
+            return type switch
+            {
+                PlayerTypes.Player1 => true,
+                PlayerTypes.Player2 => false,
+                PlayerTypes.AnyUser => Player.UserControlled,
+                PlayerTypes.AnyAi   => !Player.UserControlled,
+                _                   => false
+            };
+        }
+
+        public bool OpponentActive(PlayerTypes type)
+        {
+            return type switch
+            {
+                PlayerTypes.Player1 => false,
+                PlayerTypes.Player2 => true,
+                PlayerTypes.AnyUser => Opponent.UserControlled,
+                PlayerTypes.AnyAi   => !Opponent.UserControlled,
+                _                   => false
+            };
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Scripts.UI
 {
     public class ActionContentFiller : MonoBehaviour
     {
-        [SerializeField] private PlayerData _playerData = null;
+        [SerializeField] private GameData _gameData = null;
         [SerializeField] private RectTransform _parent = null;
         [SerializeField] private TextMeshProUGUI _headerText = null;
         [SerializeField] private List<ProjectContent> _standardProjects = new List<ProjectContent>();
@@ -24,13 +24,19 @@ namespace Scripts.UI
         private void Start()
         {
             PlayerTurnState.PlayerCanAct += UpdatePlayer;
-            _playerData.OnPatentsChanged += UpdateActions;
+            _gameData.Player.OnPatentsChanged += UpdateActions;
+            _gameData.Player.OnTurnStart += UpdateActions;
+            _gameData.Opponent.OnPatentsChanged += UpdateActions;
+            _gameData.Opponent.OnTurnStart += UpdateActions;
         }
 
         private void OnDestroy()
         {
             PlayerTurnState.PlayerCanAct -= UpdatePlayer;
-            _playerData.OnPatentsChanged -= UpdateActions;
+            _gameData.Player.OnPatentsChanged -= UpdateActions;
+            _gameData.Player.OnTurnStart -= UpdateActions;
+            _gameData.Opponent.OnPatentsChanged -= UpdateActions;
+            _gameData.Opponent.OnTurnStart -= UpdateActions;
         }
 
         public void Fill(int index)
@@ -57,7 +63,6 @@ namespace Scripts.UI
 
         public void Fill(ActionCategory category)
         {
-            if (_activeCategory == category) return;
             if (_debug) Debug.Log("Currently Selected: " + category, gameObject);
             _activeCategory = category;
             foreach (var content in _activeContent) {
@@ -73,21 +78,21 @@ namespace Scripts.UI
                     }
                     break;
                 case ActionCategory.OwnedPatents:
-                    foreach (var patent in _playerData.OwnedPatents) {
+                    foreach (var patent in _gameData.CurrentPlayer.OwnedPatents) {
                         var newContent = Instantiate(_patentBasePrefab, _parent);
                         newContent.Fill(patent);
                         _activeContent.Add(newContent.gameObject);
                     }
                     break;
                 case ActionCategory.ActivePatents:
-                    foreach (var patent in _playerData.ActivePatents) {
+                    foreach (var patent in _gameData.CurrentPlayer.ActivePatents) {
                         var newContent = Instantiate(_patentBasePrefab, _parent);
                         newContent.Fill(patent);
                         _activeContent.Add(newContent.gameObject);
                     }
                     break;
                 case ActionCategory.CompletedPatents:
-                    foreach (var patent in _playerData.CompletedPatents) {
+                    foreach (var patent in _gameData.CurrentPlayer.CompletedPatents) {
                         var newContent = Instantiate(_patentBasePrefab, _parent);
                         newContent.Fill(patent);
                         _activeContent.Add(newContent.gameObject);
@@ -106,7 +111,6 @@ namespace Scripts.UI
         {
             var category = _activeCategory;
             if (category == null) return;
-            _activeCategory = null;
             Fill(category.Value);
         }
     }
