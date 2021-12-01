@@ -1,8 +1,8 @@
-using System;
 using Scripts.Data;
 using Scripts.Enums;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Scripts.UI.MainMenu
 {
@@ -19,11 +19,17 @@ namespace Scripts.UI.MainMenu
         [SerializeField] private PlayerData _aiEasyPlayer = null;
         [SerializeField] private PlayerData _aiMediumPlayer = null;
         [SerializeField] private PlayerData _aiHardPlayer = null;
+        [SerializeField] private Image _aiColor = null;
         [Header("Hotseat Players")]
         [SerializeField] private PlayerData _hotseatPlayer1 = null;
         [SerializeField] private PlayerData _hotseatPlayer2 = null;
 
         private AiDifficultyLevels _aiDifficulty = AiDifficultyLevels.Easy;
+
+        private void Start()
+        {
+            UpdateAiColor();
+        }
 
         private void StartGame()
         {
@@ -54,6 +60,7 @@ namespace Scripts.UI.MainMenu
                 2 => AiDifficultyLevels.Hard,
                 _ => _aiDifficulty
             };
+            UpdateAiColor();
             Log("AI Difficulty set to " + _aiDifficulty);
         }
 
@@ -68,6 +75,8 @@ namespace Scripts.UI.MainMenu
                 AiDifficultyLevels.Hard   => _aiHardPlayer,
                 _                         => _aiEasyPlayer
             };
+            _gameData.Opponent.PlayerName = _gameData.Opponent.DefaultName;
+            _gameData.Opponent.PlayerColor = _gameData.Opponent.DefaultColor;
             StartGame();
         }
 
@@ -82,6 +91,17 @@ namespace Scripts.UI.MainMenu
         private void Log(string message)
         {
             if (_debug) Debug.Log(message, gameObject);
+        }
+
+        private void UpdateAiColor()
+        {
+            _aiColor.color = _aiDifficulty switch
+            {
+                AiDifficultyLevels.Easy   => _aiEasyPlayer.DefaultColor,
+                AiDifficultyLevels.Medium => _aiMediumPlayer.DefaultColor,
+                AiDifficultyLevels.Hard   => _aiHardPlayer.DefaultColor,
+                _                         => Color.white
+            };
         }
     }
 }

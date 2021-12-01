@@ -19,6 +19,8 @@ namespace Scripts.UI.MainMenu
         {
             _playerText.SetTextWithoutNotify(_player.DefaultName);
             _playerColor.color = _player.DefaultColor;
+            _player.PlayerName = _player.DefaultName;
+            _player.PlayerColor = _player.DefaultColor;
         }
 
         public void SetName(string playerName)

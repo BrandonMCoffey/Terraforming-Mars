@@ -11,8 +11,10 @@ namespace Scripts.Data
     [CreateAssetMenu(menuName = "TM/Player Data")]
     public class PlayerData : ScriptableObject
     {
-        [Header("Basic Player Info")]
+        [Header("Player Control")]
         [SerializeField] private bool _playerControlled = true;
+        [SerializeField] private AiDifficultyLevels _aiLevel = AiDifficultyLevels.None;
+        [Header("Basic Player Info")]
         [SerializeField] private string _defaultPlayerName = "Player";
         [SerializeField] private Color _defaultPlayerColor = Color.cyan;
         [SerializeField] [ReadOnly] private string _playerName = "Player";
@@ -39,6 +41,7 @@ namespace Scripts.Data
         [SerializeField] private bool _debug;
 
         public int ActionsPerTurn => _corporation.ActionsPerTurn;
+        public AiDifficultyLevels AiLevel => _aiLevel;
         public bool UserControlled => _playerControlled;
         public string DefaultName => _defaultPlayerName;
 

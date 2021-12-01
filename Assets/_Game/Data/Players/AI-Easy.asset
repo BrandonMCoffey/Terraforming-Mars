@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: AI-Easy
   m_EditorClassIdentifier: 
   _playerControlled: 0
-  _corporation: {fileID: 11400000, guid: a297451beb2feb7479411c120b962769, type: 2}
+  _aiLevel: 0
   _defaultPlayerName: Easy AI
-  _defaultPlayerColor: {r: 0, g: 1, b: 1, a: 1}
+  _defaultPlayerColor: {r: 0.8301887, g: 0.81521577, b: 0.37201852, a: 1}
   _playerName: Easy AI
   _playerColor: {r: 0, g: 1, b: 1, a: 1}
+  _corporation: {fileID: 11400000, guid: a297451beb2feb7479411c120b962769, type: 2}
   _honor: 0
   _credits: 100
   _iron: 5

@@ -13,20 +13,20 @@ MonoBehaviour:
   m_Name: HotseatPlayer2
   m_EditorClassIdentifier: 
   _playerControlled: 1
-  _corporation: {fileID: 11400000, guid: a297451beb2feb7479411c120b962769, type: 2}
+  _aiLevel: 0
   _defaultPlayerName: Player 2
-  _defaultPlayerColor: {r: 0, g: 1, b: 1, a: 1}
+  _defaultPlayerColor: {r: 0.2880918, g: 0.735849, b: 0.5045898, a: 1}
   _playerName: Player 2
-  _playerColor: {r: 0, g: 1, b: 1, a: 1}
+  _playerColor: {r: 0.23820755, g: 0.9528302, b: 0.5846415, a: 1}
+  _corporation: {fileID: 11400000, guid: a297451beb2feb7479411c120b962769, type: 2}
   _honor: 0
-  _credits: 34
+  _credits: 100
   _iron: 5
   _titanium: 0
   _plants: 10
   _energy: 5
   _heat: 0
-  _ownedPatents:
-  - {fileID: -751816673415662835, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
+  _ownedPatents: []
   _activePatents: []
   _completedPatents: []
   _debug: 0

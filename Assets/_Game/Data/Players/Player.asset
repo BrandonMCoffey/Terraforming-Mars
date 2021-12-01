@@ -13,11 +13,14 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   _playerControlled: 1
+  _aiLevel: 0
+  _defaultPlayerName: Player
+  _defaultPlayerColor: {r: 0.4452207, g: 0.8207547, b: 0.80159616, a: 1}
   _playerName: Player
+  _playerColor: {r: 0.32484868, g: 0.9055443, b: 0.9433962, a: 1}
   _corporation: {fileID: 11400000, guid: a297451beb2feb7479411c120b962769, type: 2}
-  _color: {r: 1, g: 0.86274517, b: 0, a: 1}
   _honor: 0
-  _credits: 34
+  _credits: 100
   _iron: 5
   _titanium: 0
   _plants: 10
@@ -25,6 +28,7 @@ MonoBehaviour:
   _heat: 0
   _ownedPatents:
   - {fileID: -751816673415662835, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
+  - {fileID: -3659288355907402352, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
   _activePatents: []
   _completedPatents: []
   _debug: 0
