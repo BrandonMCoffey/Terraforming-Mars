@@ -33,6 +33,26 @@ namespace Scripts.UI
             }
         }
 
+        public void OpenResourceWindow()
+        {
+            OpenWindow(MWOption.Resources);
+        }
+
+        public void OpenResearchWindow()
+        {
+            OpenWindow(MWOption.Research);
+        }
+
+        public void OpenAwardsWindow()
+        {
+            OpenWindow(MWOption.Awards);
+        }
+
+        public void OpenMilestonesWindow()
+        {
+            OpenWindow(MWOption.Milestones);
+        }
+
         [Button]
         public ModalWindow OpenWindow(MWOption option)
         {

@@ -4,7 +4,8 @@ namespace Scripts.Enums
     {
         Null,
         Resources,
-        PatentDetails,
-        Research
+        Research,
+        Awards,
+        Milestones
     }
 }

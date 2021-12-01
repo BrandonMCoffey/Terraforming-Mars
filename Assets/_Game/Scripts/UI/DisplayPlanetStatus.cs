@@ -26,6 +26,7 @@ namespace Scripts.UI
         {
             if (_planetData == null || _slider == null) return;
             _slider.value = _planetData.GetLevel0To1(_statusType);
+            _slider.onValueChanged?.Invoke(_slider.value);
         }
     }
 }
