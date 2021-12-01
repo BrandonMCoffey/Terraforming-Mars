@@ -1,6 +1,7 @@
 using System;
 using Scripts.Data;
 using Scripts.Mechanics;
+using Scripts.UI;
 using UnityEngine;
 
 namespace Scripts.States
@@ -24,6 +25,7 @@ namespace Scripts.States
             SetPlayerCanAct(true);
             _standardProjects.OnPerformAction += UpdateActionsPerformed;
             StateMachine.Input.Confirm += OnEndTurn;
+            StateMachine.Input.Cancel += OnPause;
             _playerData.StartTurn();
         }
 
@@ -33,9 +35,10 @@ namespace Scripts.States
 
         public override void Exit()
         {
-            _canEndTurnTime = Time.time + 1000f; // Weird fix
             SetPlayerCanAct(false);
             _standardProjects.OnPerformAction -= UpdateActionsPerformed;
+            StateMachine.Input.Confirm -= OnEndTurn;
+            StateMachine.Input.Cancel -= OnPause;
             _playerData.EndTurn();
         }
 
@@ -64,6 +67,11 @@ namespace Scripts.States
         {
             if (Time.time < _canEndTurnTime) return;
             StateMachine.NextTurn();
+        }
+
+        private static void OnPause()
+        {
+            PauseMenuController.Instance.Pause();
         }
     }
 }

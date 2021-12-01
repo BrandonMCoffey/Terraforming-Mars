@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Input;
 using Scripts.Data;
 using UnityEngine;
+using UserInput;
 using Utility.Inspector;
 using Utility.StateMachine;
 

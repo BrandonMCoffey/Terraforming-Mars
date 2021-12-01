@@ -307,7 +307,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6506758914880546898}
         m_TargetAssemblyTypeName: Scripts.UI.MaskSlider, Assembly-CSharp
         m_MethodName: OnSliderChange
         m_Mode: 0

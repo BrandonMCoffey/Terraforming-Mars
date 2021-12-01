@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-namespace Input
+namespace UserInput
 {
     public class InputController : MonoBehaviour
     {

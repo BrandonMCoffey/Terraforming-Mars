@@ -1,9 +1,8 @@
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
-using Utility.Inspector;
 
-namespace GridTool.DataScripts.Editor
+namespace Utility.Inspector.Editor
 {
     [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
     public class ReadOnlyAttributeEditor : PropertyDrawer
