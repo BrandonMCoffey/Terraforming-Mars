@@ -15,7 +15,6 @@ namespace Utility.Audio.Systems.Events
         public void Play()
         {
             if (_musicClip == null) return;
-
             if (_fadeTime <= 0) {
                 SoundManager.Instance.PlayMusic(_musicClip);
             } else {
@@ -25,6 +24,11 @@ namespace Utility.Audio.Systems.Events
                     SoundManager.Instance.PlayMusicWithCrossFade(_musicClip, _fadeTime);
                 }
             }
+        }
+
+        public void Play(AudioSourceController source)
+        {
+            _musicClip?.Play(source);
         }
     }
 }

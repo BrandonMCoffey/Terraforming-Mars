@@ -27,11 +27,14 @@ MonoBehaviour:
   _animal: {fileID: 8608433852809525068, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
   _bacteriaCircle: {fileID: 1376202003755801037, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
   _animalCircle: {fileID: 5205714748558221139, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
-  _resourceLevelUp: {fileID: -5124542306328803544, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _resourceLevelUp: {fileID: 21300000, guid: 93a54e7940a4a554aac9e83cec16bf7a, type: 3}
   _ocean: {fileID: -462574813355369587, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
   _forest: {fileID: -2003967379089065333, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
   _city: {fileID: -4897373708055109513, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
   _nuke: {fileID: -6485888261790410151, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
+  _naturalPreserve: {fileID: 21300000, guid: 13b025b9b5a04634388b51fab2b6a48a, type: 3}
+  _miningArea: {fileID: 21300000, guid: db30d7a66930bdf4bb4a1d3b12c444b2, type: 3}
+  _commercialDistrict: {fileID: 21300000, guid: c82c38b5661fc7c4ba7d7df72804321f, type: 3}
   _atomicScience: {fileID: 8698082325631779861, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
   _earth: {fileID: 1992016085890205707, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}
   _mars: {fileID: -8633332878866344007, guid: 18f8291e616d4524b92a868e1d575e05, type: 3}

@@ -21,6 +21,8 @@ namespace Scripts.UI.Displays
             _levelText.text = "Level " + resourceLevel;
             if (_resourceType == ResourceType.Credits) {
                 resourceLevel += player.Honor;
+            } else if (_resourceType == ResourceType.Heat) {
+                resourceLevel += player.GetResource(ResourceType.Energy);
             }
             _amountText.text = (resourceLevel < 0 ? "-" : "+") + resourceLevel;
         }

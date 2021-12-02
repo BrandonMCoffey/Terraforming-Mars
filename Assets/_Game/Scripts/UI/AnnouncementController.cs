@@ -1,7 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Scripts.Data;
+using Scripts.Enums;
 using Scripts.States;
+using Scripts.UI.Awards;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +15,8 @@ namespace Scripts.UI
 {
     public class AnnouncementController : MonoBehaviour
     {
+        public static AnnouncementController Instance;
+
         [Header("Settings")]
         [SerializeField] private float _waitTime = 0.25f;
         [SerializeField] private AnimationCurve _popupTiming = AnimationCurve.Linear(0, 0, 1, 1);
@@ -26,6 +32,7 @@ namespace Scripts.UI
         [SerializeField] private float _bannerHeight = 125;
         [SerializeField] private TextMeshProUGUI _bannerTitle;
         [SerializeField] private TextMeshProUGUI _bannerSubtitle;
+        [SerializeField] private GameObject _bannerQuitGameButton;
 
         [Header("Production and Research")]
         [SerializeField] private RectMask2D _productionMask;
@@ -38,44 +45,189 @@ namespace Scripts.UI
         private Coroutine _currentRoutine;
         private bool _hold;
         private bool _player1Research;
+        private List<AwardType> _fundedAwards;
+        private bool _gameOver;
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         private void Start()
         {
             _raycastBlock.SetActive(false);
             _bannerMask.gameObject.SetActive(false);
             _productionMask.gameObject.SetActive(false);
+            _fundedAwards = new List<AwardType>();
         }
 
         private void OnEnable()
         {
             if (_gameData == null) return;
+            AwardController.OnFundAward += FundAward;
             _gameData.Player.OnTurnStart += AnnouncePlayer1;
             _gameData.Opponent.OnTurnStart += AnnouncePlayer2;
             ProductionState.EnterProduction += AnnounceProduction;
             PlayerResearchState.EnterResearch += AnnouncePlayerResearch;
             OpponentResearchState.EnterResearch += AnnounceOpponentResearch;
+            _gameData.Planet.OnPlanetTerraformed += CheckGameOver;
         }
 
         private void OnDisable()
         {
             if (_gameData == null) return;
+            AwardController.OnFundAward -= FundAward;
             _gameData.Player.OnTurnStart -= AnnouncePlayer1;
             _gameData.Opponent.OnTurnStart -= AnnouncePlayer2;
             ProductionState.EnterProduction -= AnnounceProduction;
             PlayerResearchState.EnterResearch -= AnnouncePlayerResearch;
             OpponentResearchState.EnterResearch -= AnnounceOpponentResearch;
+            _gameData.Planet.OnPlanetTerraformed -= CheckGameOver;
         }
+
+        #region Game Over
+
+        private void FundAward(AwardType type)
+        {
+            _fundedAwards.Add(type);
+        }
+
+        private void CheckGameOver(PlanetStatusType type)
+        {
+            if (_gameData.Planet.PlanetTerraformed) {
+                GameOver();
+            } else {
+                string title = "After " + _gameData.Generation + " Generations, " + _gameData.Planet.PlanetName + " is sustainable by " + type switch {
+                    PlanetStatusType.Oxygen        => "Oxygen Level",
+                    PlanetStatusType.Heat          => "Temperature",
+                    PlanetStatusType.Water         => "Water Level",
+                    PlanetStatusType.MagneticField => "Its Magnetic Field",
+                    _                              => ""
+                };
+                _announcements.Enqueue(AnnounceRoutine(title, "", _bannerMask, _bannerHeight, _waitTime, _holdTime));
+                CheckRoutine();
+            }
+        }
+
+        private void GameOver()
+        {
+            _gameOver = true;
+            _raycastBlock.SetActive(true);
+            _announcements.Enqueue(AnnounceRoutine("After " + _gameData.Generation + " Generations, " + _gameData.Planet.PlanetName + " has been successfully Terraformed", "", _bannerMask, _bannerHeight, _waitTime, _holdTime));
+
+            // Display Bonus From Cities
+            int neighboringForests = _gameData.Player.OwnedCities.Sum(city => city.GetNeighbors(TileType.Forest));
+            _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " gets +" + neighboringForests + " Honor", "One for each forest next to their owned cities.", _bannerMask, _bannerHeight, _waitTime, _holdTime));
+
+            // Display Milestones
+            foreach (var milestone in _gameData.Player.Milestones) {
+                _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " is the " + milestone, GetDescription(milestone), _bannerMask, _bannerHeight, _waitTime, _holdTime, false, null, _gameData.Player));
+            }
+            foreach (var milestone in _gameData.Opponent.Milestones) {
+                _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " is the " + milestone, GetDescription(milestone), _bannerMask, _bannerHeight, _waitTime, _holdTime, false, null, _gameData.Opponent));
+            }
+            // Display Funded Awards (And winners)
+            foreach (var award in _fundedAwards) {
+                AwardWinner(award);
+            }
+            CheckRoutine();
+        }
+
+        public static string GetDescription(MilestoneType type)
+        {
+            return type switch {
+                MilestoneType.Terraformer => "Claimed for being a quick rising star with 35 Honor early on. +5 Honor",
+                MilestoneType.Mayor       => "Claimed for focusing on building cities. +5 Honor",
+                MilestoneType.Gardener    => "Claimed for focusing on forests and plants. +5 Honor",
+                MilestoneType.Builder     => "Claimed for building as much as possible. +5 Honor",
+                MilestoneType.Planner     => "Claimed for signing on to too many patents. +5 Honor",
+                _                         => ""
+            };
+        }
+
+        public static string GetDescription(AwardType type)
+        {
+            return type switch {
+                AwardType.Landlord   => "Awarded for owning the most tiles. +5 Honor",
+                AwardType.Banker     => "Awarded for having the highest currency production. +5 Honor",
+                AwardType.Scientist  => "Awarded for having the most scientific credit. +5 Honor",
+                AwardType.Thermalist => "Awarded for owning the most heat tokens. +5 Honor",
+                AwardType.Miner      => "Awarded for owning the most iron and steel tokens. +5 Honor",
+                _                    => ""
+            };
+        }
+
+        private void AwardWinner(AwardType type)
+        {
+            int player;
+            int opponent;
+            switch (type) {
+                case AwardType.Landlord:
+                    player = _gameData.Player.OwnedTiles;
+                    opponent = _gameData.Opponent.OwnedTiles;
+                    if (player >= opponent) {
+                        _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, _waitTime, _holdTime, false, null, _gameData.Player));
+                    }
+                    if (opponent >= player) {
+                        _announcements.Enqueue(AnnounceRoutine(_gameData.Opponent.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, _waitTime, _holdTime, false, null, _gameData.Opponent));
+                    }
+                    break;
+                case AwardType.Banker:
+                    player = _gameData.Player.GetResource(ResourceType.Credits, true);
+                    opponent = _gameData.Opponent.GetResource(ResourceType.Credits, true);
+                    if (player >= opponent) {
+                        _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, _waitTime, _holdTime, false, null, _gameData.Player));
+                    }
+                    if (opponent >= player) {
+                        _announcements.Enqueue(AnnounceRoutine(_gameData.Opponent.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, _waitTime, _holdTime, false, null, _gameData.Opponent));
+                    }
+                    break;
+                case AwardType.Scientist:
+                    break;
+                case AwardType.Thermalist:
+                    player = _gameData.Player.GetResource(ResourceType.Heat);
+                    opponent = _gameData.Opponent.GetResource(ResourceType.Heat);
+                    if (player >= opponent) {
+                        _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, _waitTime, _holdTime, false, null, _gameData.Player));
+                    }
+                    if (opponent >= player) {
+                        _announcements.Enqueue(AnnounceRoutine(_gameData.Opponent.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, _waitTime, _holdTime, false, null, _gameData.Opponent));
+                    }
+                    break;
+                case AwardType.Miner:
+                    player = _gameData.Player.GetResource(ResourceType.Iron) + _gameData.Player.GetResource(ResourceType.Titanium);
+                    opponent = _gameData.Opponent.GetResource(ResourceType.Iron) + _gameData.Opponent.GetResource(ResourceType.Titanium);
+                    if (player >= opponent) {
+                        _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, _waitTime, _holdTime, false, null, _gameData.Player));
+                    }
+                    if (opponent >= player) {
+                        _announcements.Enqueue(AnnounceRoutine(_gameData.Opponent.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, _waitTime, _holdTime, false, null, _gameData.Opponent));
+                    }
+                    break;
+            }
+            _announcements.Enqueue(AnnounceRoutine("", "", _bannerMask, _bannerHeight, _waitTime, _holdTime, true, null, null, true));
+
+            CheckRoutine();
+        }
+
+        #endregion
 
         #region Banner Announcements
 
         private void AnnouncePlayer1()
         {
-            Announce(_gameData.Player.PlayerName + "'s Turn!", "");
+            Announce(_gameData.Player.PlayerName + "'s Turn!", MilestoneNotification(_gameData.Player));
         }
 
         private void AnnouncePlayer2()
         {
             Announce(_gameData.Opponent.PlayerName + "'s Turn!", "");
+        }
+
+        private static string MilestoneNotification(PlayerData player)
+        {
+            if (!player.UserControlled) return "";
+            return MilestoneController.CanClaimAnyMilestone(player) ? "New Milestone Available, Ready to be Claimed." : "";
         }
 
         [Button(Spacing = 10)]
@@ -86,9 +238,8 @@ namespace Scripts.UI
 
         public void Announce(string title, string subtitle, float waitTime, float holdTime)
         {
-            _bannerTitle.text = title;
-            _bannerSubtitle.text = subtitle;
-            _announcements.Enqueue(AnnounceRoutine(_bannerMask, _bannerHeight, waitTime, holdTime, false));
+            if (_gameOver) return;
+            _announcements.Enqueue(AnnounceRoutine(title, subtitle, _bannerMask, _bannerHeight, waitTime, holdTime, false));
             CheckRoutine();
         }
 
@@ -98,24 +249,33 @@ namespace Scripts.UI
 
         private void AnnounceProduction()
         {
-            _bannerTitle.text = "Generation Over";
-            _bannerSubtitle.text = "Preparing for production and research until the next generation.";
-            _announcements.Enqueue(AnnounceRoutine(_bannerMask, _bannerHeight, _waitTime, _holdTime, false));
-            _announcements.Enqueue(AnnounceRoutine(_productionMask, _productionHeight, _waitTime, _holdTime, true));
+            if (_gameOver) return;
+            _announcements.Enqueue(AnnounceRoutine("Generation Over", "Preparing for production and research until the next generation.", _bannerMask, _bannerHeight, _waitTime, _holdTime, false));
+            _announcements.Enqueue(AnnounceRoutine("", "", _productionMask, _productionHeight, _waitTime, _holdTime, true));
             CheckRoutine();
         }
 
         private void AnnouncePlayerResearch()
         {
+            if (_gameOver) return;
             _player1Research = true;
-            _announcements.Enqueue(AnnounceRoutine(_researchMask, _researchHeight, _waitTime, _holdTime, true, _gameData.Player));
+            if (!_gameData.Player.UserControlled) {
+                PlayerResearchState.FinishResearch();
+                return;
+            }
+            _announcements.Enqueue(AnnounceRoutine("", "", _researchMask, _researchHeight, _waitTime, _holdTime, true, _gameData.Player));
             CheckRoutine();
         }
 
         private void AnnounceOpponentResearch()
         {
+            if (_gameOver) return;
             _player1Research = false;
-            _announcements.Enqueue(AnnounceRoutine(_researchMask, _researchHeight, _waitTime, _holdTime, true, _gameData.Opponent));
+            if (!_gameData.Opponent.UserControlled) {
+                OpponentResearchState.FinishResearch();
+                return;
+            }
+            _announcements.Enqueue(AnnounceRoutine("", "", _researchMask, _researchHeight, _waitTime, _holdTime, true, _gameData.Opponent));
             CheckRoutine();
         }
 
@@ -145,13 +305,34 @@ namespace Scripts.UI
             _currentRoutine = StartCoroutine(_announcements.Dequeue());
         }
 
-        private IEnumerator AnnounceRoutine(RectMask2D mask, float height, float wait, float hold, bool longHold, PlayerData researchData = null)
+        private IEnumerator AnnounceRoutine(string title, string subtitle, RectMask2D mask, float height, float wait, float hold, bool longHold = false, PlayerData researchData = null, PlayerData honorBonus = null, bool winnerCheck = false, int honorBonusAmount = 5)
         {
-            _raycastBlock.SetActive(true);
             _bannerMask.gameObject.SetActive(false);
             _productionMask.gameObject.SetActive(false);
             _researchMask.gameObject.SetActive(false);
             mask.gameObject.SetActive(true);
+            if (winnerCheck) {
+                int playerHonor = _gameData.Player.Honor;
+                int opponentHonor = _gameData.Opponent.Honor;
+                if (playerHonor == opponentHonor) {
+                    // TIE
+                    _bannerTitle.text = "It's a Tie! Good Game!";
+                } else if (playerHonor > opponentHonor) {
+                    // PLAYER WINS
+                    _bannerTitle.text = _gameData.Player.PlayerName + " Wins the Game!";
+                } else {
+                    // OPPONENT WINS
+                    _bannerTitle.text = _gameData.Opponent.PlayerName + " Wins the Game!";
+                }
+                _bannerSubtitle.text = "";
+                _bannerQuitGameButton.SetActive(true);
+            } else {
+                _bannerTitle.text = title;
+                _bannerSubtitle.text = subtitle;
+            }
+            if (!_gameOver) {
+                _raycastBlock.SetActive(true);
+            }
             SetBannerHeight(mask, height);
             for (float t = 0; t < wait; t += Time.deltaTime) {
                 yield return null;
@@ -177,6 +358,9 @@ namespace Scripts.UI
                     yield return null;
                 }
             }
+            if (honorBonus != null) {
+                honorBonus.AddHonor(honorBonusAmount);
+            }
             start = _closeTiming.keys[0].time;
             end = _closeTiming.keys[_closeTiming.length - 1].time;
             for (float t = start; t < end; t += Time.deltaTime) {
@@ -186,7 +370,9 @@ namespace Scripts.UI
             }
             SetBannerHeight(mask, height);
             mask.gameObject.SetActive(false);
-            _raycastBlock.SetActive(false);
+            if (!_gameOver) {
+                _raycastBlock.SetActive(false);
+            }
             _currentRoutine = null;
             CheckRoutine();
         }

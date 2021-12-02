@@ -18,17 +18,27 @@ MonoBehaviour:
   _defaultPlayerColor: {r: 0.52454036, g: 0.50462794, b: 0.7924528, a: 1}
   _playerName: Player 1
   _playerColor: {r: 0.3997873, g: 0.35635456, b: 0.9811321, a: 1}
+  _sounds: {fileID: 11400000, guid: 3f7ee09101aa92f41ac5872191f42a75, type: 2}
   _corporation: {fileID: 11400000, guid: a297451beb2feb7479411c120b962769, type: 2}
   _honor: 0
-  _credits: 100
-  _iron: 5
-  _titanium: 0
-  _plants: 10
-  _energy: 5
-  _heat: 0
-  _ownedPatents:
-  - {fileID: -751816673415662835, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
-  - {fileID: -3659288355907402352, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
+  _credits:
+    Amount: 20
+    Level: 1
+  _iron:
+    Amount: 5
+    Level: 1
+  _titanium:
+    Amount: 0
+    Level: 1
+  _plants:
+    Amount: 10
+    Level: 1
+  _energy:
+    Amount: 5
+    Level: 1
+  _heat:
+    Amount: 0
+    Level: 1
+  _ownedPatents: []
   _activePatents: []
   _completedPatents: []
-  _debug: 0

@@ -75,6 +75,7 @@ namespace Utility.Audio.Systems.Controllers
         public void PlayMusic(SfxReference track)
         {
             if (track.NullTest()) return;
+            Debug.Log("3");
             _musicSourceController.PlayMusic(track);
         }
 

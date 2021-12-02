@@ -381,13 +381,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waterTile: 0
   _icons: {fileID: 11400000, guid: 16a858eecb4d2cf4fb3c8516d3e2f177, type: 2}
+  _sounds: {fileID: 11400000, guid: 3f7ee09101aa92f41ac5872191f42a75, type: 2}
   _tileClickable: {fileID: 3220847248338079939}
   _tileImage: {fileID: 114347000659544491}
   _impactImage: {fileID: 7255647420739782116}
   _ownerImage: {fileID: 511226753349915573}
   _hoverImage: {fileID: 1397437939062879865}
   _waterTileImage: {fileID: 5010245856938708598}
-  _bonusHoverVisual: {fileID: 5788857649156396580}
+  _bonusHoverObj: {fileID: 5788857649156396580}
+  _bonusHoverVisual: {fileID: 8367730444408655476}
   _neighbors: []
 --- !u!1 &5010245856938708598
 GameObject:

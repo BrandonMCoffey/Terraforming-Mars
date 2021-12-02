@@ -10,14 +10,27 @@ namespace Scripts.UI.Displays
         [SerializeField] private bool _player1;
         [SerializeField] private TextMeshProUGUI _text;
 
-        private void Start()
+        private void OnEnable()
         {
-            if (_gameData == null || _text == null) return;
             if (_player1) {
                 _gameData.Player.OnHonorChanged += UpdateDisplay;
             } else {
                 _gameData.Opponent.OnHonorChanged += UpdateDisplay;
             }
+        }
+
+        private void OnDisable()
+        {
+            if (_player1) {
+                _gameData.Player.OnHonorChanged -= UpdateDisplay;
+            } else {
+                _gameData.Opponent.OnHonorChanged -= UpdateDisplay;
+            }
+        }
+
+        private void Start()
+        {
+            UpdateDisplay();
         }
 
         private void UpdateDisplay()

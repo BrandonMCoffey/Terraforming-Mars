@@ -110,7 +110,7 @@ namespace Utility.Audio.Systems.Base
             string second = "Volume: " + Volume.ToString("F2") + ". Pitch: " + Pitch.ToString("F2") + ". ";
             string third = (SpatialBlend == 0 ? "2D. " : "3D at " + SpatialBlend.ToString("F2") + ". ");
             string fourth = (Position != Vector3.zero ? "Position: " + Position : "") + (Parent != null ? "Parent: " + Parent : "");
-            Debug.Log(first + second + third + fourth);
+            //Debug.Log(first + second + third + fourth);
         }
     }
 }

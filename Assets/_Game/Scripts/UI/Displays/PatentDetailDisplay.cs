@@ -12,6 +12,7 @@ namespace Scripts.UI.Displays
         [SerializeField] private TextMeshProUGUI _patentCost;
         [SerializeField] private TextMeshProUGUI _patentRequirements;
         [SerializeField] private TextMeshProUGUI _patentEffects;
+        [SerializeField] private TextMeshProUGUI _patentHonor;
         [SerializeField] private GameObject _sellPatentButton;
         [SerializeField] private Button _activatePatentButton;
 
@@ -25,6 +26,9 @@ namespace Scripts.UI.Displays
 
             _patentRequirements.text = patent.GetConstraintsReadable();
             _patentEffects.text = patent.GetEffectsReadable();
+
+            _patentHonor.gameObject.SetActive(patent.Honor > 0);
+            _patentHonor.text = "Gain " + patent.Honor + " Honor";
 
             if (!sell) {
                 _activatePatentButton.interactable = patent.CanActivate(_gameData);

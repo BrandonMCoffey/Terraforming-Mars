@@ -57,23 +57,6 @@ namespace Scripts.UI.Displays
             UpdateVisuals();
         }
 
-#if UNITY_EDITOR
-        private void OnValidate()
-        {
-            _titleText.text = StandardProjects.GetName(_project);
-            if (_project == StandardProjectType.SellPatents) {
-                _costText.gameObject.SetActive(false);
-                _effectText.gameObject.SetActive(true);
-                _effectText.text = "+1";
-            } else {
-                _costText.gameObject.SetActive(true);
-                _effectText.gameObject.SetActive(false);
-                _costText.text = StandardProjects.GetCostReadable(_project);
-            }
-            UpdateVisuals();
-        }
-#endif
-
         public void SetInteractable(bool active)
         {
             _active = active;
@@ -86,37 +69,48 @@ namespace Scripts.UI.Displays
             if (_project == StandardProjectType.SellPatents) {
                 _button.interactable = _active && _gameData.CurrentPlayer.HasAvailablePatents();
             } else {
-                int cost = StandardProjects.GetCost(_project);
-                _button.interactable = _active && _gameData.CurrentPlayer.HasResource(ResourceType.Credits, cost);
+                var cost = StandardProjects.GetCost(_project);
+                var costType = StandardProjects.GetCostType(_project);
+                _button.interactable = _active && _gameData.CurrentPlayer.HasResource(costType, cost);
             }
         }
 
         private void UpdateVisuals()
         {
+            _titleText.text = StandardProjects.GetName(_project);
+            _costText.gameObject.SetActive(true);
+            _costImage.gameObject.SetActive(true);
+            _costImage.sprite = _iconData.GetResource(StandardProjects.GetCostType(_project), true);
+            _effectText.gameObject.SetActive(false);
+            _costText.text = StandardProjects.GetCostReadable(_project);
             switch (_project) {
                 case StandardProjectType.SellPatents:
-                    _costImage.sprite = _iconData.GetResource(ResourceType.None);
+                    _costText.gameObject.SetActive(false);
+                    _costImage.gameObject.SetActive(false);
+                    _effectText.gameObject.SetActive(true);
+                    _effectText.text = "+1";
                     _effectImage.sprite = _iconData.GetResource(ResourceType.Credits, true);
                     break;
                 case StandardProjectType.PowerPlant:
-                    _costImage.sprite = _iconData.GetResource(ResourceType.Credits, true);
                     _effectImage.sprite = _iconData.GetResource(ResourceType.Energy);
                     break;
                 case StandardProjectType.Asteroid:
-                    _costImage.sprite = _iconData.GetResource(ResourceType.Credits, true);
                     _effectImage.sprite = _iconData.GetResource(ResourceType.Heat);
                     break;
                 case StandardProjectType.Aquifer:
-                    _costImage.sprite = _iconData.GetResource(ResourceType.Credits, true);
                     _effectImage.sprite = _iconData.GetTile(TileType.Ocean);
                     break;
                 case StandardProjectType.Greenery:
-                    _costImage.sprite = _iconData.GetResource(ResourceType.Credits, true);
                     _effectImage.sprite = _iconData.GetTile(TileType.Forest);
                     break;
                 case StandardProjectType.City:
-                    _costImage.sprite = _iconData.GetResource(ResourceType.Credits, true);
                     _effectImage.sprite = _iconData.GetTile(TileType.City);
+                    break;
+                case StandardProjectType.Plants:
+                    _effectImage.sprite = _iconData.GetTile(TileType.Forest);
+                    break;
+                case StandardProjectType.HeatResidue:
+                    _effectImage.sprite = _iconData.GetScience(ScienceType.Mars);
                     break;
             }
         }

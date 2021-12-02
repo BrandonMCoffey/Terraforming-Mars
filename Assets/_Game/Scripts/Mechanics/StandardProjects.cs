@@ -16,7 +16,7 @@ namespace Scripts.Mechanics
     {
         public static event Action<StandardProjectType> OnUseProject = delegate { };
 
-        public static int NumOfProjects = 6;
+        public static int NumOfProjects = 8;
 
         public static void InvokeProject(int index) => InvokeProject(GetProject(index));
 
@@ -29,14 +29,30 @@ namespace Scripts.Mechanics
 
         public static string GetName(StandardProjectType type)
         {
-            return type switch
-            {
+            return type switch {
                 StandardProjectType.SellPatents => "Sell Patents",
                 StandardProjectType.PowerPlant  => "Power Plant",
                 StandardProjectType.Asteroid    => "Asteroid",
                 StandardProjectType.Aquifer     => "Aquifer",
                 StandardProjectType.Greenery    => "Greenery",
                 StandardProjectType.City        => "City",
+                StandardProjectType.Plants      => "Plants",
+                StandardProjectType.HeatResidue => "Heat Residue",
+                _                               => "None"
+            };
+        }
+
+        public static string GetActionTitle(StandardProjectType type)
+        {
+            return type switch {
+                StandardProjectType.SellPatents => "Sold Patents",
+                StandardProjectType.PowerPlant  => "Activated a Power Plant",
+                StandardProjectType.Asteroid    => "Witnessed an Asteroid",
+                StandardProjectType.Aquifer     => "Built an Aquifer",
+                StandardProjectType.Greenery    => "Built a Greenery (Forest)",
+                StandardProjectType.City        => "Established a City",
+                StandardProjectType.Plants      => "Built a Greenery (Forest)",
+                StandardProjectType.HeatResidue => "Caused Global Warming",
                 _                               => "None"
             };
         }
@@ -45,17 +61,35 @@ namespace Scripts.Mechanics
 
         public static int GetCost(StandardProjectType type)
         {
-            return type switch
-            {
+            return type switch {
                 StandardProjectType.SellPatents => -1,
                 StandardProjectType.PowerPlant  => 11,
                 StandardProjectType.Asteroid    => 14,
                 StandardProjectType.Aquifer     => 18,
                 StandardProjectType.Greenery    => 23,
                 StandardProjectType.City        => 25,
+                StandardProjectType.Plants      => 8,
+                StandardProjectType.HeatResidue => 8,
                 _                               => 0
             };
         }
+
+        public static ResourceType GetCostType(int index) => GetCostType(GetProject(index));
+
+        public static ResourceType GetCostType(StandardProjectType type)
+        {
+            return type switch {
+                StandardProjectType.PowerPlant  => ResourceType.Credits,
+                StandardProjectType.Asteroid    => ResourceType.Credits,
+                StandardProjectType.Aquifer     => ResourceType.Credits,
+                StandardProjectType.Greenery    => ResourceType.Credits,
+                StandardProjectType.City        => ResourceType.Credits,
+                StandardProjectType.Plants      => ResourceType.Plant,
+                StandardProjectType.HeatResidue => ResourceType.Heat,
+                _                               => ResourceType.None
+            };
+        }
+
 
         public static string GetCostReadable(int index) => GetCostReadable(GetProject(index));
 
@@ -70,14 +104,15 @@ namespace Scripts.Mechanics
 
         public static StandardProjectType GetProject(int index)
         {
-            return index switch
-            {
+            return index switch {
                 0 => StandardProjectType.SellPatents,
                 1 => StandardProjectType.PowerPlant,
                 2 => StandardProjectType.Asteroid,
                 3 => StandardProjectType.Aquifer,
                 4 => StandardProjectType.Greenery,
                 5 => StandardProjectType.City,
+                6 => StandardProjectType.Plants,
+                7 => StandardProjectType.HeatResidue,
                 _ => throw new System.ComponentModel.InvalidEnumArgumentException()
             };
         }

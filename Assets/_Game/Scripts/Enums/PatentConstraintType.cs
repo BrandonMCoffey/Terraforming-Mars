@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Scripts.Enums
 {
     public enum PatentConstraintType
@@ -9,6 +7,7 @@ namespace Scripts.Enums
         PlanetWater,
         IronLevel,
         TitaniumLevel,
-        SciencePatents
+        SciencePatents,
+        None
     }
 }

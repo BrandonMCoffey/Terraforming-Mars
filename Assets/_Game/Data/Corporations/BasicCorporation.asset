@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: BasicCorporation
   m_EditorClassIdentifier: 
   _actionsPerTurn: 4
-  _startHonor: 0
-  _startPatents: 5
-  _startCredits: 20
+  _startHonor: 1
+  _startPatents: 4
+  _startCredits: 25
   _startIron: 5
   _startTitanium: 0
   _startPlants: 10

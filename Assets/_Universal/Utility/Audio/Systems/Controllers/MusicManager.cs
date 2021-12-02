@@ -67,6 +67,7 @@ namespace Utility.Audio.Systems.Controllers
 
         public void PlayMusic(SfxReference musicClip)
         {
+            Debug.Log("4");
             AudioSourceController activeSource = ActiveSource;
 
             activeSource.SetSourceProperties(musicClip.GetSourceProperties());

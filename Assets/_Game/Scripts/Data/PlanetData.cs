@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Scripts.Data.Structs;
 using Scripts.Enums;
 using UnityEngine;
+using Utility.Buttons;
 using Utility.Inspector;
 using Utility.Other;
 
@@ -61,13 +62,16 @@ namespace Scripts.Data
 
         public bool RequireOxygen => _requireOxygen;
         public bool RequireWater => _requireWater;
+        public PlanetStatusLevel WaterLevel => _waterLevel;
         public bool RequireHeat => _requireHeat;
         public PlanetStatusLevel HeatLevel => _heatLevel;
         public bool RequireMagneticField => _requireMagneticField;
+        public bool MagneticFieldComplete => _magneticFieldComplete;
 
         public event Action OnPlanetStatusChanged;
 
-        public event Action OnPlanetTerraformed;
+        public event Action<PlanetStatusType> OnPlanetTerraformed;
+        public bool PlanetTerraformed => _requireOxygen && !_oxygenComplete || _requireWater && !_waterComplete || _requireHeat && !_heatComplete || _requireMagneticField && !_magneticFieldComplete;
 
         #endregion
 
@@ -87,49 +91,45 @@ namespace Scripts.Data
 
         #region PlanetType Goals
 
-        public void IncreaseStatus(PlanetStatusType type)
+        [Button]
+        public bool IncreaseStatus(PlanetStatusType type)
         {
             switch (type) {
                 case PlanetStatusType.Oxygen:
-                    if (!_requireOxygen || _oxygenComplete) return;
+                    if (!_requireOxygen || _oxygenComplete) return false;
                     _oxygenStatus += _oxygenLevel.StepValue;
                     if (_oxygenStatus >= _oxygenLevel.MaxValue) {
                         _oxygenStatus = _oxygenLevel.MaxValue;
                         _oxygenComplete = true;
+                        OnPlanetTerraformed?.Invoke(PlanetStatusType.Oxygen);
                     }
                     break;
                 case PlanetStatusType.Heat:
-                    if (!_requireHeat || _heatComplete) return;
+                    if (!_requireHeat || _heatComplete) return false;
                     _heatStatus += _heatLevel.StepValue;
                     if (_heatStatus >= _heatLevel.MaxValue) {
                         _heatStatus = _heatLevel.MaxValue;
                         _heatComplete = true;
+                        OnPlanetTerraformed?.Invoke(PlanetStatusType.Heat);
                     }
                     break;
                 case PlanetStatusType.Water:
-                    if (!_requireWater || _waterComplete) return;
+                    if (!_requireWater || _waterComplete) return false;
                     _waterStatus += _waterLevel.StepValue;
                     if (_waterStatus >= _waterLevel.MaxValue) {
                         _waterStatus = _waterLevel.MaxValue;
                         _waterComplete = true;
+                        OnPlanetTerraformed?.Invoke(PlanetStatusType.Water);
                     }
                     break;
                 case PlanetStatusType.MagneticField:
-                    if (!_requireMagneticField || _magneticFieldComplete) return;
+                    if (!_requireMagneticField || _magneticFieldComplete) return false;
                     _magneticFieldComplete = true;
+                    OnPlanetTerraformed?.Invoke(PlanetStatusType.MagneticField);
                     break;
             }
             OnPlanetStatusChanged?.Invoke();
-            CheckPlanetComplete();
-        }
-
-        private void CheckPlanetComplete()
-        {
-            if (_requireOxygen && !_oxygenComplete) return;
-            if (_requireHeat && !_heatComplete) return;
-            if (_requireWater && !_waterComplete) return;
-            if (_requireMagneticField && !_magneticFieldComplete) return;
-            OnPlanetTerraformed?.Invoke();
+            return true;
         }
 
         public int GetLevel(PlanetStatusType type)

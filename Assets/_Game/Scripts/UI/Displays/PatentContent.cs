@@ -11,9 +11,10 @@ namespace Scripts.UI.Displays
         [SerializeField] private IconData _iconData;
         [SerializeField] private TextMeshProUGUI _titleText;
         [SerializeField] private TextMeshProUGUI _costText;
+        [SerializeField] private TextMeshProUGUI _honorText;
         [SerializeField] private List<Image> _images;
 
-        public bool _selling = false;
+        private bool _selling = false;
 
         private PatentData _currentPatent = null;
 
@@ -30,28 +31,24 @@ namespace Scripts.UI.Displays
             }
             int index = 0;
             foreach (var icon in icons) {
+                if (index >= 3) continue;
                 _images[index].enabled = true;
                 _images[index++].sprite = icon;
             }
             icons = patent.GetEffectSprites(_iconData);
-            if (index > 0 && icons.Count > 0) {
-                _images[index].enabled = true;
-                _images[index++].sprite = _iconData.Spacer;
-            }
+            index = 3;
             foreach (var icon in icons) {
-                if (index >= _images.Count) continue;
+                if (index >= 6) continue;
                 _images[index].enabled = true;
                 _images[index++].sprite = icon;
             }
+            _honorText.gameObject.SetActive(patent.Honor > 0);
+            _honorText.text = patent.Honor.ToString();
         }
 
         public void OnSelect()
         {
-            if (_selling) {
-                GameController.Instance.ShowPatentDetails(_currentPatent, true);
-            } else {
-                GameController.Instance.ShowPatentDetails(_currentPatent, false);
-            }
+            GameController.Instance.ShowPatentDetails(_currentPatent, _selling);
         }
     }
 }

@@ -60,11 +60,16 @@ namespace Utility.StateMachine
                 CurrentStateBase.Exit();
             }
             AddPreviousState();
+            ChangeStateFeedback();
             _currentStateBase = newStateBase;
             if (_debug) Debug.Log("<color=yellow>Enter State: </color>" + CurrentStateBase.GetType().Name);
             CurrentStateBase.Enter();
             _currentStateIsNull = false;
             InTransition = false;
+        }
+
+        protected virtual void ChangeStateFeedback()
+        {
         }
 
         private void AddPreviousState()

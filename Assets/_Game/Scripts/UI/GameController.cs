@@ -26,14 +26,11 @@ namespace Scripts.UI
         [SerializeField] private TextMeshProUGUI _actionCost;
         [SerializeField] private GameObject _actionCostObject;
         [SerializeField] private GameObject _confirmButton;
+        [SerializeField] private GameObject _cancelButton;
         [SerializeField] private Image _tileIcon;
         [SerializeField] private Image _resourceIcon;
         [Header("Patent Details Menu")]
         [SerializeField] private PatentDetailDisplay _patentDetails;
-        [Header("Game Over Screen")]
-        [SerializeField] private GameObject _gameOverMenu;
-        [SerializeField] private TextMeshProUGUI _winnerTitle;
-        [SerializeField] private TextMeshProUGUI _winnerStats;
 
         public static Action OnConfirmAction;
         public static Action OnCancelAction;
@@ -52,37 +49,20 @@ namespace Scripts.UI
         {
             _gameData.Player.OnTurnStart += ShowActions;
             _gameData.Opponent.OnTurnStart += ShowActions;
-            _planet.OnPlanetTerraformed += GameOver;
         }
 
         private void OnDisable()
         {
             _gameData.Player.OnTurnStart -= ShowActions;
             _gameData.Opponent.OnTurnStart -= ShowActions;
-            _planet.OnPlanetTerraformed -= GameOver;
         }
 
-        private void GameOver()
+        public bool IncreasePlanetStatus(PlanetStatusType type)
         {
-            _gameOverMenu.SetActive(true);
-            var player1 = _gameData.Player;
-            var player2 = _gameData.Opponent;
-            var player1Wins = player1.Honor >= player2.Honor;
-            if (player1Wins) {
-                _winnerTitle.text = player1.PlayerName + "!";
-                _winnerStats.text = player1.Honor + " vs " + player2.Honor;
-            } else {
-                _winnerTitle.text = player2.PlayerName + "!";
-                _winnerStats.text = player2.Honor + " vs " + player1.Honor;
-            }
+            return _planet.IncreaseStatus(type);
         }
 
-        public void IncreasePlanetStatus(PlanetStatusType type)
-        {
-            _planet.IncreaseStatus(type);
-        }
-
-        public void ShowPlacingTile(TileType tile, int cost)
+        public void ShowPlacingTile(TileType tile, int cost, bool patent)
         {
             _currentPatent = null;
             _leftSideMain.SetActive(false);
@@ -90,22 +70,15 @@ namespace Scripts.UI
             _patentDetails.gameObject.SetActive(false);
             _actionCostObject.SetActive(true);
             _confirmButton.SetActive(false);
+            _cancelButton.SetActive(!patent);
             TileToPlace = tile;
             _actionTitle.text = "Placing " + tile + " Tile";
-            switch (tile) {
-                case TileType.Ocean:
-                    _actionDesc.text = "(Any open blue highlighted tile)";
-                    break;
-                case TileType.Forest:
-                    _actionDesc.text = "(Any open tile next to owned tiles)";
-                    break;
-                case TileType.City:
-                    _actionDesc.text = "(Any open tile not near another city)";
-                    break;
-                case TileType.Nuke:
-                    _actionDesc.text = "(Any open tile)";
-                    break;
-            }
+            _actionDesc.text = tile switch {
+                TileType.Ocean  => "(Any open blue highlighted tile)",
+                TileType.Forest => "(Any open tile next to owned tiles)",
+                TileType.City   => "(Any open tile not near another city)",
+                _               => "(Any open tile)"
+            };
             _actionCost.text = "Cost: " + cost;
             _tileIcon.sprite = _icons.GetTile(tile);
             _resourceIcon.gameObject.SetActive(false);
@@ -126,6 +99,11 @@ namespace Scripts.UI
                     _actionDesc.text = "(Increases PlanetType Heat by " + _planet.HeatLevel.StepValue + ")";
                     _resourceIcon.sprite = _icons.GetResource(ResourceType.Heat, true);
                     break;
+                case StandardProjectType.HeatResidue:
+                    _actionTitle.text = "Heat Residue";
+                    _actionDesc.text = "(Increases PlanetType Heat by " + _planet.HeatLevel.StepValue + ")";
+                    _resourceIcon.sprite = _icons.GetResource(ResourceType.Heat, true);
+                    break;
                 default:
                     return;
             }
@@ -135,6 +113,7 @@ namespace Scripts.UI
             _patentDetails.gameObject.SetActive(false);
             _actionCostObject.SetActive(false);
             _confirmButton.SetActive(true);
+            _cancelButton.SetActive(true);
             _resourceIcon.gameObject.SetActive(true);
             _tileIcon.gameObject.SetActive(false);
         }
@@ -169,10 +148,13 @@ namespace Scripts.UI
         public void OnActivatePatent()
         {
             if (_currentPatent == null) return;
+            if (!_currentPatent.CanActivate(_gameData)) return;
             _currentPatent.Activate(_gameData);
+            if (_patentDetails.gameObject.activeSelf) {
+                ShowActions();
+                _actionContentFiller.Fill(ActionCategory.OwnedPatents);
+            }
             _currentPatent = null;
-            ShowActions();
-            _actionContentFiller.Fill(ActionCategory.OwnedPatents);
         }
 
         public void OnSellPatent()
@@ -192,6 +174,13 @@ namespace Scripts.UI
         {
             OnCancelAction?.Invoke();
             ShowActions();
+        }
+
+
+        public void CancelPatent()
+        {
+            CancelAction();
+            _actionContentFiller.Fill(ActionCategory.OwnedPatents);
         }
     }
 }

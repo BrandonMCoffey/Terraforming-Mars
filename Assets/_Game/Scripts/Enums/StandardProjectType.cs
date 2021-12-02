@@ -7,6 +7,8 @@ namespace Scripts.Enums
         Asteroid,
         Aquifer,
         Greenery,
-        City
+        City,
+        Plants,
+        HeatResidue
     }
 }

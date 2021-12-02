@@ -13,20 +13,37 @@ MonoBehaviour:
   m_Name: AI-Medium
   m_EditorClassIdentifier: 
   _playerControlled: 0
-  _aiLevel: 0
+  _aiLevel: 2
   _defaultPlayerName: Medium AI
   _defaultPlayerColor: {r: 0.8773585, g: 0.45242593, b: 0.11173906, a: 1}
   _playerName: Medium AI
-  _playerColor: {r: 0, g: 1, b: 1, a: 1}
+  _playerColor: {r: 0.8773585, g: 0.45242593, b: 0.11173906, a: 1}
+  _sounds: {fileID: 11400000, guid: 3f7ee09101aa92f41ac5872191f42a75, type: 2}
   _corporation: {fileID: 11400000, guid: a297451beb2feb7479411c120b962769, type: 2}
-  _honor: 0
-  _credits: 100
-  _iron: 5
-  _titanium: 0
-  _plants: 10
-  _energy: 5
-  _heat: 0
-  _ownedPatents: []
+  _honor: 1
+  _credits:
+    Amount: 6
+    Level: 1
+  _iron:
+    Amount: 5
+    Level: 3
+  _titanium:
+    Amount: 0
+    Level: 1
+  _plants:
+    Amount: 10
+    Level: 1
+  _energy:
+    Amount: 5
+    Level: 0
+  _heat:
+    Amount: 0
+    Level: 1
+  _ownedPatents:
+  - {fileID: 6312609294555053283, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
+  - {fileID: -405645657076509535, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
+  - {fileID: -8954788440758503976, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
+  - {fileID: 5009735784585814476, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
   _activePatents: []
-  _completedPatents: []
-  _debug: 0
+  _completedPatents:
+  - {fileID: -3753247808185743342, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}

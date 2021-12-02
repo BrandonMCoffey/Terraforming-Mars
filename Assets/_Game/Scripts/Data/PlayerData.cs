@@ -23,6 +23,7 @@ namespace Scripts.Data
         [SerializeField] [ReadOnly] private Color _playerColor = Color.cyan;
 
         [Header("Important Player Info")]
+        [SerializeField] private SoundData _sounds;
         [SerializeField] private CorporationData _corporation;
         [SerializeField] [ReadOnly] private int _honor;
 
@@ -39,6 +40,9 @@ namespace Scripts.Data
         [SerializeField] [ReadOnly] private List<PatentData> _activePatents = new List<PatentData>();
         [SerializeField] [ReadOnly] private List<PatentData> _completedPatents = new List<PatentData>();
 
+        public List<MilestoneType> Milestones { get; private set; }
+
+        public SoundData SoundData => _sounds;
         public bool CurrentTurn { get; private set; }
         public int ActionsPerTurn => _corporation.ActionsPerTurn;
         public AiDifficultyLevels AiLevel => _aiLevel;
@@ -46,6 +50,11 @@ namespace Scripts.Data
         public string DefaultName => _defaultPlayerName;
 
         private List<HexTile> _ownedTiles;
+
+        public List<HexTile> OwnedCities => _ownedTiles.Where(tile => tile.IsCity).ToList();
+        public int OwnedForests => _ownedTiles.Count(tile => tile.IsForest);
+        public int OwnedTiles => _ownedTiles.Count(tile => !tile.WaterTile);
+        public int PlacedTiles => _ownedTiles.Count;
 
         public string PlayerName {
             get => _playerName;
@@ -98,8 +107,14 @@ namespace Scripts.Data
             SetResource(ResourceType.Heat, _corporation.StartHeatLevel, true, true);
             // Patents
             ClearAllPatents();
-            AddPatents(patents.GetRandom(_corporation.StartPatents));
+            AddPatents(patents.GetRandom(UserControlled ? _corporation.StartPatents : (int) (_corporation.StartPatents * 1.5f)));
             _ownedTiles = new List<HexTile>();
+            Milestones = new List<MilestoneType>();
+        }
+
+        public void ClaimMilestone(MilestoneType type)
+        {
+            Milestones.Add(type);
         }
 
         public void AddOwnedTile(HexTile tile)
@@ -150,6 +165,8 @@ namespace Scripts.Data
             AddResource(ResourceType.Plant, _plants.Level);
             AddResource(ResourceType.Energy, _energy.Level);
             AddResource(ResourceType.Heat, _heat.Level);
+            AddResource(ResourceType.Heat, _energy.Amount);
+            SetResource(ResourceType.Energy, 0);
         }
 
         public int GetResource(ResourceType type, bool level = false)
@@ -228,9 +245,11 @@ namespace Scripts.Data
 
         public bool RemoveResource(ResourceType type, int amount, bool level = false)
         {
-            int check = GetResource(type, level);
-            if (check < amount) return false;
-            SetResource(type, check - amount, true, level);
+            if (!level) {
+                int check = GetResource(type);
+                if (check < amount) return false;
+            }
+            SetResource(type, GetResource(type, level) - amount, true, level);
             return true;
         }
 
@@ -284,11 +303,17 @@ namespace Scripts.Data
             _completedPatents.Add(patent);
         }
 
-        public void ActivateFirstPatent(GameData gameData)
+        public bool ActivateFirstPatent(GameData gameData)
         {
             var patent = _ownedPatents[0];
-            patent.Activate(gameData);
+            if (!patent.Activate(gameData)) {
+                _ownedPatents.Remove(patent);
+                _ownedPatents.Add(patent);
+                return false;
+            }
+            Debug.Log("AI: Patent (" + patent.Name + ")");
             CompletePatent(patent);
+            return true;
         }
 
         #endregion

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Scripts.Data;
 using Scripts.Enums;
@@ -70,17 +69,20 @@ namespace Scripts.UI.Displays
             foreach (var content in _activeContent) {
                 Destroy(content);
             }
+            bool projectsActive = category == ActionCategory.StandardProject;
             foreach (var project in _standardProjects) {
-                project.gameObject.SetActive(category == ActionCategory.StandardProject);
+                project.gameObject.SetActive(projectsActive);
             }
             switch (category) {
                 case ActionCategory.StandardProject:
+                    _buttonSet.ForceSelect(0);
                     _headerText.text = "Projects";
                     foreach (var project in _standardProjects) {
                         project.SetInteractable(_canInteract);
                     }
                     break;
                 case ActionCategory.OwnedPatents:
+                    _buttonSet.ForceSelect(1);
                     _headerText.text = "Patents";
                     foreach (var patent in _gameData.CurrentPlayer.OwnedPatents) {
                         var newContent = Instantiate(_patentBasePrefab, _parent);
@@ -89,6 +91,7 @@ namespace Scripts.UI.Displays
                     }
                     break;
                 case ActionCategory.ActivePatents:
+                    _buttonSet.ForceSelect(2);
                     _headerText.text = "Active Patents";
                     foreach (var patent in _gameData.CurrentPlayer.ActivePatents) {
                         var newContent = Instantiate(_patentBasePrefab, _parent);
@@ -97,6 +100,7 @@ namespace Scripts.UI.Displays
                     }
                     break;
                 case ActionCategory.CompletedPatents:
+                    _buttonSet.ForceSelect(3);
                     _headerText.text = "Completed Patents";
                     foreach (var patent in _gameData.CurrentPlayer.CompletedPatents) {
                         var newContent = Instantiate(_patentBasePrefab, _parent);

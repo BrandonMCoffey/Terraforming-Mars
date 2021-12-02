@@ -1064,7 +1064,39 @@ MonoBehaviour:
   - {fileID: -3177763649570066645}
   - {fileID: -8954788440758503976}
   _allowDuplicates: 1
-  _availablePatents: []
+  _availablePatents:
+  - {fileID: 8148722346584136396}
+  - {fileID: 905863500014860402}
+  - {fileID: -8642819292463061975}
+  - {fileID: 4256833391025347883}
+  - {fileID: 7450634079575026538}
+  - {fileID: 3642665776919026374}
+  - {fileID: 3551685773483343002}
+  - {fileID: 8034402472347232051}
+  - {fileID: 2067235300006809163}
+  - {fileID: -1508111173435854765}
+  - {fileID: 4315858631198882799}
+  - {fileID: 7185174546983730100}
+  - {fileID: 1478980894287230048}
+  - {fileID: -1798033917230462603}
+  - {fileID: -5414654955470333970}
+  - {fileID: 1356758425722314358}
+  - {fileID: 3512221037642248262}
+  - {fileID: 6526715020451202202}
+  - {fileID: 7721482370168670965}
+  - {fileID: 7802334140681855602}
+  - {fileID: -6260552194245410655}
+  - {fileID: -1658269708825589669}
+  - {fileID: -3753247808185743342}
+  - {fileID: -405645657076509535}
+  - {fileID: 6054846014278485438}
+  - {fileID: -7416992325386587902}
+  - {fileID: -112486925048397948}
+  - {fileID: 9100922294603192728}
+  - {fileID: -5241982511784544542}
+  - {fileID: -250094219563149016}
+  - {fileID: -3177763649570066645}
+  - {fileID: -8954788440758503976}
   _discardedPatents: []
 --- !u!114 &905863500014860402
 MonoBehaviour:
@@ -2320,8 +2352,8 @@ MonoBehaviour:
     Amount: 1
   Constraint2:
     Active: 0
-    Type: 0
-    Comparison: 0
+    Type: 5
+    Comparison: 2
     Amount: 0
   Alt1: 2
   Alt2: 0
@@ -2342,7 +2374,7 @@ MonoBehaviour:
     Status: 0
   Effect3:
     Active: 0
-    Type: 0
+    Type: 1
     Amount: 0
     Resource: 0
     Tile: 0

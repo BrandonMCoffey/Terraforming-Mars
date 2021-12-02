@@ -5,6 +5,7 @@ using System.Linq;
 using Scripts.Data;
 using Scripts.Enums;
 using Scripts.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ namespace Scripts.Grid
         [SerializeField] private bool _waterTile;
         [Header("References")]
         [SerializeField] private IconData _icons;
+        [SerializeField] private SoundData _sounds;
         [Header("Internal References")]
         [SerializeField] private HexTileClickable _tileClickable;
         [SerializeField] private Image _tileImage;
@@ -22,7 +24,8 @@ namespace Scripts.Grid
         [SerializeField] private Image _ownerImage;
         [SerializeField] private Image _hoverImage;
         [SerializeField] private GameObject _waterTileImage;
-        [SerializeField] private GameObject _bonusHoverVisual;
+        [SerializeField] private GameObject _bonusHoverObj;
+        [SerializeField] private TextMeshProUGUI _bonusHoverVisual;
         [SerializeField] private List<HexTile> _neighbors = new List<HexTile>();
 
         public bool WaterTile { get; private set; }
@@ -34,6 +37,7 @@ namespace Scripts.Grid
 
         public bool Claimed => _tileType != TileType.None;
         public bool IsCity => _tileType == TileType.City;
+        public bool IsForest => _tileType == TileType.Forest;
         public bool HasAdjacentCity => _neighbors.Any(neighbor => neighbor.Claimed && neighbor.IsCity);
 
         #region Unity Functions
@@ -69,7 +73,17 @@ namespace Scripts.Grid
             GameController.OnUpdateHover -= CheckHover;
         }
 
+        private void Start()
+        {
+            WaterTile = _waterTile;
+        }
+
         #endregion
+
+        public int GetNeighbors(TileType type)
+        {
+            return _neighbors.Count(tile => tile._tileType == type);
+        }
 
         public void UpdateNeighbors(List<HexTile> grid, float maxDist)
         {
@@ -91,8 +105,23 @@ namespace Scripts.Grid
             _ownerImage.color = owner;
             _tileType = tile;
             int waterBonus = _neighbors.Where(neighbor => neighbor.WaterTile && neighbor.Claimed).Sum(neighbor => 2);
+            int commerceBonus = _neighbors.Where(neighbor => neighbor._tileType == TileType.CommercialDistrict).Sum(neighbor => 1);
+            if (tile == TileType.City) {
+                commerceBonus *= 4;
+            }
             StartCoroutine(PlacementImpact(tile));
-            return waterBonus;
+            switch (tile) {
+                case TileType.Ocean:
+                    _sounds.AquiferSfx.Play();
+                    break;
+                case TileType.Forest:
+                    _sounds.ForestSfx.Play();
+                    break;
+                case TileType.City:
+                    _sounds.CitySfx.Play();
+                    break;
+            }
+            return waterBonus + commerceBonus;
         }
 
         private void OnMouseHover()
@@ -126,8 +155,13 @@ namespace Scripts.Grid
         {
             _hoverImage.enabled = true;
             _hoverImage.sprite = _icons.GetTile(tile);
-            foreach (var neighbor in _neighbors.Where(neighbor => neighbor.WaterTile && neighbor.Claimed)) {
-                neighbor.ShowHoverBonus(true);
+            foreach (var neighbor in _neighbors) {
+                if (neighbor.WaterTile && neighbor.Claimed) {
+                    neighbor.ShowHoverBonus(2);
+                }
+                if (neighbor._tileType == TileType.CommercialDistrict) {
+                    neighbor.ShowHoverBonus(tile == TileType.City ? 4 : 1);
+                }
             }
         }
 
@@ -136,13 +170,16 @@ namespace Scripts.Grid
             _hoverImage.sprite = null;
             _hoverImage.enabled = false;
             foreach (var neighbor in _neighbors) {
-                neighbor.ShowHoverBonus(false);
+                neighbor.ShowHoverBonus(-1);
             }
         }
 
-        public void ShowHoverBonus(bool show)
+        public void ShowHoverBonus(int amount)
         {
-            _bonusHoverVisual.SetActive(show);
+            _bonusHoverObj.SetActive(amount > 0);
+            if (amount > 0) {
+                _bonusHoverVisual.text = "+" + amount;
+            }
         }
 
         private IEnumerator PlacementImpact(TileType tile)

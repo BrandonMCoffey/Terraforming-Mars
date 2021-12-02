@@ -25,6 +25,12 @@ namespace Scripts.Data
         public List<PatentData> AvailablePatents => _availablePatents;
         public List<PatentData> DiscardedPatents => _discardedPatents;
 
+        public void RemovePatent(PatentData patent)
+        {
+            if (!_availablePatents.Contains(patent)) return;
+            _availablePatents.Remove(patent);
+        }
+
         public void RestoreList()
         {
             _availablePatents = _patents;
@@ -58,7 +64,12 @@ namespace Scripts.Data
         {
             var patents = new List<PatentData>(count);
             for (int i = 0; i < count; i++) {
-                patents.Add(GetRandom(remove));
+                var patent = GetRandom(remove);
+                if (!remove && patents.Contains(patent)) {
+                    i--;
+                    continue;
+                }
+                patents.Add(patent);
             }
             return patents;
         }

@@ -3,6 +3,7 @@ using System.Linq;
 using Scripts.Data;
 using UnityEngine;
 using UserInput;
+using Utility.Audio.Systems.Events;
 using Utility.Inspector;
 using Utility.StateMachine;
 
@@ -15,7 +16,7 @@ namespace Scripts.States
         [SerializeField] private PlanetData _planet;
         [SerializeField] [ReadOnly] private PlayerData _player;
         [SerializeField] [ReadOnly] private PlayerData _opponent;
-
+        [SerializeField] private SfxEvent _endTurnSfx;
 
         public GameData GameData => _gameData;
         public InputController Input => _input;
@@ -41,6 +42,10 @@ namespace Scripts.States
             ChangeState<SetupState>();
         }
 
+        protected override void ChangeStateFeedback()
+        {
+        }
+
         public void SetupTurns(List<State> turns)
         {
             _currentTurn = -1;
@@ -51,6 +56,7 @@ namespace Scripts.States
         public void NextTurn()
         {
             if (_currentTurn >= 0) {
+                if (_endTurnSfx != null) _endTurnSfx.Play();
                 // Check to see if can move to next turn
                 var player = CurrentStateBase.GetComponent<PlayerTurnState>();
                 var ai = CurrentStateBase.GetComponent<AiTurnState>();

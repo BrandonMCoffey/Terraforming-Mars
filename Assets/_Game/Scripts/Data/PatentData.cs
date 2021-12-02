@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using Scripts.Data.Structs;
 using Scripts.Enums;
 using Scripts.Mechanics;
+using Scripts.UI;
 using UnityEngine;
 using Utility.Buttons;
 #if UNITY_EDITOR
@@ -15,16 +15,16 @@ namespace Scripts.Data
     public class PatentData : ScriptableObject
     {
         [Header("Patent Info")]
-        public string Name;
-        public int Cost;
-        public int Honor;
+        public string Name = "New Patent";
+        public int Cost = 10;
+        public int Honor = 0;
         [Header("Requirements")]
         public PatentConstraint Constraint1;
         public PatentConstraint Constraint2;
         [Header("Alt Resources")]
-        public PatentResourceType Alt1;
-        public PatentResourceType Alt2;
-        public PatentResourceType Alt3;
+        public PatentResourceType Alt1 = PatentResourceType.None;
+        public PatentResourceType Alt2 = PatentResourceType.None;
+        public PatentResourceType Alt3 = PatentResourceType.None;
         [Header("Effects")]
         public PatentEffect Effect1;
         public PatentEffect Effect2;
@@ -45,13 +45,19 @@ namespace Scripts.Data
             return list;
         }
 
-        public void Activate(GameData gameData)
+        public bool Activate(GameData gameData)
         {
+            if (!gameData.CurrentPlayer.RemoveResource(ResourceType.Credits, Cost)) {
+                return false;
+            }
             if (Effect1.Active) ActivateEffect(Effect1, gameData);
             if (Effect2.Active) ActivateEffect(Effect2, gameData);
             if (Effect3.Active) ActivateEffect(Effect3, gameData);
             if (Effect4.Active) ActivateEffect(Effect4, gameData);
+            gameData.CurrentPlayer.AddHonor(Honor);
             gameData.CurrentPlayer.CompletePatent(this);
+            AnnouncementController.Instance.Announce(gameData.CurrentPlayer.PlayerName + " Activated " + Name, GetEffectsReadable(), 0, 3);
+            return true;
         }
 
         private static void ActivateEffect(PatentEffect effect, GameData gameData)
@@ -64,7 +70,7 @@ namespace Scripts.Data
                     gameData.CurrentPlayer.RemoveResource(effect.Resource, effect.Amount, true);
                     break;
                 case PatentEffectType.Build:
-                    PlayerStandardProjects.ForcePlaceTile(effect.Tile);
+                    PlayerStandardProjects.ForcePlaceTile(effect.Tile, !gameData.CurrentPlayer.UserControlled);
                     break;
                 case PatentEffectType.Increase:
                     gameData.Planet.IncreaseStatus(effect.Status);
@@ -103,8 +109,8 @@ namespace Scripts.Data
             int required = constraint.Amount;
             int actual = constraint.Type switch {
                 PatentConstraintType.PlanetOxygen  => gameData.Planet.GetLevel(PlanetStatusType.Oxygen),
-                PatentConstraintType.PlanetHeat    => gameData.Planet.GetLevel(PlanetStatusType.Oxygen),
-                PatentConstraintType.PlanetWater   => gameData.Planet.GetLevel(PlanetStatusType.Oxygen),
+                PatentConstraintType.PlanetHeat    => gameData.Planet.GetLevel(PlanetStatusType.Heat),
+                PatentConstraintType.PlanetWater   => gameData.Planet.GetLevel(PlanetStatusType.Water),
                 PatentConstraintType.IronLevel     => gameData.CurrentPlayer.GetResource(ResourceType.Iron, true),
                 PatentConstraintType.TitaniumLevel => gameData.CurrentPlayer.GetResource(ResourceType.Titanium, true),
                 _                                  => 0
@@ -122,16 +128,17 @@ namespace Scripts.Data
 
         public string GetConstraintsReadable()
         {
+            if (!Constraint1.Active) return "";
             return Constraint1.Type + " must be " + Constraint1.Comparison + " " + Constraint1.Amount;
         }
 
         public string GetEffectsReadable()
         {
             string output = "";
-            if (Effect1.Active) output += GetEffectReadable(Effect1) + "\n";
-            if (Effect2.Active) output += GetEffectReadable(Effect2) + "\n";
-            if (Effect3.Active) output += GetEffectReadable(Effect3) + "\n";
-            if (Effect4.Active) output += GetEffectReadable(Effect4) + "\n";
+            if (Effect1.Active) output += GetEffectReadable(Effect1);
+            if (Effect2.Active) output += ", " + GetEffectReadable(Effect2);
+            if (Effect3.Active) output += ", " + GetEffectReadable(Effect3);
+            if (Effect4.Active) output += ", " + GetEffectReadable(Effect4);
             return output;
         }
 

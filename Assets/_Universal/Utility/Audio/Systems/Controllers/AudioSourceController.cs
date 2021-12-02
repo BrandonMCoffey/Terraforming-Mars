@@ -12,12 +12,10 @@ namespace Utility.Audio.Systems.Controllers
         private float _originalVolume;
 
         public bool Claimed { get; set; }
-        public bool IsPlaying => _source.isPlaying;
+        public bool IsPlaying => Source.isPlaying;
 
-        private AudioSource Source
-        {
-            get
-            {
+        private AudioSource Source {
+            get {
                 if (_source == null) {
                     _source = GetComponent<AudioSource>();
                     if (_source == null) {

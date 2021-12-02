@@ -48,5 +48,12 @@ namespace Scripts.UI.Helper
                 _currentlySelected = -1;
             }
         }
+
+        public void ForceSelect(int index)
+        {
+            for (var i = 0; i < _buttons.Count; i++) {
+                _buttons[i].interactable = i != index;
+            }
+        }
     }
 }

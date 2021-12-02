@@ -1,4 +1,3 @@
-using System;
 using Scripts.Enums;
 using UnityEngine;
 
@@ -33,6 +32,9 @@ namespace Scripts.Data
         [SerializeField] private Sprite _forest;
         [SerializeField] private Sprite _city;
         [SerializeField] private Sprite _nuke;
+        [SerializeField] private Sprite _naturalPreserve;
+        [SerializeField] private Sprite _miningArea;
+        [SerializeField] private Sprite _commercialDistrict;
         [Header("Sciences")]
         [SerializeField] private Sprite _atomicScience;
         [SerializeField] private Sprite _earth;
@@ -62,11 +64,14 @@ namespace Scripts.Data
         public Sprite GetTile(TileType type)
         {
             return type switch {
-                TileType.Ocean  => _ocean,
-                TileType.Forest => _forest,
-                TileType.City   => _city,
-                TileType.Nuke   => _nuke,
-                _               => null
+                TileType.Ocean              => _ocean,
+                TileType.Forest             => _forest,
+                TileType.City               => _city,
+                TileType.Nuke               => _nuke,
+                TileType.NaturalPreserve    => _naturalPreserve,
+                TileType.MiningArea         => _miningArea,
+                TileType.CommercialDistrict => _commercialDistrict,
+                _                           => null
             };
         }
 

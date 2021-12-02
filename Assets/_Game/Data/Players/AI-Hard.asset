@@ -13,20 +13,32 @@ MonoBehaviour:
   m_Name: AI-Hard
   m_EditorClassIdentifier: 
   _playerControlled: 0
-  _aiLevel: 0
+  _aiLevel: 3
   _defaultPlayerName: Hard AI
   _defaultPlayerColor: {r: 0.6415094, g: 0.12355488, b: 0.099857606, a: 1}
   _playerName: Hard AI
   _playerColor: {r: 0, g: 1, b: 1, a: 1}
+  _sounds: {fileID: 11400000, guid: 3f7ee09101aa92f41ac5872191f42a75, type: 2}
   _corporation: {fileID: 11400000, guid: a297451beb2feb7479411c120b962769, type: 2}
   _honor: 0
-  _credits: 100
-  _iron: 5
-  _titanium: 0
-  _plants: 10
-  _energy: 5
-  _heat: 0
+  _credits:
+    Amount: 20
+    Level: 1
+  _iron:
+    Amount: 5
+    Level: 1
+  _titanium:
+    Amount: 0
+    Level: 1
+  _plants:
+    Amount: 10
+    Level: 1
+  _energy:
+    Amount: 5
+    Level: 1
+  _heat:
+    Amount: 0
+    Level: 1
   _ownedPatents: []
   _activePatents: []
   _completedPatents: []
-  _debug: 0
