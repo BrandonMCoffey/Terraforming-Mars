@@ -14,10 +14,11 @@ namespace Utility.StateMachine
 
         protected bool InTransition { get; private set; }
         public StateBase CurrentStateBase => _currentStateBase;
+        private bool _currentStateIsNull = true;
 
         private void Update()
         {
-            if (CurrentStateBase == null || InTransition) return;
+            if (_currentStateIsNull || InTransition) return;
             CurrentStateBase.Tick();
         }
 
@@ -47,25 +48,28 @@ namespace Utility.StateMachine
 
         private void InitiateStateChange(StateBase targetStateBase)
         {
-            if (CurrentStateBase == targetStateBase || InTransition) return;
+            if (targetStateBase == null || CurrentStateBase == targetStateBase || InTransition) return;
             Transition(targetStateBase);
         }
 
         private void Transition(StateBase newStateBase)
         {
             InTransition = true;
-            if (_debug) Debug.Log("<color=yellow>Exit State: </color>" + CurrentStateBase?.GetType().Name);
-            CurrentStateBase?.Exit();
+            if (!_currentStateIsNull) {
+                if (_debug) Debug.Log("<color=yellow>Exit State: </color>" + CurrentStateBase.GetType().Name);
+                CurrentStateBase.Exit();
+            }
             AddPreviousState();
             _currentStateBase = newStateBase;
-            if (_debug) Debug.Log("<color=yellow>Enter State: </color>" + CurrentStateBase?.GetType().Name);
-            CurrentStateBase?.Enter();
+            if (_debug) Debug.Log("<color=yellow>Enter State: </color>" + CurrentStateBase.GetType().Name);
+            CurrentStateBase.Enter();
+            _currentStateIsNull = false;
             InTransition = false;
         }
 
         private void AddPreviousState()
         {
-            if (CurrentStateBase == null) return;
+            if (_currentStateIsNull) return;
             if (_previousStates.Count >= _previousStateMax) {
                 // TODO: Remove last state
             }

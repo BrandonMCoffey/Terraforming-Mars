@@ -13,15 +13,15 @@ namespace Scripts.States
         [SerializeField] private InputController _input;
         [SerializeField] private GameData _gameData;
         [SerializeField] private PlanetData _planet;
-        [SerializeField] private PatentCollection _patentCollection;
         [SerializeField] [ReadOnly] private PlayerData _player;
         [SerializeField] [ReadOnly] private PlayerData _opponent;
+
 
         public InputController Input => _input;
         public PlayerData Player => _player;
         public PlayerData Opponent => _opponent;
         public PlanetData Planet => _planet;
-        public PatentCollection PatentCollection => _patentCollection;
+        public PatentCollection PatentCollection => _gameData.PatentCollection;
 
         private List<State> _turnStates;
         private int _currentTurn;
@@ -43,11 +43,24 @@ namespace Scripts.States
         public void SetupTurns(List<State> turns)
         {
             _currentTurn = -1;
+            _gameData.SetGeneration(1);
             _turnStates = turns.Where(turn => turn != null).ToList();
         }
 
         public void NextTurn()
         {
+            if (_currentTurn >= 0) {
+                // Check to see if can move to next turn
+                var player = CurrentStateBase.GetComponent<PlayerTurnState>();
+                var ai = CurrentStateBase.GetComponent<AiTurnState>();
+                if ((player == null || !player.CanEndTurn) && ai == null) return;
+                // Next turn
+                if (_gameData.IncrementGeneration()) {
+                    ChangeState<ProductionState>();
+                    _currentTurn = -1;
+                    return;
+                }
+            }
             _currentTurn++;
             if (_currentTurn >= _turnStates.Count) {
                 _currentTurn = 0;

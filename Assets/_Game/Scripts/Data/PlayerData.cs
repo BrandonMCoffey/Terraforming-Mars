@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Scripts.Data.Structs;
 using Scripts.Enums;
 using UnityEngine;
 using Utility.Buttons;
@@ -25,20 +26,17 @@ namespace Scripts.Data
         [SerializeField] [ReadOnly] private int _honor;
 
         [Header("Resources")]
-        [SerializeField] [ReadOnly] private int _credits;
-        [SerializeField] [ReadOnly] private int _iron;
-        [SerializeField] [ReadOnly] private int _titanium;
-        [SerializeField] [ReadOnly] private int _plants;
-        [SerializeField] [ReadOnly] private int _energy;
-        [SerializeField] [ReadOnly] private int _heat;
+        [SerializeField] private Resource _credits = new Resource(20);
+        [SerializeField] private Resource _iron = new Resource(5);
+        [SerializeField] private Resource _titanium = new Resource(0);
+        [SerializeField] private Resource _plants = new Resource(10);
+        [SerializeField] private Resource _energy = new Resource(5);
+        [SerializeField] private Resource _heat = new Resource(0);
 
         [Header("Patents")]
         [SerializeField] [ReadOnly] private List<PatentData> _ownedPatents = new List<PatentData>();
         [SerializeField] [ReadOnly] private List<PatentData> _activePatents = new List<PatentData>();
         [SerializeField] [ReadOnly] private List<PatentData> _completedPatents = new List<PatentData>();
-
-        [Header("Debug Menu")]
-        [SerializeField] private bool _debug;
 
         public bool CurrentTurn { get; private set; }
         public int ActionsPerTurn => _corporation.ActionsPerTurn;
@@ -128,15 +126,25 @@ namespace Scripts.Data
 
         #region Resources
 
-        public int GetResource(ResourceType type)
+        public void ProductionPhase()
+        {
+            AddResource(ResourceType.Credits, _credits.Level);
+            AddResource(ResourceType.Iron, _iron.Level);
+            AddResource(ResourceType.Titanium, _titanium.Level);
+            AddResource(ResourceType.Plant, _plants.Level);
+            AddResource(ResourceType.Energy, _energy.Level);
+            AddResource(ResourceType.Heat, _heat.Level);
+        }
+
+        public int GetResource(ResourceType type, bool level = false)
         {
             return type switch {
-                ResourceType.Credits  => _credits,
-                ResourceType.Iron     => _iron,
-                ResourceType.Titanium => _titanium,
-                ResourceType.Plant    => _plants,
-                ResourceType.Energy   => _energy,
-                ResourceType.Heat     => _heat,
+                ResourceType.Credits  => level ? _credits.Level : _credits.Amount,
+                ResourceType.Iron     => level ? _iron.Level : _iron.Amount,
+                ResourceType.Titanium => level ? _titanium.Level : _titanium.Amount,
+                ResourceType.Plant    => level ? _plants.Level : _plants.Amount,
+                ResourceType.Energy   => level ? _energy.Level : _energy.Amount,
+                ResourceType.Heat     => level ? _heat.Level : _heat.Amount,
                 _                     => 0
             };
         }
@@ -148,22 +156,22 @@ namespace Scripts.Data
             if (!force && (amount < 0 || GetResource(type) == amount)) return;
             switch (type) {
                 case ResourceType.Credits:
-                    _credits = amount;
+                    _credits.Amount = amount;
                     break;
                 case ResourceType.Iron:
-                    _iron = amount;
+                    _iron.Amount = amount;
                     break;
                 case ResourceType.Titanium:
-                    _titanium = amount;
+                    _titanium.Amount = amount;
                     break;
                 case ResourceType.Plant:
-                    _plants = amount;
+                    _plants.Amount = amount;
                     break;
                 case ResourceType.Energy:
-                    _energy = amount;
+                    _energy.Amount = amount;
                     break;
                 case ResourceType.Heat:
-                    _heat = amount;
+                    _heat.Amount = amount;
                     break;
                 default:
                     return;
@@ -171,7 +179,7 @@ namespace Scripts.Data
             OnResourcesChanged?.Invoke();
         }
 
-        [Button]
+        [Button(Spacing = 50)]
         public void AddResource(ResourceType type, int amount)
         {
             if (amount <= 0) return;

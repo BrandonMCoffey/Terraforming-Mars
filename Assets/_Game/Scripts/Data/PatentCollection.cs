@@ -5,6 +5,7 @@ using Utility.Buttons;
 using Utility.Inspector;
 #if UNITY_EDITOR
 using UnityEditor;
+
 #endif
 
 namespace Scripts.Data
@@ -42,20 +43,22 @@ namespace Scripts.Data
             _discardedPatents = new List<PatentData>();
         }
 
-        public PatentData GetRandom()
+        public PatentData GetRandom(bool remove = true)
         {
             if (_availablePatents.Count == 0) return null;
             int rand = Random.Range(0, _availablePatents.Count);
             var patent = _availablePatents[rand];
-            _availablePatents.RemoveAt(rand);
+            if (remove) {
+                _availablePatents.RemoveAt(rand);
+            }
             return patent;
         }
 
-        public List<PatentData> GetRandom(int count)
+        public List<PatentData> GetRandom(int count, bool remove = true)
         {
             var patents = new List<PatentData>(count);
             for (int i = 0; i < count; i++) {
-                patents.Add(GetRandom());
+                patents.Add(GetRandom(remove));
             }
             return patents;
         }

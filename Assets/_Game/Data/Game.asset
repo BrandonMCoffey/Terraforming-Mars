@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c5ae204576ea042b8aa17bd8d47db7, type: 3}
   m_Name: Game
   m_EditorClassIdentifier: 
+  _turnsPerGeneration: 1
+  _generation: 2
+  _generationTurn: 1
   _player: {fileID: 11400000, guid: ba737941427f86e45bed45e3c7a6ba4a, type: 2}
   _opponent: {fileID: 11400000, guid: e92104065a7eecf46a0530b80f336de1, type: 2}
+  _patentCollection: {fileID: 11400000, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
   _planet: 0

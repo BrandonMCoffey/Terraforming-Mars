@@ -8,6 +8,8 @@ namespace Scripts.States
 {
     public class PlayerTurnState : State
     {
+        public bool CanEndTurn { get; private set; }
+
         public static event Action<bool> PlayerCanAct;
 
         private PlayerStandardProjects _standardProjects;
@@ -19,10 +21,11 @@ namespace Scripts.States
 
         public override void Enter()
         {
-            _canEndTurnTime = Time.time + 2f;
+            _canEndTurnTime = Time.time + 3f;
             _standardProjects ??= new PlayerStandardProjects(_playerData);
             _actionsThisTurn = 0;
             SetPlayerCanAct(true);
+            CanEndTurn = false;
             _standardProjects.OnPerformAction += UpdateActionsPerformed;
             StateMachine.Input.Confirm += OnEndTurn;
             StateMachine.Input.Cancel += OnPause;
@@ -31,6 +34,9 @@ namespace Scripts.States
 
         public override void Tick()
         {
+            if (!CanEndTurn && Time.time > _canEndTurnTime) {
+                CanEndTurn = true;
+            }
         }
 
         public override void Exit()
@@ -65,8 +71,9 @@ namespace Scripts.States
 
         private void OnEndTurn()
         {
-            if (Time.time < _canEndTurnTime) return;
-            StateMachine.NextTurn();
+            if (CanEndTurn) {
+                StateMachine.NextTurn();
+            }
         }
 
         private static void OnPause()
