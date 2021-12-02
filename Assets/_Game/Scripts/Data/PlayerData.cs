@@ -284,6 +284,13 @@ namespace Scripts.Data
             _completedPatents.Add(patent);
         }
 
+        public void ActivateFirstPatent(GameData gameData)
+        {
+            var patent = _ownedPatents[0];
+            patent.Activate(gameData);
+            CompletePatent(patent);
+        }
+
         #endregion
     }
 }

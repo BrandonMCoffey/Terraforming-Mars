@@ -30,6 +30,10 @@ namespace Scripts.UI
         [SerializeField] private Image _resourceIcon;
         [Header("Patent Details Menu")]
         [SerializeField] private PatentDetailDisplay _patentDetails;
+        [Header("Game Over Screen")]
+        [SerializeField] private GameObject _gameOverMenu;
+        [SerializeField] private TextMeshProUGUI _winnerTitle;
+        [SerializeField] private TextMeshProUGUI _winnerStats;
 
         public static Action OnConfirmAction;
         public static Action OnCancelAction;
@@ -48,12 +52,29 @@ namespace Scripts.UI
         {
             _gameData.Player.OnTurnStart += ShowActions;
             _gameData.Opponent.OnTurnStart += ShowActions;
+            _planet.OnPlanetTerraformed += GameOver;
         }
 
         private void OnDisable()
         {
             _gameData.Player.OnTurnStart -= ShowActions;
             _gameData.Opponent.OnTurnStart -= ShowActions;
+            _planet.OnPlanetTerraformed -= GameOver;
+        }
+
+        private void GameOver()
+        {
+            _gameOverMenu.SetActive(true);
+            var player1 = _gameData.Player;
+            var player2 = _gameData.Opponent;
+            var player1Wins = player1.Honor >= player2.Honor;
+            if (player1Wins) {
+                _winnerTitle.text = player1.PlayerName + "!";
+                _winnerStats.text = player1.Honor + " vs " + player2.Honor;
+            } else {
+                _winnerTitle.text = player2.PlayerName + "!";
+                _winnerStats.text = player2.Honor + " vs " + player1.Honor;
+            }
         }
 
         public void IncreasePlanetStatus(PlanetStatusType type)

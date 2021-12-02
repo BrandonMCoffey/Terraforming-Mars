@@ -36,7 +36,7 @@ namespace Scripts.Mechanics
 
         #endregion
 
-        private void OnStandardProject(StandardProjectType type)
+        public void OnStandardProject(StandardProjectType type)
         {
             // Sell Patents
             if (type == StandardProjectType.SellPatents) {
@@ -63,6 +63,38 @@ namespace Scripts.Mechanics
                     break;
                 case StandardProjectType.City:
                     OnStartPlacingTile(TileType.City);
+                    break;
+            }
+        }
+
+        public void OnAutoProject(StandardProjectType type, HexTile tile = null)
+        {
+            if (type == StandardProjectType.SellPatents) {
+                return;
+            }
+            // Check cost
+            int cost = StandardProjects.GetCost(type);
+            if (!_playerData.HasResource(ResourceType.Credits, cost)) return;
+            // Run standard project
+            _currentProject = type;
+            switch (type) {
+                case StandardProjectType.PowerPlant:
+                    OnConfirmProject();
+                    return;
+                case StandardProjectType.Asteroid:
+                    OnConfirmProject();
+                    return;
+                case StandardProjectType.Aquifer:
+                    OnStartPlacingTile(TileType.Ocean);
+                    OnClickTile(tile);
+                    break;
+                case StandardProjectType.Greenery:
+                    OnStartPlacingTile(TileType.Forest);
+                    OnClickTile(tile);
+                    break;
+                case StandardProjectType.City:
+                    OnStartPlacingTile(TileType.City);
+                    OnClickTile(tile);
                     break;
             }
         }

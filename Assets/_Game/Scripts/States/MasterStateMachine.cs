@@ -17,6 +17,7 @@ namespace Scripts.States
         [SerializeField] [ReadOnly] private PlayerData _opponent;
 
 
+        public GameData GameData => _gameData;
         public InputController Input => _input;
         public PlayerData Player => _player;
         public PlayerData Opponent => _opponent;
