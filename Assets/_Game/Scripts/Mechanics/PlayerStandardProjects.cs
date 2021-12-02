@@ -144,7 +144,11 @@ namespace Scripts.Mechanics
                     IncreasePlanetStatus(PlanetStatusType.Water);
                     break;
                 case TileType.Forest:
+                    _playerData.AddOwnedTile(tile);
                     IncreasePlanetStatus(PlanetStatusType.Oxygen);
+                    break;
+                default:
+                    _playerData.AddOwnedTile(tile);
                     break;
             }
             OnPerformAction?.Invoke();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Scripts.Data.Structs;
 using Scripts.Enums;
+using Scripts.Grid;
 using UnityEngine;
 using Utility.Buttons;
 using Utility.Inspector;
@@ -43,6 +44,8 @@ namespace Scripts.Data
         public AiDifficultyLevels AiLevel => _aiLevel;
         public bool UserControlled => _playerControlled;
         public string DefaultName => _defaultPlayerName;
+
+        private List<HexTile> _ownedTiles;
 
         public string PlayerName {
             get => _playerName;
@@ -96,6 +99,12 @@ namespace Scripts.Data
             // Patents
             ClearAllPatents();
             AddPatents(patents.GetRandom(_corporation.StartPatents));
+            _ownedTiles = new List<HexTile>();
+        }
+
+        public void AddOwnedTile(HexTile tile)
+        {
+            _ownedTiles.Add(tile);
         }
 
         public void StartTurn()
