@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Scripts.Data;
@@ -17,6 +18,7 @@ namespace Scripts.Grid
         [Header("Internal References")]
         [SerializeField] private HexTileClickable _tileClickable;
         [SerializeField] private Image _tileImage;
+        [SerializeField] private Image _impactImage;
         [SerializeField] private Image _ownerImage;
         [SerializeField] private Image _hoverImage;
         [SerializeField] private GameObject _waterTileImage;
@@ -89,6 +91,7 @@ namespace Scripts.Grid
             _ownerImage.color = owner;
             _tileType = tile;
             int waterBonus = _neighbors.Where(neighbor => neighbor.WaterTile && neighbor.Claimed).Sum(neighbor => 2);
+            StartCoroutine(PlacementImpact(tile));
             return waterBonus;
         }
 
@@ -140,6 +143,29 @@ namespace Scripts.Grid
         public void ShowHoverBonus(bool show)
         {
             _bonusHoverVisual.SetActive(show);
+        }
+
+        private IEnumerator PlacementImpact(TileType tile)
+        {
+            Color color = Color.white;
+            _impactImage.color = color;
+            Vector3 scale = _impactImage.transform.localScale;
+            _impactImage.sprite = _icons.GetTile(tile);
+            for (float t = 0; t < 0.2f; t += Time.deltaTime) {
+                float delta = t / 0.2f;
+                color.a = 0.8f + (1 - delta) * 0.2f;
+                _impactImage.color = color;
+                _impactImage.transform.localScale = scale * (1 + delta * 0.4f);
+                yield return null;
+            }
+            for (float t = 0; t < 0.2f; t += Time.deltaTime) {
+                float delta = t / 0.2f;
+                color.a = (1 - delta) * 0.8f;
+                _impactImage.color = color;
+                _impactImage.transform.localScale = scale * (1.4f + delta * 0.1f);
+                yield return null;
+            }
+            _impactImage.gameObject.SetActive(false);
         }
     }
 }
