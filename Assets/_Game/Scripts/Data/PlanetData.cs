@@ -8,14 +8,14 @@ using Utility.Other;
 
 namespace Scripts.Data
 {
-    [CreateAssetMenu(menuName = "TM/Planet Data")]
+    [CreateAssetMenu(menuName = "TM/PlanetType Data")]
     public class PlanetData : ScriptableObject
     {
-        #region Planet Info
+        #region PlanetType Info
 
-        [Header("Planet Info")]
+        [Header("PlanetType Info")]
         [SerializeField] private PlanetType _planetType = PlanetType.Mars;
-        [SerializeField] private string _planetName = "Planet";
+        [SerializeField] private string _planetName = "PlanetType";
         [SerializeField] private string _planetSwitchDescription = "(Description)";
         [SerializeField] private Sprite _planetSprite;
 
@@ -26,16 +26,16 @@ namespace Scripts.Data
 
         #endregion
 
-        #region Planet Resources
+        #region PlanetType Resources
 
-        [Header("Planet Resources")]
+        [Header("PlanetType Resources")]
         [SerializeField] private List<ResourceType> _availableResources = new List<ResourceType>();
 
         public List<ResourceType> AvailableResources => _availableResources;
 
         #endregion
 
-        #region Planet Goals
+        #region PlanetType Goals
 
         [Header("Oxygen")]
         [SerializeField] private bool _requireOxygen = true;
@@ -85,7 +85,7 @@ namespace Scripts.Data
 
         // ------------------------------------------
 
-        #region Planet Goals
+        #region PlanetType Goals
 
         public void IncreaseStatus(PlanetStatusType type)
         {

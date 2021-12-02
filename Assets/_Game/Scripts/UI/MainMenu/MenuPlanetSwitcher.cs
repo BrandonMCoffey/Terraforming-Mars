@@ -10,7 +10,7 @@ namespace Scripts.UI.MainMenu
     {
         [SerializeField] private MenuPlanetSwitch _menuPlanetSwitch;
         [SerializeField] private PlanetData _currentPlanet;
-        [Header("Other Planet")]
+        [Header("Other PlanetType")]
         [SerializeField] private TextMeshProUGUI _switchPlanetTxt;
         [SerializeField] private TextMeshProUGUI _switchPlanetDesc;
         [SerializeField] private Image _switchPlanetImage;

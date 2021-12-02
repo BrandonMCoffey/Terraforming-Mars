@@ -29,11 +29,7 @@ namespace Scripts.UI
         [SerializeField] private Image _tileIcon;
         [SerializeField] private Image _resourceIcon;
         [Header("Patent Details Menu")]
-        [SerializeField] private GameObject _leftSidePatents;
-        [SerializeField] private TextMeshProUGUI _patentTitle;
-        [SerializeField] private TextMeshProUGUI _patentCost;
-        [SerializeField] private GameObject _sellPatentButton;
-        [SerializeField] private GameObject _activatePatentButton;
+        [SerializeField] private PatentDetailDisplay _patentDetails;
 
         public static Action OnConfirmAction;
         public static Action OnCancelAction;
@@ -70,7 +66,7 @@ namespace Scripts.UI
             _currentPatent = null;
             _leftSideMain.SetActive(false);
             _leftSideActions.SetActive(true);
-            _leftSidePatents.SetActive(false);
+            _patentDetails.gameObject.SetActive(false);
             _actionCostObject.SetActive(true);
             _confirmButton.SetActive(false);
             TileToPlace = tile;
@@ -106,7 +102,7 @@ namespace Scripts.UI
                     break;
                 case StandardProjectType.Asteroid:
                     _actionTitle.text = "Asteroid from Space";
-                    _actionDesc.text = "(Increases Planet Heat by " + _planet.HeatLevel.StepValue + ")";
+                    _actionDesc.text = "(Increases PlanetType Heat by " + _planet.HeatLevel.StepValue + ")";
                     _resourceIcon.sprite = _icons.GetResource(ResourceType.Heat, true);
                     break;
                 default:
@@ -115,7 +111,7 @@ namespace Scripts.UI
             _currentPatent = null;
             _leftSideMain.SetActive(false);
             _leftSideActions.SetActive(true);
-            _leftSidePatents.SetActive(false);
+            _patentDetails.gameObject.SetActive(false);
             _actionCostObject.SetActive(false);
             _confirmButton.SetActive(true);
             _resourceIcon.gameObject.SetActive(true);
@@ -127,13 +123,8 @@ namespace Scripts.UI
             _currentPatent = patent;
             _leftSideMain.SetActive(false);
             _leftSideActions.SetActive(false);
-            _leftSidePatents.SetActive(true);
-
-            _patentTitle.text = patent.Name;
-            _patentCost.text = "Cost: " + patent.Cost;
-
-            _sellPatentButton.SetActive(sell);
-            _activatePatentButton.SetActive(!sell);
+            _patentDetails.gameObject.SetActive(true);
+            _patentDetails.Display(patent, sell);
         }
 
 
@@ -148,7 +139,7 @@ namespace Scripts.UI
             _currentPatent = null;
             _leftSideMain.SetActive(true);
             _leftSideActions.SetActive(false);
-            _leftSidePatents.SetActive(false);
+            _patentDetails.gameObject.SetActive(false);
             TileToPlace = TileType.None;
             _actionContentFiller.Fill(ActionCategory.StandardProject);
             OnUpdateHover?.Invoke();
@@ -157,7 +148,7 @@ namespace Scripts.UI
         public void OnActivatePatent()
         {
             if (_currentPatent == null) return;
-            _gameData.CurrentPlayer.ActivatePatent(_currentPatent);
+            _currentPatent.Activate(_gameData);
             _currentPatent = null;
             ShowActions();
             _actionContentFiller.Fill(ActionCategory.OwnedPatents);

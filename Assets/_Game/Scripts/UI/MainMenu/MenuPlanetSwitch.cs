@@ -9,19 +9,19 @@ namespace Scripts.UI.MainMenu
     {
         [SerializeField] private GameData _gameData;
         [SerializeField] private PlanetData _currentPlanet;
-        [Header("Main Planet")]
+        [Header("Main PlanetType")]
         [SerializeField] private TextMeshProUGUI _terraformingPlanetTxt;
         [SerializeField] private Image _mainPlanetImage1;
         [SerializeField] private Image _mainPlanetImage2;
 
         private void Start()
         {
-            _gameData.Planet = _currentPlanet.PlanetType;
+            _gameData.PlanetType = _currentPlanet.PlanetType;
         }
 
         public PlanetData Swap(PlanetData planet)
         {
-            _gameData.Planet = planet.PlanetType;
+            _gameData.PlanetType = planet.PlanetType;
             PlanetData old = _currentPlanet;
             _currentPlanet = planet;
             Setup();

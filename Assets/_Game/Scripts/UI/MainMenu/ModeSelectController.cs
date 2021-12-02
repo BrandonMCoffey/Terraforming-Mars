@@ -33,12 +33,12 @@ namespace Scripts.UI.MainMenu
 
         private void StartGame()
         {
-            int gameScene = _gameData.Planet switch {
+            int gameScene = _gameData.PlanetType switch {
                 PlanetType.Mars => MarsPlanetSceneIndex,
                 PlanetType.Moon => MoonPlanetSceneIndex,
                 _               => 0
             };
-            Debug.Log("Starting Game on " + _gameData.Planet + " at build scene index " + gameScene, gameObject);
+            Debug.Log("Starting Game on " + _gameData.PlanetType + " at build scene index " + gameScene, gameObject);
             SceneManager.LoadScene(gameScene);
         }
 

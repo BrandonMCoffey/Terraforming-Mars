@@ -10,6 +10,7 @@ namespace Scripts.Mechanics
     public class PlayerStandardProjects
     {
         public event Action OnPerformAction;
+        private static event Action<TileType> OnForcePlaceTile;
 
         private PlayerData _playerData;
         private StandardProjectType _currentProject;
@@ -26,8 +27,10 @@ namespace Scripts.Mechanics
         {
             if (canAct) {
                 StandardProjects.OnUseProject += OnStandardProject;
+                OnForcePlaceTile += OnStartPlacingTile;
             } else {
                 StandardProjects.OnUseProject -= OnStandardProject;
+                OnForcePlaceTile -= OnStartPlacingTile;
             }
         }
 
@@ -102,6 +105,11 @@ namespace Scripts.Mechanics
         #endregion
 
         #region Placing Tiles
+
+        public static void ForcePlaceTile(TileType type)
+        {
+            OnForcePlaceTile?.Invoke(type);
+        }
 
         private void OnStartPlacingTile(TileType type)
         {

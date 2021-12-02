@@ -226,11 +226,11 @@ namespace Scripts.Data
             SetResource(type, GetResource(type, level) + amount, true, level);
         }
 
-        public bool RemoveResource(ResourceType type, int amount)
+        public bool RemoveResource(ResourceType type, int amount, bool level = false)
         {
-            int check = GetResource(type);
+            int check = GetResource(type, level);
             if (check < amount) return false;
-            SetResource(type, check - amount, true);
+            SetResource(type, check - amount, true, level);
             return true;
         }
 
@@ -277,7 +277,7 @@ namespace Scripts.Data
             AddResource(ResourceType.Credits, 1);
         }
 
-        public void ActivatePatent(PatentData patent)
+        public void CompletePatent(PatentData patent)
         {
             if (!_ownedPatents.Contains(patent)) return;
             _ownedPatents.Remove(patent);

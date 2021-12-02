@@ -14,10 +14,13 @@ namespace Scripts.Data
         [SerializeField] private PlayerData _player;
         [SerializeField] private PlayerData _opponent;
         [SerializeField] private PatentCollection _patentCollection;
-        [SerializeField] private PlanetType _planet = PlanetType.Mars;
+        [SerializeField] private PlanetType _planetType = PlanetType.Mars;
+        [SerializeField] private PlanetData _mars;
+        [SerializeField] private PlanetData _moon;
 
         public event Action<int> OnGenerationChange;
         public PlayerData CurrentPlayer => Player.CurrentTurn ? Player : Opponent;
+        public PlayerData OtherPlayer => Player.CurrentTurn ? Opponent : Player;
         public PatentCollection PatentCollection => _patentCollection;
         public int Generation => _generation;
 
@@ -32,9 +35,19 @@ namespace Scripts.Data
             set => _opponent = value;
         }
 
-        public PlanetType Planet {
-            get => _planet;
-            set => _planet = value;
+        public PlanetType PlanetType {
+            get => _planetType;
+            set => _planetType = value;
+        }
+
+        public PlanetData Planet {
+            get {
+                return PlanetType switch {
+                    PlanetType.Mars => _mars,
+                    PlanetType.Moon => _moon,
+                    _               => _mars
+                };
+            }
         }
 
         public bool PlayerActive(PlayerTypes type)

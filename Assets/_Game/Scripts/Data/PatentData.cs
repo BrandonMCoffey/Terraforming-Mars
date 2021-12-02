@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using Scripts.Data.Structs;
 using Scripts.Enums;
+using Scripts.Mechanics;
 using UnityEngine;
 using Utility.Buttons;
 #if UNITY_EDITOR
@@ -41,6 +43,113 @@ namespace Scripts.Data
             var icon3 = icons.GetIcon(Alt3);
             if (icon3 != null) list.Add(icon3);
             return list;
+        }
+
+        public void Activate(GameData gameData)
+        {
+            if (Effect1.Active) ActivateEffect(Effect1, gameData);
+            if (Effect2.Active) ActivateEffect(Effect2, gameData);
+            if (Effect3.Active) ActivateEffect(Effect3, gameData);
+            if (Effect4.Active) ActivateEffect(Effect4, gameData);
+            gameData.CurrentPlayer.CompletePatent(this);
+        }
+
+        private static void ActivateEffect(PatentEffect effect, GameData gameData)
+        {
+            switch (effect.Type) {
+                case PatentEffectType.Lose:
+                    gameData.CurrentPlayer.RemoveResource(effect.Resource, effect.Amount);
+                    break;
+                case PatentEffectType.Damage:
+                    gameData.CurrentPlayer.RemoveResource(effect.Resource, effect.Amount, true);
+                    break;
+                case PatentEffectType.Build:
+                    PlayerStandardProjects.ForcePlaceTile(effect.Tile);
+                    break;
+                case PatentEffectType.Increase:
+                    gameData.Planet.IncreaseStatus(effect.Status);
+                    break;
+                case PatentEffectType.Earn:
+                    gameData.CurrentPlayer.AddResource(effect.Resource, effect.Amount);
+                    break;
+                case PatentEffectType.LevelUp:
+                    gameData.CurrentPlayer.AddResource(effect.Resource, effect.Amount, true);
+                    break;
+                case PatentEffectType.Sabotage:
+                    gameData.OtherPlayer.RemoveResource(effect.Resource, effect.Amount, true);
+                    break;
+                case PatentEffectType.EarnPatents:
+                    gameData.CurrentPlayer.AddPatents(gameData.PatentCollection.GetRandom(2));
+                    break;
+            }
+        }
+
+        public bool CanActivate(GameData gameData)
+        {
+            if (!gameData.CurrentPlayer.HasResource(ResourceType.Credits, Cost)) {
+                return false;
+            }
+            if (Constraint1.Active && !CheckConstraint(Constraint1, gameData)) {
+                return false;
+            }
+            if (Constraint2.Active && !CheckConstraint(Constraint2, gameData)) {
+                return false;
+            }
+            return true;
+        }
+
+        private static bool CheckConstraint(PatentConstraint constraint, GameData gameData)
+        {
+            int required = constraint.Amount;
+            int actual = constraint.Type switch {
+                PatentConstraintType.PlanetOxygen  => gameData.Planet.GetLevel(PlanetStatusType.Oxygen),
+                PatentConstraintType.PlanetHeat    => gameData.Planet.GetLevel(PlanetStatusType.Oxygen),
+                PatentConstraintType.PlanetWater   => gameData.Planet.GetLevel(PlanetStatusType.Oxygen),
+                PatentConstraintType.IronLevel     => gameData.CurrentPlayer.GetResource(ResourceType.Iron, true),
+                PatentConstraintType.TitaniumLevel => gameData.CurrentPlayer.GetResource(ResourceType.Titanium, true),
+                _                                  => 0
+            };
+
+            return constraint.Comparison switch {
+                ComparisonType.GreaterThan          => actual > required,
+                ComparisonType.GreaterThanOrEqualTo => actual >= required,
+                ComparisonType.LessThan             => actual < required,
+                ComparisonType.LessThanOrEqualTo    => actual <= required,
+                ComparisonType.EqualTo              => actual == required,
+                _                                   => false
+            };
+        }
+
+        public string GetConstraintsReadable()
+        {
+            return Constraint1.Type + " must be " + Constraint1.Comparison + " " + Constraint1.Amount;
+        }
+
+        public string GetEffectsReadable()
+        {
+            string output = "";
+            if (Effect1.Active) output += GetEffectReadable(Effect1) + "\n";
+            if (Effect2.Active) output += GetEffectReadable(Effect2) + "\n";
+            if (Effect3.Active) output += GetEffectReadable(Effect3) + "\n";
+            if (Effect4.Active) output += GetEffectReadable(Effect4) + "\n";
+            return output;
+        }
+
+        public string GetEffectReadable(PatentEffect effect)
+        {
+            string output = effect.Type.ToString();
+            switch (effect.Type) {
+                case PatentEffectType.Build:
+                    output += " one " + effect.Tile;
+                    break;
+                case PatentEffectType.Increase:
+                    output += " Planet " + effect.Status;
+                    break;
+                default:
+                    output += " " + effect.Amount + " " + effect.Resource;
+                    break;
+            }
+            return output;
         }
 
         public List<Sprite> GetEffectSprites(IconData icons)
