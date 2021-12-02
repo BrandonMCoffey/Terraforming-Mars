@@ -4,6 +4,7 @@ using UnityEngine;
 using Utility.Buttons;
 #if UNITY_EDITOR
 using UnityEditor;
+
 #endif
 
 namespace Scripts.Data
@@ -18,9 +19,9 @@ namespace Scripts.Data
         public PatentConstraint Constraint1;
         public PatentConstraint Constraint2;
         [Header("Alt Resources")]
-        public ResourceType Alt1;
-        public ResourceType Alt2;
-        public ResourceType Alt3;
+        public PatentResourceType Alt1;
+        public PatentResourceType Alt2;
+        public PatentResourceType Alt3;
         [Header("Effects")]
         public PatentEffect Effect1;
         public PatentEffect Effect2;
@@ -39,7 +40,12 @@ namespace Scripts.Data
         [Button("Delete This", Spacing = 25)]
         private void EditorDeleteThis()
         {
-            _collection.EditorDeletePatent(this);
+            if (_collection != null) {
+                _collection.EditorDeletePatent(this);
+            } else {
+                Undo.DestroyObjectImmediate(this);
+                AssetDatabase.SaveAssets();
+            }
         }
 
         [Button("Update Patent Name")]

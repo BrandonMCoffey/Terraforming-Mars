@@ -7,7 +7,7 @@ namespace Scripts.Data.Structs
     public struct PatentConstraint
     {
         public bool Active;
-        public PlanetStatusType Type;
+        public PatentConstraintType Type;
         public ComparisonType Comparison;
         public int Amount;
     }

@@ -6,6 +6,9 @@ namespace Scripts.Enums
         Ocean,
         Forest,
         City,
-        Nuke
+        Nuke,
+        NaturalPreserve,
+        MiningArea,
+        CommercialDistrict
     }
 }

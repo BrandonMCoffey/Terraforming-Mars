@@ -1,10 +1,10 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Scripts.Data.Structs
+namespace Scripts.Data.Structs.Editor
 {
-    [CustomPropertyDrawer(typeof(PatentEffect))]
-    public class PatentEffectDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(PatentConstraint))]
+    public class PatentConstraintDrawer : PropertyDrawer
     {
         private const float Padding = 5;
         private const float AmountWidth = 50;
@@ -13,9 +13,8 @@ namespace Scripts.Data.Structs
         {
             var enabledProperty = property.FindPropertyRelative("Active");
             var typeProperty = property.FindPropertyRelative("Type");
+            var comparisonProperty = property.FindPropertyRelative("Comparison");
             var amountProperty = property.FindPropertyRelative("Amount");
-            var resourceProperty = property.FindPropertyRelative("Resource");
-            var tileProperty = property.FindPropertyRelative("Tile");
 
             EditorGUI.BeginProperty(position, label, property);
 
@@ -32,21 +31,15 @@ namespace Scripts.Data.Structs
             Rect typeRect = new Rect(typeStart, position.y, enumWidth, typeHeight);
             EditorGUI.PropertyField(typeRect, typeProperty, GUIContent.none);
 
-            float amountStart = typeRect.x + typeRect.width + Padding;
+            float comparisonStart = typeRect.x + typeRect.width + Padding;
+            float comparisonHeight = EditorGUI.GetPropertyHeight(comparisonProperty);
+            Rect comparisonRect = new Rect(comparisonStart, position.y, enumWidth, comparisonHeight);
+            EditorGUI.PropertyField(comparisonRect, comparisonProperty, GUIContent.none);
+
+            float amountStart = comparisonRect.x + comparisonRect.width + Padding;
             float amountHeight = EditorGUI.GetPropertyHeight(amountProperty);
             Rect amountRect = new Rect(amountStart, position.y, AmountWidth, amountHeight);
             EditorGUI.PropertyField(amountRect, amountProperty, GUIContent.none);
-
-            float effectStart = amountRect.x + amountRect.width + Padding;
-            if (typeProperty.enumValueIndex == 2) {
-                float tileHeight = EditorGUI.GetPropertyHeight(tileProperty);
-                Rect tileRect = new Rect(effectStart, position.y, enumWidth, tileHeight);
-                EditorGUI.PropertyField(tileRect, tileProperty, GUIContent.none);
-            } else {
-                float resourceHeight = EditorGUI.GetPropertyHeight(resourceProperty);
-                Rect resourceRect = new Rect(effectStart, position.y, enumWidth, resourceHeight);
-                EditorGUI.PropertyField(resourceRect, resourceProperty, GUIContent.none);
-            }
 
             EditorGUI.EndDisabledGroup();
             EditorGUI.EndProperty();

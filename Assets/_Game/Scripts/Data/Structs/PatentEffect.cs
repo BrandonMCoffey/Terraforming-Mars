@@ -11,5 +11,6 @@ namespace Scripts.Data.Structs
         public int Amount;
         public ResourceType Resource;
         public TileType Tile;
+        public PlanetStatusType Status;
     }
 }
