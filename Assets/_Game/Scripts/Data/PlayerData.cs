@@ -80,12 +80,19 @@ namespace Scripts.Data
         {
             SetHonor(_corporation.StartHonor);
             // Resources
-            SetResource(ResourceType.Credits, _corporation.StartCredits);
-            SetResource(ResourceType.Iron, _corporation.StartIron);
-            SetResource(ResourceType.Titanium, _corporation.StartTitanium);
-            SetResource(ResourceType.Plant, _corporation.StartPlants);
-            SetResource(ResourceType.Energy, _corporation.StartEnergy);
-            SetResource(ResourceType.Heat, _corporation.StartHeat);
+            SetResource(ResourceType.Credits, _corporation.StartCredits, true);
+            SetResource(ResourceType.Iron, _corporation.StartIron, true);
+            SetResource(ResourceType.Titanium, _corporation.StartTitanium, true);
+            SetResource(ResourceType.Plant, _corporation.StartPlants, true);
+            SetResource(ResourceType.Energy, _corporation.StartEnergy, true);
+            SetResource(ResourceType.Heat, _corporation.StartHeat, true);
+            // Resource Level
+            SetResource(ResourceType.Credits, _corporation.StartCreditsLevel, true, true);
+            SetResource(ResourceType.Iron, _corporation.StartIronLevel, true, true);
+            SetResource(ResourceType.Titanium, _corporation.StartTitaniumLevel, true, true);
+            SetResource(ResourceType.Plant, _corporation.StartPlantsLevel, true, true);
+            SetResource(ResourceType.Energy, _corporation.StartEnergyLevel, true, true);
+            SetResource(ResourceType.Heat, _corporation.StartHeatLevel, true, true);
             // Patents
             ClearAllPatents();
             AddPatents(patents.GetRandom(_corporation.StartPatents));
@@ -128,7 +135,7 @@ namespace Scripts.Data
 
         public void ProductionPhase()
         {
-            AddResource(ResourceType.Credits, _credits.Level);
+            AddResource(ResourceType.Credits, _honor + _credits.Level);
             AddResource(ResourceType.Iron, _iron.Level);
             AddResource(ResourceType.Titanium, _titanium.Level);
             AddResource(ResourceType.Plant, _plants.Level);
@@ -151,27 +158,51 @@ namespace Scripts.Data
 
         public bool HasResource(ResourceType type, int amount) => GetResource(type) >= amount;
 
-        public void SetResource(ResourceType type, int amount, bool force = false)
+        public void SetResource(ResourceType type, int amount, bool force = false, bool level = false)
         {
             if (!force && (amount < 0 || GetResource(type) == amount)) return;
             switch (type) {
                 case ResourceType.Credits:
-                    _credits.Amount = amount;
+                    if (level) {
+                        _credits.Level = amount;
+                    } else {
+                        _credits.Amount = amount;
+                    }
                     break;
                 case ResourceType.Iron:
-                    _iron.Amount = amount;
+                    if (level) {
+                        _iron.Level = amount;
+                    } else {
+                        _iron.Amount = amount;
+                    }
                     break;
                 case ResourceType.Titanium:
-                    _titanium.Amount = amount;
+                    if (level) {
+                        _titanium.Level = amount;
+                    } else {
+                        _titanium.Amount = amount;
+                    }
                     break;
                 case ResourceType.Plant:
-                    _plants.Amount = amount;
+                    if (level) {
+                        _plants.Level = amount;
+                    } else {
+                        _plants.Amount = amount;
+                    }
                     break;
                 case ResourceType.Energy:
-                    _energy.Amount = amount;
+                    if (level) {
+                        _energy.Level = amount;
+                    } else {
+                        _energy.Amount = amount;
+                    }
                     break;
                 case ResourceType.Heat:
-                    _heat.Amount = amount;
+                    if (level) {
+                        _heat.Level = amount;
+                    } else {
+                        _heat.Amount = amount;
+                    }
                     break;
                 default:
                     return;
@@ -180,10 +211,10 @@ namespace Scripts.Data
         }
 
         [Button(Spacing = 50)]
-        public void AddResource(ResourceType type, int amount)
+        public void AddResource(ResourceType type, int amount, bool level = false)
         {
             if (amount <= 0) return;
-            SetResource(type, GetResource(type) + amount, true);
+            SetResource(type, GetResource(type, level) + amount, true, level);
         }
 
         public bool RemoveResource(ResourceType type, int amount)
@@ -230,24 +261,18 @@ namespace Scripts.Data
             OnPatentsChanged?.Invoke();
         }
 
-        [Button]
-        public PatentData RemoveFirstPatent()
+        public void SellPatent(PatentData patent)
         {
-            if (_ownedPatents.Count == 0) return null;
-            var patent = _ownedPatents[0];
+            if (!_ownedPatents.Contains(patent)) return;
             _ownedPatents.Remove(patent);
-            OnPatentsChanged?.Invoke();
-            return patent;
+            AddResource(ResourceType.Credits, 1);
         }
 
-        [Button]
-        public void ActivateFirstPatent()
+        public void ActivatePatent(PatentData patent)
         {
-            if (_ownedPatents.Count == 0) return;
-            var patent = _ownedPatents[0];
+            if (!_ownedPatents.Contains(patent)) return;
             _ownedPatents.Remove(patent);
-            _activePatents.Add(patent);
-            OnPatentsChanged?.Invoke();
+            _completedPatents.Add(patent);
         }
 
         #endregion

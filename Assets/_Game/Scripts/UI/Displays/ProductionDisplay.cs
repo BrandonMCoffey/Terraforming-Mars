@@ -19,6 +19,9 @@ namespace Scripts.UI.Displays
             var player = _isPlayer1 ? _gameData.Player : _gameData.Opponent;
             int resourceLevel = player.GetResource(_resourceType, true);
             _levelText.text = "Level " + resourceLevel;
+            if (_resourceType == ResourceType.Credits) {
+                resourceLevel += player.Honor;
+            }
             _amountText.text = (resourceLevel < 0 ? "-" : "+") + resourceLevel;
         }
     }

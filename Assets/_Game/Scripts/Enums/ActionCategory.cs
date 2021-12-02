@@ -5,6 +5,7 @@ namespace Scripts.Enums
         StandardProject,
         OwnedPatents,
         ActivePatents,
-        CompletedPatents
+        CompletedPatents,
+        SellPatents
     }
 }

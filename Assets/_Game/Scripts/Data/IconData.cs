@@ -1,3 +1,4 @@
+using System;
 using Scripts.Enums;
 using UnityEngine;
 
@@ -37,8 +38,11 @@ namespace Scripts.Data
         [SerializeField] private Sprite _earth;
         [SerializeField] private Sprite _mars;
         [SerializeField] private Sprite _cityCircle;
+        [Header("Other")]
+        [SerializeField] private Sprite _spacer;
 
         public Sprite ResourceLevelUp => _resourceLevelUp;
+        public Sprite Spacer => _spacer;
 
         public Sprite GetResource(ResourceType type, bool isCircular = false)
         {
@@ -74,6 +78,24 @@ namespace Scripts.Data
                 ScienceType.Mars   => _mars,
                 ScienceType.City   => _cityCircle,
                 _                  => null
+            };
+        }
+
+        public Sprite GetIcon(PatentResourceType type)
+        {
+            return type switch {
+                PatentResourceType.Earth    => _earth,
+                PatentResourceType.Mars     => _mars,
+                PatentResourceType.Science  => _atomicScience,
+                PatentResourceType.Iron     => _ironCircle,
+                PatentResourceType.Titanium => _titaniumCircle,
+                PatentResourceType.Plants   => _plantsCircle,
+                PatentResourceType.Energy   => _energyCircle,
+                PatentResourceType.Heat     => _heat,
+                PatentResourceType.City     => _cityCircle,
+                PatentResourceType.Bacteria => _bacteriaCircle,
+                PatentResourceType.Animal   => _animalCircle,
+                _                           => null
             };
         }
     }

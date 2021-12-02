@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Scripts.Data.Structs;
 using Scripts.Enums;
 using UnityEngine;
@@ -29,6 +30,36 @@ namespace Scripts.Data
         public PatentEffect Effect4;
 
         private PatentCollection _collection;
+
+        public List<Sprite> GetAltSprites(IconData icons)
+        {
+            var list = new List<Sprite>();
+            var icon1 = icons.GetIcon(Alt1);
+            if (icon1 != null) list.Add(icon1);
+            var icon2 = icons.GetIcon(Alt2);
+            if (icon2 != null) list.Add(icon2);
+            var icon3 = icons.GetIcon(Alt3);
+            if (icon3 != null) list.Add(icon3);
+            return list;
+        }
+
+        public List<Sprite> GetEffectSprites(IconData icons)
+        {
+            var list = new List<Sprite>();
+            if (Effect1.Active && Effect1.Resource != ResourceType.None) {
+                list.Add(icons.GetResource(Effect1.Resource));
+            }
+            if (Effect2.Active && Effect2.Resource != ResourceType.None) {
+                list.Add(icons.GetResource(Effect2.Resource));
+            }
+            if (Effect3.Active && Effect3.Resource != ResourceType.None) {
+                list.Add(icons.GetResource(Effect3.Resource));
+            }
+            if (Effect4.Active && Effect4.Resource != ResourceType.None) {
+                list.Add(icons.GetResource(Effect4.Resource));
+            }
+            return list;
+        }
 
 #if UNITY_EDITOR
         public void Init(PatentCollection collection)

@@ -12,12 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90fc0c6b8f4a66c4eb60d3a5313ae47e, type: 3}
   m_Name: BasicCorporation
   m_EditorClassIdentifier: 
-  _actionsPerTurn: 10
+  _actionsPerTurn: 4
   _startHonor: 0
   _startPatents: 5
-  _startCredits: 100
+  _startCredits: 20
   _startIron: 5
   _startTitanium: 0
   _startPlants: 10
   _startEnergy: 5
   _startHeat: 0
+  _startCreditsLevel: 1
+  _startIronLevel: 1
+  _startTitaniumLevel: 1
+  _startPlantsLevel: 1
+  _startEnergyLevel: 1
+  _startHeatLevel: 1

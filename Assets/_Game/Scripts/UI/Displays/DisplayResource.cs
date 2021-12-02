@@ -10,6 +10,7 @@ namespace Scripts.UI.Displays
         [SerializeField] private ResourceType _type = ResourceType.Credits;
         [SerializeField] private GameData _gameData;
         [SerializeField] private bool _player1 = true;
+        [SerializeField] private bool _level;
         [SerializeField] private TextMeshProUGUI _text;
 
         private void OnEnable()
@@ -35,11 +36,7 @@ namespace Scripts.UI.Displays
 
         private void UpdateDisplay()
         {
-            if (_player1) {
-                _text.text = _gameData.Player.GetResource(_type).ToString();
-            } else {
-                _text.text = _gameData.Opponent.GetResource(_type).ToString();
-            }
+            _text.text = _player1 ? _gameData.Player.GetResource(_type, _level).ToString() : _gameData.Opponent.GetResource(_type, _level).ToString();
         }
     }
 }

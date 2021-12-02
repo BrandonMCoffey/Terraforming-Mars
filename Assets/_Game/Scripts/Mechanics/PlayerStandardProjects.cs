@@ -79,7 +79,7 @@ namespace Scripts.Mechanics
             int cost = StandardProjects.GetCost(_currentProject);
             switch (_currentProject) {
                 case StandardProjectType.PowerPlant:
-                    _playerData.AddResource(ResourceType.Energy, 1);
+                    _playerData.AddResource(ResourceType.Energy, 1, true);
                     _playerData.RemoveResource(ResourceType.Credits, cost);
                     return;
                 case StandardProjectType.Asteroid:

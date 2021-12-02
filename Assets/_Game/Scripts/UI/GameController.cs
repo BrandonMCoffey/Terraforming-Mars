@@ -1,6 +1,7 @@
 using System;
 using Scripts.Data;
 using Scripts.Enums;
+using Scripts.UI.Displays;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,9 +16,11 @@ namespace Scripts.UI
         [SerializeField] private PlanetData _planet;
         [SerializeField] private IconData _icons;
 
-        [Header("While Placing vs Main")]
+        [Header("Projects and Patents")]
+        [SerializeField] private ActionContentFiller _actionContentFiller;
         [SerializeField] private GameObject _leftSideMain;
-        [SerializeField] private GameObject _leftSidePlacing;
+        [Header("Action Display")]
+        [SerializeField] private GameObject _leftSideActions;
         [SerializeField] private TextMeshProUGUI _actionTitle;
         [SerializeField] private TextMeshProUGUI _actionDesc;
         [SerializeField] private TextMeshProUGUI _actionCost;
@@ -25,10 +28,18 @@ namespace Scripts.UI
         [SerializeField] private GameObject _confirmButton;
         [SerializeField] private Image _tileIcon;
         [SerializeField] private Image _resourceIcon;
+        [Header("Patent Details Menu")]
+        [SerializeField] private GameObject _leftSidePatents;
+        [SerializeField] private TextMeshProUGUI _patentTitle;
+        [SerializeField] private TextMeshProUGUI _patentCost;
+        [SerializeField] private GameObject _sellPatentButton;
+        [SerializeField] private GameObject _activatePatentButton;
 
         public static Action OnConfirmAction;
         public static Action OnCancelAction;
         public static Action OnUpdateHover;
+
+        private PatentData _currentPatent;
 
         public TileType TileToPlace { get; private set; }
 
@@ -56,8 +67,10 @@ namespace Scripts.UI
 
         public void ShowPlacingTile(TileType tile, int cost)
         {
+            _currentPatent = null;
             _leftSideMain.SetActive(false);
-            _leftSidePlacing.SetActive(true);
+            _leftSideActions.SetActive(true);
+            _leftSidePatents.SetActive(false);
             _actionCostObject.SetActive(true);
             _confirmButton.SetActive(false);
             TileToPlace = tile;
@@ -99,24 +112,63 @@ namespace Scripts.UI
                 default:
                     return;
             }
+            _currentPatent = null;
             _leftSideMain.SetActive(false);
-            _leftSidePlacing.SetActive(true);
+            _leftSideActions.SetActive(true);
+            _leftSidePatents.SetActive(false);
             _actionCostObject.SetActive(false);
             _confirmButton.SetActive(true);
             _resourceIcon.gameObject.SetActive(true);
             _tileIcon.gameObject.SetActive(false);
         }
 
+        public void ShowPatentDetails(PatentData patent, bool sell)
+        {
+            _currentPatent = patent;
+            _leftSideMain.SetActive(false);
+            _leftSideActions.SetActive(false);
+            _leftSidePatents.SetActive(true);
+
+            _patentTitle.text = patent.Name;
+            _patentCost.text = "Cost: " + patent.Cost;
+
+            _sellPatentButton.SetActive(sell);
+            _activatePatentButton.SetActive(!sell);
+        }
+
+
         public void ShowSellPatents()
         {
+            ShowActions();
+            _actionContentFiller.Fill(ActionCategory.SellPatents);
         }
 
         public void ShowActions()
         {
+            _currentPatent = null;
             _leftSideMain.SetActive(true);
-            _leftSidePlacing.SetActive(false);
+            _leftSideActions.SetActive(false);
+            _leftSidePatents.SetActive(false);
             TileToPlace = TileType.None;
+            _actionContentFiller.Fill(ActionCategory.StandardProject);
             OnUpdateHover?.Invoke();
+        }
+
+        public void OnActivatePatent()
+        {
+            if (_currentPatent == null) return;
+            _gameData.CurrentPlayer.ActivatePatent(_currentPatent);
+            _currentPatent = null;
+            ShowActions();
+            _actionContentFiller.Fill(ActionCategory.OwnedPatents);
+        }
+
+        public void OnSellPatent()
+        {
+            if (_currentPatent == null) return;
+            _gameData.CurrentPlayer.SellPatent(_currentPatent);
+            _currentPatent = null;
+            ShowActions();
         }
 
         public void ConfirmAction()
@@ -127,6 +179,7 @@ namespace Scripts.UI
         public void CancelAction()
         {
             OnCancelAction?.Invoke();
+            ShowActions();
         }
     }
 }

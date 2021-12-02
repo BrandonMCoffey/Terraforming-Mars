@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Scripts.Data;
 using Scripts.Enums;
 using Scripts.States;
+using Scripts.UI.Helper;
 using TMPro;
 using UnityEngine;
 
@@ -14,6 +16,7 @@ namespace Scripts.UI.Displays
         [SerializeField] private TextMeshProUGUI _headerText;
         [SerializeField] private List<ProjectContent> _standardProjects = new List<ProjectContent>();
         [SerializeField] private PatentContent _patentBasePrefab;
+        [SerializeField] private ButtonSet _buttonSet;
         [SerializeField] private bool _debug;
 
         private List<GameObject> _activeContent = new List<GameObject>();
@@ -44,19 +47,18 @@ namespace Scripts.UI.Displays
             switch (index) {
                 case 0:
                     Fill(ActionCategory.StandardProject);
-                    _headerText.text = "Projects";
                     break;
                 case 1:
                     Fill(ActionCategory.OwnedPatents);
-                    _headerText.text = "Patents";
                     break;
                 case 2:
                     Fill(ActionCategory.ActivePatents);
-                    _headerText.text = "Active Effects";
                     break;
                 case 3:
                     Fill(ActionCategory.CompletedPatents);
-                    _headerText.text = "Completed";
+                    break;
+                case 4:
+                    Fill(ActionCategory.SellPatents);
                     break;
             }
         }
@@ -73,11 +75,13 @@ namespace Scripts.UI.Displays
             }
             switch (category) {
                 case ActionCategory.StandardProject:
+                    _headerText.text = "Projects";
                     foreach (var project in _standardProjects) {
                         project.SetInteractable(_canInteract);
                     }
                     break;
                 case ActionCategory.OwnedPatents:
+                    _headerText.text = "Patents";
                     foreach (var patent in _gameData.CurrentPlayer.OwnedPatents) {
                         var newContent = Instantiate(_patentBasePrefab, _parent);
                         newContent.Fill(patent);
@@ -85,6 +89,7 @@ namespace Scripts.UI.Displays
                     }
                     break;
                 case ActionCategory.ActivePatents:
+                    _headerText.text = "Active Patents";
                     foreach (var patent in _gameData.CurrentPlayer.ActivePatents) {
                         var newContent = Instantiate(_patentBasePrefab, _parent);
                         newContent.Fill(patent);
@@ -92,9 +97,19 @@ namespace Scripts.UI.Displays
                     }
                     break;
                 case ActionCategory.CompletedPatents:
+                    _headerText.text = "Completed Patents";
                     foreach (var patent in _gameData.CurrentPlayer.CompletedPatents) {
                         var newContent = Instantiate(_patentBasePrefab, _parent);
                         newContent.Fill(patent);
+                        _activeContent.Add(newContent.gameObject);
+                    }
+                    break;
+                case ActionCategory.SellPatents:
+                    _buttonSet.DeselectAll();
+                    _headerText.text = "Sell Patents";
+                    foreach (var patent in _gameData.CurrentPlayer.OwnedPatents) {
+                        var newContent = Instantiate(_patentBasePrefab, _parent);
+                        newContent.Fill(patent, true);
                         _activeContent.Add(newContent.gameObject);
                     }
                     break;

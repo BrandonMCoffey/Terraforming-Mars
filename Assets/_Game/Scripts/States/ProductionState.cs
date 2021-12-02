@@ -9,8 +9,6 @@ namespace Scripts.States
 
         public override void Enter()
         {
-            StateMachine.Player.ProductionPhase();
-            StateMachine.Opponent.ProductionPhase();
             EnterProduction?.Invoke();
             OnFinishProduction += EndState;
         }
@@ -27,6 +25,8 @@ namespace Scripts.States
 
         private void EndState()
         {
+            StateMachine.Player.ProductionPhase();
+            StateMachine.Opponent.ProductionPhase();
             StateMachine.ChangeState<PlayerResearchState>();
         }
     }

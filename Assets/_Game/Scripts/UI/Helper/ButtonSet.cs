@@ -40,5 +40,13 @@ namespace Scripts.UI.Helper
             }
             OnSelect?.Invoke(index + _onSelectIntOffset);
         }
+
+        public void DeselectAll()
+        {
+            foreach (var button in _buttons) {
+                button.interactable = true;
+                _currentlySelected = -1;
+            }
+        }
     }
 }
