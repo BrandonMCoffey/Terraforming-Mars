@@ -55,13 +55,32 @@ namespace Scripts.UI.Awards
         public bool Fund(AwardType type, PlayerData player = null)
         {
             if (_awardsFunded >= _maxAwards || FundedAwards.Contains(type)) return false;
-            if (player == null) player = _gameData.CurrentPlayer;
+            if (player == null) {
+                player = _gameData.CurrentPlayer;
+                if (!player.UserControlled) {
+                    Debug.Log("Warning: Player attempting to fund awards on ai turn");
+                    return false;
+                }
+            }
             if (!player.RemoveResource(ResourceType.Credits, _fundingCost)) return false;
             FundedAwards.Add(type);
             OnFundAward?.Invoke(type);
             _awardsFunded++;
             UpdateFundingCost();
+            AnnouncementController.Instance.MinorAnnouncement(player.PlayerName + " Funded the " + type + " Award", GetDescription(type));
             return true;
+        }
+
+        public static string GetDescription(AwardType type)
+        {
+            return "Will be awarded to the player who " + type switch {
+                AwardType.Landlord   => "owns the most tiles",
+                AwardType.Banker     => "has the highest credit production",
+                AwardType.Scientist  => "owns the most scientific patents",
+                AwardType.Thermalist => "owns the most heat tokens",
+                AwardType.Miner      => "owns the most iron and titanium",
+                _                    => ""
+            };
         }
 
         public bool FundAny(PlayerData player)

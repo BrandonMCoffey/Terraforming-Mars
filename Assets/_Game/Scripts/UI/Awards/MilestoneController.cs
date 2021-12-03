@@ -40,8 +40,20 @@ namespace Scripts.UI.Awards
             OnClaimMilestone?.Invoke(type, _gameData.CurrentPlayer);
             player.ClaimMilestone(type);
             _milestonesClaimed++;
-            AnnouncementController.Instance.Announce(player.PlayerName + " Claimed the " + type + " Milestone", "");
+            AnnouncementController.Instance.MinorAnnouncement(player.PlayerName + " Claimed the " + type + " Milestone", GetDescription(type));
             return true;
+        }
+
+        public static string GetDescription(MilestoneType type)
+        {
+            return type switch {
+                MilestoneType.Terraformer => "For attaining 35 Honor",
+                MilestoneType.Mayor       => "For owning 3 Cities",
+                MilestoneType.Gardener    => "For owning 3 Forests",
+                MilestoneType.Builder     => "For placing 8 Tiles",
+                MilestoneType.Planner     => "For owning 16 patents",
+                _                         => ""
+            };
         }
 
         public bool TryClaimAny(PlayerData player)

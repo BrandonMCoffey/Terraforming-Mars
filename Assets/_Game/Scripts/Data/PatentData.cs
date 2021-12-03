@@ -22,7 +22,6 @@ namespace Scripts.Data
         public PatentCost Cost2;
         [Header("Requirements")]
         public PatentConstraint Constraint1;
-        public PatentConstraint Constraint2;
         [Header("Tags")]
         public PatentResourceType Alt1 = PatentResourceType.None;
         public PatentResourceType Alt2 = PatentResourceType.None;
@@ -64,7 +63,7 @@ namespace Scripts.Data
             if (Effect4.Active) ActivateEffect(Effect4, gameData);
             gameData.CurrentPlayer.AddHonor(Honor);
             gameData.CurrentPlayer.CompletePatent(this);
-            AnnouncementController.Instance.Announce(gameData.CurrentPlayer.PlayerName + " Activated " + Name, GetEffectsReadable(), 0, 3);
+            AnnouncementController.Instance.MinorAnnouncement(gameData.CurrentPlayer.PlayerName + " Activated " + Name, GetEffectsReadable());
             return true;
         }
 
@@ -105,9 +104,6 @@ namespace Scripts.Data
                 return false;
             }
             if (Constraint1.Active && !CheckConstraint(Constraint1, gameData)) {
-                return false;
-            }
-            if (Constraint2.Active && !CheckConstraint(Constraint2, gameData)) {
                 return false;
             }
             return true;

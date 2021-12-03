@@ -32,6 +32,10 @@ namespace Scripts.UI
         [SerializeField] private TextMeshProUGUI _bannerTitle;
         [SerializeField] private TextMeshProUGUI _bannerSubtitle;
         [SerializeField] private GameObject _bannerQuitGameButton;
+        [SerializeField] private RectMask2D _smallBannerMask;
+        [SerializeField] private float _smallBannerHeight = 75;
+        [SerializeField] private TextMeshProUGUI _smallBannerTitle;
+        [SerializeField] private TextMeshProUGUI _smallBannerSubtitle;
 
         [Header("Production and Research")]
         [SerializeField] private RectMask2D _productionMask;
@@ -47,6 +51,8 @@ namespace Scripts.UI
         private List<AwardType> _fundedAwards;
         private bool _gameOver;
 
+        #region Unity Functions
+
         private void Awake()
         {
             Instance = this;
@@ -57,6 +63,7 @@ namespace Scripts.UI
             _raycastBlock.SetActive(false);
             _bannerMask.gameObject.SetActive(false);
             _productionMask.gameObject.SetActive(false);
+            _smallBannerMask.gameObject.SetActive(false);
             _fundedAwards = new List<AwardType>();
         }
 
@@ -83,6 +90,8 @@ namespace Scripts.UI
             OpponentResearchState.EnterResearch -= AnnounceOpponentResearch;
             _gameData.Planet.OnPlanetTerraformed -= CheckGameOver;
         }
+
+        #endregion
 
         #region Game Over
 
@@ -238,7 +247,14 @@ namespace Scripts.UI
         public void Announce(string title, string subtitle, float waitTime, float holdTime)
         {
             if (_gameOver) return;
-            _announcements.Enqueue(AnnounceRoutine(title, subtitle, _bannerMask, _bannerHeight, waitTime, holdTime, false));
+            _announcements.Enqueue(AnnounceRoutine(title, subtitle, _bannerMask, _bannerHeight, waitTime, holdTime));
+            CheckRoutine();
+        }
+
+        public void MinorAnnouncement(string title, string subtitle)
+        {
+            if (_gameOver) return;
+            _announcements.Enqueue(AnnounceRoutine(title, subtitle, _smallBannerMask, _smallBannerHeight, _waitTime, _holdTime));
             CheckRoutine();
         }
 
@@ -347,8 +363,10 @@ namespace Scripts.UI
             } else {
                 _bannerTitle.text = title;
                 _bannerSubtitle.text = subtitle;
+                _smallBannerTitle.text = title;
+                _smallBannerSubtitle.text = subtitle;
             }
-            if (!_gameOver) {
+            if (!_gameOver && mask != _smallBannerMask) {
                 _raycastBlock.SetActive(true);
             }
             SetBannerHeight(mask, height);

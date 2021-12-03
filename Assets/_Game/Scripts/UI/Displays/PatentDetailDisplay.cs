@@ -66,10 +66,10 @@ namespace Scripts.UI.Displays
 
                 // Buttons
                 _sellButton.gameObject.SetActive(false);
-                _activateButton.interactable = _gameData.CurrentPlayer.HasResource(patent.Cost1.Resource, patent.Cost1.Amount);
+                _activateButton.interactable = patent.CanActivate(_gameData, false);
                 _activateAltButton.gameObject.SetActive(alt);
                 if (alt) {
-                    _activateAltButton.interactable = _gameData.CurrentPlayer.HasResource(patent.Cost2.Resource, patent.Cost2.Amount);
+                    _activateAltButton.interactable = patent.CanActivate(_gameData, true);
                 }
             } else {
                 _sellButton.gameObject.SetActive(true);
