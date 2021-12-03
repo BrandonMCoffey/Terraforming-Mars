@@ -14,8 +14,8 @@ namespace Scripts.States
 
         public override void Enter()
         {
-            _waitEndTime = Time.time + Random.Range(4f, 5f);
-            _endTurnTime = Time.time + 7f;
+            _waitEndTime = Time.time + Random.Range(3f, 4.5f);
+            _endTurnTime = Time.time + 5f;
             _brain.PlayerCanAct(true);
         }
 
@@ -23,7 +23,9 @@ namespace Scripts.States
         {
             if (Time.time > _waitEndTime) {
                 if (_brain.Think()) {
-                    _waitEndTime += 2;
+                    float additionalWait = Random.Range(2.5f, 3.5f);
+                    _waitEndTime += additionalWait;
+                    _endTurnTime += additionalWait + 0.1f;
                 }
             }
             if (Time.time > _endTurnTime) {

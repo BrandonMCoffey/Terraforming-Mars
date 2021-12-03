@@ -46,7 +46,7 @@ namespace Scripts.Mechanics
 
         public bool Think()
         {
-            if (_actions++ > _aiLogic.ActionsPerTurn) return true;
+            if (_actions++ > _aiLogic.ActionsPerTurn) return false;
             int attempts = 0;
             bool success = false;
             AiActions action = AiActions.None;

@@ -57,13 +57,13 @@ namespace Scripts.Data
             if (!gameData.CurrentPlayer.RemoveResource(alt ? Cost2.Resource : Cost1.Resource, alt ? Cost2.Amount : Cost1.Amount)) {
                 return false;
             }
+            AnnouncementController.Instance.MinorAnnouncement(gameData.CurrentPlayer.PlayerName + " Activated " + Name, GetEffectsReadable());
             if (Effect1.Active) ActivateEffect(Effect1, gameData);
             if (Effect2.Active) ActivateEffect(Effect2, gameData);
             if (Effect3.Active) ActivateEffect(Effect3, gameData);
             if (Effect4.Active) ActivateEffect(Effect4, gameData);
             gameData.CurrentPlayer.AddHonor(Honor);
             gameData.CurrentPlayer.CompletePatent(this);
-            AnnouncementController.Instance.MinorAnnouncement(gameData.CurrentPlayer.PlayerName + " Activated " + Name, GetEffectsReadable());
             return true;
         }
 
