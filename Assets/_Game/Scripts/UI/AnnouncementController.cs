@@ -252,6 +252,14 @@ namespace Scripts.UI
             _announcements.Enqueue(AnnounceRoutine("Generation Over", "Preparing for production and research until the next generation.", _bannerMask, _bannerHeight, _waitTime, _holdTime, false));
             _announcements.Enqueue(AnnounceRoutine("", "", _productionMask, _productionHeight, _waitTime, _holdTime, true));
             CheckRoutine();
+            ProductionState.OnFinishProduction += EndProduction;
+        }
+
+        public void EndProduction()
+        {
+            ProductionState.OnFinishProduction -= EndProduction;
+            ProductionState.FinishProduction();
+            _hold = false;
         }
 
         private void AnnouncePlayerResearch()
@@ -259,6 +267,7 @@ namespace Scripts.UI
             if (_gameOver) return;
             _player1Research = true;
             if (!_gameData.Player.UserControlled) {
+                AiResearch(_gameData.Player);
                 PlayerResearchState.FinishResearch();
                 return;
             }
@@ -271,6 +280,7 @@ namespace Scripts.UI
             if (_gameOver) return;
             _player1Research = false;
             if (!_gameData.Opponent.UserControlled) {
+                AiResearch(_gameData.Opponent);
                 OpponentResearchState.FinishResearch();
                 return;
             }
@@ -278,10 +288,17 @@ namespace Scripts.UI
             CheckRoutine();
         }
 
-        public void EndProduction()
+        private void AiResearch(PlayerData player)
         {
-            ProductionState.FinishProduction();
-            _hold = false;
+            int rand = Random.Range(0, 4);
+            while (rand > 0) {
+                if (player.RemoveResource(ResourceType.Credits, 4)) {
+                    player.AddPatent(_gameData.PatentCollection.GetRandom());
+                } else {
+                    break;
+                }
+                rand--;
+            }
         }
 
         public void EndResearch()

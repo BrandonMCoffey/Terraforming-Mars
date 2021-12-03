@@ -107,7 +107,7 @@ namespace Scripts.Data
             SetResource(ResourceType.Heat, _corporation.StartHeatLevel, true, true);
             // Patents
             ClearAllPatents();
-            AddPatents(patents.GetRandom(UserControlled ? _corporation.StartPatents : (int) (_corporation.StartPatents * 1.5f)));
+            AddPatents(patents.GetRandom(_corporation.StartPatents));
             _ownedTiles = new List<HexTile>();
             Milestones = new List<MilestoneType>();
         }
