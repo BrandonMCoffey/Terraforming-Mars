@@ -33,16 +33,19 @@ namespace Scripts.UI.Awards
             switch (_claimedMilestone) {
                 case 1:
                     _milestone1.sprite = GetMilestoneIcon(type);
+                    _milestone1.color = Color.white;
                     _owner1.gameObject.SetActive(true);
                     _owner1.color = playerData.PlayerColor;
                     break;
                 case 2:
                     _milestone2.sprite = GetMilestoneIcon(type);
+                    _milestone2.color = Color.white;
                     _owner2.gameObject.SetActive(true);
                     _owner2.color = playerData.PlayerColor;
                     break;
                 case 3:
                     _milestone3.sprite = GetMilestoneIcon(type);
+                    _milestone3.color = Color.white;
                     _owner3.gameObject.SetActive(true);
                     _owner3.color = playerData.PlayerColor;
                     break;

@@ -22,37 +22,51 @@ namespace Scripts.UI.Awards
         private void Awake()
         {
             Instance = this;
-        }
-
-        private void Start()
-        {
             _milestonesClaimed = 0;
             ClaimedMilestones = new List<MilestoneType>(_maxMilestones);
         }
 
-        public bool Claim(MilestoneType type)
+        public bool Claim(MilestoneType type, PlayerData player = null)
         {
+            // Check available milestones
             if (_milestonesClaimed >= _maxMilestones || ClaimedMilestones.Contains(type)) return false;
-            if (!CanClaimMilestone(_gameData.CurrentPlayer, type)) return false;
+
+            // Check player
+            if (player == null) player = _gameData.CurrentPlayer;
+            if (!CanClaim(player, type)) return false;
+
+            // Claim
             ClaimedMilestones.Add(type);
             OnClaimMilestone?.Invoke(type, _gameData.CurrentPlayer);
-            _gameData.CurrentPlayer.ClaimMilestone(type);
+            player.ClaimMilestone(type);
             _milestonesClaimed++;
+            AnnouncementController.Instance.Announce(player.PlayerName + " Claimed the " + type + " Milestone", "");
             return true;
         }
 
-        public static bool CanClaimAnyMilestone(PlayerData player)
+        public bool TryClaimAny(PlayerData player)
+        {
+            if (_milestonesClaimed >= _maxMilestones) return false;
+            if (Claim(MilestoneType.Terraformer, player)) return true;
+            if (Claim(MilestoneType.Mayor, player)) return true;
+            if (Claim(MilestoneType.Gardener, player)) return true;
+            if (Claim(MilestoneType.Builder, player)) return true;
+            if (Claim(MilestoneType.Planner, player)) return true;
+            return false;
+        }
+
+        public static bool CanClaimAny(PlayerData player)
         {
             bool available = false;
-            available |= CanClaimMilestone(player, MilestoneType.Terraformer);
-            available |= CanClaimMilestone(player, MilestoneType.Mayor);
-            available |= CanClaimMilestone(player, MilestoneType.Gardener);
-            available |= CanClaimMilestone(player, MilestoneType.Builder);
-            available |= CanClaimMilestone(player, MilestoneType.Planner);
+            available |= CanClaim(player, MilestoneType.Terraformer);
+            available |= CanClaim(player, MilestoneType.Mayor);
+            available |= CanClaim(player, MilestoneType.Gardener);
+            available |= CanClaim(player, MilestoneType.Builder);
+            available |= CanClaim(player, MilestoneType.Planner);
             return available;
         }
 
-        public static bool CanClaimMilestone(PlayerData player, MilestoneType type)
+        public static bool CanClaim(PlayerData player, MilestoneType type)
         {
             if (Instance != null && Instance.ClaimedMilestones.Contains(type)) return false;
             return type switch {

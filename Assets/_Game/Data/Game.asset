@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Game
   m_EditorClassIdentifier: 
   _turnsPerGeneration: 1
-  _generation: 1
+  _generation: 38
   _generationTurn: 1
   _player: {fileID: 11400000, guid: 5d6d37c059b60ba4bb7f045645202e2e, type: 2}
   _opponent: {fileID: 11400000, guid: c384f0f13a326aa4b8280194ba617e0c, type: 2}
@@ -21,3 +21,6 @@ MonoBehaviour:
   _planetType: 0
   _mars: {fileID: 11400000, guid: 0251b9c07db3c524185126a32f0c22af, type: 2}
   _moon: {fileID: 11400000, guid: ba1c949d13c90de4f9bc3a9b8d492ffd, type: 2}
+  _easyAiLogic: {fileID: 11400000, guid: da8064db3aee19f41a80b07376bed2c4, type: 2}
+  _mediumAiLogic: {fileID: 11400000, guid: 988cee5cf1e83254eb154ddb560521cc, type: 2}
+  _hardAiLogic: {fileID: 11400000, guid: 8713655b110f6334d9a2fa29f984a8dc, type: 2}

@@ -1,5 +1,6 @@
 using System;
 using Scripts.Enums;
+using Scripts.Mechanics;
 using UnityEngine;
 using Utility.Inspector;
 
@@ -8,21 +9,31 @@ namespace Scripts.Data
     [CreateAssetMenu(menuName = "TM/Game Data")]
     public class GameData : ScriptableObject
     {
+        [Header("Generations")]
         [SerializeField] private int _turnsPerGeneration = 2;
         [SerializeField] [ReadOnly] private int _generation = 1;
         [SerializeField] [ReadOnly] private int _generationTurn = 1;
+        [Header("Players")]
         [SerializeField] private PlayerData _player;
         [SerializeField] private PlayerData _opponent;
         [SerializeField] private PatentCollection _patentCollection;
+        [Header("Planets")]
         [SerializeField] private PlanetType _planetType = PlanetType.Mars;
         [SerializeField] private PlanetData _mars;
         [SerializeField] private PlanetData _moon;
+        [Header("Ai Logic")]
+        [SerializeField] private AiLogic _easyAiLogic;
+        [SerializeField] private AiLogic _mediumAiLogic;
+        [SerializeField] private AiLogic _hardAiLogic;
 
         public event Action<int> OnGenerationChange;
         public PlayerData CurrentPlayer => Player.CurrentTurn ? Player : Opponent;
         public PlayerData OtherPlayer => Player.CurrentTurn ? Opponent : Player;
         public PatentCollection PatentCollection => _patentCollection;
         public int Generation => _generation;
+        public AiLogic EasyAiLogic => _easyAiLogic;
+        public AiLogic MediumAiLogic => _mediumAiLogic;
+        public AiLogic HardAiLogic => _hardAiLogic;
 
 
         public PlayerData Player {

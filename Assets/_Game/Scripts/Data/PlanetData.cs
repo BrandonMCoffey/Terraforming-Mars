@@ -60,18 +60,18 @@ namespace Scripts.Data
         [SerializeField] private bool _requireMagneticField = true;
         [SerializeField] [ReadOnly] private bool _magneticFieldComplete;
 
-        public bool RequireOxygen => _requireOxygen;
-        public bool RequireWater => _requireWater;
+        public bool WaterComplete => !_requireWater || _waterComplete;
+        public bool HeatComplete => !_requireHeat || _heatComplete;
+        public bool OxygenComplete => !_requireOxygen || _oxygenComplete;
+        public bool MagneticFieldComplete => !_requireMagneticField || _magneticFieldComplete;
+        public bool PlanetTerraformed => WaterComplete && HeatComplete && OxygenComplete && MagneticFieldComplete;
+
         public PlanetStatusLevel WaterLevel => _waterLevel;
-        public bool RequireHeat => _requireHeat;
         public PlanetStatusLevel HeatLevel => _heatLevel;
-        public bool RequireMagneticField => _requireMagneticField;
-        public bool MagneticFieldComplete => _magneticFieldComplete;
 
         public event Action OnPlanetStatusChanged;
 
         public event Action<PlanetStatusType> OnPlanetTerraformed;
-        public bool PlanetTerraformed => _requireOxygen && !_oxygenComplete || _requireWater && !_waterComplete || _requireHeat && !_heatComplete || _requireMagneticField && !_magneticFieldComplete;
 
         #endregion
 

@@ -21,7 +21,7 @@ namespace Scripts.UI.Awards
                 _claimButton.interactable = false;
                 return;
             }
-            _claimButton.GetComponent<Image>().color = MilestoneController.CanClaimAnyMilestone(_gameData.CurrentPlayer) ? _canClaimColor : Color.white;
+            _claimButton.GetComponent<Image>().color = MilestoneController.CanClaimAny(_gameData.CurrentPlayer) ? _canClaimColor : Color.white;
             _claimButton.onClick.AddListener(ClaimMilestone);
         }
 

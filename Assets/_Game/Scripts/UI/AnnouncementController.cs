@@ -204,7 +204,7 @@ namespace Scripts.UI
                     }
                     break;
             }
-            _announcements.Enqueue(AnnounceRoutine("", "", _bannerMask, _bannerHeight, _waitTime, _holdTime, true, null, null, true));
+            _announcements.Enqueue(AnnounceRoutine("", "", _bannerMask, _bannerHeight, _waitTime, 100, true, null, null, true));
 
             CheckRoutine();
         }
@@ -226,7 +226,7 @@ namespace Scripts.UI
         private static string MilestoneNotification(PlayerData player)
         {
             if (!player.UserControlled) return "";
-            return MilestoneController.CanClaimAnyMilestone(player) ? "New Milestone Available, Ready to be Claimed." : "";
+            return MilestoneController.CanClaimAny(player) ? "New Milestone Available, Ready to be Claimed." : "";
         }
 
         [Button(Spacing = 10)]
@@ -321,7 +321,7 @@ namespace Scripts.UI
             _currentRoutine = StartCoroutine(_announcements.Dequeue());
         }
 
-        private IEnumerator AnnounceRoutine(string title, string subtitle, RectMask2D mask, float height, float wait, float hold, bool longHold = false, PlayerData researchData = null, PlayerData honorBonus = null, bool winnerCheck = false, int honorBonusAmount = 5)
+        private IEnumerator AnnounceRoutine(string title, string subtitle, RectMask2D mask, float height, float wait, float hold, bool longHold = false, PlayerData researchData = null, PlayerData honorBonusPlayer = null, bool winnerCheck = false, int honorBonusAmount = 5)
         {
             _bannerMask.gameObject.SetActive(false);
             _productionMask.gameObject.SetActive(false);
@@ -342,6 +342,8 @@ namespace Scripts.UI
                 }
                 _bannerSubtitle.text = "";
                 _bannerQuitGameButton.SetActive(true);
+                _hold = true;
+                longHold = true;
             } else {
                 _bannerTitle.text = title;
                 _bannerSubtitle.text = subtitle;
@@ -374,8 +376,8 @@ namespace Scripts.UI
                     yield return null;
                 }
             }
-            if (honorBonus != null) {
-                honorBonus.AddHonor(honorBonusAmount);
+            if (honorBonusPlayer != null) {
+                honorBonusPlayer.AddHonor(honorBonusAmount);
             }
             start = _closeTiming.keys[0].time;
             end = _closeTiming.keys[_closeTiming.length - 1].time;
