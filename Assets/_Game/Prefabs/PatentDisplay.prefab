@@ -952,6 +952,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _patentTitle: {fileID: 7212327968486458318}
+  _patentDetailsContainer: {fileID: 7212327968879726381}
   _patentCost: {fileID: 2143749552522649980}
   _patentRequirements: {fileID: 2140891960}
   _patentEffects: {fileID: 1983300005}

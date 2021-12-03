@@ -101,7 +101,7 @@ namespace Scripts.UI
         #region Game Over
 
         private const float GameOverWaitTime = 0.1f;
-        private const float GameOverAnnouncementTime = 3f;
+        private const float GameOverAnnouncementTime = 3.5f;
 
         private void FundAward(AwardType type)
         {
@@ -111,7 +111,8 @@ namespace Scripts.UI
 
         public void TerraformingStatusComplete(PlanetStatusType type)
         {
-            string title = "After " + _gameData.Generation + " Generations, " + _gameData.Planet.PlanetName + " is sustainable by " + type switch {
+            string title = "After " + _gameData.Generation + " Generations, " + _gameData.Planet.PlanetName + " is sustainable by " + type switch
+            {
                 PlanetStatusType.Oxygen        => "Oxygen Level",
                 PlanetStatusType.Heat          => "Temperature",
                 PlanetStatusType.Water         => "Water Level",
@@ -126,16 +127,16 @@ namespace Scripts.UI
         {
             _gameOver = true;
             _raycastBlock.SetActive(true);
-            _announcements.Enqueue(AnnounceRoutine("After " + _gameData.Generation + " Generations, " + _gameData.Planet.PlanetName + " has been successfully Terraformed", "", _bannerMask, _bannerHeight, GameOverWaitTime, GameOverAnnouncementTime));
+            _announcements.Enqueue(AnnounceRoutine("After " + _gameData.Generation + " Generations, " + _gameData.Planet.PlanetName + " has been successfully Terraformed", "", _bannerMask, _bannerHeight, GameOverWaitTime, GameOverAnnouncementTime + 1));
 
             // Display Bonus From Cities
             int neighboringForests = _gameData.Player.OwnedCities.Sum(city => city.GetNeighbors(TileType.Forest));
             if (neighboringForests > 0) {
-                _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " gets +" + neighboringForests + " Honor", "One for each forest next to their owned cities.", _bannerMask, _bannerHeight, GameOverWaitTime, GameOverAnnouncementTime));
+                _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " gets +" + neighboringForests + " Honor", "One for each forest next to their owned cities.", _bannerMask, _bannerHeight, GameOverWaitTime, GameOverAnnouncementTime, false, null, _gameData.Player, false, neighboringForests));
             }
             neighboringForests = _gameData.Opponent.OwnedCities.Sum(city => city.GetNeighbors(TileType.Forest));
             if (neighboringForests > 0) {
-                _announcements.Enqueue(AnnounceRoutine(_gameData.Opponent.PlayerName + " gets +" + neighboringForests + " Honor", "One for each forest next to their owned cities.", _bannerMask, _bannerHeight, GameOverWaitTime, GameOverAnnouncementTime));
+                _announcements.Enqueue(AnnounceRoutine(_gameData.Opponent.PlayerName + " gets +" + neighboringForests + " Honor", "One for each forest next to their owned cities.", _bannerMask, _bannerHeight, GameOverWaitTime, GameOverAnnouncementTime, false, null, _gameData.Opponent, false, neighboringForests));
             }
 
             // Display Milestones
@@ -149,12 +150,14 @@ namespace Scripts.UI
             foreach (var award in _fundedAwards) {
                 AwardWinner(award);
             }
+            _announcements.Enqueue(AnnounceRoutine("", "", _bannerMask, _bannerHeight, _waitTime, 100, true, null, null, true));
             CheckRoutine();
         }
 
         public static string GetDescription(MilestoneType type)
         {
-            return type switch {
+            return type switch
+            {
                 MilestoneType.Terraformer => "Claimed for being a quick rising star with 35 Honor early on. +5 Honor",
                 MilestoneType.Mayor       => "Claimed for focusing on building cities. +5 Honor",
                 MilestoneType.Gardener    => "Claimed for focusing on forests and plants. +5 Honor",
@@ -166,7 +169,8 @@ namespace Scripts.UI
 
         public static string GetDescription(AwardType type)
         {
-            return type switch {
+            return type switch
+            {
                 AwardType.Landlord   => "Awarded for owning the most tiles. +5 Honor",
                 AwardType.Banker     => "Awarded for having the highest currency production. +5 Honor",
                 AwardType.Scientist  => "Awarded for having the most scientific credit. +5 Honor",
@@ -224,9 +228,6 @@ namespace Scripts.UI
                     }
                     break;
             }
-            _announcements.Enqueue(AnnounceRoutine("", "", _bannerMask, _bannerHeight, _waitTime, 100, true, null, null, true));
-
-            CheckRoutine();
         }
 
         #endregion
