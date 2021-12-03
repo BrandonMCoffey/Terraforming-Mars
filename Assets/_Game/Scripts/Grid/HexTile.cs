@@ -28,6 +28,8 @@ namespace Scripts.Grid
         [SerializeField] private TextMeshProUGUI _bonusHoverVisual;
         [SerializeField] private List<HexTile> _neighbors = new List<HexTile>();
 
+        private PlayerData _owner;
+
         public bool WaterTile { get; private set; }
 
         public static event Action<HexTile> OnTileClicked;
@@ -98,16 +100,22 @@ namespace Scripts.Grid
             OnTileClicked?.Invoke(this);
         }
 
-        public int SetTile(TileType tile, Color owner)
+        public int SetTile(TileType tile, PlayerData owner)
         {
+            _owner = owner;
             _tileImage.sprite = _icons.GetTile(tile);
             _tileImage.color = Color.white;
-            _ownerImage.color = owner;
+            _ownerImage.color = owner.PlayerColor;
             _tileType = tile;
             int waterBonus = _neighbors.Where(neighbor => neighbor.WaterTile && neighbor.Claimed).Sum(neighbor => 2);
-            int commerceBonus = _neighbors.Where(neighbor => neighbor._tileType == TileType.CommercialDistrict).Sum(neighbor => 1);
-            if (tile == TileType.City) {
-                commerceBonus *= 4;
+            int commerceBonus;
+            if (tile == TileType.CommercialDistrict) {
+                commerceBonus = _neighbors.Where(neighbor => neighbor._tileType == TileType.City).Sum(neighbor => 4);
+            } else {
+                commerceBonus = _neighbors.Where(neighbor => neighbor._tileType == TileType.CommercialDistrict).Sum(neighbor => 1);
+                if (tile == TileType.City) {
+                    commerceBonus *= 4;
+                }
             }
             StartCoroutine(PlacementImpact(tile));
             switch (tile) {

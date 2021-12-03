@@ -36,7 +36,7 @@ namespace Scripts.Data
         [SerializeField] private Resource _heat = new Resource(0);
 
         [Header("Patents")]
-        [SerializeField] [ReadOnly] private List<PatentData> _ownedPatents = new List<PatentData>();
+        [SerializeField] private List<PatentData> _ownedPatents = new List<PatentData>();
         [SerializeField] [ReadOnly] private List<PatentData> _activePatents = new List<PatentData>();
         [SerializeField] [ReadOnly] private List<PatentData> _completedPatents = new List<PatentData>();
 
@@ -307,6 +307,7 @@ namespace Scripts.Data
 
         public bool ActivateFirstPatent(GameData gameData)
         {
+            if (_ownedPatents.Count == 0) return false;
             var patent = _ownedPatents[0];
             if (!patent.AnyActivate(gameData)) {
                 _ownedPatents.Remove(patent);

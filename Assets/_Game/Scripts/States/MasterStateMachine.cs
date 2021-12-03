@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Scripts.Data;
+using Scripts.Enums;
+using Scripts.UI;
 using UnityEngine;
 using UserInput;
 using Utility.Audio.Systems.Events;
@@ -28,6 +31,8 @@ namespace Scripts.States
         private List<State> _turnStates;
         private int _currentTurn;
 
+        public static event Action ForceCloseAnnouncements;
+
         private void Awake()
         {
             if (Input == null) {
@@ -35,6 +40,16 @@ namespace Scripts.States
             }
             _player = _gameData.Player;
             _opponent = _gameData.Opponent;
+        }
+
+        private void OnEnable()
+        {
+            _gameData.Planet.OnPlanetTerraformed += CheckGameOver;
+        }
+
+        private void OnDisable()
+        {
+            _gameData.Planet.OnPlanetTerraformed -= CheckGameOver;
         }
 
         private void Start()
@@ -56,6 +71,7 @@ namespace Scripts.States
         public void NextTurn()
         {
             if (_currentTurn >= 0) {
+                ForceCloseAnnouncements?.Invoke();
                 if (_endTurnSfx != null) _endTurnSfx.Play();
                 // Check to see if can move to next turn
                 var player = CurrentStateBase.GetComponent<PlayerTurnState>();
@@ -74,6 +90,16 @@ namespace Scripts.States
             }
             var turn = _turnStates[_currentTurn];
             ChangeState(turn);
+        }
+
+        private void CheckGameOver(PlanetStatusType type)
+        {
+            if (_gameData.Planet.PlanetTerraformed) {
+                AnnouncementController.Instance.GameOver();
+                ChangeState<GameOverState>();
+            } else {
+                AnnouncementController.Instance.TerraformingStatusComplete(type);
+            }
         }
     }
 }

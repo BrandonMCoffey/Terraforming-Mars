@@ -83,6 +83,7 @@ namespace Scripts.Mechanics
         {
             // If Heat Complete, Dont increase heat
             if (_gameData.Planet.HeatComplete && (type == StandardProjectType.HeatResidue || type == StandardProjectType.Asteroid)) return false;
+            if (type == StandardProjectType.Aquifer && _gameData.Planet.WaterComplete) return false;
             if (!_playerData.HasResource(StandardProjects.GetCostType(type), StandardProjects.GetCost(type))) return false;
             _standardProjects.OnAutoProject(type);
             return true;

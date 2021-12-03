@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Scripts.Enums;
 using Scripts.Mechanics;
@@ -97,6 +98,11 @@ namespace Scripts.Data
             }
         }
 
+        public bool CanActivate(GameData gameData)
+        {
+            return CanActivate(gameData, false) || CanActivate(gameData, true);
+        }
+
         public bool CanActivate(GameData gameData, bool alt)
         {
             if (alt && !Cost2.Active) return false;
@@ -109,8 +115,9 @@ namespace Scripts.Data
             return true;
         }
 
-        private static bool CheckConstraint(PatentConstraint constraint, GameData gameData)
+        public static bool CheckConstraint(PatentConstraint constraint, GameData gameData)
         {
+            if (!constraint.Active) return true;
             int required = constraint.Amount;
             int actual = constraint.Type switch {
                 PatentConstraintType.PlanetOxygen  => gameData.Planet.GetLevel(PlanetStatusType.Oxygen),
@@ -141,27 +148,35 @@ namespace Scripts.Data
         {
             string output = "";
             if (Effect1.Active) output += GetEffectReadable(Effect1);
-            if (Effect2.Active) output += ", " + GetEffectReadable(Effect2);
-            if (Effect3.Active) output += ", " + GetEffectReadable(Effect3);
-            if (Effect4.Active) output += ", " + GetEffectReadable(Effect4);
+            if (Effect2.Active) output += "\n" + GetEffectReadable(Effect2);
+            if (Effect3.Active) output += "\n" + GetEffectReadable(Effect3);
+            if (Effect4.Active) output += "\n" + GetEffectReadable(Effect4);
             return output;
         }
 
         public string GetEffectReadable(PatentEffect effect)
         {
-            string output = effect.Type.ToString();
-            switch (effect.Type) {
-                case PatentEffectType.Build:
-                    output += " one " + effect.Tile;
-                    break;
-                case PatentEffectType.Increase:
-                    output += " Planet " + effect.Status;
-                    break;
-                default:
-                    output += " " + effect.Amount + " " + effect.Resource;
-                    break;
-            }
-            return output;
+            return GetEffectTypeReadable(effect.Type) + effect.Type switch {
+                PatentEffectType.Build       => " one " + effect.Tile,
+                PatentEffectType.Increase    => " Planet " + effect.Status,
+                PatentEffectType.EarnPatents => " " + effect.Amount + " Patents",
+                _                            => " " + effect.Amount + " " + effect.Resource
+            };
+        }
+
+        public static string GetEffectTypeReadable(PatentEffectType type)
+        {
+            return type switch {
+                PatentEffectType.Lose        => "Lose",
+                PatentEffectType.Damage      => "Damage",
+                PatentEffectType.Build       => "Build",
+                PatentEffectType.Increase    => "Increase",
+                PatentEffectType.Earn        => "Earn",
+                PatentEffectType.LevelUp     => "Level Up",
+                PatentEffectType.Sabotage    => "Sabotage Opponent",
+                PatentEffectType.EarnPatents => "Earn",
+                _                            => ""
+            };
         }
 
         public static string GetConstraintReadable(PatentConstraintType type)

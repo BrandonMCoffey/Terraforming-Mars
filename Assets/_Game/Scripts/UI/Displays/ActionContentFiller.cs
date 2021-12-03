@@ -86,7 +86,7 @@ namespace Scripts.UI.Displays
                     _headerText.text = "Patents";
                     foreach (var patent in _gameData.CurrentPlayer.OwnedPatents) {
                         var newContent = Instantiate(_patentBasePrefab, _parent);
-                        newContent.Fill(patent);
+                        newContent.Fill(patent, _gameData);
                         _activeContent.Add(newContent.gameObject);
                     }
                     break;
@@ -95,7 +95,7 @@ namespace Scripts.UI.Displays
                     _headerText.text = "Active Patents";
                     foreach (var patent in _gameData.CurrentPlayer.ActivePatents) {
                         var newContent = Instantiate(_patentBasePrefab, _parent);
-                        newContent.Fill(patent);
+                        newContent.Fill(patent, _gameData);
                         _activeContent.Add(newContent.gameObject);
                     }
                     break;
@@ -104,7 +104,7 @@ namespace Scripts.UI.Displays
                     _headerText.text = "Completed Patents";
                     foreach (var patent in _gameData.CurrentPlayer.CompletedPatents) {
                         var newContent = Instantiate(_patentBasePrefab, _parent);
-                        newContent.Fill(patent);
+                        newContent.Fill(patent, _gameData);
                         _activeContent.Add(newContent.gameObject);
                     }
                     break;
@@ -113,7 +113,7 @@ namespace Scripts.UI.Displays
                     _headerText.text = "Sell Patents";
                     foreach (var patent in _gameData.CurrentPlayer.OwnedPatents) {
                         var newContent = Instantiate(_patentBasePrefab, _parent);
-                        newContent.Fill(patent, true);
+                        newContent.Fill(patent, _gameData, true);
                         _activeContent.Add(newContent.gameObject);
                     }
                     break;

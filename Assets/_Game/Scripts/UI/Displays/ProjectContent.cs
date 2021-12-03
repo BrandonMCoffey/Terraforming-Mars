@@ -12,7 +12,6 @@ namespace Scripts.UI.Displays
         [SerializeField] private StandardProjectType _project = StandardProjectType.SellPatents;
         [Header("References")]
         [SerializeField] private GameData _gameData;
-        [SerializeField] private PlayerTypes _whichPlayer = PlayerTypes.AnyUser;
         [SerializeField] private IconData _iconData;
         [SerializeField] private Button _button;
         [SerializeField] private TextMeshProUGUI _titleText;
@@ -23,32 +22,22 @@ namespace Scripts.UI.Displays
         [SerializeField] private TextMeshProUGUI _effectText;
 
         private bool _active;
+        private PlayerData _player;
 
         private void OnEnable()
         {
             if (_gameData == null) return;
-            if (_gameData.PlayerActive(_whichPlayer)) {
-                _gameData.Player.OnPatentsChanged += UpdateButton;
-                _gameData.Player.OnResourcesChanged += UpdateButton;
-            }
-            if (_gameData.OpponentActive(_whichPlayer)) {
-                _gameData.Opponent.OnPatentsChanged += UpdateButton;
-                _gameData.Opponent.OnResourcesChanged += UpdateButton;
-            }
+            _player = _gameData.CurrentPlayer;
+            _player.OnPatentsChanged += UpdateButton;
+            _player.OnResourcesChanged += UpdateButton;
             UpdateButton();
         }
 
         private void OnDisable()
         {
-            if (_gameData == null) return;
-            if (_gameData.PlayerActive(_whichPlayer)) {
-                _gameData.Player.OnPatentsChanged -= UpdateButton;
-                _gameData.Player.OnResourcesChanged -= UpdateButton;
-            }
-            if (_gameData.OpponentActive(_whichPlayer)) {
-                _gameData.Opponent.OnPatentsChanged -= UpdateButton;
-                _gameData.Opponent.OnResourcesChanged -= UpdateButton;
-            }
+            if (_player == null) return;
+            _player.OnPatentsChanged -= UpdateButton;
+            _player.OnResourcesChanged -= UpdateButton;
         }
 
         private void Start()
@@ -67,11 +56,11 @@ namespace Scripts.UI.Displays
         {
             if (_button == null) return;
             if (_project == StandardProjectType.SellPatents) {
-                _button.interactable = _active && _gameData.CurrentPlayer.HasAvailablePatents();
+                _button.interactable = _active && _gameData.CurrentPlayer.UserControlled && _gameData.CurrentPlayer.HasAvailablePatents();
             } else {
                 var cost = StandardProjects.GetCost(_project);
                 var costType = StandardProjects.GetCostType(_project);
-                _button.interactable = _active && _gameData.CurrentPlayer.HasResource(costType, cost);
+                _button.interactable = _active && _gameData.CurrentPlayer.UserControlled && _gameData.CurrentPlayer.HasResource(costType, cost);
             }
         }
 

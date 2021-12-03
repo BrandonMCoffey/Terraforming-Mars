@@ -26,6 +26,8 @@ namespace Scripts.UI.Displays
         [SerializeField] private List<Image> _tags;
 
         [Header("Patent Details")]
+        [SerializeField] private Color _meetsRequirementsColor = Color.green;
+        [SerializeField] private Color _missingRequirementsColor = Color.red;
         [SerializeField] private TextMeshProUGUI _requirements;
         [SerializeField] private TextMeshProUGUI _effects;
 
@@ -38,7 +40,6 @@ namespace Scripts.UI.Displays
         {
             // Basic
             _title.text = patent.Name;
-            _honor.transform.parent.gameObject.SetActive(patent.Honor > 0);
             _honor.text = "Gain " + patent.Honor + " Honor";
 
             // Tags
@@ -51,6 +52,7 @@ namespace Scripts.UI.Displays
 
             // Details
             _requirements.text = patent.GetConstraintsReadable();
+            _requirements.color = PatentData.CheckConstraint(patent.Constraint1, _gameData) ? _meetsRequirementsColor : _missingRequirementsColor;
             _effects.text = patent.GetEffectsReadable();
 
             if (!sell) {

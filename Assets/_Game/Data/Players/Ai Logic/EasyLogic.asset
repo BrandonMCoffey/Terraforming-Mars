@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actionsPerTurn: 3
   _actions:
-  - Weight: 0.59
+  - Weight: 0.79
     Action: 0
   - Weight: 0.045
     Action: 1
   - Weight: 0.048
     Action: 2
-  - Weight: 0.004
+  - Weight: 0.13
     Action: 3
   - Weight: 0.265
     Action: 4
@@ -28,13 +28,13 @@ MonoBehaviour:
     Action: 5
   - Weight: 0.904
     Action: 6
-  - Weight: 0.451
+  - Weight: 0.61
     Action: 7
-  - Weight: 0.073
+  - Weight: 0.36
     Action: 8
   - Weight: 0.622
     Action: 9
-  - Weight: 0.636
+  - Weight: 0.43
     Action: 10
   - Weight: 0.361
     Action: 11

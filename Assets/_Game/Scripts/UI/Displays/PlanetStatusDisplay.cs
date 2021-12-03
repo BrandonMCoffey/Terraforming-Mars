@@ -32,7 +32,7 @@ namespace Scripts.UI.Displays
                     _text.text = _planet.GetLevel(PlanetStatusType.Heat) + "*";
                     break;
                 case PlanetStatusType.Water:
-                    _text.text = _planet.GetLevel(PlanetStatusType.Water) + "/" + _planet.WaterLevel.MaxValue;
+                    _text.text = _planet.GetLevel(PlanetStatusType.Water) + " / " + _planet.WaterLevel.MaxValue;
                     break;
                 case PlanetStatusType.MagneticField:
                     _text.text = _planet.MagneticFieldComplete ? "Active" : "Inactive";

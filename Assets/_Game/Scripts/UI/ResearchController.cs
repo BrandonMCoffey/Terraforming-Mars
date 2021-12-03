@@ -12,7 +12,9 @@ namespace Scripts.UI
     {
         [SerializeField] private int _researchCost = 4;
         [SerializeField] private TextMeshProUGUI _titleText;
-        [SerializeField] private TextMeshProUGUI _moneyText;
+        [SerializeField] private TextMeshProUGUI _currencyText;
+        [SerializeField] private TextMeshProUGUI _ironText;
+        [SerializeField] private TextMeshProUGUI _titaniumText;
         [SerializeField] private Image _playerBanner;
         [SerializeField] private List<ResearchDisplay> _patentDisplays = new List<ResearchDisplay>();
 
@@ -42,7 +44,9 @@ namespace Scripts.UI
             for (var i = 0; i < _patentDisplays.Count; i++) {
                 _patentDisplays[i].Display(patents[i]);
             }
-            _moneyText.text = playerData.GetResource(ResourceType.Credits).ToString();
+            _currencyText.text = playerData.GetResource(ResourceType.Credits).ToString();
+            _ironText.text = playerData.GetResource(ResourceType.Iron).ToString();
+            _titaniumText.text = playerData.GetResource(ResourceType.Titanium).ToString();
             _playerBanner.color = playerData.PlayerColor;
         }
 
@@ -56,7 +60,9 @@ namespace Scripts.UI
             if (!success) return;
             _playerData.AddPatent(display.PatentData);
             _collection.RemovePatent(display.PatentData);
-            _moneyText.text = _playerData.GetResource(ResourceType.Credits).ToString();
+            _currencyText.text = _playerData.GetResource(ResourceType.Credits).ToString();
+            _ironText.text = _playerData.GetResource(ResourceType.Iron).ToString();
+            _titaniumText.text = _playerData.GetResource(ResourceType.Titanium).ToString();
             display.Complete();
         }
     }

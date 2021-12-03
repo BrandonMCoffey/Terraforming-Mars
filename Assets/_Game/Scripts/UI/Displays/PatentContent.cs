@@ -10,6 +10,9 @@ namespace Scripts.UI.Displays
     {
         [SerializeField] private IconData _iconData;
 
+        [SerializeField] private Image _button;
+        [SerializeField] private Color _cannotPurchaseColor = Color.red;
+
         [SerializeField] private TextMeshProUGUI _titleText;
         [SerializeField] private TextMeshProUGUI _costText;
         [SerializeField] private TextMeshProUGUI _honorText;
@@ -19,9 +22,10 @@ namespace Scripts.UI.Displays
 
         private bool _selling;
 
+        private PlayerData _player;
         private PatentData _currentPatent;
 
-        public void Fill(PatentData patent, bool sell = false)
+        public void Fill(PatentData patent, GameData gameData, bool sell = false)
         {
             _selling = sell;
             _currentPatent = patent;
@@ -30,7 +34,7 @@ namespace Scripts.UI.Displays
 
             _altCostImg.gameObject.SetActive(patent.Cost2.Active);
             if (patent.Cost2.Active) {
-                _altCostImg.sprite = _iconData.GetResource(patent.Cost2.Resource, true);
+                _altCostImg.sprite = _iconData.GetResource(patent.Cost2.Resource);
             }
 
             var tags = patent.GetAltSprites(_iconData);
@@ -42,6 +46,10 @@ namespace Scripts.UI.Displays
 
             _honorText.transform.parent.gameObject.SetActive(patent.Honor > 0);
             _honorText.text = patent.Honor.ToString();
+
+            if (!patent.CanActivate(gameData)) {
+                _button.color = _cannotPurchaseColor;
+            }
         }
 
         public void OnSelect()

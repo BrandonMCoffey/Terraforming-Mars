@@ -23,7 +23,7 @@ namespace Scripts.States
         {
             if (Time.time > _waitEndTime) {
                 if (_brain.Think()) {
-                    float additionalWait = Random.Range(2.5f, 3.5f);
+                    float additionalWait = Random.Range(2.5f, 3f);
                     _waitEndTime += additionalWait;
                     _endTurnTime += additionalWait + 0.1f;
                 }

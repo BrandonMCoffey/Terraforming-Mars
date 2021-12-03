@@ -235,24 +235,30 @@ namespace Scripts.Mechanics
                     return;
                 }
             }
-            int bonus = tile.SetTile(tileType, _playerData.PlayerColor);
+            int bonus = tile.SetTile(tileType, _playerData);
             _playerData.AddResource(ResourceType.Credits, bonus);
             switch (tileType) {
                 case TileType.Ocean:
                     _playerData.AddOwnedTile(tile);
                     bool increased1 = IncreasePlanetStatus(PlanetStatusType.Water);
-                    string subtitle1 = increased1 ? _playerData.PlayerName + " Gained +1 Honor for increasing the water level of the planet" : "";
-                    AnnouncementController.Instance.MinorAnnouncement(_playerData.PlayerName + " Placed an Ocean", subtitle1);
+                    if (!_patentTile) {
+                        string subtitle1 = increased1 ? _playerData.PlayerName + " Gained +1 Honor for increasing the water level of the planet" : "";
+                        AnnouncementController.Instance.MinorAnnouncement(_playerData.PlayerName + " Placed an Ocean", subtitle1);
+                    }
                     break;
                 case TileType.Forest:
                     _playerData.AddOwnedTile(tile);
                     bool increased2 = IncreasePlanetStatus(PlanetStatusType.Oxygen);
-                    string subtitle2 = increased2 ? _playerData.PlayerName + " Gained +1 Honor for increasing the oxygen level of the planet" : "";
-                    AnnouncementController.Instance.MinorAnnouncement(_playerData.PlayerName + " Placed a Forest", subtitle2);
+                    if (!_patentTile) {
+                        string subtitle2 = increased2 ? _playerData.PlayerName + " Gained +1 Honor for increasing the oxygen level of the planet" : "";
+                        AnnouncementController.Instance.MinorAnnouncement(_playerData.PlayerName + " Placed a Forest", subtitle2);
+                    }
                     break;
                 default:
                     _playerData.AddOwnedTile(tile);
-                    AnnouncementController.Instance.MinorAnnouncement(_playerData.PlayerName + " Placed a " + tileType, "");
+                    if (!_patentTile) {
+                        AnnouncementController.Instance.MinorAnnouncement(_playerData.PlayerName + " Placed a " + tileType, "");
+                    }
                     break;
             }
             OnPerformAction?.Invoke();

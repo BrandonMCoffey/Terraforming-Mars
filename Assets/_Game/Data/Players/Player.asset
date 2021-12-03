@@ -20,9 +20,9 @@ MonoBehaviour:
   _playerColor: {r: 0.4452207, g: 0.8207547, b: 0.80159616, a: 1}
   _sounds: {fileID: 11400000, guid: 3f7ee09101aa92f41ac5872191f42a75, type: 2}
   _corporation: {fileID: 11400000, guid: a297451beb2feb7479411c120b962769, type: 2}
-  _honor: 0
+  _honor: 1
   _credits:
-    Amount: 20
+    Amount: 25
     Level: 1
   _iron:
     Amount: 5
@@ -40,10 +40,9 @@ MonoBehaviour:
     Amount: 0
     Level: 1
   _ownedPatents:
-  - {fileID: 8148722346584136396, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
-  - {fileID: -6260552194245410655, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
+  - {fileID: 4828034606760465082, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
+  - {fileID: 5009735784585814476, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
+  - {fileID: 6408141713944810664, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
   - {fileID: -250094219563149016, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
-  - {fileID: 905863500014860402, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
-  - {fileID: 5926788163533147903, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}
   _activePatents: []
   _completedPatents: []

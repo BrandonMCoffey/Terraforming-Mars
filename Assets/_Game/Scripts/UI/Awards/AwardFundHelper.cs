@@ -17,6 +17,7 @@ namespace Scripts.UI.Awards
         private void OnEnable()
         {
             _fundButton.onClick.AddListener(FundAward);
+            _fundButton.interactable = !_funded;
         }
 
         private void OnDisable()

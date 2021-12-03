@@ -16,21 +16,21 @@ MonoBehaviour:
   _actions:
   - Weight: 0.306
     Action: 0
-  - Weight: 0.525
+  - Weight: 0.88
     Action: 1
-  - Weight: 0.301
+  - Weight: 0.514
     Action: 2
-  - Weight: 0.136
+  - Weight: 0.19
     Action: 3
-  - Weight: 0.241
+  - Weight: 0.15
     Action: 4
   - Weight: 0
     Action: 5
-  - Weight: 0.65
+  - Weight: 0.8
     Action: 6
   - Weight: 0.195
     Action: 7
-  - Weight: 0.272
+  - Weight: 0.34
     Action: 8
   - Weight: 0.92
     Action: 9

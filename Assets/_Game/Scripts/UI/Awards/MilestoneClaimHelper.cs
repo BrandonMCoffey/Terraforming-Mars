@@ -9,7 +9,6 @@ namespace Scripts.UI.Awards
     {
         [SerializeField] private MilestoneType _milestoneType = MilestoneType.Terraformer;
         [SerializeField] private Button _claimButton;
-        [SerializeField] private Color _canClaimColor = Color.yellow;
         [SerializeField] private MilestoneController _milestoneController;
         [SerializeField] private GameData _gameData;
 
@@ -19,9 +18,12 @@ namespace Scripts.UI.Awards
         {
             if (_milestoneController.ClaimedMilestones.Contains(_milestoneType)) {
                 _claimButton.interactable = false;
+                Image image = _claimButton.GetComponent<Image>();
+                if (image != null) image.color = _gameData.Player.Milestones.Contains(_milestoneType) ? _gameData.Player.PlayerColor : _gameData.Opponent.PlayerColor;
                 return;
             }
-            _claimButton.GetComponent<Image>().color = MilestoneController.CanClaimAny(_gameData.CurrentPlayer) ? _canClaimColor : Color.white;
+            bool canClaim = MilestoneController.CanClaim(_gameData.CurrentPlayer, _milestoneType);
+            _claimButton.interactable = canClaim;
             _claimButton.onClick.AddListener(ClaimMilestone);
         }
 
@@ -38,6 +40,8 @@ namespace Scripts.UI.Awards
             if (success) {
                 _claimed = true;
                 _claimButton.interactable = false;
+                Image image = _claimButton.GetComponent<Image>();
+                if (image != null) image.color = _gameData.Player.Milestones.Contains(_milestoneType) ? _gameData.Player.PlayerColor : _gameData.Opponent.PlayerColor;
             }
         }
     }
