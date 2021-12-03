@@ -201,7 +201,7 @@ MonoBehaviour:
   _image: {fileID: 6506758915613445200}
   _mask: {fileID: 6506758915373326611}
   _slider: {fileID: 6506758915010918768}
-  _offsetFromBottom: 160
+  _offsetFromBottom: 170
 --- !u!1 &6506758915010918774
 GameObject:
   m_ObjectHideFlags: 0
