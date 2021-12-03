@@ -1,6 +1,6 @@
 using System;
 
-namespace Scripts.Data.Structs
+namespace Scripts.Structs
 {
     [Serializable]
     public struct PlanetStatusLevel

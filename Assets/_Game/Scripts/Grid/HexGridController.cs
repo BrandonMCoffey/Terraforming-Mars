@@ -26,9 +26,7 @@ namespace Scripts.Grid
         private void UpdateGrid()
         {
             _grid = new List<HexTile>();
-            var parent = transform.parent;
-            if (parent == null) parent = transform;
-            Traverse(_grid, parent);
+            Traverse(_grid, transform);
         }
 
         private static void Traverse(ICollection<HexTile> list, Transform obj)

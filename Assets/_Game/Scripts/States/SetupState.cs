@@ -1,14 +1,17 @@
+using System;
 using System.Collections.Generic;
 
 namespace Scripts.States
 {
     public class SetupState : State
     {
-        private bool _activated;
+        private static event Action OnStartGame;
+
+        private bool _ready;
 
         public override void Enter()
         {
-            _activated = false;
+            _ready = false;
             StateMachine.PatentCollection.RestoreList();
             StateMachine.Player.SetupPlayer(StateMachine.PatentCollection);
             StateMachine.Opponent.SetupPlayer(StateMachine.PatentCollection);
@@ -33,17 +36,29 @@ namespace Scripts.States
                 turns.Add(opponentTurn);
             }
             StateMachine.SetupTurns(turns);
+            OnStartGame += Ready;
         }
 
         public override void Tick()
         {
-            if (_activated) return;
-            _activated = true;
+            if (!_ready) return;
+            _ready = false;
             StateMachine.NextTurn();
         }
 
         public override void Exit()
         {
+            OnStartGame -= Ready;
+        }
+
+        public static void StartGame()
+        {
+            OnStartGame?.Invoke();
+        }
+
+        private void Ready()
+        {
+            _ready = true;
         }
     }
 }

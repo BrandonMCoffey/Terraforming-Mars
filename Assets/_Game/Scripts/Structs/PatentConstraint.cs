@@ -1,7 +1,7 @@
 using System;
 using Scripts.Enums;
 
-namespace Scripts.Data.Structs
+namespace Scripts.Structs
 {
     [Serializable]
     public struct PatentConstraint

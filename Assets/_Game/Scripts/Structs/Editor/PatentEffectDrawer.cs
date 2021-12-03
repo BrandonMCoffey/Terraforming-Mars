@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Scripts.Data.Structs.Editor
+namespace Scripts.Structs.Editor
 {
     [CustomPropertyDrawer(typeof(PatentEffect))]
     public class PatentEffectDrawer : PropertyDrawer

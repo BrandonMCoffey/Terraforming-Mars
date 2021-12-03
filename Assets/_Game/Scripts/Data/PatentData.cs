@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Scripts.Data.Structs;
 using Scripts.Enums;
 using Scripts.Mechanics;
+using Scripts.Structs;
 using Scripts.UI;
 using UnityEngine;
 using Utility.Buttons;

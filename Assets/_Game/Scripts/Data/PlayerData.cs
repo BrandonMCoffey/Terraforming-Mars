@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Scripts.Data.Structs;
 using Scripts.Enums;
 using Scripts.Grid;
+using Scripts.Structs;
 using UnityEngine;
 using Utility.Buttons;
 using Utility.Inspector;

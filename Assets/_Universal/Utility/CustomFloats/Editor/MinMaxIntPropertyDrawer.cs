@@ -1,5 +1,5 @@
 #if UNITY_EDITOR
-using Scripts.Data.Structs;
+using Scripts.Structs;
 using UnityEditor;
 using UnityEngine;
 
@@ -16,8 +16,8 @@ namespace Utility.CustomFloats.Editor
             pos.height -= BottomSpacing;
             label = EditorGUI.BeginProperty(pos, label, prop);
             var contentRect = EditorGUI.PrefixLabel(pos, GUIUtility.GetControlID(FocusType.Passive), label);
-            var labels = new[] { new GUIContent("Min"), new GUIContent("Max") };
-            var properties = new[] { prop.FindPropertyRelative("MinValue"), prop.FindPropertyRelative("MaxValue") };
+            var labels = new[] {new GUIContent("Min"), new GUIContent("Max")};
+            var properties = new[] {prop.FindPropertyRelative("MinValue"), prop.FindPropertyRelative("MaxValue")};
             DrawMultiplePropertyFields(contentRect, labels, properties);
 
             EditorGUI.EndProperty();
