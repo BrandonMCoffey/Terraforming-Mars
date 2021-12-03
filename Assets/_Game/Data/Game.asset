@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _turnsPerGeneration: 1
   _generation: 1
-  _generationTurn: 1
+  _generationTurn: 2
   _player: {fileID: 11400000, guid: 08f1e041fd9e72e468ae4bb3f7a7a0eb, type: 2}
   _opponent: {fileID: 11400000, guid: c384f0f13a326aa4b8280194ba617e0c, type: 2}
   _patentCollection: {fileID: 11400000, guid: 226317b7ea292d6439dbf28c783fe2a9, type: 2}

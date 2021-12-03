@@ -152,14 +152,19 @@ namespace Scripts.Mechanics
             switch (_currentProject) {
                 case StandardProjectType.PowerPlant:
                     _playerData.AddResource(ResourceType.Energy, 1, true);
+                    AnnouncementController.Instance.MinorAnnouncement(_playerData.PlayerName + " Activated a Power Plant", "+1 Production to Energy");
                     _playerData.SoundData.PowerPlantSfx.Play();
                     return;
                 case StandardProjectType.Asteroid:
-                    IncreasePlanetStatus(PlanetStatusType.Heat);
+                    bool increased1 = IncreasePlanetStatus(PlanetStatusType.Heat);
+                    string subtitle1 = increased1 ? _playerData.PlayerName + " Gained +1 Honor for increasing the heat level of the planet" : "";
+                    AnnouncementController.Instance.MinorAnnouncement(_playerData.PlayerName + " Witnessed an Asteroid", subtitle1);
                     _playerData.SoundData.AsteroidSfx.Play();
-                    return;
+                    break;
                 case StandardProjectType.HeatResidue:
-                    IncreasePlanetStatus(PlanetStatusType.Heat);
+                    bool increased2 = IncreasePlanetStatus(PlanetStatusType.Heat);
+                    string subtitle2 = increased2 ? _playerData.PlayerName + " Gained +1 Honor for increasing the heat level of the planet" : "";
+                    AnnouncementController.Instance.MinorAnnouncement(_playerData.PlayerName + " Contributed to Global Warming", subtitle2);
                     _playerData.SoundData.AsteroidSfx.Play();
                     break;
                 default:
@@ -235,24 +240,29 @@ namespace Scripts.Mechanics
             switch (tileType) {
                 case TileType.Ocean:
                     _playerData.AddOwnedTile(tile);
-                    IncreasePlanetStatus(PlanetStatusType.Water);
+                    bool increased1 = IncreasePlanetStatus(PlanetStatusType.Water);
+                    string subtitle1 = increased1 ? _playerData.PlayerName + " Gained +1 Honor for increasing the water level of the planet" : "";
+                    AnnouncementController.Instance.MinorAnnouncement(_playerData.PlayerName + " Placed an Ocean", subtitle1);
                     break;
                 case TileType.Forest:
                     _playerData.AddOwnedTile(tile);
-                    IncreasePlanetStatus(PlanetStatusType.Oxygen);
+                    bool increased2 = IncreasePlanetStatus(PlanetStatusType.Oxygen);
+                    string subtitle2 = increased2 ? _playerData.PlayerName + " Gained +1 Honor for increasing the oxygen level of the planet" : "";
+                    AnnouncementController.Instance.MinorAnnouncement(_playerData.PlayerName + " Placed a Forest", subtitle2);
                     break;
                 default:
                     _playerData.AddOwnedTile(tile);
+                    AnnouncementController.Instance.MinorAnnouncement(_playerData.PlayerName + " Placed a " + tileType, "");
                     break;
             }
             OnPerformAction?.Invoke();
         }
 
-        private void IncreasePlanetStatus(PlanetStatusType type)
+        private bool IncreasePlanetStatus(PlanetStatusType type)
         {
-            if (GameController.Instance.IncreasePlanetStatus(type)) {
-                _playerData.AddHonor(1);
-            }
+            if (!GameController.Instance.IncreasePlanetStatus(type)) return false;
+            _playerData.AddHonor(1);
+            return true;
         }
 
         #endregion
