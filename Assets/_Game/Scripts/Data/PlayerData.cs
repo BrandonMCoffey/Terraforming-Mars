@@ -159,14 +159,16 @@ namespace Scripts.Data
 
         public void ProductionPhase()
         {
+            // Convert Energy to Heat
+            AddResource(ResourceType.Heat, _energy.Amount);
+            SetResource(ResourceType.Energy, 0);
+            // Production
             AddResource(ResourceType.Credits, _honor + _credits.Level);
             AddResource(ResourceType.Iron, _iron.Level);
             AddResource(ResourceType.Titanium, _titanium.Level);
             AddResource(ResourceType.Plant, _plants.Level);
             AddResource(ResourceType.Energy, _energy.Level);
             AddResource(ResourceType.Heat, _heat.Level);
-            AddResource(ResourceType.Heat, _energy.Amount);
-            SetResource(ResourceType.Energy, 0);
         }
 
         public int GetResource(ResourceType type, bool level = false)
@@ -306,12 +308,11 @@ namespace Scripts.Data
         public bool ActivateFirstPatent(GameData gameData)
         {
             var patent = _ownedPatents[0];
-            if (!patent.Activate(gameData)) {
+            if (!patent.AnyActivate(gameData)) {
                 _ownedPatents.Remove(patent);
                 _ownedPatents.Add(patent);
                 return false;
             }
-            Debug.Log("AI: Patent (" + patent.Name + ")");
             CompletePatent(patent);
             return true;
         }

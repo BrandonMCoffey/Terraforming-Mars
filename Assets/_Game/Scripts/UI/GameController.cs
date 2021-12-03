@@ -148,8 +148,20 @@ namespace Scripts.UI
         public void OnActivatePatent()
         {
             if (_currentPatent == null) return;
-            if (!_currentPatent.CanActivate(_gameData)) return;
-            _currentPatent.Activate(_gameData);
+            if (!_currentPatent.CanActivate(_gameData, false)) return;
+            _currentPatent.Activate(_gameData, false);
+            if (_patentDetails.gameObject.activeSelf) {
+                ShowActions();
+                _actionContentFiller.Fill(ActionCategory.OwnedPatents);
+            }
+            _currentPatent = null;
+        }
+
+        public void OnActivateAltPatent()
+        {
+            if (_currentPatent == null) return;
+            if (!_currentPatent.CanActivate(_gameData, true)) return;
+            _currentPatent.Activate(_gameData, true);
             if (_patentDetails.gameObject.activeSelf) {
                 ShowActions();
                 _actionContentFiller.Fill(ActionCategory.OwnedPatents);

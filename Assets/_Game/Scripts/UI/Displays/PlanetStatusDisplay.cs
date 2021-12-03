@@ -1,4 +1,3 @@
-using System;
 using Scripts.Data;
 using Scripts.Enums;
 using TMPro;

@@ -40,7 +40,10 @@ namespace Scripts.UI.Displays
             _button.interactable = true;
 
             _patentTitle.text = patent.Name;
-            _patentCost.text = "Cost: " + patent.Cost + " Credits";
+            _patentCost.text = patent.Cost1.Amount + " " + patent.Cost1.Resource;
+            if (patent.Cost2.Active) {
+                _patentCost.text += " or " + patent.Cost2.Amount + " " + patent.Cost2.Resource;
+            }
 
             _patentHonorObj.SetActive(patent.Honor > 0);
             _patentHonor.text = "Gain " + patent.Honor + " Honor";

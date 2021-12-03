@@ -17,7 +17,7 @@ namespace Scripts.Mechanics
         private StandardProjectType _currentProject;
         private TileType _tileToPlace = TileType.None;
 
-        private bool _patentTile = false;
+        private bool _patentTile;
 
         #region Player Turn State
 
@@ -88,7 +88,7 @@ namespace Scripts.Mechanics
             }
             // Check cost
             int cost = StandardProjects.GetCost(type);
-            if (!_playerData.HasResource(ResourceType.Credits, cost)) return;
+            if (!_playerData.HasResource(StandardProjects.GetCostType(type), cost)) return;
             // Run standard project
             _currentProject = type;
             switch (type) {
@@ -212,17 +212,9 @@ namespace Scripts.Mechanics
 
         private void OnClickTile(HexTile tile)
         {
-            if (tile == null || tile.Claimed || _tileToPlace == TileType.None) {
-                return;
-            }
-            if (tile.WaterTile != (_tileToPlace == TileType.Ocean)) {
-                Debug.Log("Error placing tile: " + _tileToPlace + " Water Tiles reserved for Oceans Only");
-                return;
-            }
-            if (_tileToPlace == TileType.City && tile.HasAdjacentCity) {
-                Debug.Log("Error placing tile: " + _tileToPlace + " Cities cannot be near other cities");
-                return;
-            }
+            if (tile == null || tile.Claimed || _tileToPlace == TileType.None) return;
+            if (tile.WaterTile != (_tileToPlace == TileType.Ocean)) return;
+            if (_tileToPlace == TileType.City && tile.HasAdjacentCity) return;
             PurchaseTile(tile, _tileToPlace);
             CancelPlacingTile();
         }

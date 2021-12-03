@@ -16,12 +16,14 @@ namespace Scripts.Data
     {
         [Header("Patent Info")]
         public string Name = "New Patent";
-        public int Cost = 10;
-        public int Honor = 0;
+        public int Honor;
+        [Header("Cost")]
+        public PatentCost Cost1;
+        public PatentCost Cost2;
         [Header("Requirements")]
         public PatentConstraint Constraint1;
         public PatentConstraint Constraint2;
-        [Header("Alt Resources")]
+        [Header("Tags")]
         public PatentResourceType Alt1 = PatentResourceType.None;
         public PatentResourceType Alt2 = PatentResourceType.None;
         public PatentResourceType Alt3 = PatentResourceType.None;
@@ -45,9 +47,15 @@ namespace Scripts.Data
             return list;
         }
 
-        public bool Activate(GameData gameData)
+        public bool AnyActivate(GameData gameData)
         {
-            if (!gameData.CurrentPlayer.RemoveResource(ResourceType.Credits, Cost)) {
+            return Activate(gameData, CanActivate(gameData, true));
+        }
+
+        public bool Activate(GameData gameData, bool alt)
+        {
+            if (!CanActivate(gameData, alt)) return false;
+            if (!gameData.CurrentPlayer.RemoveResource(alt ? Cost2.Resource : Cost1.Resource, alt ? Cost2.Amount : Cost1.Amount)) {
                 return false;
             }
             if (Effect1.Active) ActivateEffect(Effect1, gameData);
@@ -90,9 +98,10 @@ namespace Scripts.Data
             }
         }
 
-        public bool CanActivate(GameData gameData)
+        public bool CanActivate(GameData gameData, bool alt)
         {
-            if (!gameData.CurrentPlayer.HasResource(ResourceType.Credits, Cost)) {
+            if (alt && !Cost2.Active) return false;
+            if (!gameData.CurrentPlayer.HasResource(alt ? Cost2.Resource : Cost1.Resource, alt ? Cost2.Amount : Cost1.Amount)) {
                 return false;
             }
             if (Constraint1.Active && !CheckConstraint(Constraint1, gameData)) {
@@ -129,7 +138,7 @@ namespace Scripts.Data
         public string GetConstraintsReadable()
         {
             if (!Constraint1.Active) return "";
-            return Constraint1.Type + " must be " + Constraint1.Comparison + " " + Constraint1.Amount;
+            return GetConstraintReadable(Constraint1.Type) + " must be " + GetComparisonReadable(Constraint1.Comparison) + " " + Constraint1.Amount;
         }
 
         public string GetEffectsReadable()
@@ -157,6 +166,31 @@ namespace Scripts.Data
                     break;
             }
             return output;
+        }
+
+        public static string GetConstraintReadable(PatentConstraintType type)
+        {
+            return type switch {
+                PatentConstraintType.PlanetOxygen   => "Planet Oxygen",
+                PatentConstraintType.PlanetHeat     => "Planet Heat",
+                PatentConstraintType.PlanetWater    => "Planet Water",
+                PatentConstraintType.IronLevel      => "Iron Level",
+                PatentConstraintType.TitaniumLevel  => "Titanium Level",
+                PatentConstraintType.SciencePatents => "Science Patents",
+                _                                   => ""
+            };
+        }
+
+        public static string GetComparisonReadable(ComparisonType type)
+        {
+            return type switch {
+                ComparisonType.GreaterThan          => "Greater Than",
+                ComparisonType.GreaterThanOrEqualTo => "Greater Than Or Equal To",
+                ComparisonType.LessThan             => "Less Than",
+                ComparisonType.LessThanOrEqualTo    => "Less Than Or Equal To",
+                ComparisonType.EqualTo              => "Equal To",
+                _                                   => ""
+            };
         }
 
         public List<Sprite> GetEffectSprites(IconData icons)

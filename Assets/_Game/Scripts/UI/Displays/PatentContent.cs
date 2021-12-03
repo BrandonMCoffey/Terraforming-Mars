@@ -9,40 +9,38 @@ namespace Scripts.UI.Displays
     public class PatentContent : MonoBehaviour
     {
         [SerializeField] private IconData _iconData;
+
         [SerializeField] private TextMeshProUGUI _titleText;
         [SerializeField] private TextMeshProUGUI _costText;
         [SerializeField] private TextMeshProUGUI _honorText;
-        [SerializeField] private List<Image> _images;
 
-        private bool _selling = false;
+        [SerializeField] private Image _altCostImg;
+        [SerializeField] private List<Image> _tags;
 
-        private PatentData _currentPatent = null;
+        private bool _selling;
+
+        private PatentData _currentPatent;
 
         public void Fill(PatentData patent, bool sell = false)
         {
             _selling = sell;
             _currentPatent = patent;
             _titleText.text = patent.Name;
-            _costText.text = patent.Cost.ToString();
+            _costText.text = patent.Cost1.Amount.ToString();
 
-            var icons = patent.GetAltSprites(_iconData);
-            foreach (var image in _images) {
-                image.enabled = false;
+            _altCostImg.gameObject.SetActive(patent.Cost2.Active);
+            if (patent.Cost2.Active) {
+                _altCostImg.sprite = _iconData.GetResource(patent.Cost2.Resource, true);
             }
-            int index = 0;
-            foreach (var icon in icons) {
-                if (index >= 3) continue;
-                _images[index].enabled = true;
-                _images[index++].sprite = icon;
+
+            var tags = patent.GetAltSprites(_iconData);
+            for (int i = 0; i < _tags.Count; i++) {
+                bool valid = i < tags.Count && tags[i] != null;
+                _tags[i].gameObject.SetActive(valid);
+                if (valid) _tags[i].sprite = tags[i];
             }
-            icons = patent.GetEffectSprites(_iconData);
-            index = 3;
-            foreach (var icon in icons) {
-                if (index >= 6) continue;
-                _images[index].enabled = true;
-                _images[index++].sprite = icon;
-            }
-            _honorText.gameObject.SetActive(patent.Honor > 0);
+
+            _honorText.transform.parent.gameObject.SetActive(patent.Honor > 0);
             _honorText.text = patent.Honor.ToString();
         }
 

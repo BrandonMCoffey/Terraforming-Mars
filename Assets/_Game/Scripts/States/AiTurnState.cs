@@ -92,10 +92,16 @@ namespace Scripts.States
             }
             if (_playerData.HasResource(ResourceType.Heat, 15)) {
                 _standardProjects.OnAutoProject(StandardProjectType.HeatResidue);
+                _waitEndTime = Time.time + 2f;
+                _endTurnTime += 2f;
+                AnnouncementController.Instance.Announce(_playerData.PlayerName + " " + StandardProjects.GetActionTitle(StandardProjectType.HeatResidue), "");
                 return;
             }
             if (_playerData.HasResource(ResourceType.Plant, 15)) {
                 _standardProjects.OnAutoProject(StandardProjectType.Plants);
+                _waitEndTime = Time.time + 2f;
+                _endTurnTime += 2f;
+                AnnouncementController.Instance.Announce(_playerData.PlayerName + " " + StandardProjects.GetActionTitle(StandardProjectType.Plants), "");
                 return;
             }
             var rand = Random.Range(0, 11);
@@ -127,6 +133,7 @@ namespace Scripts.States
                 default:
                     if (_playerData.ActivateFirstPatent(StateMachine.GameData)) {
                         _endTurnTime += 2;
+                        _waitEndTime = Time.time + 2f;
                     } else {
                         _actions--;
                     }
@@ -138,8 +145,9 @@ namespace Scripts.States
             }
             Debug.Log("AI: Standard Project (" + standardProject + ")");
             _standardProjects.OnAutoProject(standardProject);
+            _waitEndTime = Time.time + 2f;
+            _endTurnTime += 2f;
             AnnouncementController.Instance.Announce(_playerData.PlayerName + " " + StandardProjects.GetActionTitle(standardProject), "");
-            _endTurnTime += 2;
         }
 
         private bool CheckProject(StandardProjectType type)
