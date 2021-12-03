@@ -42,7 +42,11 @@ namespace Scripts.UI
             if (_titleText != null) _titleText.text = "Research Phase (" + playerData.PlayerName + ")";
             var patents = collection.GetRandom(_patentDisplays.Count, false);
             for (var i = 0; i < _patentDisplays.Count; i++) {
-                _patentDisplays[i].Display(patents[i]);
+                if (i >= patents.Count || patents[i] == null) {
+                    _patentDisplays[i].Display(null);
+                } else {
+                    _patentDisplays[i].Display(patents[i]);
+                }
             }
             _currencyText.text = playerData.GetResource(ResourceType.Credits).ToString();
             _ironText.text = playerData.GetResource(ResourceType.Iron).ToString();

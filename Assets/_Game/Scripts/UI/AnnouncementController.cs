@@ -100,8 +100,8 @@ namespace Scripts.UI
 
         #region Game Over
 
-        private const float _gameOverWaitTime = 0.1f;
-        private const float _gameOverAnnouncementTime = 3f;
+        private const float GameOverWaitTime = 0.1f;
+        private const float GameOverAnnouncementTime = 3f;
 
         private void FundAward(AwardType type)
         {
@@ -126,24 +126,24 @@ namespace Scripts.UI
         {
             _gameOver = true;
             _raycastBlock.SetActive(true);
-            _announcements.Enqueue(AnnounceRoutine("After " + _gameData.Generation + " Generations, " + _gameData.Planet.PlanetName + " has been successfully Terraformed", "", _bannerMask, _bannerHeight, _gameOverWaitTime, _gameOverAnnouncementTime));
+            _announcements.Enqueue(AnnounceRoutine("After " + _gameData.Generation + " Generations, " + _gameData.Planet.PlanetName + " has been successfully Terraformed", "", _bannerMask, _bannerHeight, GameOverWaitTime, GameOverAnnouncementTime));
 
             // Display Bonus From Cities
             int neighboringForests = _gameData.Player.OwnedCities.Sum(city => city.GetNeighbors(TileType.Forest));
             if (neighboringForests > 0) {
-                _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " gets +" + neighboringForests + " Honor", "One for each forest next to their owned cities.", _bannerMask, _bannerHeight, _gameOverWaitTime, _gameOverAnnouncementTime));
+                _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " gets +" + neighboringForests + " Honor", "One for each forest next to their owned cities.", _bannerMask, _bannerHeight, GameOverWaitTime, GameOverAnnouncementTime));
             }
             neighboringForests = _gameData.Opponent.OwnedCities.Sum(city => city.GetNeighbors(TileType.Forest));
             if (neighboringForests > 0) {
-                _announcements.Enqueue(AnnounceRoutine(_gameData.Opponent.PlayerName + " gets +" + neighboringForests + " Honor", "One for each forest next to their owned cities.", _bannerMask, _bannerHeight, _gameOverWaitTime, _gameOverAnnouncementTime));
+                _announcements.Enqueue(AnnounceRoutine(_gameData.Opponent.PlayerName + " gets +" + neighboringForests + " Honor", "One for each forest next to their owned cities.", _bannerMask, _bannerHeight, GameOverWaitTime, GameOverAnnouncementTime));
             }
 
             // Display Milestones
             foreach (var milestone in _gameData.Player.Milestones) {
-                _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " is the " + milestone, GetDescription(milestone), _bannerMask, _bannerHeight, _gameOverWaitTime, _gameOverAnnouncementTime, false, null, _gameData.Player));
+                _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " is the " + milestone, GetDescription(milestone), _bannerMask, _bannerHeight, GameOverWaitTime, GameOverAnnouncementTime, false, null, _gameData.Player));
             }
             foreach (var milestone in _gameData.Opponent.Milestones) {
-                _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " is the " + milestone, GetDescription(milestone), _bannerMask, _bannerHeight, _gameOverWaitTime, _gameOverAnnouncementTime, false, null, _gameData.Opponent));
+                _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " is the " + milestone, GetDescription(milestone), _bannerMask, _bannerHeight, GameOverWaitTime, GameOverAnnouncementTime, false, null, _gameData.Opponent));
             }
             // Display Funded Awards (And winners)
             foreach (var award in _fundedAwards) {
@@ -185,20 +185,20 @@ namespace Scripts.UI
                     player = _gameData.Player.OwnedTiles;
                     opponent = _gameData.Opponent.OwnedTiles;
                     if (player >= opponent) {
-                        _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, _gameOverWaitTime, _gameOverAnnouncementTime, false, null, _gameData.Player));
+                        _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, GameOverWaitTime, GameOverAnnouncementTime, false, null, _gameData.Player));
                     }
                     if (opponent >= player) {
-                        _announcements.Enqueue(AnnounceRoutine(_gameData.Opponent.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, _gameOverWaitTime, _gameOverAnnouncementTime, false, null, _gameData.Opponent));
+                        _announcements.Enqueue(AnnounceRoutine(_gameData.Opponent.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, GameOverWaitTime, GameOverAnnouncementTime, false, null, _gameData.Opponent));
                     }
                     break;
                 case AwardType.Banker:
                     player = _gameData.Player.GetResource(ResourceType.Credits, true);
                     opponent = _gameData.Opponent.GetResource(ResourceType.Credits, true);
                     if (player >= opponent) {
-                        _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, _gameOverWaitTime, _gameOverAnnouncementTime, false, null, _gameData.Player));
+                        _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, GameOverWaitTime, GameOverAnnouncementTime, false, null, _gameData.Player));
                     }
                     if (opponent >= player) {
-                        _announcements.Enqueue(AnnounceRoutine(_gameData.Opponent.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, _gameOverWaitTime, _gameOverAnnouncementTime, false, null, _gameData.Opponent));
+                        _announcements.Enqueue(AnnounceRoutine(_gameData.Opponent.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, GameOverWaitTime, GameOverAnnouncementTime, false, null, _gameData.Opponent));
                     }
                     break;
                 case AwardType.Scientist:
@@ -207,20 +207,20 @@ namespace Scripts.UI
                     player = _gameData.Player.GetResource(ResourceType.Heat);
                     opponent = _gameData.Opponent.GetResource(ResourceType.Heat);
                     if (player >= opponent) {
-                        _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, _gameOverWaitTime, _gameOverAnnouncementTime, false, null, _gameData.Player));
+                        _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, GameOverWaitTime, GameOverAnnouncementTime, false, null, _gameData.Player));
                     }
                     if (opponent >= player) {
-                        _announcements.Enqueue(AnnounceRoutine(_gameData.Opponent.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, _gameOverWaitTime, _gameOverAnnouncementTime, false, null, _gameData.Opponent));
+                        _announcements.Enqueue(AnnounceRoutine(_gameData.Opponent.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, GameOverWaitTime, GameOverAnnouncementTime, false, null, _gameData.Opponent));
                     }
                     break;
                 case AwardType.Miner:
                     player = _gameData.Player.GetResource(ResourceType.Iron) + _gameData.Player.GetResource(ResourceType.Titanium);
                     opponent = _gameData.Opponent.GetResource(ResourceType.Iron) + _gameData.Opponent.GetResource(ResourceType.Titanium);
                     if (player >= opponent) {
-                        _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, _gameOverWaitTime, _gameOverAnnouncementTime, false, null, _gameData.Player));
+                        _announcements.Enqueue(AnnounceRoutine(_gameData.Player.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, GameOverWaitTime, GameOverAnnouncementTime, false, null, _gameData.Player));
                     }
                     if (opponent >= player) {
-                        _announcements.Enqueue(AnnounceRoutine(_gameData.Opponent.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, _gameOverWaitTime, _gameOverAnnouncementTime, false, null, _gameData.Opponent));
+                        _announcements.Enqueue(AnnounceRoutine(_gameData.Opponent.PlayerName + " earned the " + type + " Award", GetDescription(type), _bannerMask, _bannerHeight, GameOverWaitTime, GameOverAnnouncementTime, false, null, _gameData.Opponent));
                     }
                     break;
             }
@@ -317,7 +317,7 @@ namespace Scripts.UI
 
         private void AiResearch(PlayerData player)
         {
-            int rand = Random.Range(-1, 4);
+            int rand = Random.Range(-1, 3);
             while (rand > 0) {
                 if (player.RemoveResource(ResourceType.Credits, 4)) {
                     player.AddPatent(_gameData.PatentCollection.GetRandom());

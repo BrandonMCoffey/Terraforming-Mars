@@ -10,6 +10,7 @@ namespace Scripts.UI.Displays
     public class ResearchDisplay : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _patentTitle;
+        [SerializeField] private GameObject _patentDetailsContainer;
         [SerializeField] private TextMeshProUGUI _patentCost;
         [SerializeField] private TextMeshProUGUI _patentRequirements;
         [SerializeField] private TextMeshProUGUI _patentEffects;
@@ -36,7 +37,12 @@ namespace Scripts.UI.Displays
             _button.interactable = false;
             _borderImage.color = _currentColor;
             PatentData = patent;
-            if (patent == null) return;
+            if (patent == null) {
+                _patentTitle.text = "N/A";
+                _patentDetailsContainer.SetActive(false);
+                return;
+            }
+            _patentDetailsContainer.SetActive(true);
             _button.interactable = true;
 
             _patentTitle.text = patent.Name;

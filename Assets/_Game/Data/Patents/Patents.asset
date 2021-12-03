@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Gene Repair
   m_EditorClassIdentifier: 
   Name: Gene Repair
-  Cost: 12
   Honor: 2
   Cost1:
     Active: 1
@@ -28,11 +27,6 @@ MonoBehaviour:
     Type: 5
     Comparison: 1
     Amount: 3
-  Constraint2:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
   Alt1: 3
   Alt2: 0
   Alt3: 0
@@ -77,7 +71,6 @@ MonoBehaviour:
   m_Name: Cloud Seeding
   m_EditorClassIdentifier: 
   Name: Cloud Seeding
-  Cost: 11
   Honor: 0
   Cost1:
     Active: 1
@@ -92,11 +85,6 @@ MonoBehaviour:
     Type: 2
     Comparison: 1
     Amount: 3
-  Constraint2:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
   Alt1: 0
   Alt2: 0
   Alt3: 0
@@ -141,7 +129,6 @@ MonoBehaviour:
   m_Name: Solar Wind Power
   m_EditorClassIdentifier: 
   Name: Solar Wind Power
-  Cost: 11
   Honor: 0
   Cost1:
     Active: 1
@@ -152,11 +139,6 @@ MonoBehaviour:
     Resource: 3
     Amount: 4
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -205,7 +187,6 @@ MonoBehaviour:
   m_Name: Great Escarpment Consortium
   m_EditorClassIdentifier: 
   Name: Great Escarpment Consortium
-  Cost: 6
   Honor: 0
   Cost1:
     Active: 1
@@ -220,11 +201,6 @@ MonoBehaviour:
     Type: 3
     Comparison: 1
     Amount: 1
-  Constraint2:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
   Alt1: 0
   Alt2: 0
   Alt3: 0
@@ -269,7 +245,6 @@ MonoBehaviour:
   m_Name: Adapted Lichen
   m_EditorClassIdentifier: 
   Name: Adapted Lichen
-  Cost: 9
   Honor: 0
   Cost1:
     Active: 1
@@ -280,11 +255,6 @@ MonoBehaviour:
     Resource: 0
     Amount: 0
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -333,7 +303,6 @@ MonoBehaviour:
   m_Name: Grass
   m_EditorClassIdentifier: 
   Name: Grass
-  Cost: 11
   Honor: 0
   Cost1:
     Active: 1
@@ -348,11 +317,6 @@ MonoBehaviour:
     Type: 1
     Comparison: 1
     Amount: -16
-  Constraint2:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
   Alt1: 6
   Alt2: 0
   Alt3: 0
@@ -397,7 +361,6 @@ MonoBehaviour:
   m_Name: Mangroove
   m_EditorClassIdentifier: 
   Name: Mangroove
-  Cost: 12
   Honor: 1
   Cost1:
     Active: 1
@@ -412,11 +375,6 @@ MonoBehaviour:
     Type: 1
     Comparison: 1
     Amount: 4
-  Constraint2:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
   Alt1: 0
   Alt2: 0
   Alt3: 0
@@ -461,7 +419,6 @@ MonoBehaviour:
   m_Name: Domed Crater
   m_EditorClassIdentifier: 
   Name: Domed Crater
-  Cost: 24
   Honor: 1
   Cost1:
     Active: 1
@@ -476,11 +433,6 @@ MonoBehaviour:
     Type: 0
     Comparison: 3
     Amount: 7
-  Constraint2:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
   Alt1: 9
   Alt2: 4
   Alt3: 0
@@ -525,7 +477,6 @@ MonoBehaviour:
   m_Name: Building Industries
   m_EditorClassIdentifier: 
   Name: Building Industries
-  Cost: 6
   Honor: 0
   Cost1:
     Active: 1
@@ -536,11 +487,6 @@ MonoBehaviour:
     Resource: 2
     Amount: 3
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -589,7 +535,6 @@ MonoBehaviour:
   m_Name: Colonizer Training Camp
   m_EditorClassIdentifier: 
   Name: Colonizer Training Camp
-  Cost: 8
   Honor: 2
   Cost1:
     Active: 1
@@ -604,11 +549,6 @@ MonoBehaviour:
     Type: 0
     Comparison: 3
     Amount: 5
-  Constraint2:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
   Alt1: 2
   Alt2: 4
   Alt3: 0
@@ -653,7 +593,6 @@ MonoBehaviour:
   m_Name: Research
   m_EditorClassIdentifier: 
   Name: Research
-  Cost: 11
   Honor: 1
   Cost1:
     Active: 1
@@ -664,11 +603,6 @@ MonoBehaviour:
     Resource: 0
     Amount: 0
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -717,7 +651,6 @@ MonoBehaviour:
   m_Name: Commercial District
   m_EditorClassIdentifier: 
   Name: Commercial District
-  Cost: 16
   Honor: 1
   Cost1:
     Active: 1
@@ -728,11 +661,6 @@ MonoBehaviour:
     Resource: 2
     Amount: 8
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -781,7 +709,6 @@ MonoBehaviour:
   m_Name: Lightning Harvest
   m_EditorClassIdentifier: 
   Name: Lightning Harvest
-  Cost: 8
   Honor: 1
   Cost1:
     Active: 1
@@ -796,11 +723,6 @@ MonoBehaviour:
     Type: 5
     Comparison: 1
     Amount: 3
-  Constraint2:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
   Alt1: 7
   Alt2: 0
   Alt3: 0
@@ -845,7 +767,6 @@ MonoBehaviour:
   m_Name: Mining Area
   m_EditorClassIdentifier: 
   Name: Mining Area
-  Cost: 4
   Honor: 0
   Cost1:
     Active: 1
@@ -856,11 +777,6 @@ MonoBehaviour:
     Resource: 0
     Amount: 0
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -909,7 +825,6 @@ MonoBehaviour:
   m_Name: Underground City
   m_EditorClassIdentifier: 
   Name: Underground City
-  Cost: 18
   Honor: 0
   Cost1:
     Active: 1
@@ -920,11 +835,6 @@ MonoBehaviour:
     Resource: 2
     Amount: 9
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -973,7 +883,6 @@ MonoBehaviour:
   m_Name: Mining Rights
   m_EditorClassIdentifier: 
   Name: Mining Rights
-  Cost: 9
   Honor: 0
   Cost1:
     Active: 1
@@ -984,11 +893,6 @@ MonoBehaviour:
     Resource: 2
     Amount: 4
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -1037,7 +941,6 @@ MonoBehaviour:
   m_Name: Heather
   m_EditorClassIdentifier: 
   Name: Heather
-  Cost: 6
   Honor: 0
   Cost1:
     Active: 1
@@ -1052,11 +955,6 @@ MonoBehaviour:
     Type: 1
     Comparison: 1
     Amount: -14
-  Constraint2:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
   Alt1: 6
   Alt2: 0
   Alt3: 0
@@ -1101,7 +999,6 @@ MonoBehaviour:
   m_Name: Callisto Penal Mines
   m_EditorClassIdentifier: 
   Name: Callisto Penal Mines
-  Cost: 24
   Honor: 2
   Cost1:
     Active: 1
@@ -1112,11 +1009,6 @@ MonoBehaviour:
     Resource: 3
     Amount: 8
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -1207,6 +1099,7 @@ MonoBehaviour:
   - {fileID: 6408141713944810664}
   - {fileID: -3177763649570066645}
   - {fileID: -8954788440758503976}
+  - {fileID: 1301394368226568363}
   _allowDuplicates: 1
   _availablePatents:
   - {fileID: 8148722346584136396}
@@ -1255,7 +1148,6 @@ MonoBehaviour:
   m_Name: Deep Well Heating
   m_EditorClassIdentifier: 
   Name: Deep Well Heating
-  Cost: 13
   Honor: 0
   Cost1:
     Active: 1
@@ -1266,11 +1158,6 @@ MonoBehaviour:
     Resource: 2
     Amount: 7
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -1306,6 +1193,64 @@ MonoBehaviour:
     Resource: 0
     Tile: 0
     Status: 0
+--- !u!114 &1301394368226568363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330b16b2844aeee4eb600b7e320dbf32, type: 3}
+  m_Name: Solar Light City
+  m_EditorClassIdentifier: 
+  Name: Solar Light City
+  Honor: 0
+  Cost1:
+    Active: 1
+    Resource: 1
+    Amount: 22
+  Cost2:
+    Active: 1
+    Resource: 3
+    Amount: 4
+  Constraint1:
+    Active: 0
+    Type: 0
+    Comparison: 0
+    Amount: 0
+  Alt1: 0
+  Alt2: 0
+  Alt3: 0
+  Effect1:
+    Active: 1
+    Type: 5
+    Amount: 2
+    Resource: 5
+    Tile: 0
+    Status: 2
+  Effect2:
+    Active: 1
+    Type: 2
+    Amount: 1
+    Resource: 0
+    Tile: 3
+    Status: 0
+  Effect3:
+    Active: 0
+    Type: 1
+    Amount: 0
+    Resource: 6
+    Tile: 0
+    Status: 0
+  Effect4:
+    Active: 0
+    Type: 0
+    Amount: 0
+    Resource: 0
+    Tile: 0
+    Status: 0
 --- !u!114 &1356758425722314358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1319,7 +1264,6 @@ MonoBehaviour:
   m_Name: Lake Marineris
   m_EditorClassIdentifier: 
   Name: Lake Marineris
-  Cost: 18
   Honor: 0
   Cost1:
     Active: 1
@@ -1333,11 +1277,6 @@ MonoBehaviour:
     Active: 1
     Type: 1
     Comparison: 1
-    Amount: 0
-  Constraint2:
-    Active: 0
-    Type: 0
-    Comparison: 0
     Amount: 0
   Alt1: 0
   Alt2: 0
@@ -1383,7 +1322,6 @@ MonoBehaviour:
   m_Name: Natural Preserve
   m_EditorClassIdentifier: 
   Name: Natural Preserve
-  Cost: 9
   Honor: 0
   Cost1:
     Active: 1
@@ -1398,11 +1336,6 @@ MonoBehaviour:
     Type: 0
     Comparison: 3
     Amount: 4
-  Constraint2:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
   Alt1: 3
   Alt2: 4
   Alt3: 0
@@ -1447,7 +1380,6 @@ MonoBehaviour:
   m_Name: Cupola City
   m_EditorClassIdentifier: 
   Name: Cupola City
-  Cost: 16
   Honor: 0
   Cost1:
     Active: 1
@@ -1462,11 +1394,6 @@ MonoBehaviour:
     Type: 0
     Comparison: 3
     Amount: 9
-  Constraint2:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
   Alt1: 9
   Alt2: 4
   Alt3: 0
@@ -1511,7 +1438,6 @@ MonoBehaviour:
   m_Name: Kelp Farming
   m_EditorClassIdentifier: 
   Name: Kelp Farming
-  Cost: 17
   Honor: 1
   Cost1:
     Active: 1
@@ -1526,11 +1452,6 @@ MonoBehaviour:
     Type: 2
     Comparison: 1
     Amount: 6
-  Constraint2:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
   Alt1: 6
   Alt2: 0
   Alt3: 0
@@ -1575,7 +1496,6 @@ MonoBehaviour:
   m_Name: Black Polar Dust
   m_EditorClassIdentifier: 
   Name: Black Polar Dust
-  Cost: 15
   Honor: 0
   Cost1:
     Active: 1
@@ -1586,11 +1506,6 @@ MonoBehaviour:
     Resource: 0
     Amount: 0
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -1639,7 +1554,6 @@ MonoBehaviour:
   m_Name: Methane from Titan
   m_EditorClassIdentifier: 
   Name: Methane from Titan
-  Cost: 28
   Honor: 2
   Cost1:
     Active: 1
@@ -1654,11 +1568,6 @@ MonoBehaviour:
     Type: 0
     Comparison: 1
     Amount: 2
-  Constraint2:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
   Alt1: 2
   Alt2: 5
   Alt3: 0
@@ -1703,7 +1612,6 @@ MonoBehaviour:
   m_Name: Algae
   m_EditorClassIdentifier: 
   Name: Algae
-  Cost: 10
   Honor: 0
   Cost1:
     Active: 1
@@ -1718,11 +1626,6 @@ MonoBehaviour:
     Type: 2
     Comparison: 1
     Amount: 5
-  Constraint2:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
   Alt1: 6
   Alt2: 0
   Alt3: 0
@@ -1767,7 +1670,6 @@ MonoBehaviour:
   m_Name: Capital
   m_EditorClassIdentifier: 
   Name: Capital
-  Cost: 26
   Honor: 2
   Cost1:
     Active: 1
@@ -1782,11 +1684,6 @@ MonoBehaviour:
     Type: 2
     Comparison: 1
     Amount: 4
-  Constraint2:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
   Alt1: 9
   Alt2: 4
   Alt3: 0
@@ -1831,7 +1728,6 @@ MonoBehaviour:
   m_Name: Food Factory
   m_EditorClassIdentifier: 
   Name: Food Factory
-  Cost: 12
   Honor: 1
   Cost1:
     Active: 1
@@ -1842,11 +1738,6 @@ MonoBehaviour:
     Resource: 2
     Amount: 6
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -1895,7 +1786,6 @@ MonoBehaviour:
   m_Name: Nuclear Power
   m_EditorClassIdentifier: 
   Name: Nuclear Power
-  Cost: 10
   Honor: 0
   Cost1:
     Active: 1
@@ -1906,11 +1796,6 @@ MonoBehaviour:
     Resource: 2
     Amount: 5
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -1959,7 +1844,6 @@ MonoBehaviour:
   m_Name: Asteroid Mining
   m_EditorClassIdentifier: 
   Name: Asteroid Mining
-  Cost: 30
   Honor: 2
   Cost1:
     Active: 1
@@ -1974,11 +1858,6 @@ MonoBehaviour:
     Type: 3
     Comparison: 1
     Amount: 1
-  Constraint2:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
   Alt1: 2
   Alt2: 5
   Alt3: 0
@@ -2023,7 +1902,6 @@ MonoBehaviour:
   m_Name: Vesta Shipyard
   m_EditorClassIdentifier: 
   Name: Vesta Shipyard
-  Cost: 15
   Honor: 1
   Cost1:
     Active: 1
@@ -2034,11 +1912,6 @@ MonoBehaviour:
     Resource: 3
     Amount: 5
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -2087,7 +1960,6 @@ MonoBehaviour:
   m_Name: Sponsors
   m_EditorClassIdentifier: 
   Name: Sponsors
-  Cost: 6
   Honor: 0
   Cost1:
     Active: 1
@@ -2098,11 +1970,6 @@ MonoBehaviour:
     Resource: 0
     Amount: 0
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -2151,7 +2018,6 @@ MonoBehaviour:
   m_Name: Lunar Beam
   m_EditorClassIdentifier: 
   Name: Lunar Beam
-  Cost: 13
   Honor: 0
   Cost1:
     Active: 1
@@ -2162,11 +2028,6 @@ MonoBehaviour:
     Resource: 0
     Amount: 0
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -2215,7 +2076,6 @@ MonoBehaviour:
   m_Name: Peroxide Power
   m_EditorClassIdentifier: 
   Name: Peroxide Power
-  Cost: 7
   Honor: 0
   Cost1:
     Active: 1
@@ -2226,11 +2086,6 @@ MonoBehaviour:
     Resource: 2
     Amount: 4
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -2279,7 +2134,6 @@ MonoBehaviour:
   m_Name: Mine
   m_EditorClassIdentifier: 
   Name: Mine
-  Cost: 4
   Honor: 0
   Cost1:
     Active: 1
@@ -2290,11 +2144,6 @@ MonoBehaviour:
     Resource: 2
     Amount: 2
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -2343,7 +2192,6 @@ MonoBehaviour:
   m_Name: Carbonate Processing
   m_EditorClassIdentifier: 
   Name: Carbonate Processing
-  Cost: 6
   Honor: 0
   Cost1:
     Active: 1
@@ -2354,11 +2202,6 @@ MonoBehaviour:
     Resource: 2
     Amount: 3
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -2407,7 +2250,6 @@ MonoBehaviour:
   m_Name: Noctis City
   m_EditorClassIdentifier: 
   Name: Noctis City
-  Cost: 18
   Honor: 0
   Cost1:
     Active: 1
@@ -2418,11 +2260,6 @@ MonoBehaviour:
     Resource: 2
     Amount: 9
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -2471,7 +2308,6 @@ MonoBehaviour:
   m_Name: Beam from a Thorium Asteroid
   m_EditorClassIdentifier: 
   Name: Beam from a Thorium Asteroid
-  Cost: 32
   Honor: 1
   Cost1:
     Active: 1
@@ -2482,11 +2318,6 @@ MonoBehaviour:
     Resource: 3
     Amount: 11
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
@@ -2535,7 +2366,6 @@ MonoBehaviour:
   m_Name: Trees
   m_EditorClassIdentifier: 
   Name: Trees
-  Cost: 13
   Honor: 1
   Cost1:
     Active: 1
@@ -2550,11 +2380,6 @@ MonoBehaviour:
     Type: 1
     Comparison: 1
     Amount: -4
-  Constraint2:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
   Alt1: 6
   Alt2: 0
   Alt3: 0
@@ -2599,7 +2424,6 @@ MonoBehaviour:
   m_Name: Eos Chasma National Park
   m_EditorClassIdentifier: 
   Name: Eos Chasma National Park
-  Cost: 16
   Honor: 1
   Cost1:
     Active: 1
@@ -2614,11 +2438,6 @@ MonoBehaviour:
     Type: 1
     Comparison: 1
     Amount: -12
-  Constraint2:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
   Alt1: 6
   Alt2: 4
   Alt3: 0
@@ -2663,7 +2482,6 @@ MonoBehaviour:
   m_Name: Asteroid Mining Consortum
   m_EditorClassIdentifier: 
   Name: Asteroid Mining Consortum
-  Cost: 13
   Honor: 1
   Cost1:
     Active: 1
@@ -2678,11 +2496,6 @@ MonoBehaviour:
     Type: 4
     Comparison: 1
     Amount: 1
-  Constraint2:
-    Active: 0
-    Type: 5
-    Comparison: 2
-    Amount: 0
   Alt1: 2
   Alt2: 0
   Alt3: 0
@@ -2727,7 +2540,6 @@ MonoBehaviour:
   m_Name: Giant Space Mirror
   m_EditorClassIdentifier: 
   Name: Giant Space Mirror
-  Cost: 17
   Honor: 0
   Cost1:
     Active: 1
@@ -2738,11 +2550,6 @@ MonoBehaviour:
     Resource: 3
     Amount: 6
   Constraint1:
-    Active: 0
-    Type: 0
-    Comparison: 0
-    Amount: 0
-  Constraint2:
     Active: 0
     Type: 0
     Comparison: 0
