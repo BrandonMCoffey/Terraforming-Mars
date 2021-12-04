@@ -1,6 +1,4 @@
-# State Machine Project
-
-Project Info:
+# Terraforming Mars
 
 ![Terraforming Mars Title](https://raw.githubusercontent.com/BrandonMCoffey/State-Machine-Project/main/Source%20Files/Pictures/Title.png)
 
