@@ -94,4 +94,10 @@ incomplete, buggy, and not feature complete. The AI barely worked at that point 
 I would love feedback on this project and to see how others percieve the game. I think I'll continue making it look professional
 and expand upon the features and AI and art to make the game look and feel great to play.
 
+Also when recording the Presentation Video for this project, I was constantly running over the 7 minute mark, but I finally got
+one where I addressed everything I thought was most important to talk about. Hopefully it all makes sense and there was so
+much more about the project I could talk about.
+
+P.S. I am so looking forward to leading game lab as the lead programmer with you next semester!
+
 ~ Brandon Coffey
