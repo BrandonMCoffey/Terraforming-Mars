@@ -5,6 +5,7 @@ using System.Linq;
 using Scripts.Data;
 using Scripts.Enums;
 using Scripts.UI;
+using Scripts.UI.Displays;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,6 +35,7 @@ namespace Scripts.Grid
 
         public static event Action<HexTile> OnTileClicked;
 
+        private TileType _hoverType = TileType.None;
         private TileType _tileType = TileType.None;
         private bool _isHovered;
 
@@ -62,7 +64,7 @@ namespace Scripts.Grid
                 _tileClickable.OnEnterHover += OnMouseHover;
                 _tileClickable.OnExitHover += OnMouseExitHover;
             }
-            GameController.OnUpdateHover += CheckHover;
+            ActionDetailsDisplay.OnUpdateHover += SetHover;
         }
 
         private void OnDisable()
@@ -72,7 +74,7 @@ namespace Scripts.Grid
                 _tileClickable.OnEnterHover -= OnMouseHover;
                 _tileClickable.OnExitHover -= OnMouseExitHover;
             }
-            GameController.OnUpdateHover -= CheckHover;
+            ActionDetailsDisplay.OnUpdateHover -= SetHover;
         }
 
         private void Start()
@@ -144,16 +146,21 @@ namespace Scripts.Grid
             HideHover();
         }
 
+        public void SetHover(TileType tile)
+        {
+            _hoverType = tile;
+            CheckHover();
+        }
+
         public void CheckHover()
         {
-            var hover = GameController.Instance.TileToPlace;
-            bool valid = _isHovered && !Claimed && hover != TileType.None;
-            valid &= WaterTile == (hover == TileType.Ocean);
-            if (hover == TileType.City) {
+            bool valid = _isHovered && !Claimed && _hoverType != TileType.None;
+            valid &= WaterTile == (_hoverType == TileType.Ocean);
+            if (_hoverType == TileType.City) {
                 valid &= !HasAdjacentCity;
             }
             if (valid) {
-                ShowHover(hover);
+                ShowHover(_hoverType);
             } else {
                 HideHover();
             }

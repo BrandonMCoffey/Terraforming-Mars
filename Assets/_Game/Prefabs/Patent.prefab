@@ -821,7 +821,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.25
+  m_fontSize: 30.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1047,7 +1047,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _iconData: {fileID: 11400000, guid: 16a858eecb4d2cf4fb3c8516d3e2f177, type: 2}
+  _buttonButton: {fileID: 3970228391384595059}
   _button: {fileID: 5352748396837411118}
+  _completedColor: {r: 0.075694196, g: 0.5943396, b: 0.30042425, a: 0.7019608}
   _cannotPurchaseColor: {r: 0.8301887, g: 0.41901034, b: 0.41901034, a: 0.6666667}
   _titleText: {fileID: 5352748397746634600}
   _costText: {fileID: 7531373435033502409}
@@ -1695,7 +1697,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.15
+  m_fontSize: 31.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

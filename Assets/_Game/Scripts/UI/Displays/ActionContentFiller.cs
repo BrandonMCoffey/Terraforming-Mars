@@ -5,6 +5,7 @@ using Scripts.States;
 using Scripts.UI.Helper;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Scripts.UI.Displays
 {
@@ -14,123 +15,67 @@ namespace Scripts.UI.Displays
         [SerializeField] private RectTransform _parent;
         [SerializeField] private TextMeshProUGUI _headerText;
         [SerializeField] private List<ProjectContent> _standardProjects = new List<ProjectContent>();
+        [SerializeField] private List<PatentContent> _patents = new List<PatentContent>();
         [SerializeField] private PatentContent _patentBasePrefab;
-        [SerializeField] private ButtonSet _buttonSet;
+        [SerializeField] private Button _projectsButton;
+        [SerializeField] private Button _patentsButton;
         [SerializeField] private bool _debug;
 
-        private List<GameObject> _activeContent = new List<GameObject>();
-        private ActionCategory? _activeCategory;
+        private bool _projectsActive = true;
 
-        private bool _canInteract;
-
-        private void Start()
+        public void ShowProjects()
         {
-            PlayerTurnState.PlayerCanAct += UpdatePlayer;
-            _gameData.Player.OnPatentsChanged += UpdateActions;
-            _gameData.Player.OnTurnStart += UpdateActions;
-            _gameData.Opponent.OnPatentsChanged += UpdateActions;
-            _gameData.Opponent.OnTurnStart += UpdateActions;
-        }
-
-        private void OnDestroy()
-        {
-            PlayerTurnState.PlayerCanAct -= UpdatePlayer;
-            _gameData.Player.OnPatentsChanged -= UpdateActions;
-            _gameData.Player.OnTurnStart -= UpdateActions;
-            _gameData.Opponent.OnPatentsChanged -= UpdateActions;
-            _gameData.Opponent.OnTurnStart -= UpdateActions;
-        }
-
-        public void Fill(int index)
-        {
-            switch (index) {
-                case 0:
-                    Fill(ActionCategory.StandardProject);
-                    break;
-                case 1:
-                    Fill(ActionCategory.OwnedPatents);
-                    break;
-                case 2:
-                    Fill(ActionCategory.ActivePatents);
-                    break;
-                case 3:
-                    Fill(ActionCategory.CompletedPatents);
-                    break;
-                case 4:
-                    Fill(ActionCategory.SellPatents);
-                    break;
-            }
-        }
-
-        public void Fill(ActionCategory category)
-        {
-            if (_debug) Debug.Log("Currently Selected: " + category, gameObject);
-            _activeCategory = category;
-            foreach (var content in _activeContent) {
-                Destroy(content);
-            }
-            bool projectsActive = category == ActionCategory.StandardProject;
+            _projectsButton.interactable = false;
+            _patentsButton.interactable = true;
             foreach (var project in _standardProjects) {
-                project.gameObject.SetActive(projectsActive);
+                project.gameObject.SetActive(true);
+                project.SetInteractable(_gameData.CurrentPlayer.CanAct);
             }
-            switch (category) {
-                case ActionCategory.StandardProject:
-                    _buttonSet.ForceSelect(0);
-                    _headerText.text = "Projects";
-                    foreach (var project in _standardProjects) {
-                        project.SetInteractable(_canInteract);
-                    }
-                    break;
-                case ActionCategory.OwnedPatents:
-                    _buttonSet.ForceSelect(1);
-                    _headerText.text = "Patents";
-                    foreach (var patent in _gameData.CurrentPlayer.OwnedPatents) {
-                        var newContent = Instantiate(_patentBasePrefab, _parent);
-                        newContent.Fill(patent, _gameData);
-                        _activeContent.Add(newContent.gameObject);
-                    }
-                    break;
-                case ActionCategory.ActivePatents:
-                    _buttonSet.ForceSelect(2);
-                    _headerText.text = "Active Patents";
-                    foreach (var patent in _gameData.CurrentPlayer.ActivePatents) {
-                        var newContent = Instantiate(_patentBasePrefab, _parent);
-                        newContent.Fill(patent, _gameData);
-                        _activeContent.Add(newContent.gameObject);
-                    }
-                    break;
-                case ActionCategory.CompletedPatents:
-                    _buttonSet.ForceSelect(3);
-                    _headerText.text = "Completed Patents";
-                    foreach (var patent in _gameData.CurrentPlayer.CompletedPatents) {
-                        var newContent = Instantiate(_patentBasePrefab, _parent);
-                        newContent.Fill(patent, _gameData);
-                        _activeContent.Add(newContent.gameObject);
-                    }
-                    break;
-                case ActionCategory.SellPatents:
-                    _buttonSet.DeselectAll();
-                    _headerText.text = "Sell Patents";
-                    foreach (var patent in _gameData.CurrentPlayer.OwnedPatents) {
-                        var newContent = Instantiate(_patentBasePrefab, _parent);
-                        newContent.Fill(patent, _gameData, true);
-                        _activeContent.Add(newContent.gameObject);
-                    }
-                    break;
+            foreach (var patent in _patents) {
+                patent.gameObject.SetActive(false);
             }
         }
 
-        private void UpdatePlayer(bool canAct)
+        public void ShowPatents()
         {
-            _canInteract = canAct;
-            UpdateActions();
+            _projectsButton.interactable = true;
+            _patentsButton.interactable = false;
+            foreach (var project in _standardProjects) {
+                project.gameObject.SetActive(false);
+            }
+            int index = 0;
+            foreach (var patent in _gameData.CurrentPlayer.OwnedPatents) {
+                var patentContent = GetPatentContent(index++);
+                patentContent.Fill(patent, _gameData);
+            }
+            foreach (var patent in _gameData.CurrentPlayer.CompletedPatents) {
+                var patentContent = GetPatentContent(index++);
+                patentContent.Fill(patent, _gameData, true);
+            }
+            for (int i = index; i < _patents.Count; i++) {
+                Destroy(_patents[i].gameObject);
+            }
+            foreach (var patent in _patents) {
+                patent.gameObject.SetActive(true);
+            }
         }
 
-        private void UpdateActions()
+        private PatentContent GetPatentContent(int index)
         {
-            var category = _activeCategory;
-            if (category == null) return;
-            Fill(category.Value);
+            if (index < _patents.Count) return _patents[index];
+
+            var patent = Instantiate(_patentBasePrefab, _parent);
+            _patents.Add(patent);
+            return patent;
+        }
+
+        public void UpdateContent()
+        {
+            if (_projectsActive) {
+                ShowProjects();
+            } else {
+                ShowPatents();
+            }
         }
     }
 }

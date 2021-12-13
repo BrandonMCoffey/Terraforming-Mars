@@ -10,8 +10,6 @@ namespace Scripts.States
     {
         public bool CanEndTurn { get; private set; }
 
-        public static event Action<bool> PlayerCanAct;
-
         private PlayerStandardProjects _standardProjects;
         private int _actionsThisTurn;
         private bool _playerCanAct;
@@ -66,7 +64,7 @@ namespace Scripts.States
             if (_playerCanAct == canAct) return;
             _standardProjects.PlayerCanAct(canAct);
             _playerCanAct = canAct;
-            PlayerCanAct?.Invoke(canAct);
+            _playerData.CanAct = canAct;
         }
 
         private void OnEndTurn()

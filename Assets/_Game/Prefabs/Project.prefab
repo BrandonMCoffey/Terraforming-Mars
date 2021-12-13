@@ -169,8 +169,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 65, y: 0}
-  m_SizeDelta: {x: 50, y: -10}
+  m_AnchoredPosition: {x: 64, y: -1}
+  m_SizeDelta: {x: 48, y: -14}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &8125346322013344539
 CanvasRenderer:
@@ -459,7 +459,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _project: 0
   _gameData: {fileID: 11400000, guid: d12b2fa9cb6052247a1988dcac5bfe71, type: 2}
-  _whichPlayer: 2
   _iconData: {fileID: 11400000, guid: 16a858eecb4d2cf4fb3c8516d3e2f177, type: 2}
   _button: {fileID: 4276160653722088944}
   _titleText: {fileID: 4608362297639010194}
@@ -620,8 +619,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 50, y: 0}
-  m_SizeDelta: {x: -150, y: 0}
+  m_AnchoredPosition: {x: 49.5, y: 0}
+  m_SizeDelta: {x: -149, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4608362297639010195
 CanvasRenderer:
@@ -755,8 +754,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 5, y: 0}
-  m_SizeDelta: {x: 50, y: -10}
+  m_AnchoredPosition: {x: 8, y: -1}
+  m_SizeDelta: {x: 48, y: -14}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &3727345836145573070
 CanvasRenderer:

@@ -51,19 +51,23 @@ namespace Scripts.Data
 
         private List<HexTile> _ownedTiles;
 
+        public bool CanAct { get; set; }
+
         public List<HexTile> OwnedCities => _ownedTiles.Where(tile => tile.IsCity).ToList();
         public int OwnedForests => _ownedTiles.Count(tile => tile.IsForest);
         public int OwnedTiles => _ownedTiles.Count(tile => !tile.WaterTile);
         public int PlacedTiles => _ownedTiles.Count;
 
-        public string PlayerName {
+        public string PlayerName
+        {
             get => _playerName;
             set => _playerName = value;
         }
 
         public Color DefaultColor => _defaultPlayerColor;
 
-        public Color PlayerColor {
+        public Color PlayerColor
+        {
             get => _playerColor;
             set => _playerColor = value;
         }
@@ -173,7 +177,8 @@ namespace Scripts.Data
 
         public int GetResource(ResourceType type, bool level = false)
         {
-            return type switch {
+            return type switch
+            {
                 ResourceType.Credits  => level ? _credits.Level : _credits.Amount,
                 ResourceType.Iron     => level ? _iron.Level : _iron.Amount,
                 ResourceType.Titanium => level ? _titanium.Level : _titanium.Amount,
@@ -293,7 +298,10 @@ namespace Scripts.Data
 
         public void SellPatent(PatentData patent)
         {
-            if (!_ownedPatents.Contains(patent)) return;
+            if (!_ownedPatents.Contains(patent)) {
+                Debug.Log("Attempting to sell patent that " + PlayerName + " does not own: " + (patent != null ? patent.Name : "null"));
+                return;
+            }
             _ownedPatents.Remove(patent);
             AddResource(ResourceType.Credits, 1);
         }

@@ -1,16 +1,18 @@
 using System.Collections.Generic;
 using Scripts.Data;
+using Scripts.Mechanics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Scripts.UI.Displays
 {
-    public class PatentDetailDisplay : MonoBehaviour
+    public class PatentDetailsDisplay : MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private GameData _gameData;
         [SerializeField] private IconData _icons;
+        [SerializeField] private ActionController _controller;
 
         [Header("Basic Patent Info")]
         [SerializeField] private TextMeshProUGUI _title;
@@ -34,10 +36,18 @@ namespace Scripts.UI.Displays
         [Header("Patent Buttons")]
         [SerializeField] private Button _activateButton;
         [SerializeField] private Button _activateAltButton;
-        [SerializeField] private GameObject _sellButton;
 
-        public void Display(PatentData patent, bool sell)
+        private PatentData _patent;
+
+        private void OnDisable()
         {
+            _patent = null;
+        }
+
+        public void Display(PatentData patent)
+        {
+            _patent = patent;
+
             // Basic
             _title.text = patent.Name;
             _honor.text = "Gain " + patent.Honor + " Honor";
@@ -55,29 +65,48 @@ namespace Scripts.UI.Displays
             _requirements.color = PatentData.CheckConstraint(patent.Constraint1, _gameData) ? _meetsRequirementsColor : _missingRequirementsColor;
             _effects.text = patent.GetEffectsReadable();
 
-            if (!sell) {
-                // Cost
-                _cost.text = "Activate - " + patent.Cost1.Amount;
-                _costIcon.sprite = _icons.GetResource(patent.Cost1.Resource);
+            // Cost
+            _cost.text = "Activate - " + patent.Cost1.Amount;
+            _costIcon.sprite = _icons.GetResource(patent.Cost1.Resource);
 
-                bool alt = patent.Cost2.Active;
-                if (alt) {
-                    _costAlt.text = "Activate - " + patent.Cost2.Amount;
-                    _costAltIcon.sprite = _icons.GetResource(patent.Cost2.Resource);
-                }
-
-                // Buttons
-                _sellButton.gameObject.SetActive(false);
-                _activateButton.interactable = patent.CanActivate(_gameData, false);
-                _activateAltButton.gameObject.SetActive(alt);
-                if (alt) {
-                    _activateAltButton.interactable = patent.CanActivate(_gameData, true);
-                }
-            } else {
-                _sellButton.gameObject.SetActive(true);
-                _activateButton.gameObject.SetActive(false);
-                _activateAltButton.gameObject.SetActive(false);
+            bool alt = patent.Cost2.Active;
+            if (alt) {
+                _costAlt.text = "Activate - " + patent.Cost2.Amount;
+                _costAltIcon.sprite = _icons.GetResource(patent.Cost2.Resource);
             }
+
+            // Buttons
+            _activateButton.interactable = patent.CanActivate(_gameData, false);
+
+            _activateAltButton.gameObject.SetActive(alt);
+            if (alt) {
+                _activateAltButton.interactable = patent.CanActivate(_gameData, true);
+            }
+        }
+
+        public void Purchase()
+        {
+            if (_patent.Activate(_gameData, false)) {
+                _controller.ShowPatents();
+            }
+        }
+
+        public void PurchaseAlt()
+        {
+            if (_patent.Activate(_gameData, true)) {
+                _controller.ShowPatents();
+            }
+        }
+
+        public void Sell()
+        {
+            _gameData.CurrentPlayer.SellPatent(_patent);
+            _controller.ShowPatents();
+        }
+
+        public void Cancel()
+        {
+            _controller.ShowPatents();
         }
     }
 }

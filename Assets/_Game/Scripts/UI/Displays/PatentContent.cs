@@ -10,7 +10,9 @@ namespace Scripts.UI.Displays
     {
         [SerializeField] private IconData _iconData;
 
+        [SerializeField] private Button _buttonButton;
         [SerializeField] private Image _button;
+        [SerializeField] private Color _completedColor = Color.green;
         [SerializeField] private Color _cannotPurchaseColor = Color.red;
 
         [SerializeField] private TextMeshProUGUI _titleText;
@@ -20,14 +22,10 @@ namespace Scripts.UI.Displays
         [SerializeField] private Image _altCostImg;
         [SerializeField] private List<Image> _tags;
 
-        private bool _selling;
-
-        private PlayerData _player;
         private PatentData _currentPatent;
 
-        public void Fill(PatentData patent, GameData gameData, bool sell = false)
+        public void Fill(PatentData patent, GameData gameData, bool completed = false)
         {
-            _selling = sell;
             _currentPatent = patent;
             _titleText.text = patent.Name;
             _costText.text = patent.Cost1.Amount.ToString();
@@ -47,14 +45,16 @@ namespace Scripts.UI.Displays
             _honorText.transform.parent.gameObject.SetActive(patent.Honor > 0);
             _honorText.text = patent.Honor.ToString();
 
-            if (!patent.CanActivate(gameData)) {
-                _button.color = _cannotPurchaseColor;
+            bool canActivate = !completed && patent.CanActivate(gameData);
+            _buttonButton.interactable = canActivate;
+            if (!canActivate) {
+                _button.color = completed ? _completedColor : _cannotPurchaseColor;
             }
         }
 
         public void OnSelect()
         {
-            GameController.Instance.ShowPatentDetails(_currentPatent, _selling);
+            GameController.Instance.ShowPatentDetails(_currentPatent);
         }
     }
 }

@@ -46,7 +46,6 @@ namespace Scripts.Mechanics
             _patentTile = false;
             // Sell Patents
             if (type == StandardProjectType.SellPatents) {
-                GameController.Instance.ShowSellPatents();
                 return;
             }
             // Check cost
