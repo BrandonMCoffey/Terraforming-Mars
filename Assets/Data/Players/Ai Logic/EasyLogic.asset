@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8cfd3b35dc774a4686b220df06013f2, type: 3}
+  m_Name: EasyLogic
+  m_EditorClassIdentifier: 
+  _actionsPerTurn: 3
+  _actions:
+  - Weight: 0.79
+    Action: 0
+  - Weight: 0.045
+    Action: 1
+  - Weight: 0.048
+    Action: 2
+  - Weight: 0.13
+    Action: 3
+  - Weight: 0.265
+    Action: 4
+  - Weight: 0.444
+    Action: 5
+  - Weight: 0.904
+    Action: 6
+  - Weight: 0.61
+    Action: 7
+  - Weight: 0.36
+    Action: 8
+  - Weight: 0.622
+    Action: 9
+  - Weight: 0.43
+    Action: 10
+  - Weight: 0.361
+    Action: 11
